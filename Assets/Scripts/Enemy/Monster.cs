@@ -20,6 +20,10 @@ public class Monster : MonoBehaviour
     [Tooltip("감지 콜라이더")]
     [SerializeField] protected SphereCollider detectCollider;
 
+    [Space(10)]
+    [Tooltip("애니메이션")]
+    [SerializeField] protected Animator animator;
+
     protected NavMeshAgent agent;
     protected Transform target;
 
@@ -84,6 +88,8 @@ public class Monster : MonoBehaviour
     protected virtual IEnumerator IDLE()
     {
         //Idle Animation
+        animator.SetBool("IsWalk", false);
+
         Debug.Log("정지 정지!");
 
         if (target != null)
@@ -112,6 +118,7 @@ public class Monster : MonoBehaviour
         }
 
         //Run Animation
+        animator.SetBool("IsWalk", true);
 
         agent.SetDestination(target.position);
         Debug.Log("추적중..");
@@ -123,10 +130,13 @@ public class Monster : MonoBehaviour
     protected virtual IEnumerator ATTACK()
     {
         //Attack Animation
+        animator.SetBool("IsAttack", true);
         Debug.Log($"{gameObject.name}이(가) 플레이어를 공격!!");
 
         if (Vector3.Distance(transform.position, target.position) > attackRange)
         {
+            animator.SetBool("IsAttack", false);
+
             ChangeState(State.CHASE);
             Debug.Log("다시 추적!");
             yield break;
