@@ -183,6 +183,9 @@ PrefabInstance:
       addedObject: {fileID: 165582782}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2918ec4bfa4320f4b9d6e11c9aa94dd6, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 165582789}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2918ec4bfa4320f4b9d6e11c9aa94dd6, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 165582780}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2918ec4bfa4320f4b9d6e11c9aa94dd6, type: 3}
       insertIndex: -1
@@ -325,6 +328,38 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: df0af909-013c-4555-ad91-ab481394a4cb
     m_ActionName: Player/Run[/Keyboard/leftShift]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 165582789}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
+        m_MethodName: OnAttack1
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 75c14569-5f20-4c66-8dc9-e2d827197857
+    m_ActionName: Player/Attack1[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 165582789}
+        m_TargetAssemblyTypeName: PlayerAttack, Assembly-CSharp
+        m_MethodName: OnAttack2
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a8ff441c-a7ed-402e-9b6f-c6e71969f12d
+    m_ActionName: Player/Attack2[/Mouse/rightButton]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -344,7 +379,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 165582779}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: fa99fd9e19a69a247835e7aaac6408aa, type: 3}
+  m_Avatar: {fileID: 9000000, guid: 2918ec4bfa4320f4b9d6e11c9aa94dd6, type: 3}
   m_Controller: {fileID: 9100000, guid: 99e99fe8a00fc6a4d8e935355d48261d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -356,6 +391,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &165582789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 165582779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d89dbf807abab534db2cbcd7d1e32c8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboResetTime: 1
 --- !u!1 &312218672
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +617,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 165582787}
-  mouseSensitivity: 1
+  mouseSensitivity: 0.5
   offset: {x: 0, y: 1.5, z: -3}
 --- !u!114 &1658375514
 MonoBehaviour:
@@ -629,7 +677,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30

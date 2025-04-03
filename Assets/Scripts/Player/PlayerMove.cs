@@ -8,6 +8,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float runSpeed = 9f;
     [SerializeField] private Transform cameraTransform;
+    private float currentAnimSpeed = 0f;
 
     [Header("Animation")]
     private Animator animator;
@@ -23,7 +24,7 @@ public class PlayerMove : MonoBehaviour
 
         animator = GetComponent<Animator>();
         if (animator == null)
-            Debug.LogWarning("⚠️ Animator가 할당되지 않았습니다!");
+            Debug.LogWarning("Animator가 할당되지 않았습니다!");
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -58,11 +59,12 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
         }
 
-        // 애니메이션 파라미터 전달 (Blend Tree 연결 시 사용)
+            // 애니메이션 파라미터 전달 (Blend Tree 연결 시 사용)
         if (animator != null)
         {
             float flatSpeed = new Vector2(rb.velocity.x, rb.velocity.z).magnitude;
-            animator.SetFloat("MoveSpeed", flatSpeed);
+            currentAnimSpeed = Mathf.Lerp(currentAnimSpeed, flatSpeed, Time.fixedDeltaTime * 10f);
+            animator.SetFloat("MoveSpeed", currentAnimSpeed);
         }
     }
 
