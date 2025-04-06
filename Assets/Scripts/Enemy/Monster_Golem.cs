@@ -65,6 +65,11 @@ public class Monster_Golem : Monster
 
     #region MonsterFunc
 
+    protected override void MoveAnimation(bool isMoving)
+    {
+        base.MoveAnimation(isMoving);
+    }
+
     protected override void ChangeState(State _newState)
     {
         base.ChangeState(_newState);

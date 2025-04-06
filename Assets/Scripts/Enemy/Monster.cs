@@ -1,8 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.HID;
+using UnityEngine.UIElements;
 
 public class Monster : MonoBehaviour
 {
@@ -15,6 +18,7 @@ public class Monster : MonoBehaviour
     public float moveSpeed = 3.5f;
     [Tooltip("체력")]
     public int health = 100; //체력
+    public float rotateSpeed = 10f;
 
     [Space(10)]
     [Tooltip("감지 콜라이더")]
@@ -23,6 +27,8 @@ public class Monster : MonoBehaviour
     [Space(10)]
     [Tooltip("애니메이션")]
     [SerializeField] protected Animator animator;
+    protected bool isMoving;
+    protected float moveAmount;
 
     protected NavMeshAgent agent;
     protected Transform target;
@@ -88,7 +94,10 @@ public class Monster : MonoBehaviour
     protected virtual IEnumerator IDLE()
     {
         //Idle Animation
-        animator.SetBool("IsWalk", false);
+        isMoving = false;
+        MoveAnimation(isMoving);
+
+        agent.SetDestination(transform.position);
 
         Debug.Log("정지 정지!");
 
@@ -110,7 +119,9 @@ public class Monster : MonoBehaviour
             Debug.Log("추적중단..");
             yield break;
         }
-        if (Vector3.Distance(transform.position, target.position) <= attackRange)
+
+        float distance = Vector3.Distance(transform.position, target.position);
+        if (distance <= attackRange)
         {
             ChangeState(State.ATTACK);
             Debug.Log("추적중단.. 공격!");
@@ -118,7 +129,8 @@ public class Monster : MonoBehaviour
         }
 
         //Run Animation
-        animator.SetBool("IsWalk", true);
+        isMoving = true;
+        MoveAnimation(isMoving);
 
         agent.SetDestination(target.position);
         Debug.Log("추적중..");
@@ -129,11 +141,19 @@ public class Monster : MonoBehaviour
     /// </summary>
     protected virtual IEnumerator ATTACK()
     {
-        //Attack Animation
-        animator.SetBool("IsAttack", true);
-        Debug.Log($"{gameObject.name}이(가) 플레이어를 공격!!");
+        //ChangeState_IDLE
+        if(target == null)
+        {
+            animator.SetBool("IsAttack", false);
 
-        if (Vector3.Distance(transform.position, target.position) > attackRange)
+            ChangeState(State.IDLE);
+            Debug.Log("공격도중 적을 찾지못함..");
+            yield break;
+        }
+
+        //ChangeState_CHASE
+        float distance = Vector3.Distance(transform.position, target.position);
+        if (distance > attackRange)
         {
             animator.SetBool("IsAttack", false);
 
@@ -141,6 +161,31 @@ public class Monster : MonoBehaviour
             Debug.Log("다시 추적!");
             yield break;
         }
+        
+        if (agent.destination + Vector3.up != target.position)
+        {
+            //플레이어 바라보도록 회전
+            Vector3 direction = (target.position - transform.position).normalized;
+            direction.y = 0f; // y축 회전은 무시 (바닥 기준으로 회전)
+
+            Quaternion lookRotation = Quaternion.LookRotation(direction);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
+
+            agent.SetDestination(transform.position);
+            Debug.Log($"rotation After Destination {agent.destination}");
+
+            
+        }
+        var curAnimStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float attackDelay = curAnimStateInfo.length * 1.2f;
+
+        //Attack Animation
+        animator.SetBool("IsAttack", true);
+
+        //Attack
+        Debug.Log($"{gameObject.name}이(가) 플레이어를 공격!!");
+        yield return new WaitForSeconds(attackDelay);
+        ChangeState(State.ATTACK);
     }
 
     /// <summary>
@@ -175,6 +220,18 @@ public class Monster : MonoBehaviour
     #region MonsterFunc
 
     /// <summary>
+    /// MoveBlend의 Move값 변경
+    /// </summary>
+    /// <param name="isMoving">이동중이면 true, 정지상태면 false</param>
+    protected virtual void MoveAnimation(bool isMoving)
+    {
+        float target = isMoving ? 1f : 0f;
+        moveAmount = Mathf.MoveTowards(moveAmount, target, Time.deltaTime * 2f); // 2f는 속도, 조절 가능
+
+        animator.SetFloat("Move", moveAmount);
+    }
+
+    /// <summary>
     /// State 변경
     /// </summary>
     /// <param name="_newState">변경하고싶은 State</param>
@@ -184,7 +241,7 @@ public class Monster : MonoBehaviour
     }
 
     /// <summary>
-    /// 피해
+    /// 피격
     /// </summary>
     /// <param name="damage">받을 데미지값</param>
     public virtual void TakeDamage(int damage)
