@@ -40,9 +40,6 @@ public class Monster : MonoBehaviour
 
     protected Coroutine machine;
 
-    protected MonsterAttackDetection attackDetection;
-    protected BoxCollider attackCollider;
-
     protected MonsterHitBox hitDetection;
     protected BoxCollider hitCollider;
 
@@ -64,6 +61,7 @@ public class Monster : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
+        agent.updateRotation = false;
 
         rb = GetComponent<Rigidbody>();
     }
@@ -72,10 +70,6 @@ public class Monster : MonoBehaviour
     {
         currentState = State.IDLE;
         machine = StartCoroutine(MonsterStateMachine());
-
-        attackDetection = GetComponentInChildren<MonsterAttackDetection>();
-        attackCollider = attackDetection.attackCollider;
-        attackCollider.gameObject.SetActive(false);
 
         hitDetection = GetComponentInChildren<MonsterHitBox>();
         hitCollider = hitDetection.hitCollider;
@@ -142,6 +136,8 @@ public class Monster : MonoBehaviour
 
         agent.SetDestination(target.position);
 
+        LookTarget();
+
         //Run Animation
         isMoving = true;
         MoveAnimation(isMoving);
@@ -156,7 +152,6 @@ public class Monster : MonoBehaviour
         if (target == null)
         {
             animator.SetBool("IsAttack", false);
-            attackCollider.gameObject.SetActive(false);
 
             ChangeState(State.IDLE);
             Debug.Log("공격도중 적을 찾지못함..");
@@ -168,7 +163,6 @@ public class Monster : MonoBehaviour
         if (distance > attackRange)
         {
             animator.SetBool("IsAttack", false);
-            attackCollider.gameObject.SetActive(false);
 
             ChangeState(State.CHASE);
             Debug.Log("다시 추적!");
@@ -186,6 +180,8 @@ public class Monster : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
             yield return null;
         }
+        //LookTarget();
+
 
         if (!agent.enabled)
         {
@@ -193,8 +189,6 @@ public class Monster : MonoBehaviour
         }
         // 회전 완료 후 공격
         agent.SetDestination(transform.position); // 정지
-
-        attackCollider.gameObject.SetActive(true);
 
         //Attack Animation
         animator.SetBool("IsAttack", true);
@@ -246,6 +240,17 @@ public class Monster : MonoBehaviour
     #endregion
 
     #region MonsterFunc
+
+    protected virtual void LookTarget()
+    {
+        Vector3 dir = (target.position - transform.position).normalized;
+        dir.y = 0f; // 수평 회전만
+        if (dir.sqrMagnitude > 0f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
+        }
+    }
 
     /// <summary>
     /// MoveBlend의 Move값 변경

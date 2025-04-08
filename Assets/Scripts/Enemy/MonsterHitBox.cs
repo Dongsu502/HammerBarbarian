@@ -25,7 +25,7 @@ public class MonsterHitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Player"))
+        if (other.transform.CompareTag("Weapon"))
         {
             if(IsKnockback)
             {

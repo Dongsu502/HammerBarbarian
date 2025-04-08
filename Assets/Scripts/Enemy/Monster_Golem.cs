@@ -5,6 +5,9 @@ using UnityEngine.AI;
 
 public class Monster_Golem : Monster
 {
+    protected MonsterAttackDetection attackDetection;
+    protected BoxCollider attackCollider;
+
     #region UnityCallFunc
 
     protected override void Awake()
@@ -15,6 +18,10 @@ public class Monster_Golem : Monster
     protected override void Start()
     {
         base.Start();
+
+        attackDetection = GetComponentInChildren<MonsterAttackDetection>();
+        attackCollider = attackDetection.attackCollider;
+        attackCollider.gameObject.SetActive(false);
 
         agent.avoidancePriority = Random.Range(30, 70);
     }
@@ -40,6 +47,20 @@ public class Monster_Golem : Monster
 
     protected override IEnumerator ATTACK()
     {
+        
+        if(target == null)
+        {
+            attackCollider.gameObject.SetActive(false);
+        }
+
+        float distance = Vector3.Distance(transform.position, target.position);
+        if (distance > attackRange)
+        {
+            attackCollider.gameObject.SetActive(false);
+        }
+
+        attackCollider.gameObject.SetActive(true);
+
         return base.ATTACK();
     }
 
