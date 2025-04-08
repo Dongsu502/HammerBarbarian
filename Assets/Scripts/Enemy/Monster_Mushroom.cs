@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Monster_Golem : Monster
+public class Monster_Mushroom : Monster
 {
     #region UnityCallFunc
 
@@ -16,9 +16,10 @@ public class Monster_Golem : Monster
     {
         base.Start();
 
-        agent.avoidancePriority = Random.Range(30, 70);
+        agent.avoidancePriority = Random.Range(70, 90);
+
     }
-    
+
     #endregion
 
     #region IEnumerator Machine
