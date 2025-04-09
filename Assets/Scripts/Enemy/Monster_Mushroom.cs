@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Monster_Golem : Monster
+public class Monster_Mushroom : Monster
 {
-    protected MonsterAttackDetection attackDetection;
-    protected BoxCollider attackCollider;
-
     #region UnityCallFunc
 
     protected override void Awake()
@@ -19,13 +16,10 @@ public class Monster_Golem : Monster
     {
         base.Start();
 
-        attackDetection = GetComponentInChildren<MonsterAttackDetection>();
-        attackCollider = attackDetection.attackCollider;
-        attackCollider.gameObject.SetActive(false);
+        agent.avoidancePriority = Random.Range(70, 90);
 
-        agent.avoidancePriority = Random.Range(30, 70);
     }
-    
+
     #endregion
 
     #region IEnumerator Machine
@@ -47,20 +41,6 @@ public class Monster_Golem : Monster
 
     protected override IEnumerator ATTACK()
     {
-        
-        if(target == null)
-        {
-            attackCollider.gameObject.SetActive(false);
-        }
-
-        float distance = Vector3.Distance(transform.position, target.position);
-        if (distance > attackRange)
-        {
-            attackCollider.gameObject.SetActive(false);
-        }
-
-        attackCollider.gameObject.SetActive(true);
-
         return base.ATTACK();
     }
 

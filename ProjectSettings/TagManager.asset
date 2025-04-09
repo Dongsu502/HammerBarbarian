@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Attack_Golem
+  - Weapon
   layers:
   - Default
   - TransparentFX
@@ -15,10 +17,9 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - Attack_Golem
+  - Enemy
+  - Player
   - 
   - 
   - 

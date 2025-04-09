@@ -1,8 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.Android;
+using UnityEngine.InputSystem.HID;
+using UnityEngine.UIElements;
 
 public class Monster : MonoBehaviour
 {
@@ -14,20 +19,31 @@ public class Monster : MonoBehaviour
     [Tooltip("이동속도")]
     public float moveSpeed = 3.5f;
     [Tooltip("체력")]
-    public int health = 100; //체력
+    public int health = 100;
+    [Tooltip("회전속도")]
+    public float rotateSpeed = 10f;
+    [Tooltip("공격딜레이")]
+    public float attackDelay = 1.2f;
 
     [Space(10)]
-    [Tooltip("감지 콜라이더")]
-    [SerializeField] protected SphereCollider detectCollider;
+    [Tooltip("목표")]
+    public Transform target;
 
     [Space(10)]
     [Tooltip("애니메이션")]
     [SerializeField] protected Animator animator;
 
+    protected bool isMoving;
+    protected float moveAmount;
+
     protected NavMeshAgent agent;
-    protected Transform target;
 
     protected Coroutine machine;
+
+    protected MonsterHitBox hitDetection;
+    protected BoxCollider hitCollider;
+
+    protected Rigidbody rb;
 
     public enum State
     {
@@ -45,29 +61,18 @@ public class Monster : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
+        agent.updateRotation = false;
 
-        detectCollider.radius = detectRange;
+        rb = GetComponent<Rigidbody>();
     }
 
     protected virtual void Start()
     {
         currentState = State.IDLE;
         machine = StartCoroutine(MonsterStateMachine());
-    }
 
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-        if(other.CompareTag("Player"))
-        {
-            target = other.transform;
-        }
-    }
-    protected virtual void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            target = null;
-        }
+        hitDetection = GetComponentInChildren<MonsterHitBox>();
+        hitCollider = hitDetection.hitCollider;
     }
 
     #endregion
@@ -88,9 +93,14 @@ public class Monster : MonoBehaviour
     protected virtual IEnumerator IDLE()
     {
         //Idle Animation
-        animator.SetBool("IsWalk", false);
+        isMoving = false;
+        MoveAnimation(isMoving);
 
-        Debug.Log("정지 정지!");
+        if(!agent.enabled)
+        {
+            yield break;
+        }
+        agent.SetDestination(transform.position);
 
         if (target != null)
         {
@@ -110,18 +120,27 @@ public class Monster : MonoBehaviour
             Debug.Log("추적중단..");
             yield break;
         }
-        if (Vector3.Distance(transform.position, target.position) <= attackRange)
+
+        float distance = Vector3.Distance(transform.position, target.position);
+        if (distance <= attackRange)
         {
             ChangeState(State.ATTACK);
             Debug.Log("추적중단.. 공격!");
             yield break;
         }
 
-        //Run Animation
-        animator.SetBool("IsWalk", true);
+        if (!agent.enabled)
+        {
+            yield break;
+        }
 
         agent.SetDestination(target.position);
-        Debug.Log("추적중..");
+
+        LookTarget();
+
+        //Run Animation
+        isMoving = true;
+        MoveAnimation(isMoving);
     }
 
     /// <summary>
@@ -129,11 +148,19 @@ public class Monster : MonoBehaviour
     /// </summary>
     protected virtual IEnumerator ATTACK()
     {
-        //Attack Animation
-        animator.SetBool("IsAttack", true);
-        Debug.Log($"{gameObject.name}이(가) 플레이어를 공격!!");
+        //ChangeState_IDLE
+        if (target == null)
+        {
+            animator.SetBool("IsAttack", false);
 
-        if (Vector3.Distance(transform.position, target.position) > attackRange)
+            ChangeState(State.IDLE);
+            Debug.Log("공격도중 적을 찾지못함..");
+            yield break;
+        }
+
+        //ChangeState_CHASE
+        float distance = Vector3.Distance(transform.position, target.position);
+        if (distance > attackRange)
         {
             animator.SetBool("IsAttack", false);
 
@@ -141,20 +168,60 @@ public class Monster : MonoBehaviour
             Debug.Log("다시 추적!");
             yield break;
         }
+
+        // 타겟 방향 계산
+        Vector3 direction = (target.position - transform.position).normalized;
+        direction.y = 0f;
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+
+        // 회전 완료될 때까지 대기
+        while (Quaternion.Angle(transform.rotation, targetRotation) > 3f)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotateSpeed * Time.deltaTime);
+            yield return null;
+        }
+        //LookTarget();
+
+
+        if (!agent.enabled)
+        {
+            yield break;
+        }
+        // 회전 완료 후 공격
+        agent.SetDestination(transform.position); // 정지
+
+        //Attack Animation
+        animator.SetBool("IsAttack", true);
+
+        var curAnimStateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        float delay = curAnimStateInfo.length * attackDelay;
+
+        //Attack
+        yield return new WaitForSeconds(delay);
+        ChangeState(State.ATTACK);
     }
 
     /// <summary>
-    /// 피해
+    /// 피격
     /// </summary>
     protected virtual IEnumerator HIT()
     {
         //Hit Animation
-
+        animator.SetTrigger("IsDown");
+        animator.SetBool("IsAttack", false);
         Debug.Log("아프다..");
 
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(hitDetection.knockbackDuration);
+
+        rb.isKinematic = true;
+
+        yield return new WaitForSeconds(3f);
+
+        SetAgentEnable(true);
+        hitDetection.IsKnockback = false;
 
         ChangeState(State.IDLE);
+        yield break;
     }
 
     /// <summary>
@@ -174,6 +241,29 @@ public class Monster : MonoBehaviour
 
     #region MonsterFunc
 
+    protected virtual void LookTarget()
+    {
+        Vector3 dir = (target.position - transform.position).normalized;
+        dir.y = 0f; // 수평 회전만
+        if (dir.sqrMagnitude > 0f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
+        }
+    }
+
+    /// <summary>
+    /// MoveBlend의 Move값 변경
+    /// </summary>
+    /// <param name="isMoving">이동중이면 true, 정지상태면 false</param>
+    protected virtual void MoveAnimation(bool isMoving)
+    {
+        float target = isMoving ? 1f : 0f;
+        moveAmount = Mathf.MoveTowards(moveAmount, target, Time.deltaTime * 2f); // 2f는 속도, 조절 가능
+
+        animator.SetFloat("Move", moveAmount);
+    }
+
     /// <summary>
     /// State 변경
     /// </summary>
@@ -181,10 +271,17 @@ public class Monster : MonoBehaviour
     protected virtual void ChangeState(State _newState)
     {
         currentState = _newState;
+
+        if(machine != null)
+        {
+            StopCoroutine(machine);
+        }
+
+        machine = StartCoroutine(MonsterStateMachine());
     }
 
     /// <summary>
-    /// 피해
+    /// 피격
     /// </summary>
     /// <param name="damage">받을 데미지값</param>
     public virtual void TakeDamage(int damage)
@@ -194,12 +291,22 @@ public class Monster : MonoBehaviour
 
         if(health > 0)
         {
+            Debug.Log("피격 애니메이션 호출");
             ChangeState(State.HIT);
         }
         else
         {
             MonsterDie();
         }
+    }
+
+    /// <summary>
+    /// 넉백 시 내비에이전트 비활성화
+    /// </summary>
+    /// <param name="isActive">활성화 여부</param>
+    public virtual void SetAgentEnable(bool isActive)
+    {
+        agent.enabled = isActive;
     }
 
     /// <summary>
