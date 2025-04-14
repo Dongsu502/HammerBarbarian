@@ -1,5 +1,6 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
+using UnityEditor.Rendering;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -25,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
         comboStep++;
         animator.applyRootMotion = true;
         IsAttacking = true; // 공격 시작 시 true 설정
+        Debug.Log(IsAttacking);
 
         if (comboStep == 1)
         {
@@ -53,7 +55,6 @@ public class PlayerAttack : MonoBehaviour
             {
                 comboStep = 0;
                 comboTimer = 0f;
-                IsAttacking = false; // 콤보 종료 시 공격 종료
             }
         }
     }
