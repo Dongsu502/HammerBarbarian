@@ -57,7 +57,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDiving || playerAttack != null && playerAttack.IsAttacking)
+        if (isDiving || IsAttackAnim())
         {
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
             animator.SetFloat("MoveSpeed", 0f);
@@ -127,5 +127,11 @@ public class PlayerMove : MonoBehaviour
     public void EndDive()
     {
         isDiving = false;
+    }
+
+    bool IsAttackAnim()
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsTag("Attack");
     }
 }
