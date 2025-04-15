@@ -42,9 +42,9 @@ public class PauseUIManager : MonoBehaviour
         Debug.Log("키보드세팅");
     }
 
-    public void click_GoTitleButton()
+    public void Click_GoTitleButton()
     {
-        Debug.Log("타이틀로 나가기");
+        SceneManager.LoadScene("Title");
     }
 
     public void Click_QuitButton()

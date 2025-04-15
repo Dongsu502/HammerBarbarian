@@ -8,14 +8,20 @@ public class TitleUIManager : MonoBehaviour
 {
     [Header("PlayButton")]
     [Tooltip("메뉴 버튼")]
-    public GameObject PlayButton;
+    [SerializeField]
+    private GameObject PlayButton;
 
     [Space(2)]
     [Header("Panel")]
     [Tooltip("메뉴 패널")]
-    public GameObject MenuPanel;
+    [SerializeField]
+    private GameObject MenuPanel;
     [Tooltip("저장데이터 패널")]
-    public GameObject StorageDataPanel;
+    [SerializeField]
+    private GameObject StorageDataPanel;
+    [Tooltip("설정 패널")]
+    [SerializeField]
+    private GameObject SettingPanel;
 
     #region UnityCall_Func
 
@@ -32,6 +38,8 @@ public class TitleUIManager : MonoBehaviour
 
         MenuPanel.SetActive(false);
         StorageDataPanel.SetActive(false);
+
+        SettingPanel.SetActive(false);
     }
 
     [ContextMenu("플레이버튼 등장!")]
@@ -49,7 +57,7 @@ public class TitleUIManager : MonoBehaviour
 
     public void Click_NewGameStartButton()
     {
-        Debug.Log("새로시작");
+        SceneManager.LoadScene("Map");
     }
 
     public void Click_StorageDataButton()
@@ -61,11 +69,21 @@ public class TitleUIManager : MonoBehaviour
 
     public void Click_SettingButton()
     {
-        Debug.Log("설정");
+        MenuPanel.SetActive(false);
+
+        SettingPanel.SetActive(true);
+    }
+    public void Click_Setting_GobackButton()
+    {
+        SettingPanel.SetActive(false);
+
+        MenuPanel.SetActive(true);
     }
 
     public void Click_QuitButton()
     {
         Debug.Log("게임 종료");
     }
+
+    
 }
