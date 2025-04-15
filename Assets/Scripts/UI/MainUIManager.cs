@@ -1,0 +1,290 @@
+using JetBrains.Annotations;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.InputSystem.Android;
+using UnityEngine.UI;
+
+public class MainUIManager : MonoBehaviour
+{
+    [Header("PlayerUI")]
+    [Tooltip("플레이어 체력이미지")]
+    public Image[] healthImages;
+
+    [Space(3)]
+    [Header("ItemUI")]
+    [Tooltip("아이템이미지")]
+    public Image itemImage;
+    [Tooltip("아이템사용키 텍스트")]
+    public Text itemKey_text;
+
+    [Space(1)]
+    [Tooltip("아이템 선택창")]
+    public GameObject itemChoiceUI;
+    [Tooltip("아이템 이름")]
+    public Text itemName_text;
+    [Tooltip("아이템 선택 버튼")]
+    public Button[] itemChoice_Buttons;
+    [Tooltip("아이템 선택창의 아이템 이미지")]
+    public Image[] itemChoice_itemImages;
+
+    [Space(3)]
+    [Header("Gauge")]
+    [Tooltip("게이지 백그라운드이미지")]
+    public Image gaugeBackgroundImage;
+    [Tooltip("게이지 이미지")]
+    public Image gaugeImage;
+
+    [Space(3)]
+    [Header("Image Resources")]
+    [Tooltip("ItemImages")]
+    public Sprite[] item_ImageResources;
+    [Tooltip("HealthImages")]
+    public Sprite[] health_ImageResources;
+
+    [Space(3)]
+    [Header("ItemNameText")]
+    public string[] item_NameTexts;
+
+    private int currentItemNum;
+
+    private int currentHealth = 6;
+    private const int MIN_HEALTH = 0;
+    private const int MAX_HEALTH = 6;
+
+    private float gaugeValue = 100f;
+    private const float GAUGE_RECOVERY_VALUE = 0.1f;
+    private const float GAUGE_MIN_VALUE = 0f;
+    private const float GAUGE_MAX_VALUE = 100f;
+
+#if UNITY_EDITOR
+
+    [ContextMenu("피격1")]
+    private void Hit1()
+    {
+        TakeDamage(1);
+    }
+    [ContextMenu("피격2")]
+    private void Hit2()
+    {
+        TakeDamage(2);
+    }
+    [ContextMenu("피격3")]
+    private void Hit3()
+    {
+        TakeDamage(3);
+    }
+    [ContextMenu("회복1")]
+    private void Heal1()
+    {
+        Heal(1);
+    }
+    [ContextMenu("회복2")]
+    private void Heal2()
+    {
+        Heal(2);
+    }
+    [ContextMenu("회복3")]
+    private void Heal3()
+    {
+        Heal(3);
+    }
+    [ContextMenu("게이지 감소 30")]
+    private void GaugeUse30()
+    {
+        UseGauge(30f);
+    }
+
+#endif
+
+    #region UnityCall_Func
+    private void Awake()
+    {
+        MainUI_Initialize();
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            UseItem(currentItemNum);
+        }
+        if(Input.GetKey(KeyCode.R))
+        {
+            ChoiceUI_SetActive(true);
+        }
+        if(Input.GetKeyUp(KeyCode.R))
+        {
+            ChoiceUI_SetActive(false);
+        }
+        if(Input.GetKey(KeyCode.Space))
+        {
+            UseGauge(0.5f);
+        }
+
+        GaugeRecovery(GAUGE_RECOVERY_VALUE);
+    }
+
+    #endregion
+
+    /// <summary>
+    /// 메인UI 초기화 메서드
+    /// </summary>
+    private void MainUI_Initialize()
+    {
+        //아이템선택창 비활성화
+        ChoiceUI_SetActive(false);
+
+        //게이지이미지 비활성화
+        GaugeUI_SetActive(false);
+
+        //게이지 값 적용
+        gaugeValue = GAUGE_MAX_VALUE;
+        gaugeImage.fillAmount = gaugeValue / GAUGE_MAX_VALUE;
+    }
+
+    #region Health_Func
+
+    /// <summary>
+    /// 하트 UI를 현재 체력 상태에 맞게 갱신
+    /// </summary>
+    private void UpdateHearts()
+    {
+        for (int i = 0; i < healthImages.Length; i++)
+        {
+            if (i < currentHealth)
+                healthImages[i].sprite = health_ImageResources[1];
+            else
+                healthImages[i].sprite = health_ImageResources[0];
+        }
+    }
+
+    /// <summary>
+    /// 피격 시 체력 1 감소
+    /// </summary>
+    /// /// <param name="amount">사라질 하트 수</param>
+    public void TakeDamage(int amount)
+    {
+        if (currentHealth <= MIN_HEALTH) return;
+
+        currentHealth -= amount;
+        currentHealth = Mathf.Clamp(currentHealth, MIN_HEALTH, MAX_HEALTH);
+        UpdateHearts();
+
+        Debug.Log($"피격! 현재 체력: {currentHealth}");
+
+        if(currentHealth <= MIN_HEALTH)
+        {
+            Debug.Log("사망");
+        }
+    }
+
+    /// <summary>
+    /// 지정한 수만큼 체력 회복
+    /// </summary>
+    /// <param name="amount">회복할 하트 수</param>
+    public void Heal(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, MIN_HEALTH, MAX_HEALTH);
+
+        UpdateHearts();
+
+        Debug.Log($"회복! 현재 체력: {currentHealth}");
+    }
+
+    #endregion
+
+    #region Item_Func
+
+    /// <summary>
+    /// 아이템 사용키를 눌렀을 때 호출하는 메서드
+    /// </summary>
+    /// <param name="itemNum">현재 아이템 번호</param>
+    private void UseItem(int itemNum)
+    {
+        string itemName = item_NameTexts[itemNum];
+        Debug.Log($"아이템 사용: {itemName}");
+    }
+
+    /// <summary>
+    /// 아이템 선택창 활성화 / 비활성화 메서드
+    /// </summary>
+    /// <param name="isActive">활성화 여부</param>
+    private void ChoiceUI_SetActive(bool isActive)
+    {
+        itemChoiceUI.SetActive(isActive);
+    }
+
+    /// <summary>
+    /// 아이템 선택창에서 아이템 이름 바꾸는 메서드
+    /// </summary>
+    /// <param name="newName">변경 아이템 이름</param>
+    public void ChangeItemName_UI(string newName)
+    {
+        itemName_text.text = newName;
+    }
+
+    /// <summary>
+    /// 아이템 선택 시 아이템 이미지 변경
+    /// </summary>
+    public void ChangeItem_UI()
+    {
+        string buttonName = EventSystem.current.currentSelectedGameObject.name;
+        string pressedButtonNumber = buttonName.Substring(buttonName.Length - 1, 1);
+        
+        currentItemNum = int.Parse(pressedButtonNumber);
+
+        itemImage.sprite = item_ImageResources[currentItemNum];
+    }
+
+    #endregion
+
+    #region Gauge_Func
+
+    /// <summary>
+    /// 게이지이미지 활성화 / 비활성화
+    /// </summary>
+    /// <param name="isActive">활성화 여부</param>
+    public void GaugeUI_SetActive(bool isActive)
+    {
+        gaugeBackgroundImage.gameObject.SetActive(isActive);
+    }
+
+    /// <summary>
+    /// 게이지 자동 회복
+    /// </summary>
+    /// <param name="amount">회복값(속도)</param>
+    public void GaugeRecovery(float amount)
+    {
+        if (gaugeValue >= GAUGE_MAX_VALUE)
+        {
+            //게이지 비활성화
+            GaugeUI_SetActive(false);
+
+            return;
+        }
+
+        gaugeValue += amount;
+        gaugeImage.fillAmount = gaugeValue / GAUGE_MAX_VALUE;
+    }
+
+    /// <summary>
+    /// 게이지 사용
+    /// </summary>
+    /// <param name="amount">사용할 게이지 양</param>
+    public void UseGauge(float amount)
+    {
+        if (gaugeValue <= GAUGE_MIN_VALUE) return;
+
+        //게이지 활성화
+        GaugeUI_SetActive(true);
+
+        gaugeValue -= amount;
+        gaugeImage.fillAmount = gaugeValue / GAUGE_MAX_VALUE;
+        Debug.Log($"게이지 감소값: {amount}");
+    }
+
+    #endregion
+}
