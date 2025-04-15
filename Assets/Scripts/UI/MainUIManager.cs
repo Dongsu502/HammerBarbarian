@@ -8,6 +8,10 @@ using UnityEngine.UI;
 
 public class MainUIManager : MonoBehaviour
 {
+    [Header("Panel")]
+    [Tooltip("일시정지 패널")]
+    public GameObject PausePanel;
+
     [Header("PlayerUI")]
     [Tooltip("플레이어 체력이미지")]
     public Image[] healthImages;
@@ -122,6 +126,10 @@ public class MainUIManager : MonoBehaviour
         {
             UseGauge(0.5f);
         }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            pausePanel_SetActive(true);
+        }
 
         GaugeRecovery(GAUGE_RECOVERY_VALUE);
     }
@@ -133,6 +141,9 @@ public class MainUIManager : MonoBehaviour
     /// </summary>
     private void MainUI_Initialize()
     {
+        //일시정지 패널 비활성화
+        pausePanel_SetActive(false);
+
         //아이템선택창 비활성화
         ChoiceUI_SetActive(false);
 
@@ -142,6 +153,11 @@ public class MainUIManager : MonoBehaviour
         //게이지 값 적용
         gaugeValue = GAUGE_MAX_VALUE;
         gaugeImage.fillAmount = gaugeValue / GAUGE_MAX_VALUE;
+    }
+
+    public void pausePanel_SetActive(bool active)
+    {
+        PausePanel.SetActive(active);
     }
 
     #region Health_Func
