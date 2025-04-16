@@ -41,6 +41,12 @@ public class PlayerAttack : MonoBehaviour
         return (int)attackType;
     }
 
+    [ContextMenu("화면이동 잠금")]
+    public void TestMethod()
+    {
+        DisableInputAction_Attack1();
+    }
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
