@@ -204,10 +204,20 @@ public class MainUIManager : MonoBehaviour
         if(isLock)
         {
             Cursor.lockState = CursorLockMode.None;
+
+            //플레이어 마우스 입력 비활성화
+            PlayerWhiteBox.WhiteBox.DisableAttackAction();
+            //플레이어 화면 잠금
+            PlayerWhiteBox.WhiteBox.DisableLookAction();
         }
         else
         {
             Cursor.lockState = CursorLockMode.Locked;
+
+            //플레이어 마우스 입력 활성화
+            PlayerWhiteBox.WhiteBox.EnableAttack1Action();
+            //플레이어 화면 잠금해제
+            PlayerWhiteBox.WhiteBox.EnableLookAction();
         }
         Cursor.visible = isLock;
     }

@@ -12,7 +12,7 @@ public class MonsterHitBox : MonoBehaviour
     public float knockbackDuration = 2.1f;
     public bool IsKnockback;
 
-    public int powerAttack;
+    private const int POWER_ATTACKTYPE = 2;
 
     Rigidbody rb;
 
@@ -30,7 +30,7 @@ public class MonsterHitBox : MonoBehaviour
         if (other.transform.CompareTag("Weapon")) 
         {
             //강공격인지 확인 -> 넉백
-            if(powerAttack == 3)
+            if(PlayerWhiteBox.WhiteBox.currentAttackType == POWER_ATTACKTYPE)
             {
                 //넉백중이라면 취소
                 if (IsKnockback) return;
