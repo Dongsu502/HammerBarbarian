@@ -108,11 +108,15 @@ public class MainUIManager : MonoBehaviour
     #region UnityCall_Func
     private void Awake()
     {
-        MainUI_Initialize();
+        UIWhiteBox.SetMainUIWB(this);
+
+        uiInput = new UIInputAction();
     }
 
     private void OnEnable()
     {
+        MainUI_Initialize();
+
         uiInput.MainUI.Enable();
 
         uiInput.MainUI.Setting.started += EscapeACtion;
@@ -133,11 +137,6 @@ public class MainUIManager : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.Space))
-        {
-            UseGauge(0.5f);
-        }
-
         GaugeRecovery(GAUGE_RECOVERY_VALUE);
     }
 
@@ -170,10 +169,6 @@ public class MainUIManager : MonoBehaviour
     /// </summary>
     private void MainUI_Initialize()
     {
-        UIWhiteBox.SetMainUIWB(this);
-
-        uiInput = new UIInputAction();
-
         //일시정지 패널 비활성화
         PausePanel_SetActive(false);
 
