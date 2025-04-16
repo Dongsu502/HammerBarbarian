@@ -15,16 +15,22 @@ public static class PlayerWhiteBox
 public class PlayerInputManager : MonoBehaviour
 {
     PlayerAttack playerAttack;
-    CameraController cameraController;
     PlayerMove playerMove;
+    FreeLookController freeLookController;
 
     public void EnableAttack1Action() => playerAttack.EnableInputAction_Attack1();
 
     public void DisableAttackAction() => playerAttack.DisableInputAction_Attack1();
 
-    public void EnableLookAction() => cameraController.EnableActionLook();
+    public void EnableLookAction()
+    {
+        freeLookController.UnlockCameraRotation();
+    }
     
-    public void DisableLookAction()=> cameraController.DisableActionLook();
+    public void DisableLookAction()
+    {
+        freeLookController.LockCameraRotation();
+    }
 
     public int currentAttackType => playerAttack.currentAttackType();
 
@@ -32,8 +38,8 @@ public class PlayerInputManager : MonoBehaviour
     {
         PlayerWhiteBox.SetWhiteBox(this);
         playerAttack = GetComponent<PlayerAttack>();
-        cameraController = Camera.main.GetComponent<CameraController>();
         playerMove = GetComponent<PlayerMove>();
+        freeLookController=FindAnyObjectByType<FreeLookController>().GetComponent<FreeLookController>();
     }
 
 }
