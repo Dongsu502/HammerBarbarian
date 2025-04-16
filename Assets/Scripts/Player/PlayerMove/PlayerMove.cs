@@ -130,15 +130,4 @@ public class PlayerMove : MonoBehaviour
     {
         isDiving = false;
     }
-
-    public void EnableActionLook()
-    {
-        lookAction.action.Enable();
-    }
-
-    public void DisableActionLook()
-    {
-        lookAction.action.Disable();
-    }
-    
 }

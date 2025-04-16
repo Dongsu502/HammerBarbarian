@@ -179,6 +179,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 581a780cbf647a24987dffc17b726ece, type: 3}
+--- !u!1 &63963844 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1008361840263667357, guid: 4834a7365e4627e4ea7aca9ccf337b5e, type: 3}
+  m_PrefabInstance: {fileID: 1089452375}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &150310854
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -478,19 +483,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4629232248383922634, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.w
-      value: -0.08439927
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4629232248383922634, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.009616735
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4629232248383922634, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.94930226
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4629232248383922634, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.30267075
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5620383256304357953, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_Name
@@ -710,6 +715,22 @@ PrefabInstance:
       propertyPath: cameraShakeTrigger
       value: 
       objectReference: {fileID: 683277139}
+    - target: {fileID: 5981140056403641577, guid: 4834a7365e4627e4ea7aca9ccf337b5e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981140056403641577, guid: 4834a7365e4627e4ea7aca9ccf337b5e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5981140056403641577, guid: 4834a7365e4627e4ea7aca9ccf337b5e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 63963844}
+    - target: {fileID: 5981140056403641577, guid: 4834a7365e4627e4ea7aca9ccf337b5e, type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
