@@ -91,6 +91,7 @@ public class Monster_Golem : Monster
     public override void TakeDamage(int damage)
     {
         base.TakeDamage(damage);
+        healthUI.TakeDamageUI(damage);
     }
 
     protected override void MonsterDie()

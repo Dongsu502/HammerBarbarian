@@ -9,8 +9,10 @@ public class MonsterHitBox : MonoBehaviour
     public BoxCollider hitCollider;
 
     public float knockbackForce = 10f;
-    public float knockbackDuration = 1f;
+    public float knockbackDuration = 2.1f;
     public bool IsKnockback;
+
+    public int powerAttack;
 
     Rigidbody rb;
 
@@ -25,19 +27,21 @@ public class MonsterHitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Weapon"))
+        if (other.transform.CompareTag("Weapon")) //여기다가 플레이어 공격번호 조건으로 넣기(강공격때만 넉백)
         {
-            if(IsKnockback)
+            //강공격인지 확인 -> 넉백
+            if(powerAttack == 3)
             {
-                return;
+                //넉백중이라면 취소
+                if (IsKnockback) return;
+
+                IsKnockback = true;
+                monster.KnocbackActive(false);
+
+                Knockback(other);
             }
 
-            IsKnockback = true;
-            monster.SetAgentEnable(false);
-            rb.isKinematic = false;
-
-            Knockback(other);
-
+            hitCollider.enabled = false;
             monster.TakeDamage(10);
         }
     }

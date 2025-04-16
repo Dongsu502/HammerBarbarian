@@ -41,9 +41,10 @@ public class Monster : MonoBehaviour
     protected Coroutine machine;
 
     protected MonsterHitBox hitDetection;
-    protected BoxCollider hitCollider;
 
     protected Rigidbody rb;
+
+    public MonsterHealthUI healthUI;
 
     public enum State
     {
@@ -72,7 +73,6 @@ public class Monster : MonoBehaviour
         machine = StartCoroutine(MonsterStateMachine());
 
         hitDetection = GetComponentInChildren<MonsterHitBox>();
-        hitCollider = hitDetection.hitCollider;
     }
 
     #endregion
@@ -207,17 +207,26 @@ public class Monster : MonoBehaviour
     protected virtual IEnumerator HIT()
     {
         //Hit Animation
-        animator.SetTrigger("IsDown");
+        if (hitDetection.IsKnockback)
+        {
+            animator.SetTrigger("IsDown");
+        }
+        else
+        {
+            animator.SetTrigger("TakeDamage");
+        }
+        
         animator.SetBool("IsAttack", false);
         Debug.Log("아프다..");
 
         yield return new WaitForSeconds(hitDetection.knockbackDuration);
-
         rb.isKinematic = true;
 
         yield return new WaitForSeconds(3f);
 
-        SetAgentEnable(true);
+        KnocbackActive(true);
+        rb.isKinematic = false;
+        hitDetection.hitCollider.enabled = true;
         hitDetection.IsKnockback = false;
 
         ChangeState(State.IDLE);
@@ -301,10 +310,10 @@ public class Monster : MonoBehaviour
     }
 
     /// <summary>
-    /// 넉백 시 내비에이전트 비활성화
+    /// 넉백 시 비활성화
     /// </summary>
     /// <param name="isActive">활성화 여부</param>
-    public virtual void SetAgentEnable(bool isActive)
+    public virtual void KnocbackActive(bool isActive)
     {
         agent.enabled = isActive;
     }
