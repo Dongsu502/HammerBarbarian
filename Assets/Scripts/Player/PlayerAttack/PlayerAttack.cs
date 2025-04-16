@@ -12,11 +12,13 @@ public class PlayerAttack : MonoBehaviour
 
     public bool IsAttacking { get; private set; } = false;
 
-    [SerializeField] private Collider hammerCollider;
+    [SerializeField] private GameObject hammer;
+    private Collider[] hammerCollider;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        hammerCollider = hammer.GetComponents<Collider>();
     }
 
     public void OnAttack1(InputAction.CallbackContext context)
@@ -73,12 +75,19 @@ public class PlayerAttack : MonoBehaviour
 
     public void EnableHammerCollider()
     {
-        hammerCollider.enabled = true;
+        for (int i = 0; i < hammerCollider.Length; i++)
+        {
+            hammerCollider[i].enabled = true;
+        }
     }
 
     public void DisableHammerCollider()
     {
-        hammerCollider.enabled = false;
+        for (int i = 0; i < hammerCollider.Length; i++)
+        {
+            hammerCollider[i].enabled = false;
+        }
+       
     }
 
     private void OnAnimatorMove()

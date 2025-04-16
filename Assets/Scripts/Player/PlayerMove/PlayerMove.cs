@@ -48,7 +48,7 @@ public class PlayerMove : MonoBehaviour
 
     public void OnDIve(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDiving)
+        if (context.performed && !isDiving && !IsAttackAnim())
         {
             animator.applyRootMotion = true;
             StartCoroutine(DiveCoroutine());
