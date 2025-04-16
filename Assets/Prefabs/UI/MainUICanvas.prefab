@@ -1753,7 +1753,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2453462846102704173}
         m_TargetAssemblyTypeName: PauseUIManager, Assembly-CSharp
-        m_MethodName: click_GoTitleButton
+        m_MethodName: Click_GoTitleButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -48,7 +48,7 @@ public class PlayerMove : MonoBehaviour
 
     public void OnDIve(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDiving && !IsAttackAnim())
+        if (context.performed && !isDiving && !playerAttack.IsAttackAnim())
         {
             animator.applyRootMotion = true;
             StartCoroutine(DiveCoroutine());
@@ -57,7 +57,7 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (isDiving || IsAttackAnim())
+        if (isDiving || playerAttack.IsAttackAnim())
         {
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
             animator.SetFloat("MoveSpeed", 0f);
@@ -111,6 +111,7 @@ public class PlayerMove : MonoBehaviour
         transform.rotation = diveRotation;
 
         animator.SetTrigger("Dive");
+        UIWhiteBox.UseGauge(30f);
 
         float elapsed = 0f;
         while (elapsed < diveDuration)
@@ -129,9 +130,5 @@ public class PlayerMove : MonoBehaviour
         isDiving = false;
     }
 
-    bool IsAttackAnim()
-    {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        return stateInfo.IsTag("Attack");
-    }
+    
 }
