@@ -115,8 +115,6 @@ public class MainUIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        MainUI_Initialize();
-
         uiInput.MainUI.Enable();
 
         uiInput.MainUI.Setting.started += EscapeACtion;
@@ -133,6 +131,11 @@ public class MainUIManager : MonoBehaviour
 
         uiInput.MainUI.ChoiceItem.performed -= ChoiceItemAction;
         uiInput.MainUI.ChoiceItem.canceled -= ChoiceItemAction;
+    }
+
+    private void Start()
+    {
+        MainUI_Initialize();
     }
 
     private void Update()
