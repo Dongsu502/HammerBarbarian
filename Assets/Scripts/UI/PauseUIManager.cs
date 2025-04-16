@@ -24,7 +24,7 @@ public class PauseUIManager : MonoBehaviour
 
     public void Click_GobackButton()
     {
-        mainUIManager.pausePanel_SetActive(false);
+        mainUIManager.PausePanel_SetActive(false);
     }
 
     public void Click_Save()

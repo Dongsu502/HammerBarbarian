@@ -34,6 +34,8 @@ public class TitleUIManager : MonoBehaviour
 
     private void TitleUI_Initialize()
     {
+        UIWhiteBox.SetTitleUIWB(this);
+
         PlayButton.SetActive(false);
 
         MenuPanel.SetActive(false);

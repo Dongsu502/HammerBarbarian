@@ -1,0 +1,54 @@
+{
+    "name": "UIInputAction",
+    "maps": [
+        {
+            "name": "MainUI",
+            "id": "c1ee5e4b-f8b2-44cf-8fb2-9c0cca869a6e",
+            "actions": [
+                {
+                    "name": "Setting",
+                    "type": "Button",
+                    "id": "2a7e9eb0-ad97-49d6-9283-f3137d037000",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ChoiceItem",
+                    "type": "Button",
+                    "id": "899ef13a-9f99-46ce-8d69-045785c06d9c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6bab6afd-374b-4da5-9f10-ad83f041a92d",
+                    "path": "<Keyboard>/escape",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Setting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1c5e7464-9434-4c0f-8781-7d355d27c12e",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ChoiceItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

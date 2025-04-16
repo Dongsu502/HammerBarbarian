@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Android;
 using UnityEngine.UI;
 
@@ -50,6 +51,8 @@ public class MainUIManager : MonoBehaviour
     [Space(3)]
     [Header("ItemNameText")]
     public string[] item_NameTexts;
+
+    private UIInputAction uiInput;
 
     private int currentItemNum;
 
@@ -108,30 +111,56 @@ public class MainUIManager : MonoBehaviour
         MainUI_Initialize();
     }
 
+    private void OnEnable()
+    {
+        uiInput.MainUI.Enable();
+
+        uiInput.MainUI.Setting.started += EscapeACtion;
+
+        uiInput.MainUI.ChoiceItem.performed += ChoiceItemAction;
+        uiInput.MainUI.ChoiceItem.canceled += ChoiceItemAction;
+    }
+
+    private void OnDisable()
+    {
+        uiInput.MainUI.Disable();
+
+        uiInput.MainUI.Setting.started -= EscapeACtion;
+
+        uiInput.MainUI.ChoiceItem.performed -= ChoiceItemAction;
+        uiInput.MainUI.ChoiceItem.canceled -= ChoiceItemAction;
+    }
+
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
-        {
-            UseItem(currentItemNum);
-        }
-        if(Input.GetKey(KeyCode.R))
-        {
-            ChoiceUI_SetActive(true);
-        }
-        if(Input.GetKeyUp(KeyCode.R))
-        {
-            ChoiceUI_SetActive(false);
-        }
         if(Input.GetKey(KeyCode.Space))
         {
             UseGauge(0.5f);
         }
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            pausePanel_SetActive(true);
-        }
 
         GaugeRecovery(GAUGE_RECOVERY_VALUE);
+    }
+
+    #endregion
+
+    #region InputAction
+
+    private void EscapeACtion(InputAction.CallbackContext context)
+    {
+        PausePanel_SetActive(true);
+    }
+
+    private void ChoiceItemAction(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            ChoiceUI_SetActive(true);
+        }
+
+        if(context.canceled)
+        {
+            ChoiceUI_SetActive(false);
+        }
     }
 
     #endregion
@@ -141,8 +170,12 @@ public class MainUIManager : MonoBehaviour
     /// </summary>
     private void MainUI_Initialize()
     {
+        UIWhiteBox.SetMainUIWB(this);
+
+        uiInput = new UIInputAction();
+
         //일시정지 패널 비활성화
-        pausePanel_SetActive(false);
+        PausePanel_SetActive(false);
 
         //아이템선택창 비활성화
         ChoiceUI_SetActive(false);
@@ -155,7 +188,7 @@ public class MainUIManager : MonoBehaviour
         gaugeImage.fillAmount = gaugeValue / GAUGE_MAX_VALUE;
     }
 
-    public void pausePanel_SetActive(bool active)
+    public void PausePanel_SetActive(bool active)
     {
         PausePanel.SetActive(active);
     }
@@ -215,13 +248,12 @@ public class MainUIManager : MonoBehaviour
     #region Item_Func
 
     /// <summary>
-    /// 아이템 사용키를 눌렀을 때 호출하는 메서드
+    /// 아이템 번호 리턴
     /// </summary>
-    /// <param name="itemNum">현재 아이템 번호</param>
-    private void UseItem(int itemNum)
+    /// <returns>현재 아이템 번호</returns>
+    public int UseItemNumber()
     {
-        string itemName = item_NameTexts[itemNum];
-        Debug.Log($"아이템 사용: {itemName}");
+        return currentItemNum;
     }
 
     /// <summary>
@@ -263,7 +295,7 @@ public class MainUIManager : MonoBehaviour
     /// 게이지이미지 활성화 / 비활성화
     /// </summary>
     /// <param name="isActive">활성화 여부</param>
-    public void GaugeUI_SetActive(bool isActive)
+    private void GaugeUI_SetActive(bool isActive)
     {
         gaugeBackgroundImage.gameObject.SetActive(isActive);
     }
@@ -272,7 +304,7 @@ public class MainUIManager : MonoBehaviour
     /// 게이지 자동 회복
     /// </summary>
     /// <param name="amount">회복값(속도)</param>
-    public void GaugeRecovery(float amount)
+    private void GaugeRecovery(float amount)
     {
         if (gaugeValue >= GAUGE_MAX_VALUE)
         {
