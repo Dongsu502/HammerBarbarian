@@ -1,16 +1,26 @@
 using UnityEngine.InputSystem;
 using UnityEngine;
 using UnityEditor.Rendering;
+using UnityEngine.InputSystem.Interactions;
+using System;
 
 public class PlayerAttack : MonoBehaviour
 {
     private Animator animator;
 
+    [Header("AttackCombo")]
     [SerializeField] private int comboStep = 0;
-    private float comboTimer;
     [SerializeField] private float comboResetTime = 1.0f;
+    private float comboTimer;
+    private bool canAttack = true;
+
 
     public bool IsAttacking { get; private set; } = false;
+
+    [SerializeField] private float maxWindmillTime = 3f;
+    private float windmillTimer = 0f;
+    private bool isWindmilling = false;
+    private bool windmillInputHeld = false;
 
     [SerializeField] private GameObject hammer;
     private Collider[] hammerCollider;
@@ -24,6 +34,8 @@ public class PlayerAttack : MonoBehaviour
     public void OnAttack1(InputAction.CallbackContext context)
     {
         if (!context.performed) return;
+
+        if (!canAttack) return;
 
         comboStep++;
         animator.applyRootMotion = true;
@@ -45,6 +57,21 @@ public class PlayerAttack : MonoBehaviour
         }
 
         comboTimer = comboResetTime;
+    
+    
+    }
+
+    public void OnAttack2(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            StartWindMill();
+        }
+
+        if (context.canceled)
+        {
+            StopWindMill();
+        }
     }
 
     private void Update()
@@ -59,7 +86,38 @@ public class PlayerAttack : MonoBehaviour
                 comboTimer = 0f;
             }
         }
+
+        if (isWindmilling)
+        {
+            windmillTimer += Time.deltaTime;
+            UIWhiteBox.UseGauge(0.15f);
+            if(windmillTimer >= maxWindmillTime)
+            {
+                StopWindMill();
+            }
+        }
     }
+
+    private void StartWindMill()
+    {
+        if (isWindmilling) return;
+
+        windmillTimer = 0f;
+        isWindmilling = true;
+
+        //animator.SetBool("IsWindmilling",isWindmilling);
+        Debug.Log("윈드밀 시작");
+    }
+
+    private void StopWindMill()
+    {
+        if (!isWindmilling) return;
+
+        isWindmilling= false;
+        //animator.SetBool("IsWindmilling",isWindmilling);
+        Debug.Log("윈드밀 끝");
+    }
+
 
     public void ComboReset()
     {
@@ -68,9 +126,15 @@ public class PlayerAttack : MonoBehaviour
         animator.applyRootMotion = false;
     }
 
+    public void DIsableAttackInput()
+    {
+        canAttack = false;
+    }
+
     public void EndAttack()
     {
-        IsAttacking = false; 
+        IsAttacking = false;
+        canAttack = true;
     }
 
     public void EnableHammerCollider()
@@ -98,5 +162,11 @@ public class PlayerAttack : MonoBehaviour
             deltaPosition.y = 0f;
             transform.position += deltaPosition;
         }
+    }
+
+    public bool IsAttackAnim()
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsTag("Attack");
     }
 }
