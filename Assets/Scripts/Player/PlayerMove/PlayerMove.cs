@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform cameraTransform;
     private PlayerAttack playerAttack;
+    [SerializeField] private InputActionReference lookAction;
 
     private Rigidbody rb;
     private Animator animator;
@@ -130,5 +131,14 @@ public class PlayerMove : MonoBehaviour
         isDiving = false;
     }
 
+    public void EnableActionLook()
+    {
+        lookAction.action.Enable();
+    }
+
+    public void DisableActionLook()
+    {
+        lookAction.action.Disable();
+    }
     
 }

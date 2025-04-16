@@ -653,6 +653,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2918ec4bfa4320f4b9d6e11c9aa94dd6, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6355434850191320848}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2918ec4bfa4320f4b9d6e11c9aa94dd6, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1328386222106352228}
   m_SourcePrefab: {fileID: 100100000, guid: 2918ec4bfa4320f4b9d6e11c9aa94dd6, type: 3}
 --- !u!1 &1008361840263667357 stripped
 GameObject:
@@ -674,6 +677,7 @@ MonoBehaviour:
   walkSpeed: 5
   runSpeed: 9
   cameraTransform: {fileID: 0}
+  lookAction: {fileID: -95819877466578605, guid: 34e1375c36cf6824fb646448eab1fe47, type: 3}
 --- !u!114 &2573462022065277779
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,6 +694,7 @@ MonoBehaviour:
   comboResetTime: 2
   maxWindmillTime: 3
   hammer: {fileID: 4747560522569174973}
+  attack1Action: {fileID: -2437434063116709160, guid: 34e1375c36cf6824fb646448eab1fe47, type: 3}
 --- !u!114 &3328046808868301633
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,6 +897,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1328386222106352228
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008361840263667357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029a77ba42df5bf4698b8401181ac0bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1768418063085952004 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: 2918ec4bfa4320f4b9d6e11c9aa94dd6, type: 3}
