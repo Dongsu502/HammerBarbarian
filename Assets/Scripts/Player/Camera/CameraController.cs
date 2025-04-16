@@ -9,6 +9,8 @@ public class CameraController : MonoBehaviour
     // 카메라가 위에서 내려다보도록 적절한 offset
     [SerializeField] private Vector3 offset = new Vector3(0, 3, -5);
 
+    [SerializeField] private InputActionReference lookAction;
+
     private float yaw;
     private Vector2 lookInput;
 

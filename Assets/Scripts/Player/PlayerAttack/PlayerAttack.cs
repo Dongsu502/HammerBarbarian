@@ -14,16 +14,32 @@ public class PlayerAttack : MonoBehaviour
     private float comboTimer;
     private bool canAttack = true;
 
-
     public bool IsAttacking { get; private set; } = false;
 
     [SerializeField] private float maxWindmillTime = 3f;
     private float windmillTimer = 0f;
     private bool isWindmilling = false;
-    private bool windmillInputHeld = false;
+    //private bool windmillInputHeld = false;
 
     [SerializeField] private GameObject hammer;
     private Collider[] hammerCollider;
+
+    [SerializeField] private InputActionReference attack1Action;
+
+
+    public enum PlayerAttackType
+    {
+        None =0,
+        Attack1 =1,
+        Attack2 =2
+    }
+
+    private PlayerAttackType attackType = PlayerAttackType.None;
+
+    public int currentAttackType()
+    {
+        return (int)attackType;
+    }
 
     private void Awake()
     {
@@ -40,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
         comboStep++;
         animator.applyRootMotion = true;
         IsAttacking = true; // 공격 시작 시 true 설정
-        Debug.Log(IsAttacking);
+        attackType = PlayerAttackType.Attack1;
 
         if (comboStep == 1)
         {
@@ -105,6 +121,8 @@ public class PlayerAttack : MonoBehaviour
         windmillTimer = 0f;
         isWindmilling = true;
 
+        attackType = PlayerAttackType.Attack2;
+
         //animator.SetBool("IsWindmilling",isWindmilling);
         Debug.Log("윈드밀 시작");
     }
@@ -114,11 +132,13 @@ public class PlayerAttack : MonoBehaviour
         if (!isWindmilling) return;
 
         isWindmilling= false;
+
+        attackType= PlayerAttackType.None;
         //animator.SetBool("IsWindmilling",isWindmilling);
         Debug.Log("윈드밀 끝");
     }
 
-
+    #region Attack Anim Event Key
     public void ComboReset()
     {
         comboStep = 0;
@@ -152,6 +172,18 @@ public class PlayerAttack : MonoBehaviour
             hammerCollider[i].enabled = false;
         }
        
+    }
+
+    #endregion
+
+    public void EnableInputAction_Attack1()
+    {
+        attack1Action.action.Enable();
+    }
+
+    public void DisableInputAction_Attack1()
+    {
+        attack1Action.action.Disable();
     }
 
     private void OnAnimatorMove()
