@@ -33,7 +33,8 @@ public class Monster : MonoBehaviour
     [Tooltip("애니메이션")]
     [SerializeField] protected Animator animator;
 
-    protected bool isMoving;
+    public bool isMoving;
+    
     protected float moveAmount;
 
     protected NavMeshAgent agent;
@@ -96,17 +97,19 @@ public class Monster : MonoBehaviour
         isMoving = false;
         MoveAnimation(isMoving);
 
-        if(!agent.enabled)
-        {
-            yield break;
-        }
-        agent.SetDestination(transform.position);
-
         if (target != null)
         {
             ChangeState(State.CHASE);
             yield break;
         }
+
+        if (!agent.enabled)
+        {
+            yield break;
+        }
+        agent.SetDestination(transform.position);
+
+        
     }
 
     /// <summary>
@@ -114,6 +117,10 @@ public class Monster : MonoBehaviour
     /// </summary>
     protected virtual IEnumerator CHASE()
     {
+        //Run Animation
+        isMoving = true;
+        MoveAnimation(isMoving);
+
         if (target == null)
         {
             ChangeState(State.IDLE);
@@ -137,10 +144,6 @@ public class Monster : MonoBehaviour
         agent.SetDestination(target.position);
 
         LookTarget();
-
-        //Run Animation
-        isMoving = true;
-        MoveAnimation(isMoving);
     }
 
     /// <summary>
@@ -222,7 +225,7 @@ public class Monster : MonoBehaviour
         yield return new WaitForSeconds(hitDetection.knockbackDuration);
         rb.isKinematic = true;
 
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(hitDetection.knockbackDuration);
 
         KnocbackActive(true);
         rb.isKinematic = false;
@@ -268,6 +271,7 @@ public class Monster : MonoBehaviour
     protected virtual void MoveAnimation(bool isMoving)
     {
         float target = isMoving ? 1f : 0f;
+        
         moveAmount = Mathf.MoveTowards(moveAmount, target, Time.deltaTime * 2f); // 2f는 속도, 조절 가능
 
         animator.SetFloat("Move", moveAmount);

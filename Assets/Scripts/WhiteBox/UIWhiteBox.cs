@@ -22,7 +22,7 @@ public static class UIWhiteBox
     /// 피격 시 하트 감소
     /// </summary>
     /// <param name="damage">감소할 하트 갯수</param>
-    public static void TakeDamage(int  damage)
+    public static void TakeDamage(int damage)
     {
         MainUIWB.TakeDamage(damage);
     }

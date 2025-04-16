@@ -27,7 +27,7 @@ public class MonsterHitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Weapon")) //여기다가 플레이어 공격번호 조건으로 넣기(강공격때만 넉백)
+        if (other.transform.CompareTag("Weapon")) 
         {
             //강공격인지 확인 -> 넉백
             if(powerAttack == 3)

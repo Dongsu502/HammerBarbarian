@@ -8,6 +8,7 @@ TagManager:
   - Attack_Golem
   - Weapon
   - InvisibleWall
+  - EnemyHitBox
   layers:
   - Default
   - TransparentFX

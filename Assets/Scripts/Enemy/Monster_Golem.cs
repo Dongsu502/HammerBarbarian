@@ -52,14 +52,16 @@ public class Monster_Golem : Monster
         {
             attackCollider.gameObject.SetActive(false);
         }
-
-        float distance = Vector3.Distance(transform.position, target.position);
-        if (distance > attackRange)
+        else
         {
-            attackCollider.gameObject.SetActive(false);
-        }
+            float distance = Vector3.Distance(transform.position, target.position);
+            if (distance > attackRange)
+            {
+                attackCollider.gameObject.SetActive(false);
+            }
 
-        attackCollider.gameObject.SetActive(true);
+            attackCollider.gameObject.SetActive(true);
+        }
 
         return base.ATTACK();
     }

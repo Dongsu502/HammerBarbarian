@@ -191,6 +191,25 @@ public class MainUIManager : MonoBehaviour
     public void PausePanel_SetActive(bool active)
     {
         PausePanel.SetActive(active);
+
+        CursorLock(active);
+    }
+
+    /// <summary>
+    /// 마우스 커서 잠금 & 표시
+    /// </summary>
+    /// <param name="isLock">잠금 여부 true: 잠금해제 & 표시 / false: 잠금 & 표시되지않게 </param>
+    private void CursorLock(bool isLock)
+    {
+        if(isLock)
+        {
+            Cursor.lockState = CursorLockMode.None;
+        }
+        else
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        Cursor.visible = isLock;
     }
 
     #region Health_Func
@@ -263,6 +282,8 @@ public class MainUIManager : MonoBehaviour
     private void ChoiceUI_SetActive(bool isActive)
     {
         itemChoiceUI.SetActive(isActive);
+
+        CursorLock(isActive);
     }
 
     /// <summary>
