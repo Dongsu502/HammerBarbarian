@@ -14,6 +14,8 @@ public class MonsterHitBox : MonoBehaviour
 
     private const int POWER_ATTACKTYPE = 2;
 
+    public bool testAttackType;
+
     Rigidbody rb;
 
     private void Awake()
@@ -30,7 +32,7 @@ public class MonsterHitBox : MonoBehaviour
         if (other.transform.CompareTag("Weapon")) 
         {
             //강공격인지 확인 -> 넉백
-            if(PlayerWhiteBox.WhiteBox.currentAttackType == POWER_ATTACKTYPE)
+            if(PlayerWhiteBox.WhiteBox.currentAttackType == POWER_ATTACKTYPE || testAttackType)
             {
                 //넉백중이라면 취소
                 if (IsKnockback) return;
@@ -48,7 +50,7 @@ public class MonsterHitBox : MonoBehaviour
 
     private void Knockback(Collider other)
     {
-        Vector3 direction = other.transform.position - transform.position;
+        Vector3 direction = other.GetComponentInParent<PlayerMove>().gameObject.transform.position - transform.position;
 
         Vector3 knockbackDir = -direction.normalized;
 

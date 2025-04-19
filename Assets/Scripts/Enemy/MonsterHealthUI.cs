@@ -1,10 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MonsterHealthUI : MonoBehaviour
 {
-    private GameObject hpBar;
+    [SerializeField] private GameObject HPBar;
+    [SerializeField] private Image currentHPImage;
+
+    [SerializeField] private Transform lookTarget;
+    [SerializeField] private float rotateSpeed;
 
     private float currentHP;
 
@@ -16,17 +21,24 @@ public class MonsterHealthUI : MonoBehaviour
         HPBar_Initialize();
     }
 
+    private void Update()
+    {
+        LookTarget(lookTarget);
+    }
+
     private void HPBar_Initialize()
     {
-        hpBar = transform.GetChild(0).gameObject;
         HPBar_SetActive(false);
 
         currentHP = MAX_HP;
+
+        lookTarget = FindObjectOfType<PlayerMove>().transform;
     }
 
     private void HPBar_SetActive(bool isActive)
     {
-        gameObject.SetActive(isActive);
+        currentHPImage.gameObject.SetActive(isActive);
+        HPBar.SetActive(isActive);
     }
 
     public void TakeDamageUI(float damage)
@@ -37,9 +49,19 @@ public class MonsterHealthUI : MonoBehaviour
 
         currentHP -= damage;
 
-        Vector3 newScale = new(currentHP/100, hpBar.transform.localScale.y, hpBar.transform.localScale.z);
-        hpBar.transform.localScale = newScale;
+        currentHPImage.fillAmount = currentHP / 100;
 
         Debug.Log($"currentHP: {currentHP}");
+    }
+
+    private void LookTarget(Transform target)
+    {
+        Vector3 dir = (target.position - transform.position).normalized;
+        dir.y = 0f; // 수평 회전만
+        if (dir.sqrMagnitude > 0f)
+        {
+            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
+        }
     }
 }

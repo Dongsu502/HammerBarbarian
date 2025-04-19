@@ -229,8 +229,7 @@ public class Monster : MonoBehaviour
 
         KnocbackActive(true);
         rb.isKinematic = false;
-        hitDetection.hitCollider.enabled = true;
-        hitDetection.IsKnockback = false;
+        
 
         ChangeState(State.IDLE);
         yield break;
@@ -320,6 +319,8 @@ public class Monster : MonoBehaviour
     public virtual void KnocbackActive(bool isActive)
     {
         agent.enabled = isActive;
+        hitDetection.hitCollider.enabled = isActive;
+        hitDetection.IsKnockback = !isActive;
     }
 
     /// <summary>
