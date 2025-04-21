@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class PlayerAttackTrigger : MonoBehaviour
 {
-    [SerializeField] CameraShakeTrigger cameraShakeTrigger;
+    [SerializeField] CameraShakeManager cameraShakeTrigger;
     [SerializeField] HitStopHandler hitStopHandler;
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            cameraShakeTrigger.Shake();
+            //cameraShakeTrigger.Shake();
             hitStopHandler.HitStop(0.1f);
 
             Vector3 hitPoint = other.ClosestPoint(transform.position);

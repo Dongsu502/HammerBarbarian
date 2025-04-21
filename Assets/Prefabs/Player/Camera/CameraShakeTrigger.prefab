@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5168062166603836686}
   - component: {fileID: 8040993992016161898}
-  - component: {fileID: 5025735992663679782}
+  - component: {fileID: 3981714908102019782}
   m_Layer: 0
   m_Name: CameraShakeTrigger
   m_TagString: Untagged
@@ -86,7 +86,7 @@ MonoBehaviour:
     m_DissipationDistance: 100
     m_PropagationSpeed: 343
   m_DefaultVelocity: {x: 0, y: 0, z: -2}
---- !u!114 &5025735992663679782
+--- !u!114 &3981714908102019782
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -98,5 +98,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc3b6d9b8e1e9748bc49e0f8a67b80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impulseSource: {fileID: 8040993992016161898}
+  impulseSource: {fileID: 0}
   baseShakePower: 1

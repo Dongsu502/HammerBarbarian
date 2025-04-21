@@ -6,33 +6,34 @@ using UnityEngine.InputSystem;
 public class PlayerMove : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float walkSpeed = 8f;
     [SerializeField] private float runSpeed = 9f;
 
     [Header("References")]
     [SerializeField] private Transform cameraTransform;
-    private PlayerAttack playerAttack;
     [SerializeField] private InputActionReference lookAction;
 
+    private PlayerAttack playerAttack;
+    private PlayerIK playerIK;
     private Rigidbody rb;
     private Animator animator;
 
     private Vector2 inputVector;
     private bool isRunning = false;
-    private float currentAnimSpeed = 0f;
+    private bool isDiving = false;
 
+    private float currentAnimSpeed = 0f;
     private float diveSpeed = 1f;
-    private float diveDuration =1f;
+    private float diveDuration = 1f;
     private AnimationCurve diveSpeedCurve;
-    private bool isDiving;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerAttack = GetComponent<PlayerAttack>();
+        playerIK = GetComponent<PlayerIK>();
 
-        // MainCamera의 Transform을 자동 참조
         if (cameraTransform == null && Camera.main != null)
             cameraTransform = Camera.main.transform;
     }
@@ -61,56 +62,72 @@ public class PlayerMove : MonoBehaviour
         if (isDiving || playerAttack.IsAttackAnim())
         {
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
-            animator.SetFloat("MoveSpeed", 0f);
+
+            currentAnimSpeed = Mathf.Lerp(currentAnimSpeed, 0f, Time.fixedDeltaTime * 20f);
+            animator.SetFloat("MoveSpeed", currentAnimSpeed);
+
             return;
         }
 
-        Vector3 moveDirection = CalculateMoveDirection();
+        Vector3 moveDir = CalculateMoveDirection();
         float currentSpeed = isRunning ? runSpeed : walkSpeed;
-        Vector3 velocity = moveDirection * currentSpeed;
+        Vector3 velocity = moveDir * currentSpeed;
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
 
-        if (moveDirection.sqrMagnitude > 0.01f)
+        if (moveDir.sqrMagnitude > 0.01f)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            Quaternion targetRotation = Quaternion.LookRotation(moveDir);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
         }
 
-        if (animator != null)
-        {
-            float flatSpeed = new Vector2(rb.velocity.x, rb.velocity.z).magnitude;
-            currentAnimSpeed = Mathf.Lerp(currentAnimSpeed, flatSpeed, Time.fixedDeltaTime * 10f);
-            animator.SetFloat("MoveSpeed", currentAnimSpeed);
-        }
+        // 💥 핵심 튐 제거 구간
+        UpdateMoveSpeed();
     }
+
 
     private Vector3 CalculateMoveDirection()
     {
-        // 카메라 방향 기반 이동 방향 계산
-        Vector3 camForward = cameraTransform.forward;
-        Vector3 camRight = cameraTransform.right;
+        Vector3 forward = cameraTransform.forward;
+        Vector3 right = cameraTransform.right;
 
-        camForward.y = 0f;
-        camRight.y = 0f;
-        camForward.Normalize();
-        camRight.Normalize();
+        forward.y = 0f;
+        right.y = 0f;
 
-        return (camForward * inputVector.y + camRight * inputVector.x).normalized;
+        return (forward.normalized * inputVector.y + right.normalized * inputVector.x).normalized;
     }
+
+    private void RotateTowards(Vector3 direction)
+    {
+        if (direction.sqrMagnitude < 0.01f)
+            return;
+
+        Quaternion targetRotation = Quaternion.LookRotation(direction);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
+    }
+
+    private void UpdateMoveSpeed()
+    {
+        if (animator == null) return;
+
+        bool isInputActive = inputVector.sqrMagnitude >= 0.1f;
+        bool isIdle = !isInputActive;
+
+        float targetSpeed = isIdle ? 0f : (isRunning ? 1f : 0.5f);
+
+        currentAnimSpeed = Mathf.Lerp(currentAnimSpeed, targetSpeed, Time.fixedDeltaTime * 20f);
+        animator.SetFloat("MoveSpeed", currentAnimSpeed);
+    }
+
 
     private IEnumerator DiveCoroutine()
     {
         isDiving = true;
 
         Vector3 moveDir = CalculateMoveDirection();
-        if(moveDir == Vector3.zero)
-        {
-            moveDir =transform.forward;
-        }
+        if (moveDir == Vector3.zero)
+            moveDir = transform.forward;
 
-        Quaternion diveRotation = Quaternion.LookRotation(moveDir);
-        transform.rotation = diveRotation;
-
+        transform.rotation = Quaternion.LookRotation(moveDir);
         animator.SetTrigger("Dive");
         UIWhiteBox.UseGauge(30f);
 
@@ -124,6 +141,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         animator.applyRootMotion = false;
+        isDiving = false;
     }
 
     public void EndDive()
