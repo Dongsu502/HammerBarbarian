@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632943642523816572}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.007955596, y: 0.9431683, z: -0.3212754, w: -0.08457199}
+  m_LocalRotation: {x: 0.14371774, y: 0.5530609, z: -0.09754712, w: 0.8148334}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -104,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734099189714631860}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.008578747, y: 0.94551075, z: -0.3143148, w: -0.08451108}
+  m_LocalRotation: {x: 0.12891182, y: 0.55473953, z: -0.08749775, w: 0.8173066}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_BindingMode: 5
+  m_FollowOffset: {x: 0, y: 6.1, z: -15.03}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -552,8 +552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_BindingMode: 5
+  m_FollowOffset: {x: 0, y: 6.1, z: -15.03}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -646,7 +646,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7893819067346792784}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.009616735, y: 0.94930226, z: -0.30267075, w: -0.08439927}
+  m_LocalRotation: {x: 0.15851536, y: 0.551195, z: -0.107590884, w: 0.81208444}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -758,8 +758,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_BindingMode: 5
+  m_FollowOffset: {x: 0, y: 6.1, z: -15.03}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
