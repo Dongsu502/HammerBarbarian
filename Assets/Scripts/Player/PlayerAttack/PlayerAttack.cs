@@ -28,7 +28,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private InputActionReference attack1Action;
 
 
-    private AttackType attackType = AttackType.None;
+    public AttackType attackType = AttackType.None;
 
     public int currentAttackType()
     {
