@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class PlayerAttackTrigger : MonoBehaviour
 {
-    [SerializeField] CameraShakeManager cameraShakeTrigger;
     [SerializeField] HitStopHandler hitStopHandler;
 
     private void OnTriggerEnter(Collider other)

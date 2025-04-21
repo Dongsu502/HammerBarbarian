@@ -98,5 +98,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc3b6d9b8e1e9748bc49e0f8a67b80a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impulseSource: {fileID: 0}
-  baseShakePower: 1
+  impulseSource: {fileID: 8040993992016161898}
+  shakeProfiles:
+  - {fileID: 11400000, guid: 6b2dccb516be0074bbe4e3bacaed03f0, type: 2}

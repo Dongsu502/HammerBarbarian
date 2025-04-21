@@ -481,8 +481,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce85056cb2eef04383a9c1b6bd2d6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 5
-  runSpeed: 9
+  walkSpeed: 11
+  runSpeed: 15
   cameraTransform: {fileID: 0}
   lookAction: {fileID: -95819877466578605, guid: 34e1375c36cf6824fb646448eab1fe47, type: 3}
 --- !u!114 &6002259499096730697
@@ -517,6 +517,7 @@ MonoBehaviour:
   maxWindmillTime: 3
   hammer: {fileID: 4971309386660530758}
   attack1Action: {fileID: -2437434063116709160, guid: 34e1375c36cf6824fb646448eab1fe47, type: 3}
+  attackType: 0
 --- !u!114 &5205121517121970102
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -529,7 +530,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21e1d144fe3b2084bbb51fb4d00ea6ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animator: {fileID: 0}
+  animator: {fileID: 989866097961385758}
 --- !u!136 &2410399313796516274
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -752,13 +753,29 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3621385473485291030, guid: 9e8eb213bc38d4340a0653eb421075a2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5321406167477041085}
   m_SourcePrefab: {fileID: 100100000, guid: 9e8eb213bc38d4340a0653eb421075a2, type: 3}
 --- !u!1 &4971309386660530758 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3621385473485291030, guid: 9e8eb213bc38d4340a0653eb421075a2, type: 3}
   m_PrefabInstance: {fileID: 8555745737389831248}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &5321406167477041085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4971309386660530758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39838d530a34a8a4e9e9003af26bce25, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hitStopHandler: {fileID: 5205121517121970102}
 --- !u!4 &5743904959637164284 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4110218874831103148, guid: 9e8eb213bc38d4340a0653eb421075a2, type: 3}

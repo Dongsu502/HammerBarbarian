@@ -19,7 +19,7 @@ MonoBehaviour:
       Constant: 0
     Y:
       Frequency: 2
-      Amplitude: 2
+      Amplitude: 3
       Constant: 0
     Z:
       Frequency: 0
