@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEditor.Rendering;
 using UnityEngine.InputSystem.Interactions;
 using System;
+using Game;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -27,14 +28,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private InputActionReference attack1Action;
 
 
-    public enum PlayerAttackType
-    {
-        None =0,
-        Attack1 =1,
-        Attack2 =2
-    }
-
-    private PlayerAttackType attackType = PlayerAttackType.None;
+    private AttackType attackType = AttackType.None;
 
     public int currentAttackType()
     {
@@ -62,7 +56,7 @@ public class PlayerAttack : MonoBehaviour
         comboStep++;
         animator.applyRootMotion = true;
         IsAttacking = true; // 공격 시작 시 true 설정
-        attackType = PlayerAttackType.Attack1;
+        attackType = AttackType.Light;
 
         if (comboStep == 1)
         {
@@ -72,10 +66,6 @@ public class PlayerAttack : MonoBehaviour
         else if (comboStep == 2)
         {
             animator.SetTrigger("Attack_2");
-        }
-        else if (comboStep == 3)
-        {
-            animator.SetTrigger("Attack_3");
         }
 
         comboTimer = comboResetTime;
@@ -127,7 +117,7 @@ public class PlayerAttack : MonoBehaviour
         windmillTimer = 0f;
         isWindmilling = true;
 
-        attackType = PlayerAttackType.Attack2;
+        attackType = AttackType.Heavy;
 
         //animator.SetBool("IsWindmilling",isWindmilling);
         Debug.Log("윈드밀 시작");
@@ -139,7 +129,7 @@ public class PlayerAttack : MonoBehaviour
 
         isWindmilling= false;
 
-        attackType= PlayerAttackType.None;
+        attackType= AttackType.None;
         //animator.SetBool("IsWindmilling",isWindmilling);
         Debug.Log("윈드밀 끝");
     }

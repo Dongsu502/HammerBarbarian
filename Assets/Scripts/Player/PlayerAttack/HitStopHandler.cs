@@ -7,6 +7,10 @@ public class HitStopHandler : MonoBehaviour
     private bool isHitStopping = false;
     [SerializeField]private Animator animator;
 
+    private void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
     public void HitStop(float duration)
     {
         if (!isHitStopping)
