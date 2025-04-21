@@ -9,7 +9,7 @@ public class PlayerAttackTrigger : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Enemy"))
+        if (other.gameObject.CompareTag("EnemyHitBox"))
         {
             //cameraShakeTrigger.Shake();
             hitStopHandler.HitStop(0.1f);
