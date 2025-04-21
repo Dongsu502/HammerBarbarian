@@ -1,9 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game;
 
 public class MonsterHitBox : MonoBehaviour
 {
+    public string MonsterName = "Golem";
     private Monster monster;
 
     public BoxCollider hitCollider;
@@ -31,6 +33,7 @@ public class MonsterHitBox : MonoBehaviour
     {
         if (other.transform.CompareTag("Weapon")) 
         {
+            AttackType attackType = PlayerHitWhiteBox.WhiteBox.attacktype;
             //강공격인지 확인 -> 넉백
             if(PlayerWhiteBox.WhiteBox.currentAttackType == POWER_ATTACKTYPE || testAttackType)
             {
@@ -42,6 +45,13 @@ public class MonsterHitBox : MonoBehaviour
 
                 Knockback(other);
             }
+
+            if (attackType == AttackType.Light)
+            {
+                PlayerHitWhiteBox.WhiteBox.Shake(MonsterName, attackType);
+            }
+
+
 
             hitCollider.enabled = false;
             monster.TakeDamage(10);
