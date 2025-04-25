@@ -27,8 +27,20 @@ public class PlayerAttack : MonoBehaviour
 
     [SerializeField] private InputActionReference attack1Action;
 
-
     public AttackType attackType = AttackType.None;
+    private AttackType testCurrentAttackType = AttackType.Light;
+
+    [ContextMenu("약공격으로 설정")]
+    public void SetLightAttackType()
+    {
+        testCurrentAttackType = AttackType.Light;
+    }
+
+    [ContextMenu("강공격으로 설정")]
+    public void SetHeavyAttackType()
+    {
+        testCurrentAttackType = AttackType.Heavy;
+    }
 
     public int currentAttackType()
     {
@@ -56,7 +68,7 @@ public class PlayerAttack : MonoBehaviour
         comboStep++;
         animator.applyRootMotion = true;
         IsAttacking = true; // 공격 시작 시 true 설정
-        attackType = AttackType.Light;
+        attackType = testCurrentAttackType ;
 
         if (comboStep == 1)
         {
