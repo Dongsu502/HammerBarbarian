@@ -12,9 +12,14 @@ public class CameraShakeManager : MonoBehaviour
     [Tooltip("모든 흔들림 프로필 목록")]
     [SerializeField] private List<CameraShakeProfile> shakeProfiles;
 
+    [Header("Shake 제한 설정")]
+    [SerializeField] private float shakeCooldown = 0.2f; // 최소 간격
+
+    private float lastShakeTime = -999f;
+
     public static CameraShakeManager instance;
 
-    public void Awake()
+    private void Awake()
     {
         instance = this;
     }
@@ -22,7 +27,7 @@ public class CameraShakeManager : MonoBehaviour
     [ContextMenu("테스트 쉐이크")]
     public void TestShake()
     {
-        if(impulseSource != null)
+        if (impulseSource != null)
         {
             PlayerHitWhiteBox.WhiteBox.Shake("Golem", AttackType.Light);
         }
@@ -32,16 +37,22 @@ public class CameraShakeManager : MonoBehaviour
         }
     }
 
-    public void Shake(string monsterType,AttackType attackType)
+    public void Shake(string monsterType, AttackType attackType)
     {
+        // 쿨타임 제한
+        if (Time.time - lastShakeTime < shakeCooldown) return;
+        lastShakeTime = Time.time;
+
+        // 프로필 찾기
         var profile = shakeProfiles.FirstOrDefault(p => p.mosterType == monsterType && p.attackType == attackType);
 
         if (profile == null)
         {
-            Debug.LogWarning($"[CameraShake] 프로필 없음:{monsterType}/{attackType}");
+            Debug.LogWarning($"[CameraShake] 프로필 없음: {monsterType}/{attackType}");
+            return;
         }
 
-        if(profile.impulseDefinition != null)
+        if (profile.impulseDefinition != null)
         {
             impulseSource.m_ImpulseDefinition = profile.impulseDefinition;
             impulseSource.GenerateImpulse();

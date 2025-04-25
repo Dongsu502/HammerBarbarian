@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff3e1e61934a741479daa9057447b1fc, type: 3}
-  m_Name: GolemLightMonster
+  m_Name: GolemHeavyShake
   m_EditorClassIdentifier: 
   mosterType: Golem
-  attackType: 1
+  attackType: 2
   amplitude: 1
   frequency: 1
   impulseDefinition:
     m_ImpulseChannel: 1
-    m_ImpulseShape: 1
+    m_ImpulseShape: 0
     m_CustomImpulseShape:
       serializedVersion: 2
       m_Curve: []
@@ -28,9 +28,9 @@ MonoBehaviour:
     m_ImpulseDuration: 0.2
     m_ImpulseType: 3
     m_DissipationRate: 0
-    m_RawSignal: {fileID: 11400000, guid: c3e4ac6cb90a3db4383caa20f73b2fce, type: 2}
-    m_AmplitudeGain: 4
-    m_FrequencyGain: 0.2
+    m_RawSignal: {fileID: 11400000, guid: 4e63f476492b0514e8e5e8c732ab3d23, type: 2}
+    m_AmplitudeGain: 15
+    m_FrequencyGain: 18
     m_RepeatMode: 0
     m_Randomize: 1
     m_TimeEnvelope:
@@ -46,13 +46,13 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      m_AttackTime: 0.05
-      m_SustainTime: 0.15
-      m_DecayTime: 0.75
+      m_AttackTime: 0.08
+      m_SustainTime: 0.25
+      m_DecayTime: 0.8
       m_ScaleWithImpact: 1
       m_HoldForever: 0
-    m_ImpactRadius: 40
+    m_ImpactRadius: 100
     m_DirectionMode: 0
     m_DissipationMode: 2
-    m_DissipationDistance: 50
+    m_DissipationDistance: 100
     m_PropagationSpeed: 343

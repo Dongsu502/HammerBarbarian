@@ -22,7 +22,7 @@ public class PlayerMove : MonoBehaviour
     private bool isRunning = false;
     private bool isDiving = false;
 
-    private float currentAnimSpeed = 0f;
+    public float currentAnimSpeed = 0f;
     private float diveSpeed = 1f;
     private float diveDuration = 1f;
     private AnimationCurve diveSpeedCurve;
@@ -80,7 +80,6 @@ public class PlayerMove : MonoBehaviour
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
         }
 
-        // 💥 핵심 튐 제거 구간
         UpdateMoveSpeed();
     }
 
@@ -96,14 +95,14 @@ public class PlayerMove : MonoBehaviour
         return (forward.normalized * inputVector.y + right.normalized * inputVector.x).normalized;
     }
 
-    private void RotateTowards(Vector3 direction)
-    {
-        if (direction.sqrMagnitude < 0.01f)
-            return;
+    //private void RotateTowards(Vector3 direction)
+    //{
+    //    if (direction.sqrMagnitude < 0.01f)
+    //        return;
 
-        Quaternion targetRotation = Quaternion.LookRotation(direction);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
-    }
+    //    Quaternion targetRotation = Quaternion.LookRotation(direction);
+    //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
+    //}
 
     private void UpdateMoveSpeed()
     {
