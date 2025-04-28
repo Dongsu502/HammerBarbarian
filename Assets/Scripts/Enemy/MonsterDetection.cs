@@ -5,34 +5,37 @@ using static UnityEngine.GraphicsBuffer;
 
 public class MonsterDetection : MonoBehaviour
 {
-    private Monster monster;
+    private IMonster monster;
+    public Transform target { get; private set; }
 
-    [SerializeField] private SphereCollider detectCollider;
+    private void SetTarget(Transform _newTarget)
+    {
+        target = _newTarget;
+    }
 
     private void Awake()
     {
-        monster = GetComponentInParent<Monster>();
-
-        detectCollider = GetComponent<SphereCollider>();
-    }
-
-    private void Start()
-    {
-        detectCollider.radius = monster.detectRange;
+        monster = GetComponentInParent<IMonster>();
+        target = GetComponentInParent<Transform>();
     }
 
     protected virtual void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            monster.target = other.transform;
+            SetTarget(other.transform);
+
+            monster.TargetDetected = true;
         }
     }
     protected virtual void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            monster.target = null;
+            Transform self = GetComponentInParent<Transform>();
+            SetTarget(self);
+
+            monster.TargetDetected = false;
         }
     }
 }

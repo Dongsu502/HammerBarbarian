@@ -5,24 +5,20 @@ using Game;
 
 public class MonsterHitBox : MonoBehaviour
 {
-    public string MonsterName = "Golem";
-    private Monster monster;
+    private IMonster monster;
 
     public BoxCollider hitCollider;
 
-    public float knockbackForce = 10f;
-    public float knockbackDuration = 2.1f;
+    [SerializeField] private float LightknockbackForce = 1f;
+    [SerializeField] private float HeavyknockbackForce = 10f;
+
     public bool IsKnockback;
-
-    private const int POWER_ATTACKTYPE = 2;
-
-    public bool testAttackType;
 
     Rigidbody rb;
 
     private void Awake()
     {
-        monster = GetComponentInParent<Monster>();
+        monster = GetComponentInParent<IMonster>();
 
         hitCollider = GetComponent<BoxCollider>();
 
@@ -35,30 +31,25 @@ public class MonsterHitBox : MonoBehaviour
         {
             AttackType attackType = PlayerHitWhiteBox.WhiteBox.attacktype;
             //강공격인지 확인 -> 넉백
-            if(PlayerWhiteBox.WhiteBox.currentAttackType == POWER_ATTACKTYPE || testAttackType)
+            if(attackType == AttackType.Heavy)
             {
-                //넉백중이라면 취소
-                if (IsKnockback) return;
-
                 IsKnockback = true;
-                monster.KnocbackActive(false);
 
-                Knockback(other);
+                Knockback(other, HeavyknockbackForce);
             }
 
             if (attackType == AttackType.Light)
             {
-                PlayerHitWhiteBox.WhiteBox.Shake(MonsterName, attackType);
+                PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, attackType);
+
+                Knockback(other, LightknockbackForce);
             }
 
-
-
-            hitCollider.enabled = false;
-            monster.TakeDamage(10);
+            monster.IsHit = true;
         }
     }
 
-    private void Knockback(Collider other)
+    private void Knockback(Collider other, float knockbackForce)
     {
         Vector3 direction = other.GetComponentInParent<PlayerMove>().gameObject.transform.position - transform.position;
 

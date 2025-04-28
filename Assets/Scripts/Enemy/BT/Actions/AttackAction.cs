@@ -11,6 +11,6 @@ public class AttackAction : BTNode
     public override NodeState Evaluate()
     {
         monster.Attack();
-        return NodeState.SUCCESS;
+        return NodeState.RUNNING;
     }
 }

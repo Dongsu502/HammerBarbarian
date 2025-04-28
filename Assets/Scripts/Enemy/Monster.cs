@@ -210,22 +210,22 @@ public class Monster : MonoBehaviour
     protected virtual IEnumerator HIT()
     {
         //Hit Animation
-        if (hitDetection.IsKnockback)
-        {
-            animator.SetTrigger("IsDown");
-        }
-        else
-        {
-            animator.SetTrigger("TakeDamage");
-        }
+        //if (hitDetection.IsKnockback)
+        //{
+        //    animator.SetTrigger("IsDown");
+        //}
+        //else
+        //{
+        //    animator.SetTrigger("TakeDamage");
+        //}
         
         animator.SetBool("IsAttack", false);
         Debug.Log("아프다..");
 
-        yield return new WaitForSeconds(hitDetection.knockbackDuration);
+        //yield return new WaitForSeconds(hitDetection.knockbackDuration);
         rb.isKinematic = true;
 
-        yield return new WaitForSeconds(hitDetection.knockbackDuration);
+        //yield return new WaitForSeconds(hitDetection.knockbackDuration);
 
         KnocbackActive(true);
         rb.isKinematic = false;
@@ -320,7 +320,7 @@ public class Monster : MonoBehaviour
     {
         agent.enabled = isActive;
         hitDetection.hitCollider.enabled = isActive;
-        hitDetection.IsKnockback = !isActive;
+        //hitDetection.IsKnockback = !isActive;
     }
 
     /// <summary>

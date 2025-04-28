@@ -4,10 +4,11 @@ using UnityEngine;
 
 public interface IMonster
 {
+    string Name { get; }
     int HP { get; }
-    bool IsHit { get; }
-    bool TargetDetected { get; }
-    bool InAttackRange { get; }
+    bool IsHit { get; set; }
+    bool TargetDetected { get; set; }
+    bool InAttackRange { get; set; }
 
     void Death();
     void Hit();

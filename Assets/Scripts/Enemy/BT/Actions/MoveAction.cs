@@ -11,6 +11,6 @@ public class MoveAction : BTNode
     public override NodeState Evaluate()
     {
         monster.MoveToTarget();
-        return NodeState.SUCCESS;
+        return NodeState.RUNNING;
     }
 }

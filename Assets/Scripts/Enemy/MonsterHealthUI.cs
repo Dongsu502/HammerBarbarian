@@ -32,7 +32,7 @@ public class MonsterHealthUI : MonoBehaviour
 
         currentHP = MAX_HP;
 
-        lookTarget = FindObjectOfType<PlayerMove>().transform;
+        //lookTarget = FindObjectOfType<PlayerMove>().transform;
     }
 
     private void HPBar_SetActive(bool isActive)
