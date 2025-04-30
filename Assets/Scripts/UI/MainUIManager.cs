@@ -42,6 +42,11 @@ public class MainUIManager : MonoBehaviour
     public Image gaugeImage;
 
     [Space(3)]
+    [Header("Crosshair")]
+    [Tooltip("원거리공격 에임")]
+    public Image crossHairImage;
+
+    [Space(3)]
     [Header("Image Resources")]
     [Tooltip("ItemImages")]
     public Sprite[] item_ImageResources;
@@ -181,6 +186,9 @@ public class MainUIManager : MonoBehaviour
         //게이지이미지 비활성화
         GaugeUI_SetActive(false);
 
+        //원거리공격 에임 이미지 비활성화
+        Crosshair_SetActive(false);
+
         //게이지 값 적용
         gaugeValue = GAUGE_MAX_VALUE;
         gaugeImage.fillAmount = gaugeValue / GAUGE_MAX_VALUE;
@@ -218,6 +226,11 @@ public class MainUIManager : MonoBehaviour
             PlayerWhiteBox.WhiteBox.EnableLookAction();
         }
         Cursor.visible = isLock;
+    }
+
+    public void Crosshair_SetActive(bool active)
+    {
+        crossHairImage.gameObject.SetActive(active);
     }
 
     #region Health_Func

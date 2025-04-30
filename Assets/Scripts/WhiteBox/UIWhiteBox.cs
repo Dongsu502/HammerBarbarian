@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public static class UIWhiteBox
@@ -52,6 +53,15 @@ public static class UIWhiteBox
     public static void UseGauge(float amount)
     {
         MainUIWB.UseGauge(amount);
+    }
+
+    /// <summary>
+    /// 원거리공격 에임 활성화 / 비활성화
+    /// </summary>
+    /// <param name="isActive">활성화여부</param>
+    public static void SetActiveCrosshair(bool isActive)
+    {
+        MainUIWB.Crosshair_SetActive(isActive);
     }
 
     #endregion
