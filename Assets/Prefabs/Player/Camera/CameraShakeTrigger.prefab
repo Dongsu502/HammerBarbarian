@@ -101,3 +101,5 @@ MonoBehaviour:
   impulseSource: {fileID: 8040993992016161898}
   shakeProfiles:
   - {fileID: 11400000, guid: 6b2dccb516be0074bbe4e3bacaed03f0, type: 2}
+  - {fileID: 11400000, guid: 68792b27a41778f4bb7be30efc3fdfa9, type: 2}
+  shakeCooldown: 0.2
