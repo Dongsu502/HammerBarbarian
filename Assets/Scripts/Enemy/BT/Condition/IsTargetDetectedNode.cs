@@ -9,7 +9,7 @@ public class IsTargetDetectedNode : BTNode
 
     public override NodeState Evaluate()
     {
-        if(monster.TargetDetected)
+        if(monster.TargetDetected && !monster.IsAttacking)
         {
             return NodeState.SUCCESS;
         }

@@ -12,6 +12,7 @@ public class Golem : MonoBehaviour, IMonster
     public bool IsHit { get; set; }
     public bool TargetDetected { get; set; }
     public bool InAttackRange { get; set; }
+    public bool IsAttacking { get; private set; }
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
@@ -45,6 +46,21 @@ public class Golem : MonoBehaviour, IMonster
         rb = GetComponent<Rigidbody>();
 
         golemCollider = GetComponent<CapsuleCollider>();
+    }
+
+    public void ReSetIsHitting()
+    {
+        animator.SetBool("IsHitting", false);
+    }
+
+    /// <summary>
+    /// 공격 중단 ( 공격 애니메이션 끝에 이벤트 키 배치)
+    /// </summary>
+    public void StopAttack()
+    {
+        IsAttacking = false;
+        animator.SetBool("IsAttack", false);
+        Debug.Log("공격 중단");
     }
 
     /// <summary>
@@ -113,15 +129,21 @@ public class Golem : MonoBehaviour, IMonster
 
         if (!hitBoxClass.IsKnockback)
         {
+            //약공격 히트 애니메이션
+            animator.SetFloat("HitType", 0);
             //피격 애니메이션 플레이
             animator.SetTrigger("TakeDamage");
+            //약공격 히트 불값
+            animator.SetBool("IsHitting", true);
 
             yield return new WaitForSeconds(hitDelayTime);
         }
         else
         {
-            //넉백 애니메이션 플레이
-            animator.SetTrigger("IsDown");
+            //강공격 히트 애니메이션
+            animator.SetFloat("HitType", 1);
+            //피격 애니메이션 플레이
+            animator.SetTrigger("TakeDamage");
 
             hitBoxClass.IsKnockback = false;
 
@@ -150,7 +172,7 @@ public class Golem : MonoBehaviour, IMonster
         agent.enabled = false;
 
         //사망 애니메이션 플레이
-        animator.SetTrigger("IsDie");
+        animator.SetBool("IsDie", true);
 
         yield return new WaitForSeconds(DIE_DELAY_TIME);
 
@@ -189,23 +211,34 @@ public class Golem : MonoBehaviour, IMonster
     }
     public void Hit()
     {
-        animator.SetBool("IsAttack", false);
+        //공격 도중 맞으면 공격 중단 후 바로 피격으로 전환
+        StopAttack();
+
         IsHit = false;
         TakeDamage(10);
     }
     public void Attack()
     {
         agent.enabled = false;
-
         InAttackRange = HasArrived();
         Debug.Log(InAttackRange);
 
+        Debug.Log("골렘 공격 시작");
+        IsAttacking = true;
+
+        // 공격 모션 중 이동 막기
+        MoveAnimation(false);
+
+        //타겟을 바라보기
+        Transform target = detectionClass.target;
+        LookTarget(target);
+
         //공격 애니메이션 플레이
         animator.SetBool("IsAttack", true);
-        Debug.Log("골렘 공격");
     }
     public void MoveToTarget()
     {
+        Debug.Log("골렘 접근중..");
         agent.enabled = true;
 
         //감지된 타겟을 바라보고 추적
@@ -220,7 +253,7 @@ public class Golem : MonoBehaviour, IMonster
         //걷기 애니메이션 플레이
         animator.SetBool("IsAttack", false);
         MoveAnimation(true);
-        Debug.Log("골렘 접근중..");
+        
     }
     public void Idle()
     {

@@ -9,6 +9,7 @@ public interface IMonster
     bool IsHit { get; set; }
     bool TargetDetected { get; set; }
     bool InAttackRange { get; set; }
+    bool IsAttacking { get; }
 
     void Death();
     void Hit();
