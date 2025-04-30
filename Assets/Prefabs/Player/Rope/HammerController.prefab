@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwOrigin: {fileID: 0}
-  hammer: {fileID: 0}
+  hammerPrefab: {fileID: 8575793366472011245, guid: 7e8122edde972a6468dd1044c3423f62, type: 3}
+  mainCamera: {fileID: 0}
   throwDistance: 15
   throwSpeed: 30
   recallSpeed: 10
@@ -73,3 +74,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  verticalOffset: 0.65
