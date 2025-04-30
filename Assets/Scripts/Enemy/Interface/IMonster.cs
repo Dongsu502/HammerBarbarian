@@ -7,6 +7,7 @@ public interface IMonster
     string Name { get; }
     int HP { get; }
     bool IsHit { get; set; }
+    bool IsBeingHit { get; }
     bool TargetDetected { get; set; }
     bool InAttackRange { get; set; }
     bool IsAttacking { get; }

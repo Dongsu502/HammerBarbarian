@@ -11,13 +11,17 @@ public class MonsterHealthUI : MonoBehaviour
     [SerializeField] private Transform lookTarget;
     [SerializeField] private float rotateSpeed;
 
+    private const float MIN_HP = 0f;
+    private float max_HP = 100f;
+
     private float currentHP;
 
-    private const float MIN_HP = 0f;
-    private const float MAX_HP = 100f;
+    private IMonster monster;
 
     private void Awake()
     {
+        monster = GetComponentInParent<IMonster>();
+
         HPBar_Initialize();
     }
 
@@ -30,9 +34,9 @@ public class MonsterHealthUI : MonoBehaviour
     {
         HPBar_SetActive(false);
 
-        currentHP = MAX_HP;
+        max_HP = monster.HP;
 
-        //lookTarget = FindObjectOfType<PlayerMove>().transform;
+        currentHP = max_HP;
     }
 
     private void HPBar_SetActive(bool isActive)
@@ -43,13 +47,19 @@ public class MonsterHealthUI : MonoBehaviour
 
     public void TakeDamageUI(float damage)
     {
-        if (currentHP <= MIN_HP) return;
+        if (currentHP <= MIN_HP)
+        {
+            currentHP = MIN_HP;
+            currentHPImage.fillAmount = 0;
+
+            return;
+        }
 
         HPBar_SetActive(true);
 
         currentHP -= damage;
 
-        currentHPImage.fillAmount = currentHP / 100;
+        currentHPImage.fillAmount = currentHP / max_HP;
 
         Debug.Log($"currentHP: {currentHP}");
     }

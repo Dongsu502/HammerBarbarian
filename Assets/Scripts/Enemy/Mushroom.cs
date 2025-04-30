@@ -1,14 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UI;
 
-public class Golem : MonoBehaviour, IMonster
+public class Mushroom : MonoBehaviour, IMonster
 {
-    public string Name { get; private set; } = "Golem";
-    public int HP { get; private set; } = 100;
+    public string Name { get; private set; } = "Mushroom";
+    public int HP { get; private set; } = 50;
     public bool IsHit { get; set; }
     public bool IsBeingHit { get; private set; }
     public bool TargetDetected { get; set; }
@@ -20,10 +19,12 @@ public class Golem : MonoBehaviour, IMonster
     [SerializeField] private float hitDelayTime;
     [SerializeField] private float knockbackDelayTime;
     [SerializeField] private float dieDelayTime;
+    [SerializeField] private Transform bulletSpawnPos;
 
     private MonsterDetection detectionClass;
     private MonsterHitBox hitBoxClass;
     private MonsterHealthUI healthUIClass;
+    private LongRangeAttack longAttackClass;
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -37,6 +38,7 @@ public class Golem : MonoBehaviour, IMonster
         detectionClass = GetComponentInChildren<MonsterDetection>();
         hitBoxClass = GetComponentInChildren<MonsterHitBox>();
         healthUIClass = GetComponentInChildren<MonsterHealthUI>();
+        longAttackClass = GetComponent<LongRangeAttack>();
 
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
@@ -62,6 +64,11 @@ public class Golem : MonoBehaviour, IMonster
         IsAttacking = false;
         animator.SetBool("IsAttack", false);
         Debug.Log("공격 중단");
+    }
+
+    public void LongAttack()
+    {
+        longAttackClass.Spawn(bulletSpawnPos);
     }
 
     /// <summary>
@@ -110,7 +117,6 @@ public class Golem : MonoBehaviour, IMonster
             // 아직 도착 안 했으면 false
             return false;
         }
-        
     }
 
     public void TakeDamage(int damage)
@@ -186,7 +192,7 @@ public class Golem : MonoBehaviour, IMonster
 
     public void Death()
     {
-        Debug.Log("골렘 사망");
+        Debug.Log("버섯 사망");
         StartCoroutine(DieDelay());
     }
     public void Hit()
@@ -203,9 +209,8 @@ public class Golem : MonoBehaviour, IMonster
     {
         agent.enabled = false;
         InAttackRange = HasArrived();
-        Debug.Log(InAttackRange);
 
-        Debug.Log("골렘 공격 시작");
+        Debug.Log("버섯 공격 시작");
         IsAttacking = true;
 
         // 공격 모션 중 이동 막기
@@ -220,22 +225,21 @@ public class Golem : MonoBehaviour, IMonster
     }
     public void MoveToTarget()
     {
-        Debug.Log("골렘 접근중..");
+        Debug.Log("버섯 접근중..");
         agent.enabled = true;
 
         //감지된 타겟을 바라보고 추적
         Transform target = detectionClass.target;
         LookTarget(target);
-        
+
         agent.SetDestination(target.position);
 
         InAttackRange = HasArrived();
-        Debug.Log(InAttackRange);
 
         //걷기 애니메이션 플레이
         animator.SetBool("IsAttack", false);
         MoveAnimation(true);
-        
+
     }
     public void Idle()
     {
@@ -243,7 +247,7 @@ public class Golem : MonoBehaviour, IMonster
 
         //Idle 애니메이션 플레이
         MoveAnimation(false);
-        Debug.Log("골렘 대기중");
+        Debug.Log("버섯 대기중");
     }
 
     #endregion
