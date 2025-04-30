@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwOrigin: {fileID: 0}
-  hammerPrefab: {fileID: 8575793366472011245, guid: 7e8122edde972a6468dd1044c3423f62, type: 3}
+  hammerPrefab: {fileID: 3621385473485291030, guid: f197840ad9fae2f4c883722a4e33e017, type: 3}
   mainCamera: {fileID: 0}
   throwDistance: 15
   throwSpeed: 30

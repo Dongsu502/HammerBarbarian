@@ -4,9 +4,9 @@ using System.Collections;
 public class HammerThrowController : MonoBehaviour
 {
     [Header("References")]
-    public Transform throwOrigin;
-    public GameObject hammerPrefab;
-    public Camera mainCamera;
+    public Transform throwOrigin;               // 손 위치
+    public GameObject hammerPrefab;             // 해머 프리팹
+    public Camera mainCamera;                   // 카메라 (인스펙터에서 직접 연결)
 
     [Header("Throw Settings")]
     public float throwDistance = 15f;
@@ -22,42 +22,31 @@ public class HammerThrowController : MonoBehaviour
     private GameObject activeHammer;
     private Rigidbody hammerRb;
 
-    private bool isThrowing = false;
-    private bool isRecalling = false;
-
     private Vector3 throwStart;
     private Vector3 throwTarget;
     private float throwTimer;
 
-    public GameObject ActiveHammer => activeHammer;
+    private bool isThrowing = false;
+    private bool isRecalling = false;
 
-    public Transform ActiveRopeAttachPoint
-    {
-        get
-        {
-            if (activeHammer == null) return null;
-            return activeHammer.transform.Find("RopeAttachPoint");
-        }
-    }
+    public GameObject ActiveHammer => activeHammer;
 
     [ContextMenu("던지기")]
     public void Throw()
     {
-        if (isThrowing || isRecalling || activeHammer != null) return;
+        if (activeHammer != null || isThrowing || isRecalling) return;
 
+        // 해머 생성
         activeHammer = Instantiate(hammerPrefab, throwOrigin.position, hammerPrefab.transform.rotation);
-
         hammerRb = activeHammer.GetComponent<Rigidbody>();
-        hammerRb.isKinematic = true;
-
-        // 회수 전까지 충돌 무시 (충돌 막기용)
-        activeHammer.layer = LayerMask.NameToLayer("Ignore Raycast");
+        hammerRb.isKinematic = true; // MovePosition 사용할 것이므로
 
         throwStart = activeHammer.transform.position;
 
-        var ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, verticalOffset, 0));
-        Vector3 direction = ray.direction.normalized;
-        throwTarget = throwStart + direction * throwDistance;
+        // 카메라 중심 기준 방향
+        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, verticalOffset, 0));
+        Vector3 dir = ray.direction.normalized;
+        throwTarget = throwStart + dir * throwDistance;
 
         throwTimer = 0f;
         isThrowing = true;
@@ -66,20 +55,14 @@ public class HammerThrowController : MonoBehaviour
     [ContextMenu("회수")]
     public void Recall()
     {
-        if (isRecalling || activeHammer == null) return;
+        if (activeHammer == null || isRecalling) return;
 
         isThrowing = false;
         isRecalling = true;
         StartCoroutine(RecallRoutine());
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.G)) Throw();
-        if (Input.GetKeyDown(KeyCode.R)) Recall();
-    }
-
-    void FixedUpdate()
+    private void FixedUpdate()
     {
         if (isThrowing && hammerRb != null)
         {
@@ -91,14 +74,15 @@ public class HammerThrowController : MonoBehaviour
             if (t >= 1f)
             {
                 isThrowing = false;
-                //물리 충돌은 여기서 비활성화된 상태 유지!
+
+                hammerRb.isKinematic = false;
             }
         }
     }
 
     private IEnumerator RecallRoutine()
     {
-        hammerRb.isKinematic = true;
+        hammerRb.isKinematic = true; // 충돌 무시하고 회수
 
         Vector3 start = activeHammer.transform.position;
         Vector3 end = throwOrigin.position;
@@ -109,21 +93,23 @@ public class HammerThrowController : MonoBehaviour
         {
             float t = recallEase.Evaluate(timer / duration);
             Vector3 pos = Vector3.Lerp(start, end, t);
-            hammerRb.MovePosition(pos);
+            activeHammer.transform.position = pos;
 
             timer += Time.deltaTime;
             yield return null;
         }
 
-        hammerRb.MovePosition(end);
-
-        // 회수 완료 시에만 충돌 활성화
-        hammerRb.isKinematic = false;
-        activeHammer.layer = LayerMask.NameToLayer("Hammer");
+        activeHammer.transform.position = end;
 
         Destroy(activeHammer);
         activeHammer = null;
         hammerRb = null;
         isRecalling = false;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.G)) Throw();
+        if (Input.GetKeyDown(KeyCode.R)) Recall();
     }
 }
