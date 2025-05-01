@@ -203,7 +203,9 @@ public class Mushroom : MonoBehaviour, IMonster
         StopAttack();
         IsHit = false;
         IsBeingHit = true;
-        TakeDamage(10);
+
+        int hitDamage = PlayerStatWhiteBox.WhtieBox.playerAttackDamage;
+        TakeDamage(hitDamage);
     }
     public void Attack()
     {
