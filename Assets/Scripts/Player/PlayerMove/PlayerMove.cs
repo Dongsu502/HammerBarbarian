@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private InputActionReference lookAction;
+    [SerializeField] private AimCameraSwitcher cameraSwitcher;
 
     private PlayerAttack playerAttack;
     private PlayerIK playerIK;
@@ -71,10 +72,16 @@ public class PlayerMove : MonoBehaviour
 
         Vector3 moveDir = CalculateMoveDirection();
         float currentSpeed = isRunning ? runSpeed : walkSpeed;
+
+        if (cameraSwitcher.isAiming)
+        {
+            currentSpeed = 5f;
+        }
+
         Vector3 velocity = moveDir * currentSpeed;
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
 
-        if (moveDir.sqrMagnitude > 0.01f)
+        if (moveDir.sqrMagnitude > 0.01f && !cameraSwitcher.isAiming)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDir);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
@@ -94,15 +101,6 @@ public class PlayerMove : MonoBehaviour
 
         return (forward.normalized * inputVector.y + right.normalized * inputVector.x).normalized;
     }
-
-    //private void RotateTowards(Vector3 direction)
-    //{
-    //    if (direction.sqrMagnitude < 0.01f)
-    //        return;
-
-    //    Quaternion targetRotation = Quaternion.LookRotation(direction);
-    //    transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.fixedDeltaTime * 10f);
-    //}
 
     private void UpdateMoveSpeed()
     {
