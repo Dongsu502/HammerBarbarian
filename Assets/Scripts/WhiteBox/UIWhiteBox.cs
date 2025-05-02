@@ -8,6 +8,8 @@ public static class UIWhiteBox
     public static TitleUIManager TitleUIWB { get; private set; }
     public static MainUIManager MainUIWB { get; private set; }
 
+    public static MinimapFog MinimapFogWB { get; private set; }
+
     public static void SetTitleUIWB(TitleUIManager titleUIM)
     {
         TitleUIWB = titleUIM;
@@ -15,6 +17,10 @@ public static class UIWhiteBox
     public static void SetMainUIWB(MainUIManager mainUIWB)
     {
         MainUIWB = mainUIWB;
+    }
+    public static void SetMinimapFogWB(MinimapFog minimapFogWB)
+    {
+        MinimapFogWB = minimapFogWB;
     }
 
     #region MainUI
@@ -62,6 +68,15 @@ public static class UIWhiteBox
     public static void SetActiveCrosshair(bool isActive)
     {
         MainUIWB.Crosshair_SetActive(isActive);
+    }
+
+    #endregion
+
+    #region
+
+    public static void DisableMinimapFog(Collider triggerFog)
+    {
+        MinimapFogWB.DisableFog(triggerFog);
     }
 
     #endregion

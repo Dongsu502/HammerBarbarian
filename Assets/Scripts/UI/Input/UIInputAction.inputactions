@@ -48,6 +48,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "ChoiceMapUI",
+            "id": "b83cdac1-0164-4627-843f-d33bef3982b8",
+            "actions": [
+                {
+                    "name": "OpenWorldMap",
+                    "type": "Button",
+                    "id": "74d3af17-21ca-4f9c-89e3-8adb98986253",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Mouse",
+                    "type": "Button",
+                    "id": "b4d89581-1563-48d5-93cc-b8018d075588",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "23ca1801-6ae6-46f5-8544-a4501efd1782",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenWorldMap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "82a67aa8-19f8-4b75-8b75-0c933be69c69",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

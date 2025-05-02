@@ -70,6 +70,54 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""ChoiceMapUI"",
+            ""id"": ""b83cdac1-0164-4627-843f-d33bef3982b8"",
+            ""actions"": [
+                {
+                    ""name"": ""OpenWorldMap"",
+                    ""type"": ""Button"",
+                    ""id"": ""74d3af17-21ca-4f9c-89e3-8adb98986253"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""b4d89581-1563-48d5-93cc-b8018d075588"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""23ca1801-6ae6-46f5-8544-a4501efd1782"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""OpenWorldMap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""82a67aa8-19f8-4b75-8b75-0c933be69c69"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -78,11 +126,16 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         m_MainUI = asset.FindActionMap("MainUI", throwIfNotFound: true);
         m_MainUI_Setting = m_MainUI.FindAction("Setting", throwIfNotFound: true);
         m_MainUI_ChoiceItem = m_MainUI.FindAction("ChoiceItem", throwIfNotFound: true);
+        // ChoiceMapUI
+        m_ChoiceMapUI = asset.FindActionMap("ChoiceMapUI", throwIfNotFound: true);
+        m_ChoiceMapUI_OpenWorldMap = m_ChoiceMapUI.FindAction("OpenWorldMap", throwIfNotFound: true);
+        m_ChoiceMapUI_Mouse = m_ChoiceMapUI.FindAction("Mouse", throwIfNotFound: true);
     }
 
     ~@UIInputAction()
     {
         UnityEngine.Debug.Assert(!m_MainUI.enabled, "This will cause a leak and performance issues, UIInputAction.MainUI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_ChoiceMapUI.enabled, "This will cause a leak and performance issues, UIInputAction.ChoiceMapUI.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -194,9 +247,68 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         }
     }
     public MainUIActions @MainUI => new MainUIActions(this);
+
+    // ChoiceMapUI
+    private readonly InputActionMap m_ChoiceMapUI;
+    private List<IChoiceMapUIActions> m_ChoiceMapUIActionsCallbackInterfaces = new List<IChoiceMapUIActions>();
+    private readonly InputAction m_ChoiceMapUI_OpenWorldMap;
+    private readonly InputAction m_ChoiceMapUI_Mouse;
+    public struct ChoiceMapUIActions
+    {
+        private @UIInputAction m_Wrapper;
+        public ChoiceMapUIActions(@UIInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @OpenWorldMap => m_Wrapper.m_ChoiceMapUI_OpenWorldMap;
+        public InputAction @Mouse => m_Wrapper.m_ChoiceMapUI_Mouse;
+        public InputActionMap Get() { return m_Wrapper.m_ChoiceMapUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(ChoiceMapUIActions set) { return set.Get(); }
+        public void AddCallbacks(IChoiceMapUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_ChoiceMapUIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_ChoiceMapUIActionsCallbackInterfaces.Add(instance);
+            @OpenWorldMap.started += instance.OnOpenWorldMap;
+            @OpenWorldMap.performed += instance.OnOpenWorldMap;
+            @OpenWorldMap.canceled += instance.OnOpenWorldMap;
+            @Mouse.started += instance.OnMouse;
+            @Mouse.performed += instance.OnMouse;
+            @Mouse.canceled += instance.OnMouse;
+        }
+
+        private void UnregisterCallbacks(IChoiceMapUIActions instance)
+        {
+            @OpenWorldMap.started -= instance.OnOpenWorldMap;
+            @OpenWorldMap.performed -= instance.OnOpenWorldMap;
+            @OpenWorldMap.canceled -= instance.OnOpenWorldMap;
+            @Mouse.started -= instance.OnMouse;
+            @Mouse.performed -= instance.OnMouse;
+            @Mouse.canceled -= instance.OnMouse;
+        }
+
+        public void RemoveCallbacks(IChoiceMapUIActions instance)
+        {
+            if (m_Wrapper.m_ChoiceMapUIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IChoiceMapUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_ChoiceMapUIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_ChoiceMapUIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public ChoiceMapUIActions @ChoiceMapUI => new ChoiceMapUIActions(this);
     public interface IMainUIActions
     {
         void OnSetting(InputAction.CallbackContext context);
         void OnChoiceItem(InputAction.CallbackContext context);
+    }
+    public interface IChoiceMapUIActions
+    {
+        void OnOpenWorldMap(InputAction.CallbackContext context);
+        void OnMouse(InputAction.CallbackContext context);
     }
 }
