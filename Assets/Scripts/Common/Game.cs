@@ -7,4 +7,10 @@ namespace Game
         Heavy,
         Skill
     }
+
+    public enum WeaponType
+    {
+        Hammer,
+        Rope
+    }
 }
