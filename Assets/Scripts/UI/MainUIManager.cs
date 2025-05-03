@@ -12,6 +12,8 @@ public class MainUIManager : MonoBehaviour
     [Header("Panel")]
     [Tooltip("일시정지 패널")]
     public GameObject PausePanel;
+    [Tooltip("룬 선택 패널")]
+    public GameObject RunePanel;
 
     [Header("PlayerUI")]
     [Tooltip("플레이어 체력이미지")]
@@ -107,6 +109,16 @@ public class MainUIManager : MonoBehaviour
     {
         UseGauge(30f);
     }
+    [ContextMenu("룬 선택창 활성화")]
+    private void RunePanelEnable()
+    {
+        RunePanel_SetActive(true);
+    }
+    [ContextMenu("룬 선택창 비활성화")]
+    private void RunePanelDisable()
+    {
+        RunePanel_SetActive(false);
+    }
 
 #endif
 
@@ -180,6 +192,9 @@ public class MainUIManager : MonoBehaviour
         //일시정지 패널 비활성화
         PausePanel_SetActive(false);
 
+        //룬 선택 패널 비활성화
+        RunePanel_SetActive(false);
+
         //아이템선택창 비활성화
         ChoiceUI_SetActive(false);
 
@@ -197,6 +212,13 @@ public class MainUIManager : MonoBehaviour
     public void PausePanel_SetActive(bool active)
     {
         PausePanel.SetActive(active);
+
+        CursorLock(active);
+    }
+
+    public void RunePanel_SetActive(bool active)
+    {
+        RunePanel.SetActive(active);
 
         CursorLock(active);
     }

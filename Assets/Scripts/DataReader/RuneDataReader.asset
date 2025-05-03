@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7231f348ebc8b96449194c49b31f3217, type: 3}
+  m_Name: RuneDataReader
+  m_EditorClassIdentifier: 
+  associatedSheet: 1-1GhWFWfP_SXiIONwcEVu0D2YIBG2YJN-b5uQ6KHHYY
+  associatedWorksheet: Rune
+  START_ROW_LENGTH: 2
+  END_ROW_LENGTH: 8
+  DataList:
+  - id: 1
+    name: "\uBD88\uAF43\uC758 \uB8EC"
+    description: "\uD408\uC774\uC5B4!"
+  - id: 2
+    name: "\uBC88\uAC1C\uC758 \uB8EC"
+    description: "\uC6B0\uB974\uB974\uCF85\uCF85!"
+  - id: 3
+    name: "\uBE59\uACB0\uC758 \uB8EC"
+    description: "\uC5BC\uC74C \uAF41\uAF41"
+  - id: 4
+    name: "\uCDA9\uACA9\uC758 \uB8EC"
+    description: "\uCFF5\uCF85!"
+  - id: 5
+    name: "\uC5F0\uACA9\uC758 \uB8EC"
+    description: "\uACF5\uC18D \uC99D\uAC00!"
+  - id: 6
+    name: "\uD68C\uC804\uC758 \uB8EC"
+    description: "\uB3CC\uB9AC\uACE0 \uB3CC\uB9AC\uACE0"
+  - id: 7
+    name: "\uBC18\uACA9\uC758 \uB8EC"
+    description: "\uBC18\uACA9!"
