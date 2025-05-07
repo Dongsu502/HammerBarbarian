@@ -1155,18 +1155,18 @@ PrefabInstance:
     - target: {fileID: 2002507752164547408, guid: 4834a7365e4627e4ea7aca9ccf337b5e, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1339022918}
+      objectReference: {fileID: 1339022906}
     - target: {fileID: 2002507752164547408, guid: 4834a7365e4627e4ea7aca9ccf337b5e, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2002507752164547408, guid: 4834a7365e4627e4ea7aca9ccf337b5e, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnUseItem
+      value: OnEquipItem
       objectReference: {fileID: 0}
     - target: {fileID: 2002507752164547408, guid: 4834a7365e4627e4ea7aca9ccf337b5e, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: PlayerUseItem, Assembly-CSharp
+      value: PlayerAttack, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 2002507752164547408, guid: 4834a7365e4627e4ea7aca9ccf337b5e, type: 3}
       propertyPath: m_ActionEvents.Array.data[6].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -3238,6 +3238,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3fafa79e36298543918b5c1f9994a88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimCameraSwitcher: {fileID: 1242967423}
 --- !u!1 &1365379477
 GameObject:
   m_ObjectHideFlags: 0

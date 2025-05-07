@@ -30,6 +30,10 @@ public class PlayerAttack : MonoBehaviour
     public AttackType attackType = AttackType.None;
     private AttackType testCurrentAttackType = AttackType.Light;
 
+    public bool equipItem = false;
+    public WeaponType weaponType = WeaponType.Hammer;
+    private IItemUseable useable;
+
     [ContextMenu("약공격으로 설정")]
     public void SetLightAttackType()
     {
@@ -57,6 +61,7 @@ public class PlayerAttack : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         hammerCollider = hammer.GetComponents<Collider>();
+        useable = GetComponent<IItemUseable>();
     }
 
     public void OnAttack1(InputAction.CallbackContext context)
@@ -64,6 +69,8 @@ public class PlayerAttack : MonoBehaviour
         if (!context.performed) return;
 
         if (!canAttack) return;
+
+        if (equipItem) return;
 
         comboStep++;
         animator.applyRootMotion = true;
@@ -89,12 +96,48 @@ public class PlayerAttack : MonoBehaviour
     {
         if (context.started)
         {
-            StartWindMill();
+            if (equipItem)
+            {
+                Debug.Log("조준 시작");
+                useable.UseItemByType(weaponType);
+            }
+            else
+            {
+                StartWindMill();
+            }
         }
 
         if (context.canceled)
         {
-            StopWindMill();
+            if (equipItem)
+            {
+                Debug.Log("조준 해제");
+                useable.EndUseItemByType(weaponType);
+            }
+            else
+            {
+                StopWindMill();
+            }
+        }
+    }
+
+    public void OnEquipItem(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            int currentItemType = UIWhiteBox.GetCurrentItemNum();
+            if (!equipItem)
+            {
+                Debug.Log("아이템 장착");
+                equipItem = true;
+                weaponType = (WeaponType)currentItemType;
+            }
+            else
+            {
+                Debug.Log("아이템 장착 해제");
+                equipItem = false;
+                weaponType = WeaponType.Hammer;
+            }
         }
     }
 

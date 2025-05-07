@@ -9,28 +9,24 @@ public class AimCameraSwitcher : MonoBehaviour
 
     public bool isAiming = false;
 
-   // private bool applyAimSync = false;
-
-    void Update()
+    public void SetAimCamera()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
-        {
-            aimCam.Priority = 20;
-            freeLookCam.Priority = 10;
-            isAiming = true;
+        aimCam.Priority = 20;
+        freeLookCam.Priority = 10;
+        isAiming = true;
 
-            UIWhiteBox.MainUIWB.Crosshair_SetActive(true);
+        UIWhiteBox.MainUIWB.Crosshair_SetActive(true);
 
-            StartCoroutine(SyncPOVFromFreeLook());
-        }
-        else if (Input.GetKeyUp(KeyCode.Q))
-        {
-            aimCam.Priority = 10;
-            freeLookCam.Priority = 20;
-            isAiming = false;
+        StartCoroutine(SyncPOVFromFreeLook());
+    }
 
-            UIWhiteBox.MainUIWB.Crosshair_SetActive(false);
-        }
+    public void SetFreeLookCamera()
+    {
+        aimCam.Priority = 10;
+        freeLookCam.Priority = 20;
+        isAiming = false;
+
+        UIWhiteBox.MainUIWB.Crosshair_SetActive(false);
     }
 
     IEnumerator SyncPOVFromFreeLook()
