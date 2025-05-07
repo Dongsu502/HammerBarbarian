@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 3117305867352189491}
   - component: {fileID: 3807115783914097520}
   m_Layer: 5
-  m_Name: ChoiceButton3
+  m_Name: ChoiceButton4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1239,7 +1239,7 @@ GameObject:
   - component: {fileID: 8438978742275891828}
   - component: {fileID: 709721975275056535}
   m_Layer: 5
-  m_Name: ChoiceButton2
+  m_Name: ChoiceButton3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1383,7 +1383,7 @@ GameObject:
   - component: {fileID: 5339694336327661140}
   - component: {fileID: 4931037302484633486}
   m_Layer: 5
-  m_Name: Image1
+  m_Name: Image2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1700,7 +1700,7 @@ GameObject:
   - component: {fileID: 4052943122693266971}
   - component: {fileID: 6291947148388182841}
   m_Layer: 5
-  m_Name: ChoiceButton4
+  m_Name: ChoiceButton5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2074,7 +2074,7 @@ GameObject:
   - component: {fileID: 2869209299529754368}
   - component: {fileID: 3695513007132094786}
   m_Layer: 5
-  m_Name: Image4
+  m_Name: Image5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2149,7 +2149,7 @@ GameObject:
   - component: {fileID: 6416846744675688936}
   - component: {fileID: 9063849195886910918}
   m_Layer: 5
-  m_Name: Image6
+  m_Name: Image7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2432,7 +2432,7 @@ GameObject:
   - component: {fileID: 6524539111008026690}
   - component: {fileID: 4638198798932156291}
   m_Layer: 5
-  m_Name: Image0
+  m_Name: Image1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2796,7 +2796,7 @@ GameObject:
   - component: {fileID: 2945256902246096701}
   - component: {fileID: 2795851134008424127}
   m_Layer: 5
-  m_Name: ChoiceButton5
+  m_Name: ChoiceButton6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3020,7 +3020,7 @@ GameObject:
   - component: {fileID: 6692578641277190301}
   - component: {fileID: 2875279335931432140}
   m_Layer: 5
-  m_Name: ChoiceButton1
+  m_Name: ChoiceButton2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3166,7 +3166,7 @@ GameObject:
   - component: {fileID: 7382022723453436484}
   - component: {fileID: 5306132411841911940}
   m_Layer: 5
-  m_Name: ChoiceButton0
+  m_Name: ChoiceButton1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3310,7 +3310,7 @@ GameObject:
   - component: {fileID: 739217054573011469}
   - component: {fileID: 6800569250846450300}
   m_Layer: 5
-  m_Name: Image5
+  m_Name: Image6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3672,7 +3672,7 @@ GameObject:
   - component: {fileID: 3341465702582600438}
   - component: {fileID: 3308237627921023694}
   m_Layer: 5
-  m_Name: Image2
+  m_Name: Image3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3826,7 +3826,7 @@ GameObject:
   - component: {fileID: 7092190583719195895}
   - component: {fileID: 9043844665769315729}
   m_Layer: 5
-  m_Name: Image3
+  m_Name: Image4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5052,7 +5052,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &7591158588782546432
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5130,7 +5130,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8706588616378010292
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5247,7 +5247,7 @@ GameObject:
   - component: {fileID: 7491886913917787600}
   - component: {fileID: 5592488422653861038}
   m_Layer: 5
-  m_Name: ChoiceButton6
+  m_Name: ChoiceButton7
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5710,10 +5710,10 @@ RectTransform:
   - {fileID: 5003832178090846410}
   - {fileID: 6643918527299828951}
   - {fileID: 4448182811278750775}
-  - {fileID: 8706588616378010292}
-  - {fileID: 8174601645063029582}
   - {fileID: 7914916332804905744}
+  - {fileID: 8706588616378010292}
   - {fileID: 7591158588782546432}
+  - {fileID: 8174601645063029582}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
