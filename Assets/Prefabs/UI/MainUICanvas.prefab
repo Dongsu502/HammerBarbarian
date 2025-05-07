@@ -5046,6 +5046,7 @@ GameObject:
   - component: {fileID: 7591158588782546432}
   - component: {fileID: 4097887747370557709}
   - component: {fileID: 8628686269064096392}
+  - component: {fileID: 5825113238186953080}
   m_Layer: 5
   m_Name: RuneChoicePanel
   m_TagString: Untagged
@@ -5115,6 +5116,35 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &5825113238186953080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8174290930511479501}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c01452302bd8ae945a31e63b8801b38c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  runeData: {fileID: 11400000, guid: 04a1fe9f01531b446821212bbfc0558b, type: 2}
+  runeButton:
+  - {fileID: 7447016540277643296}
+  - {fileID: 1407522498769228310}
+  - {fileID: 9035687046526944916}
+  runeImage:
+  - {fileID: 4975998132495978477}
+  - {fileID: 8445563168356188529}
+  - {fileID: 3236763291557934726}
+  runeName:
+  - {fileID: 8136443154525230470}
+  - {fileID: 2786495019215291962}
+  - {fileID: 2873775282085477949}
+  runeDescription:
+  - {fileID: 2893311179192272850}
+  - {fileID: 9120150460500540151}
+  - {fileID: 7383822853138521544}
 --- !u!1 &8483955807824009257
 GameObject:
   m_ObjectHideFlags: 0
