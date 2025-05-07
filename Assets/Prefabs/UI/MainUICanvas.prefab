@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 3117305867352189491}
   - component: {fileID: 3807115783914097520}
   m_Layer: 5
-  m_Name: ChoiceButton4
+  m_Name: ChoiceButton3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -611,7 +611,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4102674958953468739}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5825113238186953080}
+        m_TargetAssemblyTypeName: RuneChoiceUI, Assembly-CSharp
+        m_MethodName: Click_runeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1412017575536825308
 GameObject:
   m_ObjectHideFlags: 0
@@ -1239,7 +1251,7 @@ GameObject:
   - component: {fileID: 8438978742275891828}
   - component: {fileID: 709721975275056535}
   m_Layer: 5
-  m_Name: ChoiceButton3
+  m_Name: ChoiceButton2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1383,7 +1395,7 @@ GameObject:
   - component: {fileID: 5339694336327661140}
   - component: {fileID: 4931037302484633486}
   m_Layer: 5
-  m_Name: Image2
+  m_Name: Image1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1700,7 +1712,7 @@ GameObject:
   - component: {fileID: 4052943122693266971}
   - component: {fileID: 6291947148388182841}
   m_Layer: 5
-  m_Name: ChoiceButton5
+  m_Name: ChoiceButton4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2074,7 +2086,7 @@ GameObject:
   - component: {fileID: 2869209299529754368}
   - component: {fileID: 3695513007132094786}
   m_Layer: 5
-  m_Name: Image5
+  m_Name: Image4
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2149,7 +2161,7 @@ GameObject:
   - component: {fileID: 6416846744675688936}
   - component: {fileID: 9063849195886910918}
   m_Layer: 5
-  m_Name: Image7
+  m_Name: Image6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2432,7 +2444,7 @@ GameObject:
   - component: {fileID: 6524539111008026690}
   - component: {fileID: 4638198798932156291}
   m_Layer: 5
-  m_Name: Image1
+  m_Name: Image0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2796,7 +2808,7 @@ GameObject:
   - component: {fileID: 2945256902246096701}
   - component: {fileID: 2795851134008424127}
   m_Layer: 5
-  m_Name: ChoiceButton6
+  m_Name: ChoiceButton5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3020,7 +3032,7 @@ GameObject:
   - component: {fileID: 6692578641277190301}
   - component: {fileID: 2875279335931432140}
   m_Layer: 5
-  m_Name: ChoiceButton2
+  m_Name: ChoiceButton1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3166,7 +3178,7 @@ GameObject:
   - component: {fileID: 7382022723453436484}
   - component: {fileID: 5306132411841911940}
   m_Layer: 5
-  m_Name: ChoiceButton1
+  m_Name: ChoiceButton0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3310,7 +3322,7 @@ GameObject:
   - component: {fileID: 739217054573011469}
   - component: {fileID: 6800569250846450300}
   m_Layer: 5
-  m_Name: Image6
+  m_Name: Image5
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3672,7 +3684,7 @@ GameObject:
   - component: {fileID: 3341465702582600438}
   - component: {fileID: 3308237627921023694}
   m_Layer: 5
-  m_Name: Image3
+  m_Name: Image2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3826,7 +3838,7 @@ GameObject:
   - component: {fileID: 7092190583719195895}
   - component: {fileID: 9043844665769315729}
   m_Layer: 5
-  m_Name: Image4
+  m_Name: Image3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4901,7 +4913,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8433917462187101346}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5825113238186953080}
+        m_TargetAssemblyTypeName: RuneChoiceUI, Assembly-CSharp
+        m_MethodName: Click_runeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8068732334126667079
 GameObject:
   m_ObjectHideFlags: 0
@@ -5145,6 +5169,14 @@ MonoBehaviour:
   - {fileID: 2893311179192272850}
   - {fileID: 9120150460500540151}
   - {fileID: 7383822853138521544}
+  runeResourceImages:
+  - {fileID: 21300000, guid: 9129590a415f6bf4ca39a83ce3a5e017, type: 3}
+  - {fileID: 21300000, guid: eb6244ff8499dde45aa97d79a69318f3, type: 3}
+  - {fileID: 21300000, guid: 02c78723f6053374289e0da4c70ce2bc, type: 3}
+  - {fileID: 21300000, guid: 2799127103e45aa42af690f0bd3572ee, type: 3}
+  - {fileID: 21300000, guid: b2f9b277cd33e924282c6b112585a50b, type: 3}
+  - {fileID: 21300000, guid: 87310cedcc2f5ba47b6439e1d035e25a, type: 3}
+  - {fileID: 21300000, guid: ac867df40e09ef34e9254c74bd3516fe, type: 3}
 --- !u!1 &8483955807824009257
 GameObject:
   m_ObjectHideFlags: 0
@@ -5277,7 +5309,7 @@ GameObject:
   - component: {fileID: 7491886913917787600}
   - component: {fileID: 5592488422653861038}
   m_Layer: 5
-  m_Name: ChoiceButton7
+  m_Name: ChoiceButton6
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5703,7 +5735,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3718002699735536693}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5825113238186953080}
+        m_TargetAssemblyTypeName: RuneChoiceUI, Assembly-CSharp
+        m_MethodName: Click_runeButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &9096148321434316099
 GameObject:
   m_ObjectHideFlags: 0

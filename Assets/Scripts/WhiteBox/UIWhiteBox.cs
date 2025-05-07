@@ -25,6 +25,16 @@ public static class UIWhiteBox
 
     #region MainUI
 
+    public static void SetActivePausePanel(bool isActive)
+    {
+        MainUIWB.PausePanel_SetActive(isActive);
+    }
+
+    public static void SetActiveRunePanel(bool isActive)
+    {
+        MainUIWB.RunePanel_SetActive(isActive);
+    }
+
     /// <summary>
     /// 피격 시 하트 감소
     /// </summary>
