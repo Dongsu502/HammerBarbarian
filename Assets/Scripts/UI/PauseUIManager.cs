@@ -29,7 +29,18 @@ public class PauseUIManager : MonoBehaviour
 
     public void Click_Save()
     {
-        Debug.Log("¿˙¿Â");
+        //switch(DataManager.Instance.currentDataFileName)
+        //{
+        //    case "GameData1.json":
+        //        DataManager.Instance.SaveGameData(DataManager.Instance.data1, DataManager.Instance.GameDataFileName1);
+        //        break;
+        //    case "GameData2.json":
+        //        DataManager.Instance.SaveGameData(DataManager.Instance.data2, DataManager.Instance.GameDataFileName2);
+        //        break;
+        //    case "GameData3.json":
+        //        DataManager.Instance.SaveGameData(DataManager.Instance.data3, DataManager.Instance.GameDataFileName3);
+        //        break;
+        //}
     }
 
     public void Click_Setting()
