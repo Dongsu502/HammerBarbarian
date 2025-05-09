@@ -34,6 +34,12 @@ public class HammerThrowController : MonoBehaviour
         activeHammer = Instantiate(hammerPrefab, throwOrigin.position, hammerPrefab.transform.rotation);
         hammerRb = activeHammer.GetComponent<Rigidbody>();
 
+        var collisionHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
+        if (collisionHandler != null)
+        {
+            collisionHandler.SetController(this);
+        }
+
         hammerRb.isKinematic = false;
         hammerRb.velocity = Vector3.zero;
         hammerRb.angularVelocity = Vector3.zero;
@@ -53,6 +59,11 @@ public class HammerThrowController : MonoBehaviour
 
         isThrowing = false;
         isRecalling = true;
+
+        if (hammerRb != null)
+        {
+            hammerRb.isKinematic = true;
+        }
     }
 
     private void FixedUpdate()
@@ -68,6 +79,9 @@ public class HammerThrowController : MonoBehaviour
                 hammerRb.velocity = Vector3.zero;
                 hammerRb.angularVelocity = Vector3.zero;
                 hammerRb.isKinematic = false;
+
+                // 자동 회수
+                Recall();
             }
         }
 
@@ -88,7 +102,10 @@ public class HammerThrowController : MonoBehaviour
             }
 
             Vector3 direction = toHand.normalized;
-            hammerRb.AddForce(direction * recallForce, ForceMode.Force);
+            hammerRb.position += direction * maxRecallSpeed * Time.fixedDeltaTime;
+
+            //Vector3 direction = toHand.normalized;
+            //hammerRb.AddForce(direction * recallForce, ForceMode.Force);
 
             // 속도 제한
             if (hammerRb.velocity.magnitude > maxRecallSpeed)
@@ -100,7 +117,6 @@ public class HammerThrowController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G)) Throw();
         if (Input.GetKeyDown(KeyCode.R)) Recall();
     }
 }
