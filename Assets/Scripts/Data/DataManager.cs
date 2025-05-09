@@ -77,4 +77,29 @@ public class DataManager : MonoBehaviour
         //올바르게 저장되었는지 확인
         Debug.Log("저장 완료");
     }
+
+    /// <summary>
+    /// 현재 데이터파일의 Data 가져오는 메서드
+    /// </summary>
+    /// <returns>data1/2/3</returns>
+    public BaseData GetCurrentData()
+    {
+        if(currentDataFileName == GameDataFileName1)
+        {
+            return data1;
+        }
+        else if(currentDataFileName == GameDataFileName2)
+        {
+            return data2;
+        }
+        else if( currentDataFileName == GameDataFileName3)
+        {
+            return data3;
+        }
+        else
+        {
+            Debug.LogError("알 수 없는 데이터 파일 이름입니다.");
+            return null;
+        }
+    }
 }

@@ -1,4 +1,3 @@
-using JetBrains.Annotations;
 using System;
 
 [Serializable]
@@ -12,6 +11,8 @@ public abstract class BaseData
 {
     public WorldData[] worlds = new WorldData[7];
 
+    public int currentItemList;
+
     public BaseData()
     {
         for (int i = 0; i < worlds.Length; i++)
@@ -24,7 +25,7 @@ public abstract class BaseData
 [Serializable]
 public class Data1 : BaseData
 {
-
+    
 }
 
 [Serializable]

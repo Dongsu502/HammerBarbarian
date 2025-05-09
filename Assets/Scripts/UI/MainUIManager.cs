@@ -351,6 +351,31 @@ public class MainUIManager : MonoBehaviour
         itemImage.sprite = item_ImageResources[currentItemNum];
     }
 
+    /// <summary>
+    /// 아이템 리스트 재설정
+    /// </summary>
+    public void SetItemList()
+    {
+        int itemCount = DataManager.Instance.GetCurrentData().currentItemList;
+
+        for(int i = 0; i < itemChoice_Buttons.Length; i++)
+        {
+            itemChoice_Buttons[i].gameObject.SetActive(i <= itemCount);
+        }
+        Debug.Log($"활성화된 아이템 수: {itemCount}");
+    } 
+
+    /// <summary>
+    /// 아이템 획득
+    /// </summary>
+    public void GetItem()
+    {
+        DataManager.Instance.GetCurrentData().currentItemList++;
+
+        //아이템 리스트 재설정
+        SetItemList();
+    }
+
     #endregion
 
     #region Gauge_Func

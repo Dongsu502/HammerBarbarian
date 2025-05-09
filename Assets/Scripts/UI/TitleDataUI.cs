@@ -13,6 +13,9 @@ public class TitleDataUI : MonoBehaviour
         DataManager.Instance.data1 = DataManager.Instance.LoadGameData<Data1>(data1fileName);
 
         Debug.Log($"현재 데이터 파일: {DataManager.Instance.currentDataFileName}");
+
+        //아이템 리스트 초기화
+        UIWhiteBox.SetItemList();
     }
 
     public void Click_Data2Button()
@@ -22,6 +25,9 @@ public class TitleDataUI : MonoBehaviour
         DataManager.Instance.data2 = DataManager.Instance.LoadGameData<Data2>(data1fileName);
 
         Debug.Log($"현재 데이터 파일: {DataManager.Instance.currentDataFileName}");
+
+        //아이템 리스트 초기화
+        UIWhiteBox.SetItemList();
     }
 
     public void Click_Data3Button()
@@ -31,6 +37,9 @@ public class TitleDataUI : MonoBehaviour
         DataManager.Instance.data3 = DataManager.Instance.LoadGameData<Data3>(data1fileName);
 
         Debug.Log($"현재 데이터 파일: {DataManager.Instance.currentDataFileName}");
+
+        //아이템 리스트 초기화
+        UIWhiteBox.SetItemList();
     }
 
     #endregion

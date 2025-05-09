@@ -63,6 +63,22 @@ public static class UIWhiteBox
     }
 
     /// <summary>
+    /// 아이템 리스트 재설정
+    /// </summary>
+    public static void SetItemList()
+    {
+        MainUIWB.SetItemList();
+    }
+
+    /// <summary>
+    /// 아이템 획득
+    /// </summary>
+    public static void GetItem()
+    {
+        MainUIWB.GetItem();
+    }
+
+    /// <summary>
     /// 게이지 감소 / 게이지 최소:0 최대:100
     /// </summary>
     /// <param name="amount">감소할 게이지 값</param>
