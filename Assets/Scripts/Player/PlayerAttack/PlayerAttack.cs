@@ -32,7 +32,10 @@ public class PlayerAttack : MonoBehaviour
 
     public bool equipItem = false;
     public WeaponType weaponType = WeaponType.Hammer;
+    private bool isAiming = false;
+
     private IItemUseable useable;
+    private IAttackable attackable;
 
     [ContextMenu("약공격으로 설정")]
     public void SetLightAttackType()
@@ -62,6 +65,7 @@ public class PlayerAttack : MonoBehaviour
         animator = GetComponent<Animator>();
         hammerCollider = hammer.GetComponents<Collider>();
         useable = GetComponent<IItemUseable>();
+        attackable = GetComponent<IAttackable>();
     }
 
     public void OnAttack1(InputAction.CallbackContext context)
@@ -70,7 +74,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (!canAttack) return;
 
-        if (equipItem) return;
+        if (equipItem && isAiming)
+        {
+            attackable.AttackByType(weaponType);
+            return;
+        }
 
         comboStep++;
         animator.applyRootMotion = true;
@@ -99,6 +107,7 @@ public class PlayerAttack : MonoBehaviour
             if (equipItem)
             {
                 Debug.Log("조준 시작");
+                isAiming = true;
                 useable.UseItemByType(weaponType);
             }
             else
@@ -112,6 +121,7 @@ public class PlayerAttack : MonoBehaviour
             if (equipItem)
             {
                 Debug.Log("조준 해제");
+                isAiming = false;
                 useable.EndUseItemByType(weaponType);
             }
             else
