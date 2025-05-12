@@ -14,6 +14,8 @@ public class MainUIManager : MonoBehaviour
     public GameObject PausePanel;
     [Tooltip("룬 선택 패널")]
     public GameObject RunePanel;
+    [Tooltip("룬 인벤토리 패널")]
+    public GameObject RuneInventoryPanel;
 
     [Header("PlayerUI")]
     [Tooltip("플레이어 체력이미지")]
@@ -138,6 +140,8 @@ public class MainUIManager : MonoBehaviour
 
         uiInput.MainUI.ChoiceItem.performed += ChoiceItemAction;
         uiInput.MainUI.ChoiceItem.canceled += ChoiceItemAction;
+
+        uiInput.MainUI.Rune.started += RuneInventoryAction;
     }
 
     private void OnDisable()
@@ -148,6 +152,8 @@ public class MainUIManager : MonoBehaviour
 
         uiInput.MainUI.ChoiceItem.performed -= ChoiceItemAction;
         uiInput.MainUI.ChoiceItem.canceled -= ChoiceItemAction;
+
+        uiInput.MainUI.Rune.started -= RuneInventoryAction;
     }
 
     private void Start()
@@ -182,6 +188,22 @@ public class MainUIManager : MonoBehaviour
         }
     }
 
+    private void RuneInventoryAction(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            if(RuneInventoryPanel.activeSelf)
+            {
+                RuneInventoryPanel_SetActive(false);
+            }
+            else
+            {
+                UIWhiteBox.SetRuneInventoryTitleText("인벤토리");
+                RuneInventoryPanel_SetActive(true);
+            }
+        }
+    }
+
     #endregion
 
     /// <summary>
@@ -194,6 +216,9 @@ public class MainUIManager : MonoBehaviour
 
         //룬 선택 패널 비활성화
         RunePanel_SetActive(false);
+
+        //룬 인벤토리 패널 비활성화
+        RuneInventoryPanel_SetActive(false);
 
         //아이템선택창 비활성화
         ChoiceUI_SetActive(false);
@@ -209,6 +234,8 @@ public class MainUIManager : MonoBehaviour
         gaugeImage.fillAmount = gaugeValue / GAUGE_MAX_VALUE;
     }
 
+    #region panelMethod
+
     public void PausePanel_SetActive(bool active)
     {
         PausePanel.SetActive(active);
@@ -222,6 +249,15 @@ public class MainUIManager : MonoBehaviour
 
         CursorLock(active);
     }
+
+    public void RuneInventoryPanel_SetActive(bool active)
+    {
+        RuneInventoryPanel.SetActive(active);
+
+        CursorLock(active);
+    }
+
+    #endregion
 
     /// <summary>
     /// 마우스 커서 잠금 & 표시
@@ -237,6 +273,8 @@ public class MainUIManager : MonoBehaviour
             PlayerWhiteBox.WhiteBox.DisableAttackAction();
             //플레이어 화면 잠금
             PlayerWhiteBox.WhiteBox.DisableLookAction();
+
+            Debug.Log("Cursor unlocked");
         }
         else
         {
@@ -246,10 +284,16 @@ public class MainUIManager : MonoBehaviour
             PlayerWhiteBox.WhiteBox.EnableAttack1Action();
             //플레이어 화면 잠금해제
             PlayerWhiteBox.WhiteBox.EnableLookAction();
+
+            Debug.Log("Cursor locked");
         }
         Cursor.visible = isLock;
     }
 
+    /// <summary>
+    /// 십자선 활성화, 비활성화
+    /// </summary>
+    /// <param name="active">활성화 여부</param>
     public void Crosshair_SetActive(bool active)
     {
         crossHairImage.gameObject.SetActive(active);

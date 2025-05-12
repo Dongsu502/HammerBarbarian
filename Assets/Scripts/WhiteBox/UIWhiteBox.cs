@@ -10,6 +10,9 @@ public static class UIWhiteBox
 
     public static MinimapFog MinimapFogWB { get; private set; }
 
+    public static RuneInventoryUI RuneInventoryWB { get; private set; }
+    public static RuneChoiceUI RuneChoiceWB { get; private set; }
+
     public static void SetTitleUIWB(TitleUIManager titleUIM)
     {
         TitleUIWB = titleUIM;
@@ -22,6 +25,14 @@ public static class UIWhiteBox
     {
         MinimapFogWB = minimapFogWB;
     }
+    public static void SetRuneInventoryWB(RuneInventoryUI runeInventoryWB)
+    {
+        RuneInventoryWB = runeInventoryWB;
+    }
+    public static void SetRuneChoiceWB(RuneChoiceUI runeChoiceWB)
+    {
+        RuneChoiceWB = runeChoiceWB;
+    }
 
     #region MainUI
 
@@ -33,6 +44,11 @@ public static class UIWhiteBox
     public static void SetActiveRunePanel(bool isActive)
     {
         MainUIWB.RunePanel_SetActive(isActive);
+    }
+
+    public static void SetActiveRuneInventoryPanel(bool isActive)
+    {
+        MainUIWB.RuneInventoryPanel_SetActive(isActive);
     }
 
     /// <summary>
@@ -98,11 +114,38 @@ public static class UIWhiteBox
 
     #endregion
 
-    #region
+    #region MinimapFog
 
     public static void DisableMinimapFog(Collider triggerFog)
     {
         MinimapFogWB.DisableFog(triggerFog);
+    }
+
+    #endregion
+
+    #region Rune
+
+    /// <summary>
+    /// 룬 인벤토리 타이틀 텍스트 설정
+    /// </summary>
+    /// <param name="newText">변경할 텍스트값</param>
+    public static void SetRuneInventoryTitleText(string newText)
+    {
+        RuneInventoryWB.ChangeTitleText(newText);
+    }
+
+    /// <summary>
+    /// 룬 인벤토리에 적용
+    /// </summary>
+    /// <param name="rune">추가할 룬</param>
+    public static void AddRuneToInventory(ItemData rune)
+    {
+        RuneInventoryWB.AddRuneToInventory(rune);
+    }
+
+    public static List<int> GetRuneIDs()
+    {
+        return RuneInventoryWB.runeIDs;
     }
 
     #endregion

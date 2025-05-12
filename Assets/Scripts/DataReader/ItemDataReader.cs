@@ -9,7 +9,7 @@ using UnityEditor;
 #endif
 
 [Serializable]
-public struct ItemData
+public class ItemData
 {
     public int id;
     public string name;

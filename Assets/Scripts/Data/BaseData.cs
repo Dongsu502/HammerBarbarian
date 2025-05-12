@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 [Serializable]
 public class WorldData
@@ -9,9 +11,14 @@ public class WorldData
 [Serializable]
 public abstract class BaseData
 {
+    //월드 클리어 현황
     public WorldData[] worlds = new WorldData[7];
 
+    //현재 가지고 있는 아이템 리스트
     public int currentItemList;
+
+    //획득한 룬ID
+    public List<int> ownedRunes = new List<int>();
 
     public BaseData()
     {

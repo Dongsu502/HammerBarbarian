@@ -51,6 +51,7 @@ public class DataManager : MonoBehaviour
             //저장된 파일 불러오고 Json을 클래스 형식으로 전환해서 할당
             string FromJsonData = File.ReadAllText(filePath);
             T loadedData = JsonUtility.FromJson<T>(FromJsonData);
+
             Debug.Log("불러오기 완료");
             return loadedData;
         }
