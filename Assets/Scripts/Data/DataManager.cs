@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -34,6 +35,34 @@ public class DataManager : MonoBehaviour
     public Data1 data1 = new();
     public Data2 data2 = new();
     public Data3 data3 = new();
+
+    /// <summary>
+    /// 데이터 초기화
+    /// </summary>
+    /// <param name="currentData">초기화 할 데이터</param>
+    public void ResetData(BaseData currentData)
+    {
+        //월드 데이터 초기화
+        for(int i = 0; i < currentData.worlds.Length; i++)
+        {
+            if (currentData.worlds[i] == null)
+            {
+                currentData.worlds[i] = new WorldData();
+            }
+            else
+            {
+                Array.Clear(currentData.worlds[i].dungeons, 0, currentData.worlds[i].dungeons.Length);
+            }
+        }
+
+        //아이템 리스트 초기화
+        currentData.currentItemList = 0;
+
+        //룬 리스트 초기화
+        currentData.ownedRunes.Clear();
+
+        Debug.Log($"{currentData}데이터 리셋 완료");
+    }
 
     /// <summary>
     /// 게임 데이터 불러오기
@@ -101,6 +130,28 @@ public class DataManager : MonoBehaviour
         {
             Debug.LogError("알 수 없는 데이터 파일 이름입니다.");
             return null;
+        }
+    }
+
+    /// <summary>
+    /// 현재파일이름 설정
+    /// </summary>
+    /// <param name="index">설정할 데이터 번호</param>
+    public void SetCurrentData(int index)
+    {
+        switch (index)
+        {
+            case 0:
+                currentDataFileName = GameDataFileName1;
+                break;
+
+            case 1:
+                currentDataFileName = GameDataFileName2;
+                break;
+
+            case 2:
+                currentDataFileName = GameDataFileName3;
+                break;
         }
     }
 }

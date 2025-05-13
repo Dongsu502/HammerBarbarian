@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class TitleUIManager : MonoBehaviour
 {
@@ -50,6 +51,8 @@ public class TitleUIManager : MonoBehaviour
         PlayButton.SetActive(true);
     }
 
+    #region ButtonEvent
+
     public void Click_PlayButton()
     {
         PlayButton.SetActive(false);
@@ -87,5 +90,5 @@ public class TitleUIManager : MonoBehaviour
         Debug.Log("게임 종료");
     }
 
-    
+    #endregion
 }

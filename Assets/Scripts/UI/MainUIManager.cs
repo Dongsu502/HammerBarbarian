@@ -44,11 +44,18 @@ public class MainUIManager : MonoBehaviour
     public Image gaugeBackgroundImage;
     [Tooltip("게이지 이미지")]
     public Image gaugeImage;
+    [Tooltip("게이지 색상 그라데이션")]
+    [SerializeField]
+    private Gradient gaugeGradient;
 
     [Space(3)]
     [Header("Crosshair")]
     [Tooltip("원거리공격 에임")]
     public Image crossHairImage;
+
+    [Space(3)]
+    [Header("RuneShow UI")]
+    public Image[] runeShowImages;
 
     [Space(3)]
     [Header("Image Resources")]
@@ -134,6 +141,7 @@ public class MainUIManager : MonoBehaviour
 
     private void OnEnable()
     {
+        #region UIKeyAction
         uiInput.MainUI.Enable();
 
         uiInput.MainUI.Setting.started += EscapeACtion;
@@ -142,10 +150,16 @@ public class MainUIManager : MonoBehaviour
         uiInput.MainUI.ChoiceItem.canceled += ChoiceItemAction;
 
         uiInput.MainUI.Rune.started += RuneInventoryAction;
+
+        #endregion
+
+        SetItemList();
     }
 
     private void OnDisable()
     {
+        #region UIKeyAction
+
         uiInput.MainUI.Disable();
 
         uiInput.MainUI.Setting.started -= EscapeACtion;
@@ -154,6 +168,8 @@ public class MainUIManager : MonoBehaviour
         uiInput.MainUI.ChoiceItem.canceled -= ChoiceItemAction;
 
         uiInput.MainUI.Rune.started -= RuneInventoryAction;
+
+        #endregion
     }
 
     private void Start()
@@ -449,6 +465,7 @@ public class MainUIManager : MonoBehaviour
 
         gaugeValue += amount;
         gaugeImage.fillAmount = gaugeValue / GAUGE_MAX_VALUE;
+        UpdateGaugeColor();
     }
 
     /// <summary>
@@ -464,7 +481,42 @@ public class MainUIManager : MonoBehaviour
 
         gaugeValue -= amount;
         gaugeImage.fillAmount = gaugeValue / GAUGE_MAX_VALUE;
+        UpdateGaugeColor();
+
         Debug.Log($"게이지 감소값: {amount}");
+    }
+
+    /// <summary>
+    /// 게이지 색상 업데이트
+    /// </summary>
+    private void UpdateGaugeColor()
+    {
+        float normalized = gaugeValue / GAUGE_MAX_VALUE;
+        gaugeImage.color = gaugeGradient.Evaluate(normalized);
+    }
+
+    #endregion
+
+    #region Rune
+
+    /// <summary>
+    /// 룬 표시 이미지 색깔 초기화
+    /// </summary>
+    public void ResetColorRuneShowImage()
+    {
+        for(int i = 0; i < runeShowImages.Length; i++)
+        {
+            runeShowImages[i].color = Color.white;
+        }
+    }
+
+    /// <summary>
+    /// 인벤토리에 들어간 룬 표시 이미지 색깔 변경
+    /// </summary>
+    /// <param name="index">인벤토리에 들어간 룬 번호</param>
+    public void SetColorRuneShowImage(int index)
+    {
+        runeShowImages[index].color = Color.red;
     }
 
     #endregion

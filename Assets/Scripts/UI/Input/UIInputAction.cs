@@ -138,6 +138,54 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""TitleUI"",
+            ""id"": ""e47442e9-1251-4cf5-a1eb-3e86c1c4c16d"",
+            ""actions"": [
+                {
+                    ""name"": ""DeleteData"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc3c3f73-bb3b-4ac8-83be-0e8cff2347ee"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mouse"",
+                    ""type"": ""Button"",
+                    ""id"": ""07efb6a0-1dd6-4737-91e9-bdbef973e868"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""185261ba-09fd-48ea-8cb6-ee725329269e"",
+                    ""path"": ""<Keyboard>/delete"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DeleteData"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""782ea44a-6c6b-4b61-9f8d-c09f22be9ff0"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -151,12 +199,17 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         m_ChoiceMapUI = asset.FindActionMap("ChoiceMapUI", throwIfNotFound: true);
         m_ChoiceMapUI_OpenWorldMap = m_ChoiceMapUI.FindAction("OpenWorldMap", throwIfNotFound: true);
         m_ChoiceMapUI_Mouse = m_ChoiceMapUI.FindAction("Mouse", throwIfNotFound: true);
+        // TitleUI
+        m_TitleUI = asset.FindActionMap("TitleUI", throwIfNotFound: true);
+        m_TitleUI_DeleteData = m_TitleUI.FindAction("DeleteData", throwIfNotFound: true);
+        m_TitleUI_Mouse = m_TitleUI.FindAction("Mouse", throwIfNotFound: true);
     }
 
     ~@UIInputAction()
     {
         UnityEngine.Debug.Assert(!m_MainUI.enabled, "This will cause a leak and performance issues, UIInputAction.MainUI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_ChoiceMapUI.enabled, "This will cause a leak and performance issues, UIInputAction.ChoiceMapUI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_TitleUI.enabled, "This will cause a leak and performance issues, UIInputAction.TitleUI.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -330,6 +383,60 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         }
     }
     public ChoiceMapUIActions @ChoiceMapUI => new ChoiceMapUIActions(this);
+
+    // TitleUI
+    private readonly InputActionMap m_TitleUI;
+    private List<ITitleUIActions> m_TitleUIActionsCallbackInterfaces = new List<ITitleUIActions>();
+    private readonly InputAction m_TitleUI_DeleteData;
+    private readonly InputAction m_TitleUI_Mouse;
+    public struct TitleUIActions
+    {
+        private @UIInputAction m_Wrapper;
+        public TitleUIActions(@UIInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @DeleteData => m_Wrapper.m_TitleUI_DeleteData;
+        public InputAction @Mouse => m_Wrapper.m_TitleUI_Mouse;
+        public InputActionMap Get() { return m_Wrapper.m_TitleUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(TitleUIActions set) { return set.Get(); }
+        public void AddCallbacks(ITitleUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_TitleUIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_TitleUIActionsCallbackInterfaces.Add(instance);
+            @DeleteData.started += instance.OnDeleteData;
+            @DeleteData.performed += instance.OnDeleteData;
+            @DeleteData.canceled += instance.OnDeleteData;
+            @Mouse.started += instance.OnMouse;
+            @Mouse.performed += instance.OnMouse;
+            @Mouse.canceled += instance.OnMouse;
+        }
+
+        private void UnregisterCallbacks(ITitleUIActions instance)
+        {
+            @DeleteData.started -= instance.OnDeleteData;
+            @DeleteData.performed -= instance.OnDeleteData;
+            @DeleteData.canceled -= instance.OnDeleteData;
+            @Mouse.started -= instance.OnMouse;
+            @Mouse.performed -= instance.OnMouse;
+            @Mouse.canceled -= instance.OnMouse;
+        }
+
+        public void RemoveCallbacks(ITitleUIActions instance)
+        {
+            if (m_Wrapper.m_TitleUIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(ITitleUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_TitleUIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_TitleUIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public TitleUIActions @TitleUI => new TitleUIActions(this);
     public interface IMainUIActions
     {
         void OnSetting(InputAction.CallbackContext context);
@@ -339,6 +446,11 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
     public interface IChoiceMapUIActions
     {
         void OnOpenWorldMap(InputAction.CallbackContext context);
+        void OnMouse(InputAction.CallbackContext context);
+    }
+    public interface ITitleUIActions
+    {
+        void OnDeleteData(InputAction.CallbackContext context);
         void OnMouse(InputAction.CallbackContext context);
     }
 }

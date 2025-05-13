@@ -78,13 +78,15 @@ public static class UIWhiteBox
         return MainUIWB.UseItemNumber() + 1;
     }
 
+#if UNITY_EDITOR
     /// <summary>
-    /// 아이템 리스트 재설정
+    /// 아이템 리스트 재설정(테스트용)
     /// </summary>
     public static void SetItemList()
     {
         MainUIWB.SetItemList();
     }
+#endif
 
     /// <summary>
     /// 아이템 획득
@@ -110,6 +112,23 @@ public static class UIWhiteBox
     public static void SetActiveCrosshair(bool isActive)
     {
         MainUIWB.Crosshair_SetActive(isActive);
+    }
+
+    /// <summary>
+    /// 룬 표시 이미지 색깔 초기화
+    /// </summary>
+    public static void ResetColor_RuneShowImage()
+    {
+        MainUIWB.ResetColorRuneShowImage();
+    }
+
+    /// <summary>
+    /// 룬 표시 이미지 색깔 변경
+    /// </summary>
+    /// <param name="index">변경할 룬 표시 이미지 번호(인벤토리에 들어온 룬 번호)</param>
+    public static void SetColor_RuneShowImage(int index)
+    {
+        MainUIWB.SetColorRuneShowImage(index);
     }
 
     #endregion

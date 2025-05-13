@@ -47,8 +47,6 @@ public class RuneInventoryUI : MonoBehaviour
     {
         UIWhiteBox.SetRuneInventoryWB(this);
 
-        InitializeSlot();
-
         runeIDs = new List<int>();
     }
 
@@ -56,6 +54,11 @@ public class RuneInventoryUI : MonoBehaviour
     {
         //팝업창 비활성화
         RePlacementPopup.SetActive(false);
+    }
+
+    private void Start()
+    {
+        InitializeSlot();
     }
 
     /// <summary>
@@ -68,6 +71,9 @@ public class RuneInventoryUI : MonoBehaviour
         {
             runeButton[i].SetActive(false);
         }
+
+        //룬 표시 이미지 색깔 초기화
+        UIWhiteBox.ResetColor_RuneShowImage();
     }
 
     /// <summary>
@@ -123,6 +129,9 @@ public class RuneInventoryUI : MonoBehaviour
         //인벤토리의 룬 아이디 추가
         runeIDs.Add(rune.id);
         Debug.LogWarning($"인벤토리 룬아이디: " + string.Join(", ", runeIDs));
+
+        //룬 표시 이미지 색깔 변경
+        UIWhiteBox.SetColor_RuneShowImage(slotIndex);
     }
 
     private void RuneUIApplication(int slotIndex, ItemData rune)

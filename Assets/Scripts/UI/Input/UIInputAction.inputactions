@@ -116,6 +116,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "TitleUI",
+            "id": "e47442e9-1251-4cf5-a1eb-3e86c1c4c16d",
+            "actions": [
+                {
+                    "name": "DeleteData",
+                    "type": "Button",
+                    "id": "fc3c3f73-bb3b-4ac8-83be-0e8cff2347ee",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Mouse",
+                    "type": "Button",
+                    "id": "07efb6a0-1dd6-4737-91e9-bdbef973e868",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "185261ba-09fd-48ea-8cb6-ee725329269e",
+                    "path": "<Keyboard>/delete",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DeleteData",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "782ea44a-6c6b-4b61-9f8d-c09f22be9ff0",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Mouse",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []
