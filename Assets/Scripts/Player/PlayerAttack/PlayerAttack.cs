@@ -37,6 +37,9 @@ public class PlayerAttack : MonoBehaviour
     private IItemUseable useable;
     private IAttackable attackable;
 
+    [SerializeField] private HammerThrowController hammerController;
+    private GameObject activeHammer;
+
     [ContextMenu("약공격으로 설정")]
     public void SetLightAttackType()
     {
@@ -70,6 +73,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAttack1(InputAction.CallbackContext context)
     {
+       
         if (!context.performed) return;
 
         if (!canAttack) return;
@@ -79,6 +83,10 @@ public class PlayerAttack : MonoBehaviour
             attackable.AttackByType(weaponType);
             return;
         }
+        //activeHammer = hammerController.ActiveHammer;
+        //var stuckHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
+
+        //if (stuckHandler.IsStuckToWall) return;
 
         comboStep++;
         animator.applyRootMotion = true;
