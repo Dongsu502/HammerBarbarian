@@ -49,6 +49,8 @@ public class Golem : MonoBehaviour, IMonster
         golemCollider = GetComponent<CapsuleCollider>();
     }
 
+    #region Animation Eventkey
+
     public void ReSetIsHitting()
     {
         animator.SetBool("IsHitting", false);
@@ -63,6 +65,8 @@ public class Golem : MonoBehaviour, IMonster
         animator.SetBool("IsAttack", false);
         Debug.Log("공격 중단");
     }
+
+    #endregion
 
     /// <summary>
     /// Idle, Move 애니메이션
@@ -135,7 +139,8 @@ public class Golem : MonoBehaviour, IMonster
             //피격 애니메이션 플레이
             animator.SetTrigger("TakeDamage");
             //약공격 히트 불값
-            animator.SetBool("IsHitting", true);
+            //약공격을 맞았을 경우 바로 Move나 Attack으로 넘어갈 수 있고 강공격이면 딜레이가 필요하기 때문에 Entry를 통해 넘어감
+            animator.SetBool("IsHitting", true); 
 
             yield return new WaitForSeconds(hitDelayTime);
         }
@@ -175,7 +180,7 @@ public class Golem : MonoBehaviour, IMonster
         agent.enabled = false;
 
         //사망 애니메이션 플레이
-        animator.SetBool("IsDie", true);
+        animator.SetTrigger("IsDie");
 
         yield return new WaitForSeconds(dieDelayTime);
 
