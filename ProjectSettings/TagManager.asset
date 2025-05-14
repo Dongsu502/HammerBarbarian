@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - InvisibleWall
   - EnemyHitBox
+  - InteractionWall
   layers:
   - Default
   - TransparentFX

@@ -26,7 +26,7 @@ public class RopeVisualController : MonoBehaviour
             return;
         }
 
-        Transform hammer = hammerThrow.ActiveHammer.transform;
+        Transform hammer = hammerThrow.ActiveHammer.transform.GetChild(2);
 
         Vector3[] points = new Vector3[]
         {
