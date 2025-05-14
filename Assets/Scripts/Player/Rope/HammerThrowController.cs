@@ -125,14 +125,13 @@ public class HammerThrowController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)) Recall();
-
         if (activeHammer != null && Input.GetMouseButtonDown(0))
         {
             var stuckHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
             if (stuckHandler != null && stuckHandler.IsStuckToWall)
             {
                 Debug.Log("È¸¼ö!!");
+                stuckHandler.UnstickFromWall();
                 Recall();
             }
         }
