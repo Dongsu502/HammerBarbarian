@@ -109,9 +109,9 @@ public class PlayerMove : MonoBehaviour
         bool isInputActive = inputVector.sqrMagnitude >= 0.1f;
         bool isIdle = !isInputActive;
 
-        float targetSpeed = isIdle ? 0f : (isRunning ? 1f : 0.5f);
+        float targetSpeed = isIdle ? 0f : (isRunning ? 1f : 0.8f);
 
-        currentAnimSpeed = Mathf.Lerp(currentAnimSpeed, targetSpeed, Time.fixedDeltaTime * 20f);
+        currentAnimSpeed = Mathf.Lerp(currentAnimSpeed, targetSpeed, Time.fixedDeltaTime*5f);
         animator.SetFloat("MoveSpeed", currentAnimSpeed);
     }
 

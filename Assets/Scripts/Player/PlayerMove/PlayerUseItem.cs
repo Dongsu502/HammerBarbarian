@@ -10,6 +10,7 @@ public class PlayerUseItem : MonoBehaviour, IItemUseable, IAttackable
     [Header("References")]
     [SerializeField] private AimCameraSwitcher aimCameraSwitcher;
     [SerializeField] private HammerThrowController hammerThrowController;
+    
 
     public void UseItemByType(WeaponType weaponType)
     {

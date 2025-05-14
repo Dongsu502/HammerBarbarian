@@ -6,6 +6,7 @@ public class HammerThrowController : MonoBehaviour
     public Transform throwOrigin;
     public GameObject hammerPrefab;
     public Camera mainCamera;
+    [SerializeField] private Transform playerTransform;
 
     [Header("Throw Settings")]
     public float throwSpeed = 30f;
@@ -31,7 +32,15 @@ public class HammerThrowController : MonoBehaviour
     {
         if (activeHammer != null || isThrowing || isRecalling) return;
 
-        activeHammer = Instantiate(hammerPrefab, throwOrigin.position, hammerPrefab.transform.rotation);
+        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, verticalOffset, 0));
+        Vector3 dir = ray.direction.normalized;
+
+        Quaternion lookRotation = Quaternion.LookRotation(dir, Vector3.up);
+        Vector3 euler = lookRotation.eulerAngles;
+        euler.x = -90f; // X축 회전 고정
+        Quaternion finalRotation = Quaternion.Euler(euler);
+
+        activeHammer = Instantiate(hammerPrefab, throwOrigin.position, finalRotation);
         hammerRb = activeHammer.GetComponent<Rigidbody>();
 
         var collisionHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
@@ -44,14 +53,13 @@ public class HammerThrowController : MonoBehaviour
         hammerRb.velocity = Vector3.zero;
         hammerRb.angularVelocity = Vector3.zero;
 
-        Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, verticalOffset, 0));
-        Vector3 dir = ray.direction.normalized;
-
         hammerRb.AddForce(dir * throwSpeed, ForceMode.VelocityChange);
         throwStartPos = activeHammer.transform.position;
 
         isThrowing = true;
     }
+
+
 
     public void Recall()
     {
@@ -118,5 +126,15 @@ public class HammerThrowController : MonoBehaviour
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.R)) Recall();
+
+        if (activeHammer != null && Input.GetMouseButtonDown(0))
+        {
+            var stuckHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
+            if (stuckHandler != null && stuckHandler.IsStuckToWall)
+            {
+                Debug.Log("회수!!");
+                Recall();
+            }
+        }
     }
 }
