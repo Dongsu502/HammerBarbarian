@@ -29,6 +29,7 @@ public class Golem : MonoBehaviour, IMonster
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider golemCollider;
+    private BoxCollider attackCollider;
 
     private float moveAmount;
 
@@ -47,13 +48,47 @@ public class Golem : MonoBehaviour, IMonster
         rb = GetComponent<Rigidbody>();
 
         golemCollider = GetComponent<CapsuleCollider>();
+        attackCollider = GetComponentInChildren<MonsterAttackDetection>().AttackCollider;
     }
 
     #region Animation Eventkey
 
+    /// <summary>
+    /// Attack 애니메이션 이벤트 키 ( 공격 콜라이더 On Off ) 
+    /// </summary>
+    public void EnableAttackCol()
+    {
+        attackCollider.enabled = true;
+    }
+    public void DisableAttackCol()
+    {
+        attackCollider.enabled = false;
+    }
+
+    /// <summary>
+    /// Hit 애니메이션 이벤트 키
+    /// </summary>
     public void ReSetIsHitting()
     {
         animator.SetBool("IsHitting", false);
+
+        rb.isKinematic = false;
+
+        IsBeingHit = false;
+    }
+
+    /// <summary>
+    /// Hit 애니메이션 이벤트 키
+    /// </summary>
+    public void ResetCollider()
+    {
+        hitBoxClass.hitCollider.enabled = true;
+        agent.enabled = true;
+    }
+
+    public void OnisKinematic()
+    {
+        rb.isKinematic = true;
     }
 
     /// <summary>
@@ -61,9 +96,33 @@ public class Golem : MonoBehaviour, IMonster
     /// </summary>
     public void StopAttack()
     {
+        DisableAttackCol();
         IsAttacking = false;
         animator.SetBool("IsAttack", false);
         Debug.Log("공격 중단");
+    }
+
+    /// <summary>
+    /// Die 애니메이션 키 이벤트
+    /// </summary>
+    public void DestroyDelay()
+    {
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Die 애니메이션 키 이벤트
+    /// </summary>
+    public void RBDestory()
+    {
+        //중력 제거
+        rb.isKinematic = true;
+
+        //내비 제거
+        agent.enabled = false;
+
+        //골렘 콜라이더 제거
+        golemCollider.enabled = false;
     }
 
     #endregion
@@ -124,10 +183,10 @@ public class Golem : MonoBehaviour, IMonster
 
         healthUIClass.TakeDamageUI(damage);
 
-        StartCoroutine(HitDelay());
+        HitAnimation();
     }
 
-    private IEnumerator HitDelay()
+    private void HitAnimation()
     {
         hitBoxClass.hitCollider.enabled = false;
         agent.enabled = false;
@@ -139,10 +198,8 @@ public class Golem : MonoBehaviour, IMonster
             //피격 애니메이션 플레이
             animator.SetTrigger("TakeDamage");
             //약공격 히트 불값
-            //약공격을 맞았을 경우 바로 Move나 Attack으로 넘어갈 수 있고 강공격이면 딜레이가 필요하기 때문에 Entry를 통해 넘어감
+            //약공격, 강공격을 애니메이션 키로 SetBool false하여 조절
             animator.SetBool("IsHitting", true); 
-
-            yield return new WaitForSeconds(hitDelayTime);
         }
         else
         {
@@ -150,41 +207,19 @@ public class Golem : MonoBehaviour, IMonster
             animator.SetFloat("HitType", 1);
             //피격 애니메이션 플레이
             animator.SetTrigger("TakeDamage");
+            animator.SetBool("IsHitting", true);
 
             hitBoxClass.IsKnockback = false;
-
-            yield return new WaitForSeconds(knockbackDelayTime);
         }
-
-        hitBoxClass.hitCollider.enabled = true;
-        agent.enabled = true;
-
-        rb.isKinematic = true;
-
-        yield return new WaitForSeconds(0.1f);
-        rb.isKinematic = false;
-
-        IsBeingHit = false;
     }
 
-    private IEnumerator DieDelay()
+    private void DieDelay()
     {
-        //콜라이더 제거
+        //Hit 콜라이더 제거
         hitBoxClass.hitCollider.enabled = false;
-        golemCollider.enabled = false;
-
-        //중력 제거
-        rb.useGravity = false;
-
-        //내비 제거
-        agent.enabled = false;
 
         //사망 애니메이션 플레이
         animator.SetTrigger("IsDie");
-
-        yield return new WaitForSeconds(dieDelayTime);
-
-        Destroy(gameObject);
     }
 
     #region AI
@@ -192,7 +227,7 @@ public class Golem : MonoBehaviour, IMonster
     public void Death()
     {
         Debug.Log("골렘 사망");
-        StartCoroutine(DieDelay());
+        DieDelay();
     }
     public void Hit()
     {

@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class MonsterAttackDetection : MonoBehaviour
 {
+    public BoxCollider AttackCollider;
+
+    private void OnEnable()
+    {
+        AttackCollider.enabled = false;
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.transform.CompareTag("Player"))

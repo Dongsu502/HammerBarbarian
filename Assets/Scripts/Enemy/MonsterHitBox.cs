@@ -29,6 +29,13 @@ public class MonsterHitBox : MonoBehaviour
     {
         if (other.transform.CompareTag("Weapon")) 
         {
+            //반짝이는 효과
+            var flash = GetComponent<HitFlashEffect>();
+            if (flash != null)
+            {
+                flash.Flash();
+            }
+
             AttackType attackType = PlayerHitWhiteBox.WhiteBox.attacktype;
             //강공격인지 확인 -> 넉백
             if(attackType == AttackType.Heavy)

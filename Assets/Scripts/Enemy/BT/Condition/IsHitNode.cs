@@ -9,7 +9,7 @@ public class IsHitNode : BTNode
 
     public override NodeState Evaluate()
     {
-        if(monster.IsHit)
+        if(monster.IsHit && monster.HP > 0)
         {
             return NodeState.SUCCESS;
         }
