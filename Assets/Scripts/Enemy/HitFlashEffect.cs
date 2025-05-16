@@ -5,17 +5,19 @@ using UnityEngine;
 public class HitFlashEffect : MonoBehaviour
 {
     [SerializeField] private Renderer targetRenderer;
+    [Tooltip("이펙트 머티리얼 1")]
+    [SerializeField] private Material flashMaterial;
+    [Tooltip("이펙트 머티리얼 2")]
+    [SerializeField] private Material flashMateria2;
+    [Tooltip("이펙트 시간")]
     [SerializeField] private float flashDuration = 0.1f;
 
-    private MaterialPropertyBlock propertyBlock;
-    private Color originalColor;
+    private Material[] originalMaterials;
     private bool isFlashing = false;
 
     private void Awake()
     {
-        propertyBlock = new MaterialPropertyBlock();
-        targetRenderer.GetPropertyBlock(propertyBlock);
-        originalColor = targetRenderer.material.GetColor("_Color");
+        originalMaterials = targetRenderer.materials;
     }
 
     public void Flash()
@@ -28,14 +30,20 @@ public class HitFlashEffect : MonoBehaviour
     {
         isFlashing = true;
 
-        propertyBlock.SetColor("_Color", Color.red);
-        targetRenderer.SetPropertyBlock(propertyBlock);
+        Debug.LogWarning("히트 플래시 이펙트");
+
+        // 흰색 머티리얼로 변경
+        targetRenderer.material = flashMaterial;
 
         yield return new WaitForSeconds(flashDuration);
 
-        propertyBlock.SetColor("_Color", originalColor);
-        targetRenderer.SetPropertyBlock(propertyBlock);
+        //은색 머티리얼로 변경
+        targetRenderer.material = flashMateria2;
 
+        yield return new WaitForSeconds(flashDuration);
+
+        // 원래대로 복구
+        targetRenderer.materials = originalMaterials;
         isFlashing = false;
     }
 }

@@ -426,7 +426,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetRenderer: {fileID: 6317635010503244621}
-  flashDuration: 0.2
+  flashMaterial: {fileID: 2100000, guid: 5158db7c924cf28479583d4672f561e8, type: 2}
+  flashMateria2: {fileID: 2100000, guid: 2323404605946264899c643ee0e64fc4, type: 2}
+  flashDuration: 0.05
 --- !u!1 &7973055240663160752
 GameObject:
   m_ObjectHideFlags: 0
