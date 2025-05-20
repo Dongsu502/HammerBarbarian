@@ -8,15 +8,13 @@ using UnityEngine.Windows;
 public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 {
     [Header("Panel")]
-    [SerializeField]
-    private GameObject ResetDataPopup;
+    [SerializeField] private GameObject ResetDataPopup;
 
     private UIInputAction uiInput;
 
-    private bool[] isClickButton = new bool[3];
+    [SerializeField] private bool[] isClickButton = new bool[3];
 
-    [SerializeField]
-    private int selectIndex = -1;
+    [SerializeField] private int selectIndex = -1;
 
     #region UnityFunc
 
@@ -28,6 +26,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
     private void OnEnable()
     {
         SetActive_ResetDataPopup(false);
+        DeselectAll();
+        selectIndex = -1;
 
         uiInput.TitleUI.Enable();
 
@@ -57,8 +57,7 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
     private void RightMouseKeyAction(InputAction.CallbackContext context)
     {
-        Debug.Log("메뉴로 돌아가기");
-        selectIndex = -1;
+        UIWhiteBox.GobackMenu();
     }
 
     #endregion
@@ -67,6 +66,7 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        DeselectAll();
         selectIndex = -1;
     }
 
@@ -78,10 +78,10 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
     }
 
     /// <summary>
-    /// 모든 버튼 isClickButton true로 초기화
+    /// 모든 버튼 isClickButton false로 초기화
     /// </summary>
     private void DeselectAll()
-    {
+    {        
         for (int i = 0; i < isClickButton.Length; i++)
         {
             isClickButton[i] = false;
@@ -126,23 +126,27 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
                 return;
 
             case 0:
-                DataManager.Instance.ResetData(DataManager.Instance.data1);
+                DataManager.Instance.DeleteDataFile(selectIndex);
                 break;
 
             case 1:
-                DataManager.Instance.ResetData(DataManager.Instance.data2);
+                DataManager.Instance.DeleteDataFile(selectIndex);
                 break;
 
             case 2:
-                DataManager.Instance.ResetData(DataManager.Instance.data3);
+                DataManager.Instance.DeleteDataFile(selectIndex);
                 break;
         }
+
         SetActive_ResetDataPopup(false);
+        DeselectAll();
+        selectIndex = -1;
     }
 
     public void Click_NoButton()
     {
         SetActive_ResetDataPopup(false);
+        DeselectAll();
         selectIndex = -1;
     }
 

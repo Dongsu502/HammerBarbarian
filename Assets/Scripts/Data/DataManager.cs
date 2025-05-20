@@ -40,28 +40,53 @@ public class DataManager : MonoBehaviour
     /// 데이터 초기화
     /// </summary>
     /// <param name="currentData">초기화 할 데이터</param>
-    public void ResetData(BaseData currentData)
+    //public void ResetData(BaseData currentData)
+    //{
+    //    //월드 데이터 초기화
+    //    for(int i = 0; i < currentData.worlds.Length; i++)
+    //    {
+    //        if (currentData.worlds[i] == null)
+    //        {
+    //            currentData.worlds[i] = new WorldData();
+    //        }
+    //        else
+    //        {
+    //            Array.Clear(currentData.worlds[i].dungeons, 0, currentData.worlds[i].dungeons.Length);
+    //        }
+    //    }
+
+    //    //아이템 리스트 초기화
+    //    currentData.currentItemList = 0;
+
+    //    //룬 리스트 초기화
+    //    currentData.ownedRunes.Clear();
+
+    //    Debug.Log($"{currentData}데이터 리셋 완료");
+    //}
+    public void DeleteDataFile(int index)
     {
-        //월드 데이터 초기화
-        for(int i = 0; i < currentData.worlds.Length; i++)
+        string fileName = "";
+
+        switch (index)
         {
-            if (currentData.worlds[i] == null)
-            {
-                currentData.worlds[i] = new WorldData();
-            }
-            else
-            {
-                Array.Clear(currentData.worlds[i].dungeons, 0, currentData.worlds[i].dungeons.Length);
-            }
+            case 0: fileName = GameDataFileName1; break;
+            case 1: fileName = GameDataFileName2; break;
+            case 2: fileName = GameDataFileName3; break;
+            default:
+                Debug.LogError("잘못된 슬롯 인덱스");
+                return;
         }
 
-        //아이템 리스트 초기화
-        currentData.currentItemList = 0;
-
-        //룬 리스트 초기화
-        currentData.ownedRunes.Clear();
-
-        Debug.Log($"{currentData}데이터 리셋 완료");
+        string filePath = Path.Combine(Application.persistentDataPath, fileName);
+        if (File.Exists(filePath))
+        {
+            File.Delete(filePath);
+            Debug.Log($"{fileName} 삭제 완료");
+        }
+        else
+        {
+            Debug.LogWarning($"{fileName} 파일이 존재하지 않아 삭제할 수 없음");
+        }
     }
 
     /// <summary>
@@ -153,5 +178,45 @@ public class DataManager : MonoBehaviour
                 currentDataFileName = GameDataFileName3;
                 break;
         }
+    }
+
+    /// <summary>
+    /// 세 개의 데이터 파일 중 하나라도 존재하지 않으면 true 반환
+    /// 모두 존재하면 false 반환
+    /// </summary>
+    public bool NeedToCreateNewDataFile()
+    {
+        string path1 = Path.Combine(Application.persistentDataPath, GameDataFileName1);
+        string path2 = Path.Combine(Application.persistentDataPath, GameDataFileName2);
+        string path3 = Path.Combine(Application.persistentDataPath, GameDataFileName3);
+
+        // 하나라도 없으면 true (새로운 데이터 파일을 만들 수 있음)
+        if (!File.Exists(path1) || !File.Exists(path2) || !File.Exists(path3))
+        {
+            return true;
+        }
+
+        // 모두 존재하면 false (더 이상 만들 수 없음)
+        return false;
+    }
+
+    /// <summary>
+    /// 비어있는 데이터 슬롯(index)을 반환합니다.
+    /// 모두 차 있으면 -1을 반환합니다.
+    /// </summary>
+    public int GetFirstEmptyDataSlotIndex()
+    {
+        string[] fileNames = { GameDataFileName1, GameDataFileName2, GameDataFileName3 };
+
+        for (int i = 0; i < fileNames.Length; i++)
+        {
+            string path = Path.Combine(Application.persistentDataPath, fileNames[i]);
+            if (!File.Exists(path))
+            {
+                return i; // 비어 있는 슬롯 번호 반환 (0~2)
+            }
+        }
+
+        return -1; // 모든 슬롯이 존재함
     }
 }

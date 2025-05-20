@@ -34,6 +34,15 @@ public static class UIWhiteBox
         RuneChoiceWB = runeChoiceWB;
     }
 
+    #region TitleUI
+
+    public static void GobackMenu()
+    {
+        TitleUIWB.GobackMenu();
+    }
+
+    #endregion
+
     #region MainUI
 
     public static void SetActivePausePanel(bool isActive)
