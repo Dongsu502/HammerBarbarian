@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 using UnityEngine.Windows;
 
 public class TitleDataUI : MonoBehaviour, IPointerClickHandler
@@ -164,6 +165,7 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
         LoadData(selectIndex);
         isClickButton[selectIndex] = false;
+        SceneManager.LoadScene("ChoiceDungeon");
     }
 
     public void Click_Data2Button()
@@ -180,6 +182,7 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
         LoadData(selectIndex);
         isClickButton[selectIndex] = false;
+        SceneManager.LoadScene("ChoiceDungeon");
     }
 
     public void Click_Data3Button()
@@ -196,6 +199,7 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
         LoadData(selectIndex);
         isClickButton[selectIndex] = false;
+        SceneManager.LoadScene("ChoiceDungeon");
     }
 
     #endregion

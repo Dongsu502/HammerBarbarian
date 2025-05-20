@@ -3,15 +3,36 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+public enum MainUIState
+{
+    NONE,
+    RUNE_CHOICE,
+    RUNE_GET,
+    PUASE,
+    PUASE_SETTING
+}
+public enum ChoiceMapUIState
+{
+    DUNGEON,
+    WORLD
+}
+
 public static class UIWhiteBox
 {
+    public static MainUIState MainUICurrentState { get; set; }
+    public static ChoiceMapUIState ChoiceMapUICurrentState { get; set; }
+
     public static TitleUIManager TitleUIWB { get; private set; }
     public static MainUIManager MainUIWB { get; private set; }
+
+    public static PauseUIManager PauseUIWB { get; private set; }
 
     public static MinimapFog MinimapFogWB { get; private set; }
 
     public static RuneInventoryUI RuneInventoryWB { get; private set; }
     public static RuneChoiceUI RuneChoiceWB { get; private set; }
+
+    #region SetWhiteBox
 
     public static void SetTitleUIWB(TitleUIManager titleUIM)
     {
@@ -20,6 +41,10 @@ public static class UIWhiteBox
     public static void SetMainUIWB(MainUIManager mainUIWB)
     {
         MainUIWB = mainUIWB;
+    }
+    public static void SetPauseUIWB(PauseUIManager pauseUIWB)
+    {
+        PauseUIWB = pauseUIWB;
     }
     public static void SetMinimapFogWB(MinimapFog minimapFogWB)
     {
@@ -33,6 +58,8 @@ public static class UIWhiteBox
     {
         RuneChoiceWB = runeChoiceWB;
     }
+
+    #endregion
 
     #region TitleUI
 
@@ -142,6 +169,19 @@ public static class UIWhiteBox
 
     #endregion
 
+    #region PauseUI
+
+    /// <summary>
+    /// 설정창 활성화 / 비활성화
+    /// </summary>
+    /// <param name="isActive">활성화 여부</param>
+    public static void SetActive_SettingPanel(bool isActive)
+    {
+        PauseUIWB.SetActive_SettingPanel(isActive);
+    }
+
+    #endregion
+
     #region MinimapFog
 
     public static void DisableMinimapFog(Collider triggerFog)
@@ -171,6 +211,10 @@ public static class UIWhiteBox
         RuneInventoryWB.AddRuneToInventory(rune);
     }
 
+    /// <summary>
+    /// 현재 소유중인 룬 목록 가져오기
+    /// </summary>
+    /// <returns>인벤토리에 있는 룬 목록</returns>
     public static List<int> GetRuneIDs()
     {
         return RuneInventoryWB.runeIDs;

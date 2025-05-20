@@ -27,6 +27,11 @@ public class TitleUIManager : MonoBehaviour
         TitleUI_Initialize();
     }
 
+    private void OnEnable()
+    {
+        StartCoroutine(StartSequence());
+    }
+
     #endregion
 
     private void TitleUI_Initialize()
@@ -54,6 +59,13 @@ public class TitleUIManager : MonoBehaviour
         PlayButton?.SetActive(false);
         StorageDataPanel?.SetActive(false);
         SettingPanel?.SetActive(false);
+    }
+
+    private IEnumerator StartSequence()
+    {
+        yield return new WaitForSeconds(3f);
+        //플레이 버튼 활성화
+        OnPlayButton();
     }
 
     #region ButtonEvent
@@ -104,8 +116,7 @@ public class TitleUIManager : MonoBehaviour
 
             Debug.Log($"새로운 게임이 슬롯 {emptySlotIndex + 1}번에 생성되었습니다.");
 
-            // 예: 게임 씬으로 전환
-            // SceneManager.LoadScene("MainScene");
+            SceneManager.LoadScene("ChoiceDungeon");
         }
     }
 
@@ -132,6 +143,7 @@ public class TitleUIManager : MonoBehaviour
     public void Click_QuitButton()
     {
         Debug.Log("게임 종료");
+        Application.Quit();
     }
 
     #endregion

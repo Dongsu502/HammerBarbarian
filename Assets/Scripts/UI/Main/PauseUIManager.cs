@@ -12,6 +12,15 @@ public class PauseUIManager : MonoBehaviour
     [Tooltip("옵션 패널")]
     public GameObject SettingPanel;
 
+    [Space(2)]
+    [Tooltip("옵션창 배경이미지")]
+    [SerializeField] private Image SettingBackgroundImage;
+
+    private void Awake()
+    {
+        UIWhiteBox.SetPauseUIWB(this);
+    }
+
     private void Start()
     {
         mainUIManager = GetComponentInParent<MainUIManager>();
@@ -19,38 +28,31 @@ public class PauseUIManager : MonoBehaviour
 
     private void OnEnable()
     {
-        SettingPanel.SetActive(false);
+        SetActive_SettingPanel(false);
     }
+
+    /// <summary>
+    /// 설정창 활성화 / 비활성화
+    /// </summary>
+    /// <param name="isActive">활성화 여부</param>
+    public void SetActive_SettingPanel(bool isActive)
+    {
+        SettingPanel.SetActive(isActive);
+        SettingBackgroundImage.gameObject.SetActive(!isActive);
+    }
+
+    #region ButtonEvent
 
     public void Click_GobackButton()
     {
         mainUIManager.PausePanel_SetActive(false);
-    }
-
-    public void Click_Save()
-    {
-        //switch(DataManager.Instance.currentDataFileName)
-        //{
-        //    case "GameData1.json":
-        //        DataManager.Instance.SaveGameData(DataManager.Instance.data1, DataManager.Instance.GameDataFileName1);
-        //        break;
-        //    case "GameData2.json":
-        //        DataManager.Instance.SaveGameData(DataManager.Instance.data2, DataManager.Instance.GameDataFileName2);
-        //        break;
-        //    case "GameData3.json":
-        //        DataManager.Instance.SaveGameData(DataManager.Instance.data3, DataManager.Instance.GameDataFileName3);
-        //        break;
-        //}
+        UIWhiteBox.MainUICurrentState = MainUIState.NONE;
     }
 
     public void Click_Setting()
     {
-        SettingPanel.SetActive(true);
-    }
-
-    public void Click_KeyboardSettingButton()
-    {
-        Debug.Log("키보드세팅");
+        SetActive_SettingPanel(true);
+        UIWhiteBox.MainUICurrentState = MainUIState.PUASE_SETTING;
     }
 
     public void Click_GoTitleButton()
@@ -61,5 +63,8 @@ public class PauseUIManager : MonoBehaviour
     public void Click_QuitButton()
     {
         Debug.Log("게임 종료");
+        Application.Quit();
     }
+
+    #endregion
 }

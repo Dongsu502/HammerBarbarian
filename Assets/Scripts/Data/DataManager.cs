@@ -36,33 +36,26 @@ public class DataManager : MonoBehaviour
     public Data2 data2 = new();
     public Data3 data3 = new();
 
-    /// <summary>
-    /// 데이터 초기화
-    /// </summary>
-    /// <param name="currentData">초기화 할 데이터</param>
-    //public void ResetData(BaseData currentData)
-    //{
-    //    //월드 데이터 초기화
-    //    for(int i = 0; i < currentData.worlds.Length; i++)
-    //    {
-    //        if (currentData.worlds[i] == null)
-    //        {
-    //            currentData.worlds[i] = new WorldData();
-    //        }
-    //        else
-    //        {
-    //            Array.Clear(currentData.worlds[i].dungeons, 0, currentData.worlds[i].dungeons.Length);
-    //        }
-    //    }
+#if UNITY_EDITOR
 
-    //    //아이템 리스트 초기화
-    //    currentData.currentItemList = 0;
+    [ContextMenu("데이터 초기화1")]
+    public void DeleteData1()
+    {
+        DeleteDataFile(0);
+    }
+    [ContextMenu("데이터 초기화2")]
+    public void DeleteData2()
+    {
+        DeleteDataFile(1);
+    }
+    [ContextMenu("데이터 초기화3")]
+    public void DeleteData3()
+    {
+        DeleteDataFile(2);
+    }
 
-    //    //룬 리스트 초기화
-    //    currentData.ownedRunes.Clear();
+#endif
 
-    //    Debug.Log($"{currentData}데이터 리셋 완료");
-    //}
     public void DeleteDataFile(int index)
     {
         string fileName = "";

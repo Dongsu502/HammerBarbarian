@@ -118,15 +118,20 @@ public class MainUIManager : MonoBehaviour
     {
         UseGauge(30f);
     }
+    [ContextMenu("∑È º±≈√√¢¿∏∑Œ º≥¡§")]
+    private void SetRuneChoice()
+    {
+        UIWhiteBox.MainUICurrentState = MainUIState.RUNE_CHOICE;
+    }
+    [ContextMenu("∑È »πµÊ√¢¿∏∑Œ º≥¡§")]
+    private void SetRuneGet()
+    {
+        UIWhiteBox.MainUICurrentState = MainUIState.RUNE_GET;
+    }
     [ContextMenu("∑È º±≈√√¢ »∞º∫»≠")]
     private void RunePanelEnable()
     {
         RunePanel_SetActive(true);
-    }
-    [ContextMenu("∑È º±≈√√¢ ∫Ò»∞º∫»≠")]
-    private void RunePanelDisable()
-    {
-        RunePanel_SetActive(false);
     }
 
 #endif
@@ -152,6 +157,8 @@ public class MainUIManager : MonoBehaviour
         uiInput.MainUI.Rune.started += RuneInventoryAction;
 
         #endregion
+
+        UIWhiteBox.MainUICurrentState = MainUIState.NONE;
 
         SetItemList();
     }
@@ -188,7 +195,25 @@ public class MainUIManager : MonoBehaviour
 
     private void EscapeACtion(InputAction.CallbackContext context)
     {
-        PausePanel_SetActive(true);
+        if(context.started)
+        {
+            switch(UIWhiteBox.MainUICurrentState)
+            {
+                case MainUIState.NONE:
+                    PausePanel_SetActive(true);
+                    UIWhiteBox.MainUICurrentState = MainUIState.PUASE;
+                    break;
+                case MainUIState.PUASE:
+                    PausePanel_SetActive(false);
+                    UIWhiteBox.MainUICurrentState = MainUIState.NONE;
+                    break;
+                case MainUIState.PUASE_SETTING:
+                    UIWhiteBox.SetActive_SettingPanel(false);
+                    UIWhiteBox.MainUICurrentState = MainUIState.PUASE;
+                    break;
+            }
+        }
+        
     }
 
     private void ChoiceItemAction(InputAction.CallbackContext context)

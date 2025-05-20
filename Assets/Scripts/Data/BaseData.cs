@@ -12,7 +12,7 @@ public class WorldData
 public abstract class BaseData
 {
     //월드 클리어 현황
-    public WorldData[] worlds = new WorldData[7];
+    public WorldData[] worlds = new WorldData[4];
 
     //현재 가지고 있는 아이템 리스트
     public int currentItemList;
