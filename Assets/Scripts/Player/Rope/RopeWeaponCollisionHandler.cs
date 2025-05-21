@@ -25,9 +25,9 @@ public class RopeWeaponCollisionHandler : MonoBehaviour
         if (collision.collider.CompareTag("InteractionWall"))
         {
             // 물리 고정 (움직이지 않도록)
-            hammerRb.isKinematic = true;
+           
             hammerRb.velocity = Vector3.zero;
-            hammerRb.angularVelocity = Vector3.zero;
+            hammerRb.isKinematic = true;
 
             isStuckToWall = true;
             return;

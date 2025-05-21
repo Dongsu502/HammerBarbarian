@@ -48,9 +48,14 @@ MonoBehaviour:
   hammerPrefab: {fileID: 4816191021747535203, guid: 583e9145dd2598a41a681fe4c8498d4e, type: 3}
   mainCamera: {fileID: 0}
   playerTransform: {fileID: 0}
+  playerRb: {fileID: 0}
   throwSpeed: 30
   maxThrowDistance: 20
   verticalOffset: 0.65
   recallForce: 80
   maxRecallSpeed: 25
   stopDistance: 2.5
+  ropePullStrength: 150
+  ropeDamper: 5
+  ropeMaxDistance: 1
+  ropeStopDistance: 1
