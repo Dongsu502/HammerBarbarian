@@ -19,11 +19,11 @@ public class MonsterAttackDetection : MonoBehaviour
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Vector3 hitNormal = (other.transform.position - transform.position).normalized;
 
-            //Player_HitReceiver receiver = other.GetComponent<Player_HitReceiver>()
-            //if (receiver != null)
-            //{
-            //    receiver.OnHit(hitPoint, hitNormal);
-            //}
+            Player_HitReceiver receiver = other.GetComponent<Player_HitReceiver>();
+            if (receiver != null)
+            {
+                receiver.OnHit(hitPoint, hitNormal);
+            }
         }
     }
 }
