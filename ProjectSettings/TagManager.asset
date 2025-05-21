@@ -10,6 +10,7 @@ TagManager:
   - InvisibleWall
   - EnemyHitBox
   - InteractionWall
+  - PlayerHitBox
   layers:
   - Default
   - TransparentFX

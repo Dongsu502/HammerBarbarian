@@ -145,4 +145,16 @@ public class PlayerMove : MonoBehaviour
     {
         isDiving = false;
     }
+
+    // 루트 모션 애니메이션이 끝날 때
+    void OnExitRootMotionAnim()
+    {
+        animator.applyRootMotion = false;
+
+        // 현재 위치를 기준으로 Animator 리셋
+        Vector3 currentPos = transform.position;
+        animator.Rebind(); // Animator를 현재 트랜스폼 상태로 리셋
+        transform.position = currentPos;
+    }
+
 }

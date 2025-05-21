@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    //private float playerHP = 100f;
+    private float maxPlayerHp = 200f;
+    public float playerHP = 200f;
     public int playerAttackDamage = 10;
+
+    private void Start()
+    {
+        playerHP = maxPlayerHp;
+    }
 }
