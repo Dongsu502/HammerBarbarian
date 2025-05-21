@@ -83,10 +83,17 @@ public class PlayerAttack : MonoBehaviour
             attackable.AttackByType(weaponType);
             return;
         }
-        //activeHammer = hammerController.ActiveHammer;
-        //var stuckHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
+        activeHammer = hammerController.ActiveHammer;
 
-        //if (stuckHandler.IsStuckToWall) return;
+        if (activeHammer != null)
+        {
+            var stuckHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
+            if (stuckHandler != null && stuckHandler.IsStuckToWall)
+            {
+                Debug.Log("안할게");
+                return; // 붙어있으면 공격하지 않음
+            }
+        }
 
         comboStep++;
         animator.applyRootMotion = true;
