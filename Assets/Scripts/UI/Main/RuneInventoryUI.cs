@@ -54,6 +54,13 @@ public class RuneInventoryUI : MonoBehaviour
     {
         //팝업창 비활성화
         RePlacementPopup.SetActive(false);
+
+        UIWhiteBox.MainUICurrentState = MainUIState.RUNE_INVENTORY;
+    }
+
+    private void OnDisable()
+    {
+        UIWhiteBox.MainUICurrentState = MainUIState.NONE;
     }
 
     private void Start()

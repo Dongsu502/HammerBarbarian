@@ -62,6 +62,11 @@ public class RuneChoiceUI : MonoBehaviour
         GetRandomID(itemNumber);
     }
 
+    private void OnDisable()
+    {
+        UIWhiteBox.MainUICurrentState = MainUIState.NONE;
+    }
+
     /// <summary>
     /// ·é ChoiceUI <-> ·é GetUI º¯È¯
     /// </summary>

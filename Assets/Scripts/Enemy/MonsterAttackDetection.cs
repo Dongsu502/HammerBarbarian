@@ -16,6 +16,14 @@ public class MonsterAttackDetection : MonoBehaviour
         if(other.transform.CompareTag("Player"))
         {
             Debug.Log($"몬스터 {other.gameObject.name}공격!! ");
+            Vector3 hitPoint = other.ClosestPoint(transform.position);
+            Vector3 hitNormal = (other.transform.position - transform.position).normalized;
+
+            //Player_HitReceiver receiver = other.GetComponent<Player_HitReceiver>()
+            //if (receiver != null)
+            //{
+            //    receiver.OnHit(hitPoint, hitNormal);
+            //}
         }
     }
 }

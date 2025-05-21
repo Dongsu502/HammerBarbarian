@@ -9,7 +9,8 @@ public enum MainUIState
     RUNE_CHOICE,
     RUNE_GET,
     PUASE,
-    PUASE_SETTING
+    PUASE_SETTING,
+    RUNE_INVENTORY
 }
 public enum ChoiceMapUIState
 {
