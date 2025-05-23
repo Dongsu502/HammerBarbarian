@@ -65,7 +65,7 @@ public class ChoiceMapUIManager : MonoBehaviour
 
     private void RightMouseDown(InputAction.CallbackContext context)
     {
-        Debug.Log("야영지로 돌아가기");
+        SceneManager.LoadScene("Title");
     }
 
     /// <summary>
