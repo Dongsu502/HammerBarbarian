@@ -54,11 +54,13 @@ public class CameraShakeManager : MonoBehaviour
 
         if (profile.impulseDefinition != null)
         {
+            Debug.Log("Ω¶¿Ã≈∞");
             impulseSource.m_ImpulseDefinition = profile.impulseDefinition;
             impulseSource.GenerateImpulse();
         }
         else
         {
+            Debug.Log("Ω¶¿Ã≈∑!");
             impulseSource.GenerateImpulse(profile.amplitude);
         }
     }

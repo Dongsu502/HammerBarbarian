@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAttackTrigger : MonoBehaviour
 {
+    [SerializeField]private Transform hitOrigin;
+
     [SerializeField] HitStopHandler hitStopHandler;
 
     private void OnTriggerEnter(Collider other)
@@ -13,8 +15,8 @@ public class PlayerAttackTrigger : MonoBehaviour
             //cameraShakeTrigger.Shake();
             hitStopHandler.HitStop(0.1f);
 
-            Vector3 hitPoint = other.ClosestPoint(transform.position);
-            Vector3 hitNormal = (other.transform.position - transform.position).normalized;
+            Vector3 hitPoint = other.ClosestPoint(hitOrigin.position);
+            Vector3 hitNormal = (other.transform.position - hitOrigin.position).normalized;
 
             HitReceiver receiver = other.GetComponent<HitReceiver>();
             if (receiver != null)
