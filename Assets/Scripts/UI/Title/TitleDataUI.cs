@@ -138,10 +138,20 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
                 DataManager.Instance.DeleteDataFile(selectIndex);
                 break;
         }
-
-        SetActive_ResetDataPopup(false);
-        DeselectAll();
-        selectIndex = -1;
+        
+        //새 게임 시작인지 확인
+        if(UIWhiteBox.GetisNewGame())
+        {
+            LoadData(selectIndex);
+            isClickButton[selectIndex] = false;
+            SceneManager.LoadScene("ChoiceDungeon");
+        }
+        else
+        {
+            SetActive_ResetDataPopup(false);
+            DeselectAll();
+            selectIndex = -1;
+        }
     }
 
     public void Click_NoButton()
@@ -155,12 +165,27 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
     {
         selectIndex = 0;
 
+        //버튼 선택되었는지 확인
         if (!isClickButton[selectIndex]) 
         {
             DeselectAll();
             isClickButton[selectIndex] = true;
             
             return;
+        }
+
+        //새 게임 시작인지 확인
+        if(UIWhiteBox.GetisNewGame())
+        {
+            bool isExist = DataManager.Instance.NeedToCreateNewDataFile(0);
+
+            //데이터 파일이 존재한다면
+            if(!isExist)
+            {
+                SetActive_ResetDataPopup(true);
+
+                return;
+            }
         }
 
         LoadData(selectIndex);
@@ -180,6 +205,20 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
             return;
         }
 
+        //새 게임 시작인지 확인
+        if (UIWhiteBox.GetisNewGame())
+        {
+            bool isExist = DataManager.Instance.NeedToCreateNewDataFile(1);
+
+            //데이터 파일이 존재한다면
+            if (!isExist)
+            {
+                SetActive_ResetDataPopup(true);
+
+                return;
+            }
+        }
+
         LoadData(selectIndex);
         isClickButton[selectIndex] = false;
         SceneManager.LoadScene("ChoiceDungeon");
@@ -195,6 +234,20 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
             isClickButton[selectIndex] = true;
 
             return;
+        }
+
+        //새 게임 시작인지 확인
+        if (UIWhiteBox.GetisNewGame())
+        {
+            bool isExist = DataManager.Instance.NeedToCreateNewDataFile(2);
+
+            //데이터 파일이 존재한다면
+            if (!isExist)
+            {
+                SetActive_ResetDataPopup(true);
+
+                return;
+            }
         }
 
         LoadData(selectIndex);

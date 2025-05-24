@@ -12,6 +12,8 @@ public class MainUIManager : MonoBehaviour
     public GameObject RunePanel;
     [Tooltip("룬 인벤토리 패널")]
     public GameObject RuneInventoryPanel;
+    [Tooltip("대사 패널")]
+    public GameObject ScriptPanel;
 
     [Header("PlayerUI")]
     [Tooltip("플레이어 체력이미지")]
@@ -63,6 +65,10 @@ public class MainUIManager : MonoBehaviour
     [Space(3)]
     [Header("ItemNameText")]
     public string[] item_NameTexts;
+
+    [Space(3)]
+    [Header("Animator")]
+    [SerializeField] private Animator Anim_RuneInventory;
 
     private UIInputAction uiInput;
 
@@ -231,7 +237,7 @@ public class MainUIManager : MonoBehaviour
         {
             if(RuneInventoryPanel.activeSelf)
             {
-                RuneInventoryPanel_SetActive(false);
+                Anim_RuneInventory.SetTrigger("Off");
             }
             else
             {
@@ -256,6 +262,9 @@ public class MainUIManager : MonoBehaviour
 
         //룬 인벤토리 패널 비활성화
         RuneInventoryPanel_SetActive(false);
+
+        //대사 패널 비활성화
+        ScriptPanel_SetActive(false);
 
         //아이템선택창 비활성화
         ChoiceUI_SetActive(false);
@@ -294,13 +303,20 @@ public class MainUIManager : MonoBehaviour
         CursorLock(active);
     }
 
+    public void ScriptPanel_SetActive(bool active)
+    {
+        ScriptPanel.SetActive(active);
+
+        CursorLock(active);
+    }
+
     #endregion
 
     /// <summary>
     /// 마우스 커서 잠금 & 표시
     /// </summary>
     /// <param name="isLock">잠금 여부 true: 잠금해제 & 표시 / false: 잠금 & 표시되지않게 </param>
-    private void CursorLock(bool isLock)
+    public void CursorLock(bool isLock)
     {
         if(isLock)
         {

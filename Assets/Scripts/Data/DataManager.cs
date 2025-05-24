@@ -53,9 +53,25 @@ public class DataManager : MonoBehaviour
     {
         DeleteDataFile(2);
     }
+    [ContextMenu("데이터 저장1")]
+    public void SaveData1()
+    {
+        SaveGameData(data1, GameDataFileName1);
+    }
+    [ContextMenu("데이터 존재하는지 확인")]
+    public void DataCheck()
+    {
+        Debug.Log($"데이터1: {NeedToCreateNewDataFile(0)}");
+        Debug.Log($"데이터2: {NeedToCreateNewDataFile(1)}");
+        Debug.Log($"데이터3: {NeedToCreateNewDataFile(2)}");
+    }
 
 #endif
 
+    /// <summary>
+    /// 데이터 삭제
+    /// </summary>
+    /// <param name="index">삭제할 데이터 번호</param>
     public void DeleteDataFile(int index)
     {
         string fileName = "";
@@ -174,42 +190,41 @@ public class DataManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 세 개의 데이터 파일 중 하나라도 존재하지 않으면 true 반환
-    /// 모두 존재하면 false 반환
+    /// 슬롯에 있는 데이터파일 경로를 가져오는 메서드
     /// </summary>
-    public bool NeedToCreateNewDataFile()
+    /// <param name="slotNumber">슬롯 번호</param>
+    /// <returns>데이터파일 경로</returns>
+    private string GetDataFilePath(int slotNumber)
     {
-        string path1 = Path.Combine(Application.persistentDataPath, GameDataFileName1);
-        string path2 = Path.Combine(Application.persistentDataPath, GameDataFileName2);
-        string path3 = Path.Combine(Application.persistentDataPath, GameDataFileName3);
+        switch (slotNumber)
+        {
+            case 0:
+                return Path.Combine(Application.persistentDataPath, GameDataFileName1);
+            case 1:
+                return Path.Combine(Application.persistentDataPath, GameDataFileName2);
+            case 2:
+                return Path.Combine(Application.persistentDataPath, GameDataFileName3);
 
-        // 하나라도 없으면 true (새로운 데이터 파일을 만들 수 있음)
-        if (!File.Exists(path1) || !File.Exists(path2) || !File.Exists(path3))
+            default: return null;
+        }
+    }
+
+    /// <summary>
+    /// 데이터 파일이 존재하는지 확인하는 메서드
+    /// </summary>
+    /// <param name="slotNumber">슬롯 번호</param>
+    /// <returns> 데이터파일 존재 유무(존재: false) </returns>
+    public bool NeedToCreateNewDataFile(int slotNumber)
+    {
+        string path = GetDataFilePath(slotNumber);
+
+        // 없으면 true (새로운 데이터 파일을 만들 수 있음)
+        if (!File.Exists(path))
         {
             return true;
         }
 
-        // 모두 존재하면 false (더 이상 만들 수 없음)
+        // 존재하면 false (더 이상 만들 수 없음)
         return false;
-    }
-
-    /// <summary>
-    /// 비어있는 데이터 슬롯(index)을 반환합니다.
-    /// 모두 차 있으면 -1을 반환합니다.
-    /// </summary>
-    public int GetFirstEmptyDataSlotIndex()
-    {
-        string[] fileNames = { GameDataFileName1, GameDataFileName2, GameDataFileName3 };
-
-        for (int i = 0; i < fileNames.Length; i++)
-        {
-            string path = Path.Combine(Application.persistentDataPath, fileNames[i]);
-            if (!File.Exists(path))
-            {
-                return i; // 비어 있는 슬롯 번호 반환 (0~2)
-            }
-        }
-
-        return -1; // 모든 슬롯이 존재함
     }
 }

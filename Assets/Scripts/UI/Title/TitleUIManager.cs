@@ -20,6 +20,15 @@ public class TitleUIManager : MonoBehaviour
     [Tooltip("설정 패널")]
     [SerializeField] private GameObject SettingPanel;
 
+    [Space(2)]
+    [Header("Animator")]
+    [Tooltip("페이드인아웃 이미지")]
+    [SerializeField] private Image Image_fadeInOut;
+    [Tooltip("설정창 Off 애니메이션")]
+    [SerializeField] private Animator Anim_SettingOff;
+
+    public bool isNewGame { get; private set; }
+
     #region UnityCall_Func
 
     private void Awake()
@@ -44,6 +53,9 @@ public class TitleUIManager : MonoBehaviour
         StorageDataPanel.SetActive(false);
 
         SettingPanel.SetActive(false);
+
+        //페이드인아웃 이미지
+        Image_fadeInOut.gameObject.SetActive(false);
     }
 
     [ContextMenu("플레이버튼 등장!")]
@@ -79,65 +91,29 @@ public class TitleUIManager : MonoBehaviour
 
     public void Click_NewGameStartButton()
     {
-        if(!DataManager.Instance.NeedToCreateNewDataFile())
-        {
-            Debug.LogWarning("모든 저장 슬롯이 사용 중입니다. 새 게임을 시작할 수 없습니다.");
-            return;
-        }
+        isNewGame = true;
 
-        int emptySlotIndex = DataManager.Instance.GetFirstEmptyDataSlotIndex();
-
-        if(emptySlotIndex != -1)
-        {
-            // 슬롯 설정
-            DataManager.Instance.SetCurrentData(emptySlotIndex);
-
-            // 슬롯에 맞는 데이터 인스턴스 생성 및 초기화
-            switch (emptySlotIndex)
-            {
-                case 0:
-                    DataManager.Instance.data1 = new Data1();
-                    DataManager.Instance.DeleteDataFile(0);
-                    DataManager.Instance.SaveGameData(DataManager.Instance.data1, DataManager.Instance.GameDataFileName1);
-                    break;
-
-                case 1:
-                    DataManager.Instance.data2 = new Data2();
-                    DataManager.Instance.DeleteDataFile(1);
-                    DataManager.Instance.SaveGameData(DataManager.Instance.data2, DataManager.Instance.GameDataFileName2);
-                    break;
-
-                case 2:
-                    DataManager.Instance.data3 = new Data3();
-                    DataManager.Instance.DeleteDataFile(2);
-                    DataManager.Instance.SaveGameData(DataManager.Instance.data3, DataManager.Instance.GameDataFileName3);
-                    break;
-            }
-
-            Debug.Log($"새로운 게임이 슬롯 {emptySlotIndex + 1}번에 생성되었습니다.");
-
-            SceneManager.LoadScene("ChoiceDungeon");
-        }
+        SettingPanel.SetActive(false);
+        //페이드인아웃 애니메이션
+        Image_fadeInOut.gameObject.SetActive(true);
     }
 
     public void Click_StorageDataButton()
     {
-        MenuPanel.SetActive(false);
+        isNewGame = false;
 
-        StorageDataPanel.SetActive(true);
+        SettingPanel.SetActive(false);
+        //페이드인아웃 애니메이션
+        Image_fadeInOut.gameObject.SetActive(true);
     }
 
     public void Click_SettingButton()
     {
-        MenuPanel.SetActive(false);
-
         SettingPanel.SetActive(true);
     }
     public void Click_Setting_GobackButton()
     {
-        SettingPanel.SetActive(false);
-
-        MenuPanel.SetActive(true);
+        Anim_SettingOff.SetTrigger("Off");
     }
 
     public void Click_QuitButton()

@@ -20,6 +20,10 @@ public class RuneChoiceUI : MonoBehaviour
     [SerializeField] private Text[] runeName;
     [SerializeField] private Text[] runeDescription;
 
+    [Space(2)]
+    [Header("Animator")]
+    [SerializeField] private Animator animator;
+
     private int itemNumber;
 
     private const string RUNE_TITLE_CHOICE = "룬 선택";
@@ -124,7 +128,8 @@ public class RuneChoiceUI : MonoBehaviour
 
     public void Click_runeButton()
     {
-        UIWhiteBox.SetActiveRunePanel(false);
+        animator.SetTrigger("Off");
+        UIWhiteBox.CursorLock(false);
 
         string buttonName = GetButtonName();
         int buttonNumber = int.Parse(buttonName.Substring(4, 1));
@@ -141,6 +146,15 @@ public class RuneChoiceUI : MonoBehaviour
         {
             Debug.Log("선택된 룬 정보를 찾을 수 없습니다.");
         }
+    }
+
+    #endregion
+
+    #region AnimEventKey
+
+    public void DisableRuneChoiceUI()
+    {
+        gameObject.SetActive(false);
     }
 
     #endregion

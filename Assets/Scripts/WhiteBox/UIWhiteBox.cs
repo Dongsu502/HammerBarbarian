@@ -10,7 +10,8 @@ public enum MainUIState
     RUNE_GET,
     PUASE,
     PUASE_SETTING,
-    RUNE_INVENTORY
+    RUNE_INVENTORY,
+    SCRIPT
 }
 public enum ChoiceMapUIState
 {
@@ -69,6 +70,11 @@ public static class UIWhiteBox
         TitleUIWB.GobackMenu();
     }
 
+    public static bool GetisNewGame()
+    {
+        return TitleUIWB.isNewGame;
+    }
+
     #endregion
 
     #region MainUI
@@ -86,6 +92,15 @@ public static class UIWhiteBox
     public static void SetActiveRuneInventoryPanel(bool isActive)
     {
         MainUIWB.RuneInventoryPanel_SetActive(isActive);
+    }
+
+    /// <summary>
+    /// 마우스 커서 잠금 & 표시
+    /// </summary>
+    /// <param name="isLock">잠금 여부 true: 잠금해제 & 표시 / false: 잠금 & 표시되지않게</param>
+    public static void CursorLock(bool isLock)
+    {
+        MainUIWB.CursorLock(isLock);
     }
 
     /// <summary>

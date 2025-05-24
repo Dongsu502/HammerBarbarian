@@ -216,4 +216,12 @@ public class RuneInventoryUI : MonoBehaviour
 
     #endregion
 
+    #region AnimEventKey
+
+    public void DisableRuneInventory()
+    {
+        gameObject.SetActive(false);
+    }
+
+    #endregion
 }
