@@ -5,6 +5,7 @@ public class RopeWeaponCollisionHandler : MonoBehaviour
 {
     private HammerThrowController controller;
     private Rigidbody hammerRb;
+    private RopePullController ropePullController;
 
     private bool isStuckToWall = false;
 
@@ -12,6 +13,7 @@ public class RopeWeaponCollisionHandler : MonoBehaviour
 
     private void Awake()
     {
+        ropePullController = FindAnyObjectByType<RopePullController>().GetComponent<RopePullController>();
         hammerRb = GetComponent<Rigidbody>();
     }
 
@@ -30,7 +32,13 @@ public class RopeWeaponCollisionHandler : MonoBehaviour
             hammerRb.isKinematic = true;
 
             isStuckToWall = true;
+            ropePullController.TryStartPull();
             return;
+        }
+
+        if (collision.collider.CompareTag("EnemyHitBox"))
+        {
+
         }
 
         // 일반적인 충돌은 바로 회수

@@ -6,10 +6,10 @@ public class RopePullController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Camera mainCamera;
     [SerializeField] private LayerMask pullableLayer;
+    [SerializeField] private HammerThrowController hammerThrowController;
 
     [Header("Pull Settings")]
-    [SerializeField] private float pullForce = 80f;
-    [SerializeField] private float maxSpeed = 20f;
+    [SerializeField] private float moveSpeed = 15f;
     [SerializeField] private float stopDistance = 1f;
 
     private Rigidbody rb;
@@ -23,40 +23,27 @@ public class RopePullController : MonoBehaviour
             mainCamera = Camera.main;
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0) && !isPulling)
-        {
-            TryStartPull();
-        }
-
-        if (Input.GetMouseButtonUp(0) && isPulling)
-        {
-            StopPull();
-        }
-    }
-
     void FixedUpdate()
     {
         if (!isPulling || targetPoint == null) return;
 
-        Vector3 toTarget = targetPoint.Value - transform.position;
+        Vector3 toTarget = targetPoint.Value - rb.position;
         float distance = toTarget.magnitude;
 
         if (distance < stopDistance)
         {
+            rb.MovePosition(targetPoint.Value); // 정확히 고정
             StopPull();
+            hammerThrowController.Recall();
             return;
         }
 
         Vector3 direction = toTarget.normalized;
-        Vector3 desiredVelocity = direction * maxSpeed;
-        Vector3 velocityChange = desiredVelocity - rb.velocity;
-
-        rb.AddForce(velocityChange, ForceMode.VelocityChange);
+        Vector3 moveStep = direction * moveSpeed * Time.fixedDeltaTime;
+        rb.MovePosition(rb.position + moveStep);
     }
 
-    void TryStartPull()
+    public void TryStartPull()
     {
         Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         if (Physics.Raycast(ray, out RaycastHit hit, 100f, pullableLayer))
