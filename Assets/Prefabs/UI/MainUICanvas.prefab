@@ -921,7 +921,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1451151806606109644}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 4604813389642053950}
+        m_TargetAssemblyTypeName: ScriptUIManager, Assembly-CSharp
+        m_MethodName: NextScript
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1220944560541522817
 GameObject:
   m_ObjectHideFlags: 0
@@ -6717,6 +6729,7 @@ GameObject:
   - component: {fileID: 5837150242220752746}
   - component: {fileID: 5098005276178737766}
   - component: {fileID: 1236170553593848752}
+  - component: {fileID: 4604813389642053950}
   m_Layer: 5
   m_Name: ScriptPanel
   m_TagString: Untagged
@@ -6782,6 +6795,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &4604813389642053950
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6220053306432933213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a591e7083a30244a86cccd789b75df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scriptData: {fileID: 11400000, guid: bf68803f5239a5d419f2298096bbbc6e, type: 2}
+  Name: {fileID: 935578759609006641}
+  Script: {fileID: 5026051613323087544}
 --- !u!1 &6242488087491813971
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7231f348ebc8b96449194c49b31f3217, type: 3}
-  m_Name: RuneDataReader
+  m_Name: RuneData
   m_EditorClassIdentifier: 
   associatedSheet: 1-1GhWFWfP_SXiIONwcEVu0D2YIBG2YJN-b5uQ6KHHYY
   associatedWorksheet: Rune

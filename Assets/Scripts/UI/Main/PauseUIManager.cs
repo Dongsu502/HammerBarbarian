@@ -52,7 +52,7 @@ public class PauseUIManager : MonoBehaviour
     public void Click_Setting()
     {
         SetActive_SettingPanel(true);
-        UIWhiteBox.MainUICurrentState = MainUIState.PUASE_SETTING;
+        UIWhiteBox.MainUICurrentState = MainUIState.PAUSE_SETTING;
     }
 
     public void Click_GoTitleButton()

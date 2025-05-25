@@ -8,8 +8,8 @@ public enum MainUIState
     NONE,
     RUNE_CHOICE,
     RUNE_GET,
-    PUASE,
-    PUASE_SETTING,
+    PAUSE,
+    PAUSE_SETTING,
     RUNE_INVENTORY,
     SCRIPT
 }
@@ -26,13 +26,11 @@ public static class UIWhiteBox
 
     public static TitleUIManager TitleUIWB { get; private set; }
     public static MainUIManager MainUIWB { get; private set; }
-
     public static PauseUIManager PauseUIWB { get; private set; }
-
     public static MinimapFog MinimapFogWB { get; private set; }
-
     public static RuneInventoryUI RuneInventoryWB { get; private set; }
     public static RuneChoiceUI RuneChoiceWB { get; private set; }
+    public static ScriptUIManager ScriptUIWB { get; private set; }
 
     #region SetWhiteBox
 
@@ -60,6 +58,10 @@ public static class UIWhiteBox
     {
         RuneChoiceWB = runeChoiceWB;
     }
+    public static void SetScriptUIWB(ScriptUIManager scriptUIWB)
+    {
+        ScriptUIWB = scriptUIWB;
+    }
 
     #endregion
 
@@ -79,6 +81,7 @@ public static class UIWhiteBox
 
     #region MainUI
 
+    #region SetActivePanel
     public static void SetActivePausePanel(bool isActive)
     {
         MainUIWB.PausePanel_SetActive(isActive);
@@ -93,6 +96,13 @@ public static class UIWhiteBox
     {
         MainUIWB.RuneInventoryPanel_SetActive(isActive);
     }
+
+    public static void SetActiveScriptUIPanel(bool isActive)
+    {
+        MainUIWB.ScriptPanel_SetActive(isActive);
+    }
+
+    #endregion
 
     /// <summary>
     /// 마우스 커서 잠금 & 표시
@@ -129,16 +139,6 @@ public static class UIWhiteBox
     {
         return MainUIWB.UseItemNumber() + 1;
     }
-
-#if UNITY_EDITOR
-    /// <summary>
-    /// 아이템 리스트 재설정(테스트용)
-    /// </summary>
-    public static void SetItemList()
-    {
-        MainUIWB.SetItemList();
-    }
-#endif
 
     /// <summary>
     /// 아이템 획득
@@ -183,6 +183,17 @@ public static class UIWhiteBox
         MainUIWB.SetColorRuneShowImage(index);
     }
 
+    public static void StartScripting(int _start, int _end)
+    {
+        MainUICurrentState = MainUIState.SCRIPT;
+
+        //대사 UI 활성화
+        MainUIWB.ScriptPanel_SetActive(true);
+        
+        //대사 가져오기
+        ScriptUIWB.GetScriptData(_start, _end);
+    }
+
     #endregion
 
     #region PauseUI
@@ -200,6 +211,10 @@ public static class UIWhiteBox
 
     #region MinimapFog
 
+    /// <summary>
+    /// 미니맵 안개 제거
+    /// </summary>
+    /// <param name="triggerFog">비활성화 할 이미지 콜라이더</param>
     public static void DisableMinimapFog(Collider triggerFog)
     {
         MinimapFogWB.DisableFog(triggerFog);

@@ -135,6 +135,11 @@ public class MainUIManager : MonoBehaviour
     {
         RunePanel_SetActive(true);
     }
+    [ContextMenu("대사 시작")]
+    private void StartScript()
+    {
+        UIWhiteBox.StartScripting(1100, 1104);
+    }
 
 #endif
 
@@ -203,15 +208,15 @@ public class MainUIManager : MonoBehaviour
             {
                 case MainUIState.NONE:
                     PausePanel_SetActive(true);
-                    UIWhiteBox.MainUICurrentState = MainUIState.PUASE;
+                    UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
                     break;
-                case MainUIState.PUASE:
+                case MainUIState.PAUSE:
                     PausePanel_SetActive(false);
                     UIWhiteBox.MainUICurrentState = MainUIState.NONE;
                     break;
-                case MainUIState.PUASE_SETTING:
+                case MainUIState.PAUSE_SETTING:
                     UIWhiteBox.SetActive_SettingPanel(false);
-                    UIWhiteBox.MainUICurrentState = MainUIState.PUASE;
+                    UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
                     break;
             }
         }
