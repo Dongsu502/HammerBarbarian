@@ -15,7 +15,7 @@ public class ResetDataPopup : MonoBehaviour
     {
         bool isNewGame = UIWhiteBox.GetisNewGame();
 
-        if(!isNewGame)
+        if(isNewGame)
         {
             question.text = NEW_GAME_QUESTION;
         }
