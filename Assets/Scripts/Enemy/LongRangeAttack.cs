@@ -5,10 +5,16 @@ using UnityEngine;
 public class LongRangeAttack : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private Transform bulletSpawnPos;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float destroyDelayTime;
 
     private GameObject bullet = null;
+
+    public void Fire()
+    {
+        Spawn(bulletSpawnPos);
+    }
 
     /// <summary>
     /// ÃÑ¾Ë ½ºÆù

@@ -19,17 +19,15 @@ public class Mushroom : MonoBehaviour, IMonster
     [SerializeField] private float hitDelayTime;
     [SerializeField] private float knockbackDelayTime;
     [SerializeField] private float dieDelayTime;
-    [SerializeField] private Transform bulletSpawnPos;
 
     private MonsterDetection detectionClass;
     private MonsterHitBox hitBoxClass;
     private MonsterHealthUI healthUIClass;
-    private LongRangeAttack longAttackClass;
 
     private NavMeshAgent agent;
     private Animator animator;
     private Rigidbody rb;
-    private CapsuleCollider golemCollider;
+    private CapsuleCollider mushroomCollider;
 
     private float moveAmount;
 
@@ -38,7 +36,6 @@ public class Mushroom : MonoBehaviour, IMonster
         detectionClass = GetComponentInChildren<MonsterDetection>();
         hitBoxClass = GetComponentInChildren<MonsterHitBox>();
         healthUIClass = GetComponentInChildren<MonsterHealthUI>();
-        longAttackClass = GetComponent<LongRangeAttack>();
 
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
@@ -48,12 +45,35 @@ public class Mushroom : MonoBehaviour, IMonster
 
         rb = GetComponent<Rigidbody>();
 
-        golemCollider = GetComponent<CapsuleCollider>();
+        mushroomCollider = GetComponent<CapsuleCollider>();
     }
 
+    #region Animation Eventkey
+
+    /// <summary>
+    /// Hit 애니메이션 이벤트 키
+    /// </summary>
     public void ReSetIsHitting()
     {
         animator.SetBool("IsHitting", false);
+
+        rb.isKinematic = false;
+
+        IsBeingHit = false;
+    }
+
+    /// <summary>
+    /// Hit 애니메이션 이벤트 키
+    /// </summary>
+    public void ResetCollider()
+    {
+        hitBoxClass.hitCollider.enabled = true;
+        agent.enabled = true;
+    }
+
+    public void OnisKinematic()
+    {
+        rb.isKinematic = true;
     }
 
     /// <summary>
@@ -66,10 +86,30 @@ public class Mushroom : MonoBehaviour, IMonster
         Debug.Log("공격 중단");
     }
 
-    public void LongAttack()
+    /// <summary>
+    /// Die 애니메이션 키 이벤트
+    /// </summary>
+    public void DestroyDelay()
     {
-        longAttackClass.Spawn(bulletSpawnPos);
+        Destroy(gameObject);
     }
+
+    /// <summary>
+    /// Die 애니메이션 키 이벤트
+    /// </summary>
+    public void RBDestory()
+    {
+        //중력 제거
+        rb.isKinematic = true;
+
+        //내비 제거
+        agent.enabled = false;
+
+        //골렘 콜라이더 제거
+        mushroomCollider.enabled = false;
+    }
+
+    #endregion
 
     /// <summary>
     /// Idle, Move 애니메이션
@@ -117,6 +157,7 @@ public class Mushroom : MonoBehaviour, IMonster
             // 아직 도착 안 했으면 false
             return false;
         }
+
     }
 
     public void TakeDamage(int damage)
@@ -126,10 +167,10 @@ public class Mushroom : MonoBehaviour, IMonster
 
         healthUIClass.TakeDamageUI(damage);
 
-        StartCoroutine(HitDelay());
+        HitAnimation();
     }
 
-    private IEnumerator HitDelay()
+    private void HitAnimation()
     {
         hitBoxClass.hitCollider.enabled = false;
         agent.enabled = false;
@@ -141,9 +182,8 @@ public class Mushroom : MonoBehaviour, IMonster
             //피격 애니메이션 플레이
             animator.SetTrigger("TakeDamage");
             //약공격 히트 불값
+            //약공격, 강공격을 애니메이션 키로 SetBool false하여 조절
             animator.SetBool("IsHitting", true);
-
-            yield return new WaitForSeconds(hitDelayTime);
         }
         else
         {
@@ -151,49 +191,27 @@ public class Mushroom : MonoBehaviour, IMonster
             animator.SetFloat("HitType", 1);
             //피격 애니메이션 플레이
             animator.SetTrigger("TakeDamage");
+            animator.SetBool("IsHitting", true);
 
             hitBoxClass.IsKnockback = false;
-
-            yield return new WaitForSeconds(knockbackDelayTime);
         }
-
-        hitBoxClass.hitCollider.enabled = true;
-        agent.enabled = true;
-
-        rb.isKinematic = true;
-
-        yield return new WaitForSeconds(0.1f);
-        rb.isKinematic = false;
-
-        IsBeingHit = false;
     }
 
-    private IEnumerator DieDelay()
+    private void DieDelay()
     {
-        //콜라이더 제거
+        //Hit 콜라이더 제거
         hitBoxClass.hitCollider.enabled = false;
-        golemCollider.enabled = false;
-
-        //중력 제거
-        rb.useGravity = false;
-
-        //내비 제거
-        agent.enabled = false;
 
         //사망 애니메이션 플레이
-        animator.SetBool("IsDie", true);
-
-        yield return new WaitForSeconds(dieDelayTime);
-
-        Destroy(gameObject);
+        animator.SetTrigger("IsDie");
     }
 
     #region AI
 
     public void Death()
     {
-        Debug.Log("버섯 사망");
-        StartCoroutine(DieDelay());
+        Debug.Log("골렘 사망");
+        DieDelay();
     }
     public void Hit()
     {
@@ -211,8 +229,9 @@ public class Mushroom : MonoBehaviour, IMonster
     {
         agent.enabled = false;
         InAttackRange = HasArrived();
+        Debug.Log(InAttackRange);
 
-        Debug.Log("버섯 공격 시작");
+        Debug.Log("골렘 공격 시작");
         IsAttacking = true;
 
         // 공격 모션 중 이동 막기
@@ -227,7 +246,7 @@ public class Mushroom : MonoBehaviour, IMonster
     }
     public void MoveToTarget()
     {
-        Debug.Log("버섯 접근중..");
+        Debug.Log("골렘 접근중..");
         agent.enabled = true;
 
         //감지된 타겟을 바라보고 추적
@@ -237,6 +256,7 @@ public class Mushroom : MonoBehaviour, IMonster
         agent.SetDestination(target.position);
 
         InAttackRange = HasArrived();
+        Debug.Log(InAttackRange);
 
         //걷기 애니메이션 플레이
         animator.SetBool("IsAttack", false);
@@ -249,7 +269,7 @@ public class Mushroom : MonoBehaviour, IMonster
 
         //Idle 애니메이션 플레이
         MoveAnimation(false);
-        Debug.Log("버섯 대기중");
+        Debug.Log("골렘 대기중");
     }
 
     #endregion

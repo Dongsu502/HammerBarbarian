@@ -413,6 +413,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffectPrefab: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
+  effectOffset: 0.05
 --- !u!114 &5544683719419404605
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -570,7 +571,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -13.32
+      value: -36.25
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
       propertyPath: m_LocalPosition.y
@@ -578,7 +579,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 66.01
+      value: 36.66
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
       propertyPath: m_LocalRotation.w
