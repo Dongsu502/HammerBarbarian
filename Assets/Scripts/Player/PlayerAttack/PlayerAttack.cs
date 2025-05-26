@@ -96,7 +96,7 @@ public class PlayerAttack : MonoBehaviour
         }
 
         comboStep++;
-        animator.applyRootMotion = true;
+        //animator.applyRootMotion = true;
         IsAttacking = true; // 공격 시작 시 true 설정
         attackType = testCurrentAttackType ;
 
@@ -219,7 +219,7 @@ public class PlayerAttack : MonoBehaviour
     {
         comboStep = 0;
         comboTimer = 0;
-        animator.applyRootMotion = false;
+        //animator.applyRootMotion = false;
     }
 
     public void DIsableAttackInput()

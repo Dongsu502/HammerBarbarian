@@ -112,14 +112,20 @@ public class HammerThrowController : MonoBehaviour
         {
             float distance = Vector3.Distance(throwStartPos, activeHammer.transform.position);
 
+            //벽에 박힌 경우 자동 회수 금지
+            var collisionHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
+            if (collisionHandler != null && collisionHandler.IsStuckToWall)
+                return;
+
             if (distance >= maxThrowDistance)
             {
                 isThrowing = false;
 
                 hammerRb.velocity = Vector3.zero;
+                hammerRb.angularVelocity = Vector3.zero;
                 hammerRb.isKinematic = false;
 
-                Recall();
+                Recall(); // 자동 회수
             }
         }
 
