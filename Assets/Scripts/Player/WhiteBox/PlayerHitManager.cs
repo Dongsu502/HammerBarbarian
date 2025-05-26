@@ -19,6 +19,8 @@ public class PlayerHitManager : MonoBehaviour
     public void Shake(string type, AttackType attackType) => cameraShakeManager.Shake(type, attackType);
     public AttackType attacktype => PlayerAttack.attackType;
 
+    public WeaponType weaponType => PlayerAttack.weaponType;
+
     private void Awake()
     {
         PlayerHitWhiteBox.SetWhiteBox(this);

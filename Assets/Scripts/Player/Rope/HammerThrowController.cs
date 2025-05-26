@@ -6,6 +6,7 @@ public class HammerThrowController : MonoBehaviour
     public Transform throwOrigin;
     public GameObject hammerPrefab;
     public Camera mainCamera;
+    [SerializeField] private HammerThrowAnimHandler hammerThrowAnimHandler;
     [SerializeField] private Transform playerTransform;
     [SerializeField] private Rigidbody playerRb; // 플레이어 끌기용
 
@@ -70,6 +71,7 @@ public class HammerThrowController : MonoBehaviour
         hammerRb.AddForce(dir * throwSpeed, ForceMode.VelocityChange);
         throwStartPos = activeHammer.transform.position;
 
+        hammerThrowAnimHandler.StartThrow();
         isThrowing = true;
     }
 
@@ -145,6 +147,7 @@ public class HammerThrowController : MonoBehaviour
                 activeHammer = null;
                 hammerRb = null;
                 isRecalling = false;
+                hammerThrowAnimHandler.StopThrow();
                 return;
             }
 
