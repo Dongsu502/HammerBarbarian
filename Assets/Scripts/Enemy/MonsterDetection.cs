@@ -19,7 +19,7 @@ public class MonsterDetection : MonoBehaviour
         target = GetComponentInParent<Transform>();
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -28,7 +28,7 @@ public class MonsterDetection : MonoBehaviour
             monster.TargetDetected = true;
         }
     }
-    protected virtual void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Player"))
         {

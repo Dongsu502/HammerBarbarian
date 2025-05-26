@@ -85,7 +85,7 @@ public class RuneChoiceUI : MonoBehaviour
 
         RectTransform rectT = runeButton[0].GetComponent<RectTransform>();
         rectT.anchoredPosition = new Vector2(anchorPosX, rectT.anchoredPosition.y);
-        
+        Debug.LogWarning($"PosX: {anchorPosX}");
     }
 
     /// <summary>

@@ -10,6 +10,12 @@ public class LongRangeAttack : MonoBehaviour
     [SerializeField] private float destroyDelayTime;
 
     private GameObject bullet = null;
+    private MonsterDetection monsterDetection;
+
+    private void Awake()
+    {
+        monsterDetection = GetComponentInChildren<MonsterDetection>();
+    }
 
     public void Fire()
     {
@@ -30,9 +36,9 @@ public class LongRangeAttack : MonoBehaviour
 
     private void FireDirection()
     {
-        Vector3 direction = transform.forward.normalized;
+        Vector3 direction = gameObject.transform.forward;
 
-        bullet.GetComponent<Rigidbody>().AddForce(direction * bulletSpeed * Time.deltaTime, ForceMode.Force);
+        bullet.GetComponent<Rigidbody>().AddForce(direction.normalized * bulletSpeed * Time.deltaTime, ForceMode.Force);
     }
 
     private void DestroyBullet(GameObject bullet, float delayTime)

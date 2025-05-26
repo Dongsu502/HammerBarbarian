@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterAttackDetection : MonoBehaviour
 {
-    public BoxCollider AttackCollider;
+    public Collider AttackCollider;
 
     private void OnEnable()
     {

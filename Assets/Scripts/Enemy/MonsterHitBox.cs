@@ -58,6 +58,7 @@ public class MonsterHitBox : MonoBehaviour
 
     private void Knockback(Collider other, float knockbackForce)
     {
+        //나중에 플레이어 무기 타입에 따라서 구분
         Vector3 direction = other.GetComponentInParent<PlayerMove>().gameObject.transform.position - transform.position;
 
         Vector3 knockbackDir = -direction.normalized;

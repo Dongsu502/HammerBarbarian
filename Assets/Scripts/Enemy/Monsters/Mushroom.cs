@@ -16,9 +16,6 @@ public class Mushroom : MonoBehaviour, IMonster
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
-    [SerializeField] private float hitDelayTime;
-    [SerializeField] private float knockbackDelayTime;
-    [SerializeField] private float dieDelayTime;
 
     private MonsterDetection detectionClass;
     private MonsterHitBox hitBoxClass;

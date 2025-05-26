@@ -17,9 +17,6 @@ public class Golem : MonoBehaviour, IMonster
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
-    [SerializeField] private float hitDelayTime;
-    [SerializeField] private float knockbackDelayTime;
-    [SerializeField] private float dieDelayTime;
 
     private MonsterDetection detectionClass;
     private MonsterHitBox hitBoxClass;
@@ -29,7 +26,7 @@ public class Golem : MonoBehaviour, IMonster
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider golemCollider;
-    private BoxCollider attackCollider;
+    private Collider attackCollider;
 
     private float moveAmount;
 
