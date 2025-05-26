@@ -4117,19 +4117,19 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4566345529945945170, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.37283355
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4566345529945945170, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.16704196
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4566345529945945170, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.832958
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4566345529945945170, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.37319314
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5620383256304357953, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_Name

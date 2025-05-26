@@ -46,7 +46,7 @@ public class RopePullController : MonoBehaviour
     public void TryStartPull()
     {
         Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f, pullableLayer))
+        if (Physics.Raycast(ray, out RaycastHit hit, 30f, pullableLayer))
         {
             targetPoint = hit.point;
             isPulling = true;
