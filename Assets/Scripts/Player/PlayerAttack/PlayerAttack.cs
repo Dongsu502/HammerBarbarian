@@ -110,9 +110,7 @@ public class PlayerAttack : MonoBehaviour
             animator.SetTrigger("Attack_2");
         }
 
-        comboTimer = comboResetTime;
-    
-    
+        comboTimer = comboResetTime;  
     }
 
     public void OnAttack2(InputAction.CallbackContext context)
@@ -124,11 +122,22 @@ public class PlayerAttack : MonoBehaviour
                 Debug.Log("조준 시작");
                 isAiming = true;
                 useable.UseItemByType(weaponType);
+                return;
             }
-            else
+
+
+            if (comboStep >= 2)
             {
                 StartWindMill();
             }
+            else
+            {
+                IsAttacking = true;
+                attackType = AttackType.Heavy;
+                animator.SetTrigger("SAttack_1");
+            }
+
+           
         }
 
         if (context.canceled)
