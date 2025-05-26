@@ -11,6 +11,7 @@ TagManager:
   - EnemyHitBox
   - InteractionWall
   - PlayerHitBox
+  - Attack_Mushroom
   layers:
   - Default
   - TransparentFX

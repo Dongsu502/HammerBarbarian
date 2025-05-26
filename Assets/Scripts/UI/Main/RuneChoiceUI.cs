@@ -29,9 +29,6 @@ public class RuneChoiceUI : MonoBehaviour
     private const string RUNE_TITLE_CHOICE = "·é ¼±ÅÃ";
     private const string RUNE_TITLE_GET = "·é È¹µæ";
 
-    private const int RUNE_BUTTON_POS_X_MIN = -550;
-    private const int RUNE_BUTTON_POS_X_MAX = -50;
-
     private void Awake()
     {
         UIWhiteBox.SetRuneChoiceWB(this);
@@ -51,7 +48,7 @@ public class RuneChoiceUI : MonoBehaviour
             //·é °¹¼ö 3°³
             itemNumber = 3;
             //·é ¹öÆ° 3°³, À§Ä¡ ÀçÁ¶Á¤
-            SwitchRuneChoiceUI(true, RUNE_BUTTON_POS_X_MIN);
+            animator.SetBool("isChoice", true);
         }
         else if(UIWhiteBox.MainUICurrentState == MainUIState.RUNE_GET)
         {
@@ -60,7 +57,7 @@ public class RuneChoiceUI : MonoBehaviour
             //·é °¹¼ö 1°³
             itemNumber = 1;
             //·é ¹öÆ° 1°³, À§Ä¡ ÀçÁ¶Á¤
-            SwitchRuneChoiceUI(false, RUNE_BUTTON_POS_X_MAX);
+            animator.SetBool("isChoice", false);
         }
 
         GetRandomID(itemNumber);
@@ -69,23 +66,6 @@ public class RuneChoiceUI : MonoBehaviour
     private void OnDisable()
     {
         UIWhiteBox.MainUICurrentState = MainUIState.NONE;
-    }
-
-    /// <summary>
-    /// ·é ChoiceUI <-> ·é GetUI º¯È¯
-    /// </summary>
-    /// <param name="isActive"></param>
-    /// <param name="anchorPosX"></param>
-    private void SwitchRuneChoiceUI(bool isActive, int anchorPosX)
-    {
-        for(int i = 1;  i < runeButton.Length; i++)
-        {
-            runeButton[i].gameObject.SetActive(isActive);
-        }
-
-        RectTransform rectT = runeButton[0].GetComponent<RectTransform>();
-        rectT.anchoredPosition = new Vector2(anchorPosX, rectT.anchoredPosition.y);
-        Debug.LogWarning($"PosX: {anchorPosX}");
     }
 
     /// <summary>

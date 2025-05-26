@@ -42,6 +42,8 @@ public class MonsterHitBox : MonoBehaviour
             {
                 IsKnockback = true;
 
+                PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, attackType);
+
                 Knockback(other, HeavyknockbackForce);
             }
 

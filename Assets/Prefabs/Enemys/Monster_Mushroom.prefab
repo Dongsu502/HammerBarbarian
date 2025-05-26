@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8882918407501317976}
   - component: {fileID: 5794688230903303096}
   - component: {fileID: 6599885897862709932}
-  m_Layer: 10
+  m_Layer: 16
   m_Name: DetectCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 7
+  m_Radius: 10
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &6599885897862709932
 MonoBehaviour:
@@ -347,11 +347,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f93f1f6b61483048811e2c8fec084fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 8
-  rotateSpeed: 8
-  hitDelayTime: 2.5
-  knockbackDelayTime: 3
-  dieDelayTime: 3
+  moveSpeed: 6
+  rotateSpeed: 6
 --- !u!114 &7993369597243107776
 MonoBehaviour:
   m_ObjectHideFlags: 0

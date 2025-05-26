@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 7739012118382486160}
   - component: {fileID: 6397554619797014805}
   - component: {fileID: 3793611501883132164}
-  m_Layer: 10
+  m_Layer: 16
   m_Name: DetectCol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1130,9 +1130,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   rotateSpeed: 5
-  hitDelayTime: 1
-  knockbackDelayTime: 4.15
-  dieDelayTime: 5
 --- !u!4 &3452399130152939167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}

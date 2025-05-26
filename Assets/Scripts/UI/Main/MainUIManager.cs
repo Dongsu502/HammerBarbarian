@@ -69,6 +69,8 @@ public class MainUIManager : MonoBehaviour
     [Space(3)]
     [Header("Animator")]
     [SerializeField] private Animator Anim_RuneInventory;
+    [Tooltip("옵션 패널 애니메이션")]
+    [SerializeField] private Animator Anim_Setting;
 
     private UIInputAction uiInput;
 
@@ -215,7 +217,7 @@ public class MainUIManager : MonoBehaviour
                     UIWhiteBox.MainUICurrentState = MainUIState.NONE;
                     break;
                 case MainUIState.PAUSE_SETTING:
-                    UIWhiteBox.SetActive_SettingPanel(false);
+                    Anim_Setting.SetTrigger("Off");
                     UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
                     break;
             }
