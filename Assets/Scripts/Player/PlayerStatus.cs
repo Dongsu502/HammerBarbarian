@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Game;
 
 public class PlayerStatus : MonoBehaviour
 {
@@ -44,5 +45,19 @@ public class PlayerStatus : MonoBehaviour
     {
         Animator animator = GetComponent<Animator>();
         animator.enabled = false;
+    }
+
+    public int PlayerDamagebyAttackType(AttackType attackType)
+    {
+        if (attackType == AttackType.None)
+            return 0;
+        if (attackType == AttackType.Light)
+            return 10;
+        if (attackType == AttackType.Heavy)
+            return 20;
+        if(attackType==AttackType.Skill)
+            return 30;
+
+        return 0;
     }
 }

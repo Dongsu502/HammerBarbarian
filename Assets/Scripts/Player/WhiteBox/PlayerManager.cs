@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game;
 
 
 public static class PlayerStatWhiteBox
@@ -16,7 +17,7 @@ public class PlayerManager : MonoBehaviour
 {
     PlayerStatus playerStatus;
 
-    public int playerAttackDamage => playerStatus.playerAttackDamage;
+    public int playerAttackDamage(AttackType type) => playerStatus.PlayerDamagebyAttackType(type);
 
     private void Awake()
     {
