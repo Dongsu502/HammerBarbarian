@@ -190,7 +190,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
         LoadData(selectIndex);
         isClickButton[selectIndex] = false;
-        SceneManager.LoadScene("ChoiceDungeon");
+        UIWhiteBox.SceneName = "ChoiceDungeon";
+        SceneManager.LoadScene("Loading");
     }
 
     public void Click_Data2Button()
@@ -221,7 +222,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
         LoadData(selectIndex);
         isClickButton[selectIndex] = false;
-        SceneManager.LoadScene("ChoiceDungeon");
+        UIWhiteBox.SceneName = "ChoiceDungeon";
+        SceneManager.LoadScene("Loading");
     }
 
     public void Click_Data3Button()
@@ -252,7 +254,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
         LoadData(selectIndex);
         isClickButton[selectIndex] = false;
-        SceneManager.LoadScene("ChoiceDungeon");
+        UIWhiteBox.SceneName = "ChoiceDungeon";
+        SceneManager.LoadScene("Loading");
     }
 
     #endregion

@@ -65,7 +65,8 @@ public class ChoiceMapUIManager : MonoBehaviour
 
     private void RightMouseDown(InputAction.CallbackContext context)
     {
-        SceneManager.LoadScene("Title");
+        UIWhiteBox.SceneName = "Title";
+        SceneManager.LoadScene("Loading");
     }
 
     /// <summary>
@@ -130,7 +131,8 @@ public class ChoiceMapUIManager : MonoBehaviour
     public void Click_Dungeon1()
     {
         Debug.Log("던전1 이동");
-        SceneManager.LoadScene("Map");
+        UIWhiteBox.SceneName = "Map";
+        SceneManager.LoadScene("Loading");
     }
     public void Click_Dungeon2()
     {

@@ -57,7 +57,8 @@ public class PauseUIManager : MonoBehaviour
 
     public void Click_GoTitleButton()
     {
-        SceneManager.LoadScene("Title");
+        UIWhiteBox.SceneName = "Title";
+        SceneManager.LoadScene("Loading");
     }
 
     public void Click_QuitButton()

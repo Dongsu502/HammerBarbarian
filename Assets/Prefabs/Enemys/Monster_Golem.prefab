@@ -66,6 +66,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c458fee9133c8449a331cf1f456c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterAttackPower: 1
   AttackCollider: {fileID: 6578936887699019650}
 --- !u!1 &1562643790971292798
 GameObject:
