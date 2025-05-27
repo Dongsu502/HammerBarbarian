@@ -221,6 +221,7 @@ public class PlayerAttack : MonoBehaviour
     {
         comboStep = 0;
         comboTimer = 0f;
+        animator.SetBool("isSpinning", false);
     }
 
     public void EnableHammerCollider()
