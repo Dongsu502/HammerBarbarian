@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class PlayerStatus : MonoBehaviour
 {
-    private float maxPlayerHp = 200f;
-    public float playerHP = 200f;
+    private int maxPlayerHp = 6;
+    public int playerHP = 6;
     public int playerAttackDamage = 10;
 
     private void Start()
     {
         playerHP = maxPlayerHp;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        playerHP -= damage;
+        UIWhiteBox.TakeDamage(damage);
     }
 }

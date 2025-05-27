@@ -45,7 +45,9 @@ public class PlayerAttack : MonoBehaviour
     private IItemUseable useable;
     private IAttackable attackable;
 
-    #region Unity Methods
+    // Buffered Input
+    private bool bufferedLightAttack = false;
+    private bool bufferedHeavyAttack = false;
 
     private void Awake()
     {
@@ -85,13 +87,15 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    #endregion
-
-    #region Input Methods
-
     public void OnAttack1(InputAction.CallbackContext context)
     {
-        if (!context.performed || !canAttack) return;
+        if (!context.performed) return;
+
+        if (!canAttack)
+        {
+            bufferedLightAttack = true;
+            return;
+        }
 
         if (equipItem && isAiming)
         {
@@ -112,11 +116,9 @@ public class PlayerAttack : MonoBehaviour
 
         comboStep++;
         IsAttacking = true;
-        attackType = testCurrentAttackType;
 
         if (comboStep == 1)
         {
-            Debug.Log("공격!!_1");
             animator.SetTrigger("Attack_1");
         }
         else if (comboStep == 2)
@@ -129,11 +131,17 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAttack2(InputAction.CallbackContext context)
     {
+        Debug.Log("아오 진자");
         if (context.started)
         {
+            if (!canAttack)
+            {
+                bufferedHeavyAttack = true;
+                return;
+            }
+
             if (equipItem)
             {
-                Debug.Log("조준 시작");
                 isAiming = true;
                 useable.UseItemByType(weaponType);
                 return;
@@ -146,7 +154,7 @@ public class PlayerAttack : MonoBehaviour
             else
             {
                 IsAttacking = true;
-                attackType = AttackType.Heavy;
+                canAttack = false;
                 animator.SetTrigger("SAttack_1");
             }
         }
@@ -155,7 +163,6 @@ public class PlayerAttack : MonoBehaviour
         {
             if (equipItem)
             {
-                Debug.Log("조준 해제");
                 isAiming = false;
                 useable.EndUseItemByType(weaponType);
             }
@@ -167,99 +174,27 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
-    public void OnEquipItem(InputAction.CallbackContext context)
+    public void EndAttack()
     {
-        if (context.performed && !isAiming)
-        {
-            int currentItemType = UIWhiteBox.GetCurrentItemNum();
+        IsAttacking = false;
+        canAttack = true;
 
-            if (!equipItem)
-            {
-                Debug.Log("아이템 장착");
-                equipItem = true;
-                weaponType = (WeaponType)currentItemType;
-            }
-            else
-            {
-                Debug.Log("아이템 장착 해제");
-                equipItem = false;
-                weaponType = WeaponType.Hammer;
-            }
+        if (bufferedHeavyAttack)
+        {
+            bufferedHeavyAttack = false;
+            OnAttack2(new InputAction.CallbackContext());
+        }
+        else if (bufferedLightAttack)
+        {
+            bufferedLightAttack = false;
+            OnAttack1(new InputAction.CallbackContext());
         }
     }
-
-    #endregion
-
-    #region Attack Logic
-
-    private void HandleComboResetTimer()
-    {
-        if (comboStep <= 0) return;
-
-        comboTimer -= Time.deltaTime;
-        if (comboTimer <= 0f)
-        {
-            comboStep = 0;
-            comboTimer = 0f;
-        }
-    }
-
-    private void StartWindMill()
-    {
-        if (isWindmilling) return;
-
-        windmillTimer = 0f;
-        isWindmilling = true;
-        attackType = AttackType.Heavy;
-
-        animator.SetBool("isSpinning", true);
-        Debug.Log("윈드밀 시작");
-    }
-
-    private void StopWindMill()
-    {
-        if (!isWindmilling) return;
-
-        isWindmilling = false;
-        attackType = AttackType.None;
-        animator.SetBool("isSpinning", false);
-
-        isDizzy = true;
-        dizzyTimer = 0f;
-
-        Debug.Log("윈드밀 끝");
-    }
-
-    private void HandleWindmillState()
-    {
-        if (!isWindmilling) return;
-
-        windmillTimer += Time.deltaTime;
-        UIWhiteBox.UseGauge(0.15f);
-
-        if (windmillTimer >= maxWindmillTime)
-            StopWindMill();
-    }
-
-    #endregion
-
-    #region Animation Events
 
     public void ComboReset()
     {
         comboStep = 0;
         comboTimer = 0f;
-    }
-
-    public void DIsableAttackInput()
-    {
-        canAttack = false;
-    }
-
-    public void EndAttack()
-    {
-        IsAttacking = false;
-        canAttack = true;
     }
 
     public void EnableHammerCollider()
@@ -274,30 +209,69 @@ public class PlayerAttack : MonoBehaviour
             col.enabled = false;
     }
 
-    #endregion
-
-    #region Utility
-
-    public void EnableInputAction_Attack1()
+    public void SetAttackTypeToLight()
     {
-        attack1Action.action.Enable();
+        attackType = AttackType.Light;
     }
 
-    public void DisableInputAction_Attack1()
+    public void SetAttackTypeToHeavy()
     {
-        attack1Action.action.Disable();
+        attackType = AttackType.Heavy;
     }
 
-    public int currentAttackType()
+    public void StartWindmillTimer()
     {
-        return (int)attackType;
+        isWindmilling = true;
     }
 
+    public void EnableInputAction_Attack1() => attack1Action.action.Enable();
+    public void DisableInputAction_Attack1() => attack1Action.action.Disable();
+    public int currentAttackType() => (int)attackType;
     public void SetLightAttackType() => testCurrentAttackType = AttackType.Light;
     public void SetHeavyAttackType() => testCurrentAttackType = AttackType.Heavy;
 
-    [ContextMenu("화면이동 잠금")]
-    public void TestMethod() => DisableInputAction_Attack1();
+    private void HandleComboResetTimer()
+    {
+        if (comboStep <= 0) return;
+
+        comboTimer -= Time.deltaTime;
+        if (comboTimer <= 0f)
+        {
+            comboStep = 0;
+            comboTimer = 0f;
+        }
+    }
+
+    private void HandleWindmillState()
+    {
+        if (!isWindmilling) return;
+
+        windmillTimer += Time.deltaTime;
+        UIWhiteBox.UseGauge(0.15f);
+
+        if (windmillTimer >= maxWindmillTime)
+            StopWindMill();
+    }
+
+    private void StartWindMill()
+    {
+        if (isWindmilling) return;
+
+        windmillTimer = 0f;
+        
+        animator.SetBool("isSpinning", true);
+    }
+
+    private void StopWindMill()
+    {
+        if (!isWindmilling) return;
+
+        isWindmilling = false;
+        animator.SetBool("isSpinning", false);
+
+        isDizzy = true;
+        dizzyTimer = 0f;
+    }
 
     public bool IsAttackAnim()
     {
@@ -305,5 +279,6 @@ public class PlayerAttack : MonoBehaviour
         return stateInfo.IsTag("Attack");
     }
 
-    #endregion
+    [ContextMenu("화면이동 잠금")]
+    public void TestMethod() => DisableInputAction_Attack1();
 }
