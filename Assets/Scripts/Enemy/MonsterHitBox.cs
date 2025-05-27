@@ -14,6 +14,8 @@ public class MonsterHitBox : MonoBehaviour
 
     public bool IsKnockback;
 
+    private Vector3 hitDirection;
+
     Rigidbody rb;
 
     private void Awake()
@@ -61,9 +63,18 @@ public class MonsterHitBox : MonoBehaviour
     private void Knockback(Collider other, float knockbackForce)
     {
         //나중에 플레이어 무기 타입에 따라서 구분
-        Vector3 direction = other.GetComponentInParent<PlayerMove>().gameObject.transform.position - transform.position;
+        WeaponType weaponType = PlayerHitWhiteBox.WhiteBox.weaponType;
+        switch (weaponType)
+        {
+            case WeaponType.Hammer:
+                hitDirection = other.GetComponentInParent<PlayerMove>().gameObject.transform.position - transform.position;
+                break;
+            case WeaponType.Rope:
+                hitDirection = other.gameObject.transform.position - transform.position;
+                break;
+        }
 
-        Vector3 knockbackDir = -direction.normalized;
+        Vector3 knockbackDir = -hitDirection.normalized;
 
         rb.AddForce(knockbackDir * knockbackForce, ForceMode.Impulse);
 

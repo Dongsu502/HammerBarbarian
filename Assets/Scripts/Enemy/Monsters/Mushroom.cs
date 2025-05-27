@@ -172,6 +172,8 @@ public class Mushroom : MonoBehaviour, IMonster
         hitBoxClass.hitCollider.enabled = false;
         agent.enabled = false;
 
+        Debug.LogWarning($"IsKnockback: {hitBoxClass.IsKnockback}");
+
         if (!hitBoxClass.IsKnockback)
         {
             //약공격 히트 애니메이션
@@ -181,6 +183,8 @@ public class Mushroom : MonoBehaviour, IMonster
             //약공격 히트 불값
             //약공격, 강공격을 애니메이션 키로 SetBool false하여 조절
             animator.SetBool("IsHitting", true);
+
+            Debug.LogWarning("약공격");
         }
         else
         {
@@ -191,6 +195,8 @@ public class Mushroom : MonoBehaviour, IMonster
             animator.SetBool("IsHitting", true);
 
             hitBoxClass.IsKnockback = false;
+
+            Debug.LogWarning("강공격");
         }
     }
 

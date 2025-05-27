@@ -193,7 +193,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Move
     m_Mirror: 0
-  m_BlendParameter: Move
+  m_BlendParameter: HitType
   m_BlendParameterY: Move
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -245,9 +245,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.4295624
-  m_TransitionOffset: 0
-  m_ExitTime: 0
+  m_TransitionDuration: 0.91305405
+  m_TransitionOffset: 0.16498736
+  m_ExitTime: 0.86080307
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
@@ -270,9 +270,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.5686849
-  m_TransitionOffset: 0
-  m_ExitTime: 0.002655971
+  m_TransitionDuration: 1.394793
+  m_TransitionOffset: 0.1270281
+  m_ExitTime: 0.89185363
   m_HasExitTime: 0
   m_HasFixedDuration: 1
   m_InterruptionSource: 0

@@ -30,8 +30,6 @@ public class HitFlashEffect : MonoBehaviour
     {
         isFlashing = true;
 
-        Debug.LogWarning("히트 플래시 이펙트");
-
         // 흰색 머티리얼로 변경
         targetRenderer.material = flashMaterial;
 
