@@ -6,6 +6,7 @@ public class PlayerAttack : MonoBehaviour
 {
     private Animator animator;
     private Rigidbody rb;
+    private PlayerStatus status;
 
     [Header("Attack Combo")]
     [SerializeField] private int comboStep = 0;
@@ -39,7 +40,6 @@ public class PlayerAttack : MonoBehaviour
 
     // Attack types
     public AttackType attackType = AttackType.None;
-    private AttackType testCurrentAttackType = AttackType.Light;
 
     // Interfaces
     private IItemUseable useable;
@@ -51,6 +51,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Awake()
     {
+        status = GetComponent<PlayerStatus>();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         hammerCollider = hammer.GetComponents<Collider>();
@@ -89,6 +90,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAttack1(InputAction.CallbackContext context)
     {
+        if (status.IsDead) return;
         if (!context.performed) return;
 
         if (!canAttack)
@@ -131,7 +133,8 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAttack2(InputAction.CallbackContext context)
     {
-        Debug.Log("아오 진자");
+        if (status.IsDead) return;
+
         if (context.started)
         {
             if (!canAttack)
@@ -170,6 +173,29 @@ public class PlayerAttack : MonoBehaviour
             {
                 StopWindMill();
                 animator.SetBool("isSpinning", false);
+            }
+        }
+    }
+
+    public void OnEquipItem(InputAction.CallbackContext context)
+    {
+        if (status.IsDead) return;
+
+        if (context.performed && !isAiming)
+        {
+            int currentItemType = UIWhiteBox.GetCurrentItemNum();
+
+            if (!equipItem)
+            {
+                Debug.Log("아이템 장착");
+                equipItem = true;
+                weaponType = (WeaponType)currentItemType;
+            }
+            else
+            {
+                Debug.Log("아이템 장착 해제");
+                equipItem = false;
+                weaponType = WeaponType.Hammer;
             }
         }
     }
@@ -227,8 +253,6 @@ public class PlayerAttack : MonoBehaviour
     public void EnableInputAction_Attack1() => attack1Action.action.Enable();
     public void DisableInputAction_Attack1() => attack1Action.action.Disable();
     public int currentAttackType() => (int)attackType;
-    public void SetLightAttackType() => testCurrentAttackType = AttackType.Light;
-    public void SetHeavyAttackType() => testCurrentAttackType = AttackType.Heavy;
 
     private void HandleComboResetTimer()
     {

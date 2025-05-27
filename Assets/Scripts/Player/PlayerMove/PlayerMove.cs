@@ -13,6 +13,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private InputActionReference lookAction;
     [SerializeField] private AimCameraSwitcher cameraSwitcher;
+    private PlayerStatus status;
 
     private PlayerAttack playerAttack;
     private PlayerIK playerIK;
@@ -30,6 +31,7 @@ public class PlayerMove : MonoBehaviour
 
     private void Awake()
     {
+        status = GetComponent<PlayerStatus>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         playerAttack = GetComponent<PlayerAttack>();
@@ -41,16 +43,22 @@ public class PlayerMove : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (status.IsDead) return;
+
         inputVector = context.ReadValue<Vector2>();
     }
 
     public void OnRun(InputAction.CallbackContext context)
     {
+        if (status.IsDead) return;
+
         isRunning = context.performed;
     }
 
     public void OnDIve(InputAction.CallbackContext context)
     {
+        if (status.IsDead) return;
+
         if (context.performed && !isDiving && !playerAttack.IsAttackAnim())
         {
             animator.applyRootMotion = true;
@@ -60,6 +68,8 @@ public class PlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (status.IsDead) return;
+
         if (isDiving || playerAttack.IsAttackAnim())
         {
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
@@ -88,6 +98,18 @@ public class PlayerMove : MonoBehaviour
         }
 
         UpdateMoveSpeed();
+        StickToGround();
+    }
+
+    private void StickToGround()
+    {
+        Ray ray = new Ray(transform.position + Vector3.up * 0.2f, Vector3.down);
+        if (Physics.Raycast(ray, out RaycastHit hit, 0.5f))
+        {
+            Vector3 position = transform.position;
+            position.y = Mathf.MoveTowards(position.y, hit.point.y, 5f * Time.fixedDeltaTime);
+            transform.position = position;
+        }
     }
 
 
@@ -144,17 +166,6 @@ public class PlayerMove : MonoBehaviour
     public void EndDive()
     {
         isDiving = false;
-    }
-
-    // 루트 모션 애니메이션이 끝날 때
-    void OnExitRootMotionAnim()
-    {
-        animator.applyRootMotion = false;
-
-        // 현재 위치를 기준으로 Animator 리셋
-        Vector3 currentPos = transform.position;
-        animator.Rebind(); // Animator를 현재 트랜스폼 상태로 리셋
-        transform.position = currentPos;
     }
 
 }
