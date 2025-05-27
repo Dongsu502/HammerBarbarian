@@ -162,7 +162,7 @@
                     "name": "",
                     "id": "3b972d52-9117-4112-be6d-fb8d3a8ac4f1",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "Hold",
+                    "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Attack2",
