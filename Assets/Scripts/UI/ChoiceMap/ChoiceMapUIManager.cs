@@ -131,8 +131,6 @@ public class ChoiceMapUIManager : MonoBehaviour
     public void Click_Dungeon1()
     {
         Debug.Log("던전1 이동");
-        UIWhiteBox.SceneName = "Map";
-        SceneManager.LoadScene("Loading");
     }
     public void Click_Dungeon2()
     {
@@ -141,6 +139,8 @@ public class ChoiceMapUIManager : MonoBehaviour
     public void Click_Dungeon3()
     {
         Debug.Log("던전3 이동");
+        UIWhiteBox.SceneName = "Map";
+        SceneManager.LoadScene("Loading");
     }
 
     public void Click_World1()

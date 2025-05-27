@@ -27,6 +27,8 @@ public class MainUIManager : MonoBehaviour
     public Image itemImage;
     [Tooltip("아이템사용키 텍스트")]
     public Text itemKey_text;
+    [Tooltip("아이템 활성화 이미지")]
+    [SerializeField] private Image itemSelectImage;
 
     [Space(1)]
     [Tooltip("아이템 선택창")]
@@ -285,6 +287,9 @@ public class MainUIManager : MonoBehaviour
         //아이템선택창 비활성화
         ChoiceUI_SetActive(false);
 
+        //아이템 선택 표시 비활성화
+        ItemSelectImage_SetActive(false);
+
         //게이지이미지 비활성화
         GaugeUI_SetActive(false);
 
@@ -297,6 +302,11 @@ public class MainUIManager : MonoBehaviour
     }
 
     #region SetActiveFunc
+
+    public void ItemSelectImage_SetActive(bool active)
+    {
+        itemSelectImage.gameObject.SetActive(active);
+    }
 
     public void PausePanel_SetActive(bool active)
     {

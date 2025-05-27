@@ -190,12 +190,18 @@ public class PlayerAttack : MonoBehaviour
                 Debug.Log("아이템 장착");
                 equipItem = true;
                 weaponType = (WeaponType)currentItemType;
+
+                //아이템 장착 표시
+                UIWhiteBox.SetActiveItemSelectImage(true);
             }
             else
             {
                 Debug.Log("아이템 장착 해제");
                 equipItem = false;
                 weaponType = WeaponType.Hammer;
+
+                //아이템 장착 표시 해제
+                UIWhiteBox.SetActiveItemSelectImage(false);
             }
         }
     }

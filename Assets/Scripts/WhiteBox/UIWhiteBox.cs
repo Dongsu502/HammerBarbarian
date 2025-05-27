@@ -84,7 +84,12 @@ public static class UIWhiteBox
 
     #region MainUI
 
-    #region SetActivePanel
+    #region SetActive
+
+    public static void SetActiveItemSelectImage(bool isActive)
+    {
+        MainUIWB.ItemSelectImage_SetActive(isActive);
+    }
     public static void SetActivePausePanel(bool isActive)
     {
         MainUIWB.PausePanel_SetActive(isActive);
