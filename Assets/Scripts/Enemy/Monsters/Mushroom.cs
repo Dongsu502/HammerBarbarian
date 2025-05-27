@@ -17,9 +17,14 @@ public class Mushroom : MonoBehaviour, IMonster
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
 
+    [Header("Effect")]
+    [SerializeField] private GameObject attackReadyPrefab;
+    private GameObject attackReadyObject;
+
     private MonsterDetection detectionClass;
     private MonsterHitBox hitBoxClass;
     private MonsterHealthUI healthUIClass;
+    private LongRangeAttack rangeAttackClass;
 
     private NavMeshAgent agent;
     private Animator animator;
@@ -33,6 +38,7 @@ public class Mushroom : MonoBehaviour, IMonster
         detectionClass = GetComponentInChildren<MonsterDetection>();
         hitBoxClass = GetComponentInChildren<MonsterHitBox>();
         healthUIClass = GetComponentInChildren<MonsterHealthUI>();
+        rangeAttackClass = GetComponent<LongRangeAttack>();
 
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
@@ -46,6 +52,23 @@ public class Mushroom : MonoBehaviour, IMonster
     }
 
     #region Animation Eventkey
+
+    /// <summary>
+    /// 기모으기 이펙트 생성
+    /// </summary>
+    public void AttackReady()
+    {
+        Vector3 spawnPos = rangeAttackClass.bulletSpawnPos.position;
+        attackReadyObject = Instantiate(attackReadyPrefab, spawnPos, Quaternion.identity);
+    }
+
+    /// <summary>
+    /// 기모으기 끝
+    /// </summary>
+    public void AttackReadyFinish()
+    {
+        Destroy(attackReadyObject);
+    }
 
     /// <summary>
     /// Hit 애니메이션 이벤트 키
@@ -213,7 +236,7 @@ public class Mushroom : MonoBehaviour, IMonster
 
     public void Death()
     {
-        Debug.Log("골렘 사망");
+        Debug.Log("버섯 사망");
         DieDelay();
     }
     public void Hit()
@@ -234,7 +257,7 @@ public class Mushroom : MonoBehaviour, IMonster
         InAttackRange = HasArrived();
         Debug.Log(InAttackRange);
 
-        Debug.Log("골렘 공격 시작");
+        Debug.Log("버섯 공격 시작");
         IsAttacking = true;
 
         // 공격 모션 중 이동 막기
@@ -249,7 +272,7 @@ public class Mushroom : MonoBehaviour, IMonster
     }
     public void MoveToTarget()
     {
-        Debug.Log("골렘 접근중..");
+        Debug.Log("버섯 접근중..");
         agent.enabled = true;
 
         //감지된 타겟을 바라보고 추적
@@ -272,7 +295,7 @@ public class Mushroom : MonoBehaviour, IMonster
 
         //Idle 애니메이션 플레이
         MoveAnimation(false);
-        Debug.Log("골렘 대기중");
+        Debug.Log("버섯 대기중");
     }
 
     #endregion

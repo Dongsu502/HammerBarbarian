@@ -66,8 +66,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53c458fee9133c8449a331cf1f456c7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  monsterName: Golem
   monsterAttackPower: 1
-  AttackCollider: {fileID: 6578936887699019650}
+  AttackCollider: {fileID: 573504753629860270}
 --- !u!1 &1562643790971292798
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,6 +402,7 @@ MonoBehaviour:
   LightknockbackForce: 1
   HeavyknockbackForce: 10
   IsKnockback: 0
+  playerAttackType: 0
 --- !u!114 &240689754132307771
 MonoBehaviour:
   m_ObjectHideFlags: 0

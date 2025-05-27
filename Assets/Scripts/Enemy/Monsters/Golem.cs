@@ -26,7 +26,7 @@ public class Golem : MonoBehaviour, IMonster
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider golemCollider;
-    private Collider attackCollider;
+    private GameObject attackCollider;
 
     private float moveAmount;
 
@@ -55,11 +55,11 @@ public class Golem : MonoBehaviour, IMonster
     /// </summary>
     public void EnableAttackCol()
     {
-        attackCollider.enabled = true;
+        attackCollider.SetActive(true);
     }
     public void DisableAttackCol()
     {
-        attackCollider.enabled = false;
+        attackCollider.SetActive(false);
     }
 
     /// <summary>

@@ -349,6 +349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   rotateSpeed: 6
+  attackReadyPrefab: {fileID: 5978683434153172194, guid: 96886d40cb147c440af0e90e8536059d, type: 3}
 --- !u!114 &7993369597243107776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,6 +438,7 @@ MonoBehaviour:
   LightknockbackForce: 1
   HeavyknockbackForce: 10
   IsKnockback: 0
+  playerAttackType: 0
 --- !u!114 &8783472523856455710
 MonoBehaviour:
   m_ObjectHideFlags: 0

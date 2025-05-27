@@ -4,12 +4,16 @@ using UnityEngine;
 
 public class MonsterAttackDetection : MonoBehaviour
 {
+    public string monsterName;
     public int monsterAttackPower;
-    public Collider AttackCollider;
+    public GameObject AttackCollider;
 
-    private void OnEnable()
+    private void Start()
     {
-        AttackCollider.enabled = false;
+        if(monsterName == "Golem")
+        {
+            AttackCollider.SetActive(false);
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -20,11 +24,18 @@ public class MonsterAttackDetection : MonoBehaviour
             Vector3 hitPoint = other.ClosestPoint(transform.position);
             Vector3 hitNormal = (other.transform.position - transform.position).normalized;
 
+            if (monsterName == "Mushroom")
+            {
+                gameObject.GetComponent<BulletEffect>().SpawnHitEffect(hitPoint);
+                Destroy(gameObject);
+            }
+
             Player_HitReceiver receiver = other.GetComponent<Player_HitReceiver>();
             if (receiver != null)
             {
                 receiver.OnHit(hitPoint, hitNormal);
             }
         }
+        
     }
 }

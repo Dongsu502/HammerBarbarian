@@ -5,7 +5,7 @@ using UnityEngine;
 public class LongRangeAttack : MonoBehaviour
 {
     [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform bulletSpawnPos;
+    public Transform bulletSpawnPos;
     [SerializeField] private float bulletSpeed;
     [SerializeField] private float destroyDelayTime;
 
