@@ -11,6 +11,8 @@ public class LoadingUIManager : MonoBehaviour
     [SerializeField] private Image gaugeImage;
     [Tooltip("GaugeText")]
     [SerializeField] private Text gaugeText;
+    [Tooltip("로딩 시간")]
+    [SerializeField] private float maxLoadingTime;
     private float time;
 
     [Header("TipPanel")]
@@ -41,18 +43,17 @@ public class LoadingUIManager : MonoBehaviour
         {
             time += Time.deltaTime;
 
-            gaugeImage.fillAmount = time / 10f;
+            gaugeImage.fillAmount = time / maxLoadingTime;
 
-            float gaugeValue = time * 10;
+            float gaugeValue = time * 20;
             gaugeText.text = Mathf.RoundToInt(gaugeValue).ToString() + "%";
-            Debug.LogWarning("로딩중..");
 
             if(time > 0.5f)
             {
                 SetActive_Tip(true);
             }
 
-            if(time > 10)
+            if(time > maxLoadingTime)
             {
                 operation.allowSceneActivation = true;
             }

@@ -814,6 +814,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gaugeImage: {fileID: 1552006133}
   gaugeText: {fileID: 292023089}
+  maxLoadingTime: 5
   tipPanel: {fileID: 1022499915}
 --- !u!1 &2091735398
 GameObject:
