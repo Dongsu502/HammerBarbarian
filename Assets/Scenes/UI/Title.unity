@@ -494,8 +494,8 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "\uC6D4\uB4DC"
 --- !u!222 &245340274
@@ -856,8 +856,8 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "\uC6D4\uB4DC"
 --- !u!222 &345685464
@@ -2945,6 +2945,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ResetDataPopup: {fileID: 428126833}
+  button1WorldName: {fileID: 245340273}
+  button2WorldName: {fileID: 345685463}
+  button3WorldName: {fileID: 1863668951}
   isClickButton: 000000
   selectIndex: -1
 --- !u!1 &1324287279
@@ -4376,8 +4379,8 @@ MonoBehaviour:
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "\uC6D4\uB4DC"
 --- !u!222 &1863668952

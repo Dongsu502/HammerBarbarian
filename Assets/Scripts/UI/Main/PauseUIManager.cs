@@ -57,12 +57,20 @@ public class PauseUIManager : MonoBehaviour
 
     public void Click_GoTitleButton()
     {
+        var currentData = DataManager.Instance.GetCurrentData();
+        string currentDataName = DataManager.Instance.currentDataFileName;
+        DataManager.Instance.SaveGameData(currentData, currentDataName);
+
         UIWhiteBox.SceneName = "Title";
         SceneManager.LoadScene("Loading");
     }
 
     public void Click_QuitButton()
     {
+        var currentData = DataManager.Instance.GetCurrentData();
+        string currentDataName = DataManager.Instance.currentDataFileName;
+        DataManager.Instance.SaveGameData(currentData, currentDataName);
+
         Debug.Log("게임 종료");
         Application.Quit();
     }

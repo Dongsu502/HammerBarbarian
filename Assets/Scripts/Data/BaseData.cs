@@ -14,6 +14,9 @@ public abstract class BaseData
     //월드 클리어 현황
     public WorldData[] worlds = new WorldData[4];
 
+    //현재 월드 클리어 번호
+    public int currentWorldNumber;
+
     //현재 가지고 있는 아이템 리스트
     public int currentItemList;
 
@@ -26,6 +29,26 @@ public abstract class BaseData
         {
             worlds[i] = new WorldData();
         }
+    }
+
+    public int GetCurrentWorldDataNumber()
+    {
+        for(int i = 0; i < worlds.Length; i++)
+        {
+            bool isBreak = false;
+            for(int j = 0; j < worlds[i].dungeons.Length; j++)
+            {
+                if (worlds[i].dungeons[j] == false)
+                {
+                    currentWorldNumber = i + 1;
+                    isBreak = true;
+                    break;
+                }
+            }
+            if (isBreak) break;
+        }
+
+        return currentWorldNumber;
     }
 }
 

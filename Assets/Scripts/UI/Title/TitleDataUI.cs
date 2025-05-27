@@ -4,12 +4,18 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.Windows;
 
 public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 {
     [Header("Panel")]
     [SerializeField] private GameObject ResetDataPopup;
+
+    [Header("Button")]
+    [SerializeField] private Text button1WorldName;
+    [SerializeField] private Text button2WorldName;
+    [SerializeField] private Text button3WorldName;
 
     private UIInputAction uiInput;
 
@@ -34,6 +40,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
         uiInput.TitleUI.DeleteData.started += DeleteKeyAction;
         uiInput.TitleUI.Mouse.started += RightMouseKeyAction;
+
+        SetButtonWorldName();
     }
 
     private void OnDisable()
@@ -72,6 +80,43 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
     }
 
     #endregion
+
+    private void SetButtonWorldName()
+    {
+        bool isExist1 = DataManager.Instance.NeedToCreateNewDataFile(0);
+        if (isExist1)
+        {
+            button1WorldName.text = "데이터 없음";
+        }
+        else
+        {
+            int worldNumber = DataManager.Instance.data1.GetCurrentWorldDataNumber();
+            button1WorldName.text = "월드 " + worldNumber;
+        }
+
+        bool isExist2 = DataManager.Instance.NeedToCreateNewDataFile(1);
+        if (isExist2)
+        {
+            button2WorldName.text = "데이터 없음";
+        }
+        else
+        {
+            int worldNumber = DataManager.Instance.data2.GetCurrentWorldDataNumber();
+            button2WorldName.text = "월드 " + worldNumber;
+        }
+
+        bool isExist3 = DataManager.Instance.NeedToCreateNewDataFile(2);
+        if (isExist3)
+        {
+            button3WorldName.text = "데이터 없음";
+            
+        }
+        else
+        {
+            int worldNumber = DataManager.Instance.data3.GetCurrentWorldDataNumber();
+            button3WorldName.text = "월드 " + worldNumber;
+        }
+    }
 
     private void SetActive_ResetDataPopup(bool isActive)
     {
