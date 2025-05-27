@@ -52,7 +52,7 @@ public class HammerThrowController : MonoBehaviour
 
             Quaternion lookRotation = Quaternion.LookRotation(dir, Vector3.up);
         Vector3 euler = lookRotation.eulerAngles;
-        euler.x = -90f;
+        euler.x = 90f;
         Quaternion finalRotation = Quaternion.Euler(euler);
 
         activeHammer = Instantiate(hammerPrefab, throwOrigin.position, finalRotation);
@@ -62,6 +62,10 @@ public class HammerThrowController : MonoBehaviour
         if (collisionHandler != null)
         {
             collisionHandler.SetController(this);
+        }
+        else
+        {
+            Debug.Log("ππæﬂ ¥Î√º");
         }
 
         hammerRb.isKinematic = false;

@@ -24,15 +24,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Run",
-                    "type": "Button",
-                    "id": "df0af909-013c-4555-ad91-ab481394a4cb",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Attack1",
                     "type": "Button",
                     "id": "75c14569-5f20-4c66-8dc9-e2d827197857",
@@ -133,17 +124,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "Look",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "f0830068-aa0b-4643-adee-47ecbe666c3b",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Run",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
