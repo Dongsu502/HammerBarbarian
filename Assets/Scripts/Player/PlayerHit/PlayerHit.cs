@@ -11,8 +11,19 @@ public class PlayerHit : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Attack_Golem"))
         {
+            MonsterAttackDetection enemyAttack = other.GetComponent<MonsterAttackDetection>();
+            status.TakeDamage(enemyAttack.monsterAttackPower);
+
             animator.applyRootMotion = true;
-            animator.SetTrigger("Hit");
+            if(status.playerHP <= 0)
+            {
+                animator.SetTrigger("Die");
+                status.Die();
+            }
+            else
+            {
+                animator.SetTrigger("Hit");
+            }
         }
     }
 }
