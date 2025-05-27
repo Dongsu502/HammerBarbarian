@@ -116,4 +116,4 @@ MonoBehaviour:
   hand: {fileID: 0}
   ropeGen: {fileID: 5770539081267633766}
   hammerThrow: {fileID: 0}
-  sag: 0.02
+  sag: 0

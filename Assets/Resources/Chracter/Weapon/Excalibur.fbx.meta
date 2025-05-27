@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Excalibur
-    second: {fileID: 2100000, guid: 82219680c91136549a40bb8353716605, type: 2}
+    second: {fileID: 2100000, guid: 69b9a335788707f439c687043b5e6220, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Stone
-    second: {fileID: 2100000, guid: 576e5f1915d9f264b9331957a6f75b0d, type: 2}
+    second: {fileID: 2100000, guid: 38f5cdaf3ec70754b82f740143659321, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
