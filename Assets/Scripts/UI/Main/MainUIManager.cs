@@ -14,6 +14,8 @@ public class MainUIManager : MonoBehaviour
     public GameObject RuneInventoryPanel;
     [Tooltip("대사 패널")]
     public GameObject ScriptPanel;
+    [Tooltip("사망 패널")]
+    public GameObject DiePanel;
 
     [Header("PlayerUI")]
     [Tooltip("플레이어 체력이미지")]
@@ -71,6 +73,10 @@ public class MainUIManager : MonoBehaviour
     [SerializeField] private Animator Anim_RuneInventory;
     [Tooltip("옵션 패널 애니메이션")]
     [SerializeField] private Animator Anim_Setting;
+
+    [Space(3)]
+    [Header("HitEffect")]
+    [SerializeField] private Image hitEffect;
 
     private UIInputAction uiInput;
 
@@ -273,6 +279,9 @@ public class MainUIManager : MonoBehaviour
         //대사 패널 비활성화
         ScriptPanel_SetActive(false);
 
+        //사망 패널 비활성화
+        DiePanel_SetActive(false);
+
         //아이템선택창 비활성화
         ChoiceUI_SetActive(false);
 
@@ -287,7 +296,7 @@ public class MainUIManager : MonoBehaviour
         gaugeImage.fillAmount = gaugeValue / GAUGE_MAX_VALUE;
     }
 
-    #region panelMethod
+    #region SetActiveFunc
 
     public void PausePanel_SetActive(bool active)
     {
@@ -313,6 +322,13 @@ public class MainUIManager : MonoBehaviour
     public void ScriptPanel_SetActive(bool active)
     {
         ScriptPanel.SetActive(active);
+
+        CursorLock(active);
+    }
+
+    public void DiePanel_SetActive(bool active)
+    {
+        DiePanel.SetActive(active);
 
         CursorLock(active);
     }
@@ -386,12 +402,14 @@ public class MainUIManager : MonoBehaviour
         currentHealth -= amount;
         currentHealth = Mathf.Clamp(currentHealth, MIN_HEALTH, MAX_HEALTH);
         UpdateHearts();
+        hitEffect.gameObject.SetActive(true);
 
         Debug.Log($"피격! 현재 체력: {currentHealth}");
 
         if(currentHealth <= MIN_HEALTH)
         {
-            Debug.Log("사망");
+            UIWhiteBox.MainUICurrentState = MainUIState.Die;
+            DiePanel_SetActive(true);
         }
     }
 

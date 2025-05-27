@@ -22,6 +22,8 @@ public class TitleUIManager : MonoBehaviour
 
     [Space(2)]
     [Header("Animator")]
+    [Tooltip("타이틀캔버스 애니메이터")]
+    [SerializeField] private Animator Anim_Title;
     [Tooltip("페이드인아웃 이미지")]
     [SerializeField] private Image Image_fadeInOut;
     [Tooltip("설정창 Off 애니메이션")]
@@ -58,7 +60,6 @@ public class TitleUIManager : MonoBehaviour
         Image_fadeInOut.gameObject.SetActive(false);
     }
 
-    [ContextMenu("플레이버튼 등장!")]
     public void OnPlayButton()
     {
         PlayButton.SetActive(true);
@@ -75,7 +76,7 @@ public class TitleUIManager : MonoBehaviour
 
     private IEnumerator StartSequence()
     {
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         //플레이 버튼 활성화
         OnPlayButton();
     }
@@ -86,6 +87,7 @@ public class TitleUIManager : MonoBehaviour
     {
         PlayButton.SetActive(false);
 
+        Anim_Title.SetTrigger("Start");
         MenuPanel.SetActive(true);
     }
 

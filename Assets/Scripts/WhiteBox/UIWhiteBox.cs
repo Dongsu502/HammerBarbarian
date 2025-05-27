@@ -11,7 +11,8 @@ public enum MainUIState
     PAUSE,
     PAUSE_SETTING,
     RUNE_INVENTORY,
-    SCRIPT
+    SCRIPT,
+    Die
 }
 public enum ChoiceMapUIState
 {
