@@ -173,14 +173,17 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
             case 0:
                 DataManager.Instance.DeleteDataFile(selectIndex);
+                button1WorldName.text = "데이터 없음";
                 break;
 
             case 1:
                 DataManager.Instance.DeleteDataFile(selectIndex);
+                button2WorldName.text = "데이터 없음";
                 break;
 
             case 2:
                 DataManager.Instance.DeleteDataFile(selectIndex);
+                button3WorldName.text = "데이터 없음";
                 break;
         }
         

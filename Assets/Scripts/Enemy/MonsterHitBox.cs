@@ -18,6 +18,8 @@ public class MonsterHitBox : MonoBehaviour
 
     Rigidbody rb;
 
+    public AttackType playerAttackType;
+
     private void Awake()
     {
         monster = GetComponentInParent<IMonster>();
@@ -38,20 +40,20 @@ public class MonsterHitBox : MonoBehaviour
                 flash.Flash();
             }
 
-            AttackType attackType = PlayerHitWhiteBox.WhiteBox.attacktype;
+            playerAttackType = PlayerHitWhiteBox.WhiteBox.attacktype;
             //강공격인지 확인 -> 넉백
-            if(attackType == AttackType.Heavy)
+            if(playerAttackType == AttackType.Heavy)
             {
                 IsKnockback = true;
 
-                PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, attackType);
+                PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, playerAttackType);
 
                 Knockback(other, HeavyknockbackForce);
             }
 
-            if (attackType == AttackType.Light)
+            if (playerAttackType == AttackType.Light)
             {
-                PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, attackType);
+                PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, playerAttackType);
 
                 Knockback(other, LightknockbackForce);
             }

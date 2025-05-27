@@ -235,7 +235,7 @@ public class Golem : MonoBehaviour, IMonster
         IsHit = false;
         IsBeingHit = true;
 
-        int hitDamage = PlayerStatWhiteBox.WhtieBox.playerAttackDamage;
+        int hitDamage = PlayerStatWhiteBox.WhtieBox.playerAttackDamage(hitBoxClass.playerAttackType);
         TakeDamage(hitDamage);
     }
     public void Attack()
