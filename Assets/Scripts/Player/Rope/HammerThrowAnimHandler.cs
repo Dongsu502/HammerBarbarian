@@ -10,31 +10,18 @@ public class HammerThrowAnimHandler : MonoBehaviour
 
     private void Awake()
     {
-        animator = GetComponent<Animator>();
-        
+        animator = GetComponent<Animator>();        
     }
 
     public void StartThrow()
     {
-        //hammer.SetActive(false);
-        SkinnedMeshRenderer skinnedMeshRenderer = hammer.GetComponent<SkinnedMeshRenderer>();
-
-        Material weaponMaterial = skinnedMeshRenderer.materials[2];
-        Color c = weaponMaterial.color;
-        c.a = 0f;
-        weaponMaterial.color = c;
+        hammer.SetActive(false);
         animator.SetBool("isThrowing",true);
     }
 
     public void StopThrow()
     {
-        //hammer.SetActive(true);
-        SkinnedMeshRenderer skinnedMeshRenderer = hammer.GetComponent<SkinnedMeshRenderer>();
-
-        Material weaponMaterial = skinnedMeshRenderer.materials[2];
-        Color c = weaponMaterial.color;
-        c.a = 1f;
-        weaponMaterial.color = c;
+        hammer.SetActive(true);
         animator.SetBool("isThrowing", false);
     }
 }

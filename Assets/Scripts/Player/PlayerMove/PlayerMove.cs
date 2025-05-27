@@ -6,8 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerMove : MonoBehaviour
 {
     [Header("Movement Settings")]
-    [SerializeField] private float walkSpeed = 8f;
-    [SerializeField] private float runSpeed = 9f;
+    [SerializeField] private float moveSpeed = 8f;
 
     [Header("References")]
     [SerializeField] private Transform cameraTransform;
@@ -21,7 +20,6 @@ public class PlayerMove : MonoBehaviour
     private Animator animator;
 
     private Vector2 inputVector;
-    private bool isRunning = false;
     private bool isDiving = false;
 
     public float currentAnimSpeed = 0f;
@@ -46,13 +44,6 @@ public class PlayerMove : MonoBehaviour
         if (status.IsDead) return;
 
         inputVector = context.ReadValue<Vector2>();
-    }
-
-    public void OnRun(InputAction.CallbackContext context)
-    {
-        if (status.IsDead) return;
-
-        isRunning = context.performed;
     }
 
     public void OnDIve(InputAction.CallbackContext context)
@@ -81,12 +72,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         Vector3 moveDir = CalculateMoveDirection();
-        float currentSpeed = isRunning ? runSpeed : walkSpeed;
-
-        if (cameraSwitcher.isAiming)
-        {
-            currentSpeed = 5f;
-        }
+        float currentSpeed = cameraSwitcher.isAiming ? 5f : moveSpeed;
 
         Vector3 velocity = moveDir * currentSpeed;
         rb.velocity = new Vector3(velocity.x, rb.velocity.y, velocity.z);
@@ -112,7 +98,6 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-
     private Vector3 CalculateMoveDirection()
     {
         Vector3 forward = cameraTransform.forward;
@@ -129,14 +114,11 @@ public class PlayerMove : MonoBehaviour
         if (animator == null) return;
 
         bool isInputActive = inputVector.sqrMagnitude >= 0.1f;
-        bool isIdle = !isInputActive;
+        float targetSpeed = isInputActive ? 0.8f : 0f;
 
-        float targetSpeed = isIdle ? 0f : (isRunning ? 1f : 0.8f);
-
-        currentAnimSpeed = Mathf.Lerp(currentAnimSpeed, targetSpeed, Time.fixedDeltaTime*5f);
+        currentAnimSpeed = Mathf.Lerp(currentAnimSpeed, targetSpeed, Time.fixedDeltaTime * 5f);
         animator.SetFloat("MoveSpeed", currentAnimSpeed);
     }
-
 
     private IEnumerator DiveCoroutine()
     {
@@ -167,5 +149,4 @@ public class PlayerMove : MonoBehaviour
     {
         isDiving = false;
     }
-
 }

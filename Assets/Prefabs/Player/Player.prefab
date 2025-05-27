@@ -1764,8 +1764,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dce85056cb2eef04383a9c1b6bd2d6f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSpeed: 11
-  runSpeed: 15
+  moveSpeed: 11
   cameraTransform: {fileID: 0}
   lookAction: {fileID: -95819877466578605, guid: 34e1375c36cf6824fb646448eab1fe47, type: 3}
   cameraSwitcher: {fileID: 0}
