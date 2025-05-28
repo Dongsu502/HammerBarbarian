@@ -23,8 +23,8 @@ public class PlayerMove : MonoBehaviour
     private bool isDiving = false;
 
     public float currentAnimSpeed = 0f;
-    private float diveSpeed = 1f;
-    private float diveDuration = 1f;
+    private float diveSpeed = 5f;
+    private float diveDuration = 1.2f;
     private AnimationCurve diveSpeedCurve;
 
     private void Awake()
@@ -84,7 +84,11 @@ public class PlayerMove : MonoBehaviour
         }
 
         UpdateMoveSpeed();
-        StickToGround();
+        if (!isDiving)
+        {
+            StickToGround();
+
+        }
     }
 
     private void StickToGround()
@@ -136,6 +140,13 @@ public class PlayerMove : MonoBehaviour
         while (elapsed < diveDuration)
         {
             Vector3 offset = moveDir * diveSpeed * Time.fixedDeltaTime;
+
+            // 벽 충돌 사전 감지
+            if (Physics.Raycast(rb.position, moveDir, out RaycastHit hit, offset.magnitude + 0.1f, LayerMask.GetMask("InvisibleWall")))
+            {
+                break;
+            }
+
             rb.MovePosition(rb.position + offset);
             elapsed += Time.fixedDeltaTime;
             yield return new WaitForFixedUpdate();
@@ -145,8 +156,22 @@ public class PlayerMove : MonoBehaviour
         isDiving = false;
     }
 
+
     public void EndDive()
     {
         isDiving = false;
+    }
+
+    public void OnInterpolate()
+    {
+        isDiving = true;
+        rb.interpolation = RigidbodyInterpolation.Extrapolate;
+        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+    }
+
+    public void OffInterpolate()
+    {
+        rb.interpolation = RigidbodyInterpolation.None;
+        rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
     }
 }

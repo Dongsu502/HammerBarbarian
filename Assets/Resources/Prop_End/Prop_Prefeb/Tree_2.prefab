@@ -48,9 +48,93 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7567606629468105249, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -7426739409916788527, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -6844190791126084743, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -6737457706927196297, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -6279087277881825844, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -6176513780125827179, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -4123292429646024344, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -3219667987162777922, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: -1340784564810384053, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 793358360990240784, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
       propertyPath: m_Name
-      value: Tree_2 (1)
+      value: Tree_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 2314846980746449117, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452271665733034256, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4804853416078053747, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 4849042302580644941, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 5135117179731087362, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6602201867123003894, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6781330548785859341, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 7721467417225323870, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8063177841202270420, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 9054155471211529582, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_Layer
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
