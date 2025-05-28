@@ -12,5 +12,6 @@ public class BulletEffect : MonoBehaviour
     public void SpawnHitEffect(Vector3 hitPosition)
     {
         hitEffectObject = Instantiate(hitEffectPrefab, hitPosition, Quaternion.identity);
+        Destroy(hitEffectObject,2f);
     }
 }

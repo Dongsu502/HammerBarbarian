@@ -139,7 +139,7 @@ public class ChoiceMapUIManager : MonoBehaviour
     public void Click_Dungeon3()
     {
         Debug.Log("던전3 이동");
-        UIWhiteBox.SceneName = "Map";
+        UIWhiteBox.SceneName = "New Map";
         SceneManager.LoadScene("Loading");
     }
 

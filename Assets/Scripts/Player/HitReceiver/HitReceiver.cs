@@ -7,14 +7,15 @@ public class HitReceiver : MonoBehaviour
     [SerializeField] private GameObject hitEffectPrefab;
     [SerializeField] private float effectOffset = 0.05f;
 
-    public void OnHit(Vector3 hitPoint,Vector3 hitNormal)
+    public void OnHit(Vector3 hitPoint, Vector3 hitNormal)
     {
         if (hitEffectPrefab != null)
         {
             Vector3 spawnPos = hitPoint + hitNormal * effectOffset;
             Quaternion rot = Quaternion.LookRotation(hitNormal);
 
-            Instantiate(hitEffectPrefab, spawnPos, rot);
+            GameObject effect = Instantiate(hitEffectPrefab, spawnPos, rot);
+            Destroy(effect, 2f); // 2초 후 자동 파괴
         }
     }
 }

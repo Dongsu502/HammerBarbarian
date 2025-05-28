@@ -47,6 +47,7 @@ public class PauseUIManager : MonoBehaviour
     {
         mainUIManager.PausePanel_SetActive(false);
         UIWhiteBox.MainUICurrentState = MainUIState.NONE;
+        WorldWhiteBox.WhiteBox.ResumeGame();
     }
 
     public void Click_Setting()
