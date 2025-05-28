@@ -278,7 +278,7 @@ public class PlayerAttack : MonoBehaviour
         if (!isWindmilling) return;
 
         windmillTimer += Time.deltaTime;
-        UIWhiteBox.UseGauge(0.15f);
+        UIWhiteBox.UseGauge(0.3f);
 
         if (windmillTimer >= maxWindmillTime)
             StopWindMill();

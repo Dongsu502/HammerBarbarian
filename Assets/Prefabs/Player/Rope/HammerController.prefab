@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwOrigin: {fileID: 0}
-  hammerPrefab: {fileID: 4816191021747535203, guid: 583e9145dd2598a41a681fe4c8498d4e, type: 3}
+  hammerPrefab: {fileID: 5974699853018199197, guid: 281d0c98fe390774088501bdaf2df536, type: 3}
   mainCamera: {fileID: 0}
+  hammerThrowAnimHandler: {fileID: 0}
   playerTransform: {fileID: 0}
   playerRb: {fileID: 0}
   throwSpeed: 60
