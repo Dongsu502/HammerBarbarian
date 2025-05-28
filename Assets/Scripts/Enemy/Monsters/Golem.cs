@@ -181,6 +181,10 @@ public class Golem : MonoBehaviour, IMonster
         healthUIClass.TakeDamageUI(damage);
 
         HitAnimation();
+        if(HP<=0)
+        {
+            Destroy(this.gameObject, 5f);
+        }
     }
 
     private void HitAnimation()

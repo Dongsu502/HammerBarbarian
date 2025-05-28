@@ -8,12 +8,12 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Big_Tree
-    second: {fileID: 2100000, guid: 6a1ee7d93e104e74a9080913d3c8bcdf, type: 2}
+    second: {fileID: 2100000, guid: a324b39b390ece24eba4aae39b50132a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tree_Leaf
-    second: {fileID: 2100000, guid: f313fd6fa4f59da4ebd1d76eb202cb24, type: 2}
+    second: {fileID: 8345877277565219651, guid: cea7509b8aa6bab4786b070fe7888f17, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0

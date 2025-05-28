@@ -101,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 4646268977044781299}
-  status: {fileID: 0}
+  status: {fileID: 2642593598563711206}
 --- !u!114 &7407847551293000281
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,15 +211,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 416c1836a317852439696dd195f07357, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 74.02
+      value: 49.89
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 416c1836a317852439696dd195f07357, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.0031123
+      value: 4.09
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 416c1836a317852439696dd195f07357, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 107.32
+      value: 6.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 416c1836a317852439696dd195f07357, type: 3}
       propertyPath: m_LocalRotation.w

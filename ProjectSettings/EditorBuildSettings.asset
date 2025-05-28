@@ -12,8 +12,8 @@ EditorBuildSettings:
     path: Assets/Scenes/UI/ChoiceDungeon.unity
     guid: a572a387a5c66ed4fbe81d348cb0f37c
   - enabled: 1
-    path: Assets/Scenes/Map/Scenes/Map.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
+    path: Assets/Scenes/New Map/New Map.unity
+    guid: 11064f62b57eba844ad7154f682949bb
   - enabled: 1
     path: Assets/Scenes/UI/Loading.unity
     guid: 005a3a4a78ea55f4484d8ee0c9839828
