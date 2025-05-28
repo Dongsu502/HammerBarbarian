@@ -192,7 +192,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
         {
             LoadData(selectIndex);
             isClickButton[selectIndex] = false;
-            SceneManager.LoadScene("ChoiceDungeon");
+            UIWhiteBox.SceneName = "ChoiceDungeon";
+            SceneManager.LoadSceneAsync("Loading");
         }
         else
         {

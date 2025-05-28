@@ -14,6 +14,7 @@ public class LoadingUIManager : MonoBehaviour
     [Tooltip("로딩 시간")]
     [SerializeField] private float maxLoadingTime;
     private float time;
+    private float gaugeTextAmount;
 
     [Header("TipPanel")]
     [SerializeField] private GameObject tipPanel;
@@ -24,6 +25,23 @@ public class LoadingUIManager : MonoBehaviour
     {
         sceneName = UIWhiteBox.SceneName;
         Debug.LogWarning(sceneName);
+
+        if (sceneName == "ChoiceDungeon")
+        {
+            maxLoadingTime = 2f;
+            gaugeTextAmount = 50f;
+        }
+        else if(sceneName == "New Map")
+        {
+            maxLoadingTime = 4f;
+            gaugeTextAmount = 25f;
+        }
+        else
+        {
+            maxLoadingTime = 4f;
+            gaugeTextAmount = 25f;
+        }
+        Debug.LogWarning(maxLoadingTime);
 
         SetActive_Tip(false);
     }
@@ -45,13 +63,13 @@ public class LoadingUIManager : MonoBehaviour
 
             gaugeImage.fillAmount = time / maxLoadingTime;
 
-            float gaugeValue = time * 20;
+            float gaugeValue = time * gaugeTextAmount;
             gaugeText.text = Mathf.RoundToInt(gaugeValue).ToString() + "%";
 
             if(time > 0.5f)
             {
                 SetActive_Tip(true);
-            }
+            }            
 
             if(time > maxLoadingTime)
             {

@@ -219,12 +219,10 @@ public class MainUIManager : MonoBehaviour
                 case MainUIState.NONE:
                     PausePanel_SetActive(true);
                     UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
-                    WorldWhiteBox.WhiteBox.PauseGame();
                     break;
                 case MainUIState.PAUSE:
                     PausePanel_SetActive(false);
                     UIWhiteBox.MainUICurrentState = MainUIState.NONE;
-                    WorldWhiteBox.WhiteBox.ResumeGame();
                     break;
                 case MainUIState.PAUSE_SETTING:
                     Anim_Setting.SetTrigger("Off");
