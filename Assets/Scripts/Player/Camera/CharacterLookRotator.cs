@@ -15,9 +15,8 @@ public class CharacterLookRotator : MonoBehaviour
             pov = aimCamera.GetCinemachineComponent<CinemachinePOV>();
     }
 
-    void Update()
+    void LateUpdate()
     {
-        // 에임 카메라가 현재 Live 상태일 때만 작동
         if (aimCamera != null && aimCamera.Priority == GetHighestPriority())
         {
             if (pov == null) return;

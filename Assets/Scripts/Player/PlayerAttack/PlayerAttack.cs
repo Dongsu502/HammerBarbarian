@@ -143,7 +143,7 @@ public class PlayerAttack : MonoBehaviour
                 return;
             }
 
-            if (equipItem)
+            if (equipItem&& !IsAttackAnim()&&!IsDiveAnim())
             {
                 isAiming = true;
                 useable.UseItemByType(weaponType);
@@ -164,7 +164,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (context.canceled)
         {
-            if (equipItem)
+            if (equipItem&& !IsAttackAnim()&& !IsDiveAnim())
             {
                 isAiming = false;
                 useable.EndUseItemByType(weaponType);
@@ -308,6 +308,12 @@ public class PlayerAttack : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         return stateInfo.IsTag("Attack");
+    }
+
+    public bool IsDiveAnim()
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsTag("Dive");
     }
 
     [ContextMenu("화면이동 잠금")]
