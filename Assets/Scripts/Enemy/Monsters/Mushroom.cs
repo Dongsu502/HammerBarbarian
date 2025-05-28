@@ -7,7 +7,7 @@ using UnityEngine.AI;
 public class Mushroom : MonoBehaviour, IMonster
 {
     public string Name { get; private set; } = "Mushroom";
-    public int HP { get; private set; } = 50;
+    public int HP { get; private set; } = 30;
     public bool IsHit { get; set; }
     public bool IsBeingHit { get; private set; }
     public bool TargetDetected { get; set; }

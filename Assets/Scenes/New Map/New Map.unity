@@ -804,7 +804,7 @@ GameObject:
   - component: {fileID: 221620641}
   - component: {fileID: 221620640}
   - component: {fileID: 221620639}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: TextToggleController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3200,19 +3200,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4566345529945945170, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.6303194
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4566345529945945170, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.2824043
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4566345529945945170, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.65994036
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4566345529945945170, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.29567546
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4629232248383922634, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_LocalPosition.z

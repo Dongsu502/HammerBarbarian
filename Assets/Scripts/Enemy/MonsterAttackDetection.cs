@@ -18,7 +18,7 @@ public class MonsterAttackDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.transform.CompareTag("Player"))
+        if(other.transform.CompareTag("PlayerHitBox"))
         {
             Debug.Log($"몬스터 {other.gameObject.name}공격!! ");
             Vector3 hitPoint = other.ClosestPoint(transform.position);

@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Golem : MonoBehaviour, IMonster
 {
     public string Name { get; private set; } = "Golem";
-    public int HP { get; private set; } = 100;
+    public int HP { get; private set; } = 50;
     public bool IsHit { get; set; }
     public bool IsBeingHit { get; private set; }
     public bool TargetDetected { get; set; }

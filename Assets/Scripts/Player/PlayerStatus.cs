@@ -25,6 +25,7 @@ public class PlayerStatus : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
+        Debug.LogWarning(damage);
         playerHP -= damage;
         UIWhiteBox.TakeDamage(damage); 
     }
