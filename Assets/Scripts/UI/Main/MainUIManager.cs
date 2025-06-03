@@ -51,6 +51,11 @@ public class MainUIManager : MonoBehaviour
     private Gradient gaugeGradient;
 
     [Space(3)]
+    [Header("Map")]
+    [Tooltip("미니맵")]
+    [SerializeField] private Image minimapImage;
+
+    [Space(3)]
     [Header("Crosshair")]
     [Tooltip("원거리공격 에임")]
     public Image crossHairImage;
@@ -92,6 +97,12 @@ public class MainUIManager : MonoBehaviour
     private const float GAUGE_RECOVERY_VALUE = 0.1f;
     private const float GAUGE_MIN_VALUE = 0f;
     private const float GAUGE_MAX_VALUE = 100f;
+
+    private bool isBigMapSize = false;
+    private const float BIG_MINIMAP_POS = -250f;
+    private const float SMALL_MINIMAP_POS = -200f;
+    private const float BIG_MINIMAP_SCALE = 450f;
+    private const float SMALL_MINIMAP_SCALE = 320f;
 
 #if UNITY_EDITOR
 
@@ -173,6 +184,8 @@ public class MainUIManager : MonoBehaviour
 
         uiInput.MainUI.Rune.started += RuneInventoryAction;
 
+        uiInput.MainUI.Map.started += MapAction;
+
         #endregion
 
         UIWhiteBox.MainUICurrentState = MainUIState.NONE;
@@ -192,6 +205,8 @@ public class MainUIManager : MonoBehaviour
         uiInput.MainUI.ChoiceItem.canceled -= ChoiceItemAction;
 
         uiInput.MainUI.Rune.started -= RuneInventoryAction;
+
+        uiInput.MainUI.Map.started -= MapAction;
 
         #endregion
     }
@@ -228,6 +243,11 @@ public class MainUIManager : MonoBehaviour
                     Anim_Setting.SetTrigger("Off");
                     UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
                     break;
+                default:
+                    Debug.LogWarning("MainUIState가 NONE, PAUSE, PAUSE_SETTING이 아닙니다.");
+                    PausePanel_SetActive(true);
+                    UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
+                    break;
             }
         }
         
@@ -259,6 +279,30 @@ public class MainUIManager : MonoBehaviour
                 UIWhiteBox.SetRuneInventoryTitleText("인벤토리");
                 RuneInventoryPanel_SetActive(true);
             }
+        }
+    }
+
+    private void MapAction(InputAction.CallbackContext context)
+    {
+        if(context.started)
+        {
+            Vector2 newPos;
+            float newScale;
+            if(!isBigMapSize)
+            {
+                isBigMapSize = true;
+
+                newPos = new Vector2(BIG_MINIMAP_POS, BIG_MINIMAP_POS);
+                newScale = BIG_MINIMAP_SCALE;
+            }
+            else
+            {
+                isBigMapSize = false;
+
+                newPos = new Vector2(SMALL_MINIMAP_POS, SMALL_MINIMAP_POS);
+                newScale = SMALL_MINIMAP_SCALE;
+            }
+            MapSizeChange(newPos, newScale);
         }
     }
 
@@ -589,6 +633,25 @@ public class MainUIManager : MonoBehaviour
     public void SetColorRuneShowImage(int index)
     {
         runeShowImages[index].color = Color.red;
+    }
+
+    #endregion
+
+    #region Map
+
+    private void MapSizeChange(Vector2 newPos2D ,float newSize)
+    {
+        RawImage insideImage = minimapImage.GetComponentInChildren<RawImage>();
+        Image frameImage = minimapImage.transform.GetChild(1).GetComponent<Image>();
+
+        minimapImage.rectTransform.anchoredPosition = newPos2D;
+
+        minimapImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newSize);
+        minimapImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
+        insideImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newSize);
+        insideImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
+        frameImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newSize);
+        frameImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
     }
 
     #endregion

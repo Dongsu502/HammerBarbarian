@@ -195,7 +195,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff707ae6f7cb454fb6f5be48b11643c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
 --- !u!54 &564963987
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -948,22 +947,6 @@ PrefabInstance:
     - target: {fileID: 3395330831850877845, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3562728903483786107, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5292040311330655802, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: m_Text
-      value: "\uB8EC \uC120\uD0DD"
-      objectReference: {fileID: 0}
-    - target: {fileID: 6220053306432933213, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8984782676096567005, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9096148321434316099, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
       propertyPath: m_Name

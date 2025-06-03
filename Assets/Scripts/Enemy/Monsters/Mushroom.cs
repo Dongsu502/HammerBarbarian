@@ -247,6 +247,8 @@ public class Mushroom : MonoBehaviour, IMonster
         StopAttack();
         IsHit = false;
         IsBeingHit = true;
+        //공격 기모으기 이펙트 삭제
+        AttackReadyFinish();
 
         int hitDamage = PlayerStatWhiteBox.WhtieBox.playerAttackDamage(hitBoxClass.playerAttackType);
         TakeDamage(hitDamage);

@@ -62,6 +62,15 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Map"",
+                    ""type"": ""Button"",
+                    ""id"": ""0ccfe98e-1e35-483f-9557-9e51fcb78bff"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -106,6 +115,17 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Script"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""075f3a9b-ffbf-407b-9a7a-41457906adb1"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Map"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -216,6 +236,7 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         m_MainUI_ChoiceItem = m_MainUI.FindAction("ChoiceItem", throwIfNotFound: true);
         m_MainUI_Rune = m_MainUI.FindAction("Rune", throwIfNotFound: true);
         m_MainUI_Script = m_MainUI.FindAction("Script", throwIfNotFound: true);
+        m_MainUI_Map = m_MainUI.FindAction("Map", throwIfNotFound: true);
         // ChoiceMapUI
         m_ChoiceMapUI = asset.FindActionMap("ChoiceMapUI", throwIfNotFound: true);
         m_ChoiceMapUI_OpenWorldMap = m_ChoiceMapUI.FindAction("OpenWorldMap", throwIfNotFound: true);
@@ -296,6 +317,7 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_MainUI_ChoiceItem;
     private readonly InputAction m_MainUI_Rune;
     private readonly InputAction m_MainUI_Script;
+    private readonly InputAction m_MainUI_Map;
     public struct MainUIActions
     {
         private @UIInputAction m_Wrapper;
@@ -304,6 +326,7 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         public InputAction @ChoiceItem => m_Wrapper.m_MainUI_ChoiceItem;
         public InputAction @Rune => m_Wrapper.m_MainUI_Rune;
         public InputAction @Script => m_Wrapper.m_MainUI_Script;
+        public InputAction @Map => m_Wrapper.m_MainUI_Map;
         public InputActionMap Get() { return m_Wrapper.m_MainUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -325,6 +348,9 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
             @Script.started += instance.OnScript;
             @Script.performed += instance.OnScript;
             @Script.canceled += instance.OnScript;
+            @Map.started += instance.OnMap;
+            @Map.performed += instance.OnMap;
+            @Map.canceled += instance.OnMap;
         }
 
         private void UnregisterCallbacks(IMainUIActions instance)
@@ -341,6 +367,9 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
             @Script.started -= instance.OnScript;
             @Script.performed -= instance.OnScript;
             @Script.canceled -= instance.OnScript;
+            @Map.started -= instance.OnMap;
+            @Map.performed -= instance.OnMap;
+            @Map.canceled -= instance.OnMap;
         }
 
         public void RemoveCallbacks(IMainUIActions instance)
@@ -472,6 +501,7 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         void OnChoiceItem(InputAction.CallbackContext context);
         void OnRune(InputAction.CallbackContext context);
         void OnScript(InputAction.CallbackContext context);
+        void OnMap(InputAction.CallbackContext context);
     }
     public interface IChoiceMapUIActions
     {

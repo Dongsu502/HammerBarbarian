@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8462739246932004184}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: VFX_Trail_Nature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3045179546469444612}
   - component: {fileID: 9221680245413418549}
   - component: {fileID: 2581139768854670339}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Fly
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4874,7 +4874,7 @@ GameObject:
   - component: {fileID: 3174116400369078490}
   - component: {fileID: 1076758189532071012}
   - component: {fileID: 2096505014553419786}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Fire Effects Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9712,7 +9712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1708230925587178545}
   - component: {fileID: 6256043189375153650}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Trail 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9777,7 +9777,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 1
-  m_PreviewTimeScale: 1
+  m_PreviewTimeScale: 0
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -9848,7 +9848,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6683140261387323178}
   - component: {fileID: 6443775026278853565}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: Distortion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9989,7 +9989,7 @@ GameObject:
   - component: {fileID: 5934368299743511528}
   - component: {fileID: 2223948096333631625}
   - component: {fileID: 689558602803787561}
-  m_Layer: 0
+  m_Layer: 20
   m_Name: MushroomBullet
   m_TagString: Attack_Mushroom
   m_Icon: {fileID: 0}
@@ -10005,7 +10005,7 @@ Transform:
   m_GameObject: {fileID: 6857675137450186579}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.2, y: 0, z: -6.54}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.33, y: 0.33, z: 0.33}
   m_ConstrainProportionsScale: 1
   m_Children:
