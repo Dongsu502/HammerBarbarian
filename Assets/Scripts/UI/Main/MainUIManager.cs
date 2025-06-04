@@ -54,6 +54,7 @@ public class MainUIManager : MonoBehaviour
     [Header("Map")]
     [Tooltip("¹Ì´Ï¸Ê")]
     [SerializeField] private Image minimapImage;
+    [SerializeField] private Camera minimapCamera;
 
     [Space(3)]
     [Header("Crosshair")]
@@ -294,6 +295,8 @@ public class MainUIManager : MonoBehaviour
 
                 newPos = new Vector2(BIG_MINIMAP_POS, BIG_MINIMAP_POS);
                 newScale = BIG_MINIMAP_SCALE;
+
+                minimapCamera.GetComponent<Minimap_Camera>().ChangeSize(30f);
             }
             else
             {
@@ -301,6 +304,8 @@ public class MainUIManager : MonoBehaviour
 
                 newPos = new Vector2(SMALL_MINIMAP_POS, SMALL_MINIMAP_POS);
                 newScale = SMALL_MINIMAP_SCALE;
+
+                minimapCamera.GetComponent<Minimap_Camera>().ChangeSize(20f);
             }
             MapSizeChange(newPos, newScale);
         }

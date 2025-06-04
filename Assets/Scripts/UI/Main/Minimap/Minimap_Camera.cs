@@ -22,4 +22,11 @@ public class Minimap_Camera : MonoBehaviour
 
         transform.position = newPos;
     }
+
+    public void ChangeSize(float newSize)
+    {
+        Camera thisCamera = GetComponent<Camera>();
+
+        thisCamera.orthographicSize = newSize;
+    }
 }
