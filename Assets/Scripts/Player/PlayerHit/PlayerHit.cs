@@ -31,7 +31,7 @@ public class PlayerHit : MonoBehaviour
             }
             else
             {
-                animator.SetTrigger("Hit");
+                //animator.SetTrigger("Hit");
             }
         }
     }
