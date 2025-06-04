@@ -23,8 +23,8 @@ public class PlayerMove : MonoBehaviour
     private bool isDiving = false;
 
     public float currentAnimSpeed = 0f;
-    private float diveSpeed = 5f;
-    private float diveDuration = 1.2f;
+    [SerializeField]private float diveSpeed = 5f;
+    private float diveDuration = 0.38f;
     private AnimationCurve diveSpeedCurve;
 
     private void Awake()
@@ -53,7 +53,8 @@ public class PlayerMove : MonoBehaviour
         if (context.performed && !isDiving && !playerAttack.IsAttackAnim())
         {
             animator.applyRootMotion = true;
-            StartCoroutine(DiveCoroutine());
+
+            animator.SetTrigger("Dive");
         }
     }
 
@@ -133,7 +134,6 @@ public class PlayerMove : MonoBehaviour
             moveDir = transform.forward;
 
         transform.rotation = Quaternion.LookRotation(moveDir);
-        animator.SetTrigger("Dive");
         UIWhiteBox.UseGauge(30f);
 
         float elapsed = 0f;
@@ -153,7 +153,6 @@ public class PlayerMove : MonoBehaviour
         }
 
         animator.applyRootMotion = false;
-        isDiving = false;
     }
 
 
