@@ -9,6 +9,7 @@ public class PlayerStatus : MonoBehaviour
     private int maxPlayerHp = 6;
     public int playerHP = 6;
     public int playerAttackDamage = 10;
+    public InputAction inputAction;
 
     public bool IsDead { get; private set; } = false;
 
@@ -60,5 +61,15 @@ public class PlayerStatus : MonoBehaviour
             return 30;
 
         return 0;
+    }
+
+    public void OffInputAction()
+    {
+        inputAction.Disable();
+    }
+
+    public void OnInputAction()
+    {
+        inputAction.Enable();
     }
 }

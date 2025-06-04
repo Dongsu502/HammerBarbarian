@@ -12,7 +12,7 @@ public class FreeLookController : MonoBehaviour
         freeLookCam.m_YAxis.m_MaxSpeed = 0f;
     }
 
-    public void UnlockCameraRotation(float xSpeed = 1000f, float ySpeed = 2f)
+    public void UnlockCameraRotation(float xSpeed = 250f, float ySpeed = 2f)
     {
         freeLookCam.m_XAxis.m_MaxSpeed = xSpeed;
         freeLookCam.m_YAxis.m_MaxSpeed = ySpeed;

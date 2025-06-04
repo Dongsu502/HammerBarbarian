@@ -8,6 +8,7 @@ public class HitReceiver : MonoBehaviour
     [SerializeField] private GameObject hitEffectPrefab;
     [SerializeField] private GameObject boomEffectPrefab;
     [SerializeField] private float effectOffset = 0.05f;
+    [SerializeField] private Transform bigHitEffectTransform;
     private IMonster monster;
 
     private void Start()
@@ -26,7 +27,7 @@ public class HitReceiver : MonoBehaviour
             AttackType attackType = PlayerHitWhiteBox.WhiteBox.attacktype;
             if (monster.HP <= 20 && attackType == AttackType.Heavy)
             {        
-                GameObject boomEffect = Instantiate(boomEffectPrefab, spawnPos, rot);
+                GameObject boomEffect = Instantiate(boomEffectPrefab, transform.position, rot);
                 Destroy(boomEffect, 2f);
             }         
             GameObject effect = Instantiate(hitEffectPrefab, spawnPos, rot);

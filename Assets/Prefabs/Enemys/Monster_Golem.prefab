@@ -480,6 +480,7 @@ MonoBehaviour:
   hitEffectPrefab: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
   boomEffectPrefab: {fileID: 7212039062744049335, guid: ec4174474f3ec4749ba56c6ba0709013, type: 3}
   effectOffset: 0.05
+  bigHitEffectTransform: {fileID: 4456201237100028570}
 --- !u!114 &5544683719419404605
 MonoBehaviour:
   m_ObjectHideFlags: 0
