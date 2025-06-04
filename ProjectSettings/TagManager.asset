@@ -12,6 +12,7 @@ TagManager:
   - InteractionWall
   - PlayerHitBox
   - Attack_Mushroom
+  - Attack_Bomber
   layers:
   - Default
   - TransparentFX
@@ -22,7 +23,7 @@ TagManager:
   - Minimap
   - 
   - 
-  - Attack_Golem
+  - Enemy_Attack
   - Enemy
   - Player
   - InvisibleWall

@@ -36,6 +36,5 @@ public class MonsterAttackDetection : MonoBehaviour
                 receiver.OnHit(hitPoint, hitNormal);
             }
         }
-        
     }
 }
