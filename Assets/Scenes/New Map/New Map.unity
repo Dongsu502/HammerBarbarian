@@ -1559,6 +1559,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2347716024353218003, guid: 163c2a7cb99b16c4d93a4ac70515d182, type: 3}
   m_PrefabInstance: {fileID: 2106352172}
   m_PrefabAsset: {fileID: 0}
+--- !u!20 &494958936 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 116750467052522022, guid: 25c5a1126ae76df4abba887603c3c7aa, type: 3}
+  m_PrefabInstance: {fileID: 1043655338}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &502779612
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1841,6 +1846,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -24.999756
       objectReference: {fileID: 0}
+    - target: {fileID: 1234886135090730904, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
+      propertyPath: minimapCamera
+      value: 
+      objectReference: {fileID: 494958936}
     - target: {fileID: 1883170122082122507, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -1788.0002

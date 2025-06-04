@@ -179,10 +179,6 @@ public class HammerThrowController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.M)) 
-        {
-            StartRopePull(pullPoint);
-        }
         if (activeHammer != null && Input.GetMouseButtonDown(0))
         {
             var stuckHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
