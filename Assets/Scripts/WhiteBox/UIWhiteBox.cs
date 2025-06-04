@@ -24,7 +24,7 @@ public static class UIWhiteBox
 {
     public static string SceneName { get; set; }
 
-    public static MainUIState MainUICurrentState { get; set; }
+    public static MainUIState MainUICurrentState { get; set; } = MainUIState.NONE;
     public static ChoiceMapUIState ChoiceMapUICurrentState { get; set; }
 
     public static TitleUIManager TitleUIWB { get; private set; }

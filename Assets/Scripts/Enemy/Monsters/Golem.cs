@@ -15,8 +15,15 @@ public class Golem : MonoBehaviour, IMonster
     public bool InAttackRange { get; set; }
     public bool IsAttacking { get; private set; }
 
+
+    [Header("State")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
+
+    [Space]
+    [Header("Effect")]
+    [SerializeField] private GameObject attackEffectPrefab;
+    [SerializeField] private Transform attackEffectSpawnPos;
 
     private MonsterDetection detectionClass;
     private MonsterHitBox hitBoxClass;
@@ -49,6 +56,16 @@ public class Golem : MonoBehaviour, IMonster
     }
 
     #region Animation Eventkey
+
+    /// <summary>
+    /// 공격 이펙트 생성
+    /// </summary>
+    public void SpawnAttackEffect()
+    {
+        GameObject attackEffect =  Instantiate(attackEffectPrefab, attackEffectSpawnPos.position, attackEffectPrefab.transform.rotation);
+
+        Destroy(attackEffect, 2f);
+    }
 
     /// <summary>
     /// Attack 애니메이션 이벤트 키 ( 공격 콜라이더 On Off ) 

@@ -69,6 +69,37 @@ MonoBehaviour:
   monsterName: Golem
   monsterAttackPower: 1
   AttackCollider: {fileID: 573504753629860270}
+--- !u!1 &731098629423118943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6769774733310872578}
+  m_Layer: 0
+  m_Name: attackEffectPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6769774733310872578
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 731098629423118943}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.2564333, y: -0.9605719, z: -0.10532595, w: -0.021216119}
+  m_LocalPosition: {x: -0.279, y: 0.084, z: 0.19}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9106035197969276414}
+  m_LocalEulerAnglesHint: {x: -11.038, y: -185.541, z: 30.43}
 --- !u!1 &1562643790971292798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1133,6 +1164,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   rotateSpeed: 5
+  attackEffectPrefab: {fileID: 3432958286849152088, guid: 87ee7299dd44ed747af24dbb91bcd33b, type: 3}
+  attackEffectSpawnPos: {fileID: 6769774733310872578}
 --- !u!4 &3452399130152939167 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
@@ -2605,6 +2638,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -4660625046027191327, guid: 85d597c449c77f444a87164a13239bbf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7570956437220925906}
+    - targetCorrespondingSourceObject: {fileID: -4660625046027191327, guid: 85d597c449c77f444a87164a13239bbf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6769774733310872578}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 85d597c449c77f444a87164a13239bbf, type: 3}
 --- !u!4 &5082234730721985012 stripped
