@@ -17,4 +17,14 @@ public class FreeLookController : MonoBehaviour
         freeLookCam.m_XAxis.m_MaxSpeed = xSpeed;
         freeLookCam.m_YAxis.m_MaxSpeed = ySpeed;
     }
+
+    private void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.layer == LayerMask.NameToLayer("Environment"))
+        {
+            // 투명화 로직
+            col.GetComponent<Renderer>().material.SetFloat("_Alpha", 0.2f);
+            Debug.Log(col.gameObject);
+        }
+    }
 }
