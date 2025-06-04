@@ -8,6 +8,7 @@ public class Player_HitReceiver : MonoBehaviour
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerMove playerMove;
+    [SerializeField] private GameObject player;
 
     [Header("Hit Reaction")]
     [SerializeField] private float knockbackForce = 10f;
@@ -31,26 +32,31 @@ public class Player_HitReceiver : MonoBehaviour
     {
         isKnockedBack = true;
 
-        // 이동/입력 차단
         if (playerMove != null)
             playerMove.enabled = false;
 
-        // 넉백 애니메이션 (선택)
         animator.SetTrigger("Hit");
 
-        // 초기화
         direction.y = 0f;
         direction.Normalize();
         animator.applyRootMotion = false;
+
+        // 회전 처리 (넉백 반대방향 = 맞은 방향)
+        if (direction.sqrMagnitude > 0.01f)
+        {
+            Quaternion lookRot = Quaternion.LookRotation(-direction);
+            lookRot = Quaternion.Euler(0, lookRot.eulerAngles.y, 0);
+            player.transform.rotation = lookRot;
+        }
 
         float elapsed = 0f;
 
         while (elapsed < knockbackDuration)
         {
             Vector3 offset = direction * knockbackForce * Time.fixedDeltaTime;
+            Vector3 backDir = -direction;
 
-            // 충돌 감지
-            if (Physics.Raycast(rb.position, direction, out RaycastHit hit, offset.magnitude + 0.1f, LayerMask.GetMask("InvisibleWall")))
+            if (Physics.Raycast(rb.position, backDir, out RaycastHit hit, offset.magnitude + 0.1f, LayerMask.GetMask("InvisibleWall")))
             {
                 break;
             }

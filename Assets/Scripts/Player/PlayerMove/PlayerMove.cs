@@ -156,6 +156,10 @@ public class PlayerMove : MonoBehaviour
         animator.applyRootMotion = false;
     }
 
+    public void StartDive()
+    {
+        isDiving = true;
+    }
 
     public void EndDive()
     {
@@ -164,7 +168,6 @@ public class PlayerMove : MonoBehaviour
 
     public void OnInterpolate()
     {
-        isDiving = true;
         rb.interpolation = RigidbodyInterpolation.Extrapolate;
         rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }

@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632943642523816572}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39990488, y: 0.09962403, z: -0.043776806, w: 0.91007406}
+  m_LocalRotation: {x: 0.29379272, y: 0.65446776, z: -0.30759907, w: 0.6250925}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_LockStageInInspector: 00000000
   m_StreamingVersion: 20170927
   m_Priority: 10
-  m_StandbyUpdate: 2
+  m_StandbyUpdate: 1
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
@@ -104,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734099189714631860}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4064437, y: 0.09930643, z: -0.0444926, w: 0.9071726}
+  m_LocalRotation: {x: 0.2824043, y: 0.65994036, z: -0.29567546, w: 0.6303194}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_LockStageInInspector: 00000000
   m_StreamingVersion: 20170927
   m_Priority: 10
-  m_StandbyUpdate: 2
+  m_StandbyUpdate: 1
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
@@ -216,8 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_BindingMode: 5
+  m_FollowOffset: {x: 0, y: 13, z: -10}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -298,6 +298,7 @@ GameObject:
   - component: {fileID: 1936974471952408095}
   - component: {fileID: 7968205015656279077}
   - component: {fileID: 5046783627575658952}
+  - component: {fileID: 5789286781628316712}
   m_Layer: 0
   m_Name: FreeLook Camera
   m_TagString: Untagged
@@ -340,7 +341,7 @@ MonoBehaviour:
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
   m_Priority: 20
-  m_StandbyUpdate: 2
+  m_StandbyUpdate: 1
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_CommonLens: 1
@@ -389,7 +390,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 500
+    m_MaxSpeed: 50
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -465,21 +466,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CollideAgainst:
     serializedVersion: 2
-    m_Bits: 6144
+    m_Bits: 268288
   m_IgnoreTag: Player
   m_TransparentLayers:
     serializedVersion: 2
-    m_Bits: 0
-  m_MinimumDistanceFromTarget: 1
+    m_Bits: 262144
+  m_MinimumDistanceFromTarget: 10
   m_AvoidObstacles: 1
-  m_DistanceLimit: 0
+  m_DistanceLimit: 3
   m_MinimumOcclusionTime: 0
-  m_CameraRadius: 1
+  m_CameraRadius: 1.2
   m_Strategy: 0
   m_MaximumEffort: 4
   m_SmoothingTime: 0.3
   m_Damping: 0.5
-  m_DampingWhenOccluded: 0.3
+  m_DampingWhenOccluded: 0.6
   m_OptimalTargetDistance: 0
 --- !u!114 &5046783627575658952
 MonoBehaviour:
@@ -494,6 +495,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   freeLookCam: {fileID: 7737666022250754167}
+--- !u!114 &5789286781628316712
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5620383256304357953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62a68a028312a1b469e7735b433fdb0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  transparentLayer:
+    serializedVersion: 2
+    m_Bits: 262144
 --- !u!1 &7623959231177456521
 GameObject:
   m_ObjectHideFlags: 0
@@ -552,8 +569,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_BindingMode: 5
+  m_FollowOffset: {x: 0, y: 13, z: -10}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -646,7 +663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7893819067346792784}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.43912846, y: 0.0976247, z: -0.04807054, w: 0.8918099}
+  m_LocalRotation: {x: 0.30511424, y: 0.64876443, z: -0.3194526, w: 0.6196451}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -678,7 +695,7 @@ MonoBehaviour:
   m_LockStageInInspector: 00000000
   m_StreamingVersion: 20170927
   m_Priority: 10
-  m_StandbyUpdate: 2
+  m_StandbyUpdate: 1
   m_LookAt: {fileID: 0}
   m_Follow: {fileID: 0}
   m_Lens:
@@ -758,8 +775,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9384ab8608cdc3d479fe89cd51eed48f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_BindingMode: 1
-  m_FollowOffset: {x: 0, y: 0, z: -10}
+  m_BindingMode: 5
+  m_FollowOffset: {x: 0, y: 13, z: -10}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
