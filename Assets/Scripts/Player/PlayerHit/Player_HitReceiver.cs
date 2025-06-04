@@ -35,6 +35,9 @@ public class Player_HitReceiver : MonoBehaviour
         if (playerMove != null)
             playerMove.enabled = false;
 
+        // 넉백 애니메이션 (선택)
+        animator.SetTrigger("Hit");
+
         // 초기화
         direction.y = 0f;
         direction.Normalize();
@@ -45,6 +48,12 @@ public class Player_HitReceiver : MonoBehaviour
         while (elapsed < knockbackDuration)
         {
             Vector3 offset = direction * knockbackForce * Time.fixedDeltaTime;
+
+            // 충돌 감지
+            if (Physics.Raycast(rb.position, direction, out RaycastHit hit, offset.magnitude + 0.1f, LayerMask.GetMask("InvisibleWall")))
+            {
+                break;
+            }
 
             rb.MovePosition(rb.position + offset);
             elapsed += Time.fixedDeltaTime;

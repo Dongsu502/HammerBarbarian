@@ -24,9 +24,14 @@ public class PlayerStatus : MonoBehaviour
         playerHP = maxPlayerHp;
     }
 
+    private void Update()
+    {
+        Debug.LogWarning(IsDead);
+    }
+
     public void TakeDamage(int damage)
     {
-        Debug.LogWarning(damage);
+        
         playerHP -= damage;
         UIWhiteBox.TakeDamage(damage); 
     }

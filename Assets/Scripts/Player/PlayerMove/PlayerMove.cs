@@ -42,6 +42,7 @@ public class PlayerMove : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         if (status.IsDead) return;
+        Debug.LogWarning("움직일 수 있어!");
 
         inputVector = context.ReadValue<Vector2>();
     }
