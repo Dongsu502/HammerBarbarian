@@ -49,7 +49,7 @@ public class EnemySpawnManager : MonoBehaviour
             }
 
             //아레나 컨트롤러에 몬스터들 등록
-
+            arenaController.AddEnemy(spawnMonster);
         }
     }
 }

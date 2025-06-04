@@ -100,6 +100,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 9106035197969276414}
   m_LocalEulerAnglesHint: {x: -11.038, y: -185.541, z: 30.43}
+--- !u!1 &862839845975785961
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4456201237100028570}
+  m_Layer: 10
+  m_Name: BigHitEffectPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4456201237100028570
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 862839845975785961}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 1.362, z: 0.39}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3452399130152939167}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1562643790971292798
 GameObject:
   m_ObjectHideFlags: 0
@@ -1021,6 +1052,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8495119393759682329}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4456201237100028570}
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
       insertIndex: -1
