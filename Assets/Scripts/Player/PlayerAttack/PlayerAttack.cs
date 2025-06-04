@@ -164,7 +164,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (context.canceled)
         {
-            if (equipItem&& !IsAttackAnim()&& !IsDiveAnim())
+            if (equipItem&& !IsDiveAnim())
             {
                 isAiming = false;
                 useable.EndUseItemByType(weaponType);
