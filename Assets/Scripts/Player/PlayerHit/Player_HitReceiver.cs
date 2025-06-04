@@ -35,16 +35,22 @@ public class Player_HitReceiver : MonoBehaviour
         if (playerMove != null)
             playerMove.enabled = false;
 
-        // 넉백 애니메이션 (선택)
-        animator.SetTrigger("Hit");
+        // 초기화
+        direction.y = 0f;
+        direction.Normalize();
+        animator.applyRootMotion = false;
 
-        // 힘 주기
-        rb.velocity = Vector3.zero;
-        rb.AddForce(direction * knockbackForce, ForceMode.VelocityChange);
+        float elapsed = 0f;
 
-        yield return new WaitForSeconds(knockbackDuration);
+        while (elapsed < knockbackDuration)
+        {
+            Vector3 offset = direction * knockbackForce * Time.fixedDeltaTime;
 
-        // 복구
+            rb.MovePosition(rb.position + offset);
+            elapsed += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
+        }
+
         rb.velocity = Vector3.zero;
         animator.applyRootMotion = true;
 
@@ -53,4 +59,5 @@ public class Player_HitReceiver : MonoBehaviour
 
         isKnockedBack = false;
     }
+
 }
