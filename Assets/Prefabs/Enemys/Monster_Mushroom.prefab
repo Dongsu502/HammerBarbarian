@@ -453,8 +453,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hitEffectPrefab: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
-  boomEffectPrefab: {fileID: 0}
+  boomEffectPrefab: {fileID: 7212039062744049335, guid: ec4174474f3ec4749ba56c6ba0709013, type: 3}
   effectOffset: 0.05
+  bigHitEffectTransform: {fileID: 975308918496258346}
 --- !u!114 &5516270939196735899
 MonoBehaviour:
   m_ObjectHideFlags: 0
