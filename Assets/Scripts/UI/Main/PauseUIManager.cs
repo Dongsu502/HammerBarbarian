@@ -29,7 +29,15 @@ public class PauseUIManager : MonoBehaviour
     private void OnEnable()
     {
         SetActive_SettingPanel(false);
+
+        WorldWhiteBox.WhiteBox.PauseGame();
     }
+
+    private void OnDisable()
+    {
+        WorldWhiteBox.WhiteBox.ResumeGame();
+    }
+
 
     /// <summary>
     /// 설정창 활성화 / 비활성화

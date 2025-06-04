@@ -36,6 +36,8 @@ public class ScriptUIManager : MonoBehaviour
         inputAction.MainUI.Enable();
 
         inputAction.MainUI.Script.started += Input_F;
+
+        WorldWhiteBox.WhiteBox.PauseGame();
     }
 
     private void OnDisable()
@@ -43,6 +45,8 @@ public class ScriptUIManager : MonoBehaviour
         inputAction.MainUI.Disable();
 
         inputAction.MainUI.Script.started -= Input_F;
+
+        WorldWhiteBox.WhiteBox.ResumeGame();
     }
 
     #endregion

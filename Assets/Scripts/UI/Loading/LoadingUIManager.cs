@@ -24,9 +24,8 @@ public class LoadingUIManager : MonoBehaviour
     private void OnEnable()
     {
         sceneName = UIWhiteBox.SceneName;
-        Debug.LogWarning(sceneName);
 
-        if (sceneName == "ChoiceDungeon")
+        if (sceneName == "ChoiceDungeon" || sceneName == "Title")
         {
             maxLoadingTime = 2f;
             gaugeTextAmount = 50f;
@@ -41,7 +40,6 @@ public class LoadingUIManager : MonoBehaviour
             maxLoadingTime = 4f;
             gaugeTextAmount = 25f;
         }
-        Debug.LogWarning(maxLoadingTime);
 
         SetActive_Tip(false);
     }
