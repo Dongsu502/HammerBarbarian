@@ -211,6 +211,16 @@ public static class UIWhiteBox
         ScriptUIWB.GetScriptData(_start, _end);
     }
 
+    /// <summary>
+    /// 상호작용 UI 오브젝트 스폰
+    /// </summary>
+    /// <param name="spawnPos">스폰 위치</param>
+    /// <returns>상호작용 UI 오브젝트</returns>
+    public static GameObject SpawnInterectionUI(Transform spawnPos, Transform lookTarget) 
+    {
+        return MainUIWB.SpawnInterectionUI(spawnPos, lookTarget);
+    }
+
     #endregion
 
     #region PauseUI
