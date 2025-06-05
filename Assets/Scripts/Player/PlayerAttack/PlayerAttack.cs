@@ -19,6 +19,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float maxWindmillTime = 3f;
     private float windmillTimer = 0f;
     private bool isWindmilling = false;
+    private float maxWindMillStemina = 100f;
+    private float minWindMillStemina = 0f;
+    private float currentWindMillStemina = 100f;
 
     [Header("Weapon")]
     [SerializeField] private GameObject hammer;
@@ -111,7 +114,6 @@ public class PlayerAttack : MonoBehaviour
             var stuckHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
             if (stuckHandler != null && stuckHandler.IsStuckToWall)
             {
-                Debug.Log("안할게");
                 return;
             }
         }
@@ -159,6 +161,7 @@ public class PlayerAttack : MonoBehaviour
                 IsAttacking = true;
                 canAttack = false;
                 animator.SetTrigger("SAttack_1");
+
             }
         }
 
@@ -187,7 +190,6 @@ public class PlayerAttack : MonoBehaviour
 
             if (!equipItem)
             {
-                Debug.Log("아이템 장착");
                 equipItem = true;
                 weaponType = (WeaponType)currentItemType;
 
@@ -196,7 +198,6 @@ public class PlayerAttack : MonoBehaviour
             }
             else
             {
-                Debug.Log("아이템 장착 해제");
                 equipItem = false;
                 weaponType = WeaponType.Hammer;
 
@@ -275,21 +276,26 @@ public class PlayerAttack : MonoBehaviour
 
     private void HandleWindmillState()
     {
-        if (!isWindmilling) return;
-
-        windmillTimer += Time.deltaTime;
+        if (!isWindmilling)
+        {
+            currentWindMillStemina = UIWhiteBox.GetGauge();
+            return;
+        }
         UIWhiteBox.UseGauge(0.3f);
+        currentWindMillStemina = UIWhiteBox.GetGauge();
 
-        if (windmillTimer >= maxWindmillTime)
+        if (currentWindMillStemina <= 0f)
+        {
             StopWindMill();
+        }
     }
 
     private void StartWindMill()
     {
         if (isWindmilling) return;
 
+        canAttack = false;
         windmillTimer = 0f;
-        
         animator.SetBool("isSpinning", true);
     }
 
@@ -314,6 +320,12 @@ public class PlayerAttack : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         return stateInfo.IsTag("Dive");
+    }
+
+    public bool IsWhirlwindAnim()
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsTag("Whirlwind");
     }
 
     [ContextMenu("화면이동 잠금")]

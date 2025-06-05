@@ -20,6 +20,8 @@ public class HitStopHandler : MonoBehaviour
         if (isHitStopping || Time.time - lastHitStopTime < hitStopCooldown)
             return;
 
+        Debug.Log("애니메이션 스탑!");
+
         StartCoroutine(HitStopCoroutine(duration));
     }
 

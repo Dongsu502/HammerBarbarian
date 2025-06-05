@@ -157,6 +157,15 @@ public static class UIWhiteBox
     }
 
     /// <summary>
+    /// 게이지 값 리턴
+    /// </summary>
+    /// <returns></returns>
+    public static float GetGauge()
+    {
+        return MainUIWB.GetGaugeValue();
+    }
+
+    /// <summary>
     /// 게이지 감소 / 게이지 최소:0 최대:100
     /// </summary>
     /// <param name="amount">감소할 게이지 값</param>
