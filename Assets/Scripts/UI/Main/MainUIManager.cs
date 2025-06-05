@@ -1,3 +1,4 @@
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -5,6 +6,10 @@ using UnityEngine.UI;
 
 public class MainUIManager : MonoBehaviour
 {
+    [Header("상호작용 UI")]
+    [SerializeField] private GameObject interectionUIPrefab;
+
+    [Space(3)]
     [Header("Panel")]
     [Tooltip("일시정지 패널")]
     public GameObject PausePanel;
@@ -55,6 +60,9 @@ public class MainUIManager : MonoBehaviour
     [Tooltip("미니맵")]
     [SerializeField] private Image minimapImage;
     [SerializeField] private Camera minimapCamera;
+    [SerializeField] private GameObject playerMarker;
+    [Space]
+    [SerializeField] private GameObject MapPanel;
 
     [Space(3)]
     [Header("Crosshair")]
@@ -100,10 +108,11 @@ public class MainUIManager : MonoBehaviour
     private const float GAUGE_MAX_VALUE = 100f;
 
     private bool isBigMapSize = false;
-    private const float BIG_MINIMAP_POS = -250f;
-    private const float SMALL_MINIMAP_POS = -200f;
-    private const float BIG_MINIMAP_SCALE = 450f;
-    private const float SMALL_MINIMAP_SCALE = 320f;
+    private const float PLAYER_MARKER_BIGSIZE = 17f;
+    private const float PLAYER_MARKER_SMALLSIZE = 5f;
+
+    [SerializeField] private Transform spawnPos;
+    [SerializeField] private Transform lookTarget;
 
 #if UNITY_EDITOR
 
@@ -161,6 +170,11 @@ public class MainUIManager : MonoBehaviour
     private void StartScript()
     {
         UIWhiteBox.StartScripting(1100, 1104);
+    }
+    [ContextMenu("상호작용 UI 소환")]
+    private void SpawnInterectionUI_Test()
+    {
+        SpawnInterectionUI(spawnPos, lookTarget);
     }
 
 #endif
@@ -287,27 +301,22 @@ public class MainUIManager : MonoBehaviour
     {
         if(context.started)
         {
-            Vector2 newPos;
-            float newScale;
             if(!isBigMapSize)
             {
                 isBigMapSize = true;
 
-                newPos = new Vector2(BIG_MINIMAP_POS, BIG_MINIMAP_POS);
-                newScale = BIG_MINIMAP_SCALE;
-
-                minimapCamera.GetComponent<Minimap_Camera>().ChangeSize(30f);
+                Vector3 bigSize = new Vector3(PLAYER_MARKER_BIGSIZE, PLAYER_MARKER_BIGSIZE, PLAYER_MARKER_BIGSIZE);
+                playerMarker.transform.localScale = bigSize;
+                MapPanel_SetActive(true);
             }
             else
             {
                 isBigMapSize = false;
 
-                newPos = new Vector2(SMALL_MINIMAP_POS, SMALL_MINIMAP_POS);
-                newScale = SMALL_MINIMAP_SCALE;
-
-                minimapCamera.GetComponent<Minimap_Camera>().ChangeSize(20f);
+                Vector3 smallSize = new Vector3(PLAYER_MARKER_SMALLSIZE, PLAYER_MARKER_SMALLSIZE, PLAYER_MARKER_SMALLSIZE);
+                playerMarker.transform.localScale = smallSize;
+                MapPanel_SetActive(false);
             }
-            MapSizeChange(newPos, newScale);
         }
     }
 
@@ -329,6 +338,9 @@ public class MainUIManager : MonoBehaviour
 
         //대사 패널 비활성화
         ScriptPanel_SetActive(false);
+
+        //맵 패널 비활성화
+        MapPanel_SetActive(false);
 
         //사망 패널 비활성화
         DiePanel_SetActive(false);
@@ -381,6 +393,13 @@ public class MainUIManager : MonoBehaviour
     public void ScriptPanel_SetActive(bool active)
     {
         ScriptPanel.SetActive(active);
+
+        CursorLock(active);
+    }
+
+    public void MapPanel_SetActive(bool active)
+    {
+        MapPanel.SetActive(active);
 
         CursorLock(active);
     }
@@ -647,21 +666,14 @@ public class MainUIManager : MonoBehaviour
 
     #endregion
 
-    #region Map
+    #region InterectionUI
 
-    private void MapSizeChange(Vector2 newPos2D ,float newSize)
+    //수정 필요 스폰할때 카메라를 바라보지 않는 문제 + 가장 앞에서 보이는데 이게 이상하게 부자연스러움
+    public GameObject SpawnInterectionUI(Transform spawnPos, Transform lookTarget)
     {
-        RawImage insideImage = minimapImage.GetComponentInChildren<RawImage>();
-        Image frameImage = minimapImage.transform.GetChild(1).GetComponent<Image>();
-
-        minimapImage.rectTransform.anchoredPosition = newPos2D;
-
-        minimapImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newSize);
-        minimapImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
-        insideImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newSize);
-        insideImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
-        frameImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, newSize);
-        frameImage.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, newSize);
+        Vector3 direction = (lookTarget.position - spawnPos.position).normalized;
+        Debug.LogWarning(direction);
+        return Instantiate(interectionUIPrefab, spawnPos.position, Quaternion.Euler(direction));
     }
 
     #endregion
