@@ -21,7 +21,7 @@ public class CameraObstructionFader : MonoBehaviour
         Vector3 dir = to - from;
         float dist = dir.magnitude;
 
-        float radius = 0.5f; // 조절 가능
+        float radius = 1f; // 조절 가능
         RaycastHit[] hits = Physics.SphereCastAll(from, radius, dir, dist, transparentLayer);
 
         Debug.DrawRay(from, dir.normalized * dist, Color.green);

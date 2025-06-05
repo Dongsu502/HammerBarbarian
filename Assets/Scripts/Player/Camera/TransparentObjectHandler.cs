@@ -18,7 +18,7 @@ public class TransparentObjectHandler : MonoBehaviour
         }
     }
 
-    public void SetTransparent(float alpha = 0.3f)
+    public void SetTransparent(float alpha = 0.2f)
     {
         if (isTransparent) return;
         isTransparent = true;

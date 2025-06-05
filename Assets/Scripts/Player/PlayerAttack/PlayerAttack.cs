@@ -65,7 +65,9 @@ public class PlayerAttack : MonoBehaviour
     private void Update()
     {
         HandleComboResetTimer();
-        HandleWindmillState();
+
+        if(IsWhirlwindAnim())
+            HandleWindmillState();
     }
 
     private void FixedUpdate()
@@ -98,7 +100,20 @@ public class PlayerAttack : MonoBehaviour
 
         if (!canAttack)
         {
-            bufferedLightAttack = true;
+            if (!IsWhirlwindAnim())
+            {
+                bufferedLightAttack = true;
+                return;
+            }
+            
+        }
+
+        if (IsWhirlwindAnim())
+        {
+            IsAttacking = true;
+            canAttack = false;
+            animator.SetTrigger("SAttack_1");
+            Debug.Log("강공격 전환");
             return;
         }
 
@@ -258,6 +273,11 @@ public class PlayerAttack : MonoBehaviour
         isWindmilling = true;
     }
 
+    public void DizzyPlay()
+    {
+        isDizzy=true;
+    }
+
     public void EnableInputAction_Attack1() => attack1Action.action.Enable();
     public void DisableInputAction_Attack1() => attack1Action.action.Disable();
     public int currentAttackType() => (int)attackType;
@@ -281,7 +301,7 @@ public class PlayerAttack : MonoBehaviour
             currentWindMillStemina = UIWhiteBox.GetGauge();
             return;
         }
-        UIWhiteBox.UseGauge(0.3f);
+        UIWhiteBox.UseGauge(0.7f);
         currentWindMillStemina = UIWhiteBox.GetGauge();
 
         if (currentWindMillStemina <= 0f)
@@ -306,7 +326,6 @@ public class PlayerAttack : MonoBehaviour
         isWindmilling = false;
         animator.SetBool("isSpinning", false);
 
-        isDizzy = true;
         dizzyTimer = 0f;
     }
 

@@ -27,6 +27,8 @@ public class PlayerMove : MonoBehaviour
     private float diveDuration = 0.38f;
     private AnimationCurve diveSpeedCurve;
 
+
+
     private void Awake()
     {
         status = GetComponent<PlayerStatus>();
@@ -92,6 +94,7 @@ public class PlayerMove : MonoBehaviour
 
         }
     }
+
 
     private void StickToGround()
     {
