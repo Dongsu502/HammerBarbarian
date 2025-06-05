@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerAttackTrigger : MonoBehaviour
 {
+    [SerializeField] private PlayerAttack playerAttack;
+
     [SerializeField]private Transform hitOrigin;
 
     [SerializeField] HitStopHandler hitStopHandler;
@@ -13,8 +15,12 @@ public class PlayerAttackTrigger : MonoBehaviour
         if (other.gameObject.CompareTag("EnemyHitBox"))
         {
             //cameraShakeTrigger.Shake();
-            hitStopHandler.HitStop(0.1f);
 
+            if (!playerAttack.IsWhirlwindAnim())
+            {
+                hitStopHandler.HitStop(0.1f);
+            }
+            
             Vector3 hitPoint = other.ClosestPoint(hitOrigin.position);
             Vector3 hitNormal = (other.transform.position - hitOrigin.position).normalized;
 
@@ -26,5 +32,6 @@ public class PlayerAttackTrigger : MonoBehaviour
         }
     }
 
+   
 
 }

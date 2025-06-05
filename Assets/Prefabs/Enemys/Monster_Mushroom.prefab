@@ -452,7 +452,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9828e13aeb803e46a88b61abc44d854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitEffectPrefab: {fileID: 5024009746357069194, guid: ec3f674830402cc45bce805cf6493db7, type: 3}
+  hitEffectPrefab: {fileID: 1429954232896169633, guid: 83036083a4ebcd34f98131bd3cf6f4d2, type: 3}
   boomEffectPrefab: {fileID: 7212039062744049335, guid: ec4174474f3ec4749ba56c6ba0709013, type: 3}
   effectOffset: 0.05
   bigHitEffectTransform: {fileID: 975308918496258346}

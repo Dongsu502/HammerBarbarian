@@ -25,11 +25,16 @@ public class HitReceiver : MonoBehaviour
             Vector3 spawnPos = hitPoint + hitNormal * effectOffset;
             Quaternion rot = Quaternion.LookRotation(hitNormal);
             AttackType attackType = PlayerHitWhiteBox.WhiteBox.attacktype;
-            if (monster.HP <= 20 && attackType == AttackType.Heavy)
+            if (monster.HP <= 20 && attackType == AttackType.Heavy && monster.Name =="Golem")
             {        
                 GameObject boomEffect = Instantiate(boomEffectPrefab, transform.position, rot);
                 Destroy(boomEffect, 2f);
-            }         
+            }
+            else if(monster.HP <= 10 && attackType == AttackType.Heavy)
+            {
+                GameObject boomEffect = Instantiate(boomEffectPrefab, transform.position, rot);
+                Destroy(boomEffect, 2f);
+            }
             GameObject effect = Instantiate(hitEffectPrefab, spawnPos, rot);
             Destroy(effect, 2f); // 2초 후 자동 파괴
         }

@@ -561,6 +561,11 @@ public class MainUIManager : MonoBehaviour
 
     #region Gauge_Func
 
+    public float GetGaugeValue()
+    {
+        return gaugeValue;
+    }
+
     /// <summary>
     /// 게이지이미지 활성화 / 비활성화
     /// </summary>

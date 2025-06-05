@@ -36,8 +36,8 @@ ModelImporter:
       name: Whirlwind_Spin
       takeName: Take 001
       internalID: 1827226128182048838
-      firstFrame: 40
-      lastFrame: 120
+      firstFrame: 63
+      lastFrame: 69
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
