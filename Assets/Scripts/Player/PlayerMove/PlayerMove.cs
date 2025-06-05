@@ -168,13 +168,13 @@ public class PlayerMove : MonoBehaviour
 
     public void OnInterpolate()
     {
-        rb.interpolation = RigidbodyInterpolation.Extrapolate;
-        rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
+        rb.interpolation = RigidbodyInterpolation.Interpolate;
+        //rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
     }
 
     public void OffInterpolate()
     {
         rb.interpolation = RigidbodyInterpolation.None;
-        rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
+        //rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
     }
 }
