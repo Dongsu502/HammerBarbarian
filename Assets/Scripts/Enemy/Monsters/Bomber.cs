@@ -33,6 +33,7 @@ public class Bomber : MonoBehaviour, IMonster
     private CapsuleCollider bomberCollider;
 
     private float moveAmount;
+    private bool isDetection;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class Bomber : MonoBehaviour, IMonster
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
         agent.updateRotation = false;
+        animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
         bomberCollider = GetComponent<CapsuleCollider>();
     }
@@ -50,6 +52,11 @@ public class Bomber : MonoBehaviour, IMonster
     {
         attackCollider.SetActive(false);
         attackRangeObj.SetActive(false);
+    }
+
+    public void RunDelay()
+    {
+        isDetection = true;
     }
 
     /// <summary>
@@ -91,12 +98,6 @@ public class Bomber : MonoBehaviour, IMonster
     {
         hitBoxClass.hitCollider.enabled = false;
         agent.enabled = false;
-
-        //강공격 히트 애니메이션
-        //animator.SetFloat("HitType", 1);
-        //피격 애니메이션 플레이
-        //animator.SetTrigger("TakeDamage");
-        //animator.SetBool("IsHitting", true);
     }
 
     /// <summary>
@@ -135,19 +136,6 @@ public class Bomber : MonoBehaviour, IMonster
         }
     }
 
-    /// <summary>
-    /// Idle, Move 애니메이션
-    /// </summary>
-    /// <param name="isMoving">true: Move, false: Idle</param>
-    private void MoveAnimation(bool isMoving)
-    {
-        float target = isMoving ? 1f : 0f;
-
-        moveAmount = Mathf.MoveTowards(moveAmount, target, Time.deltaTime * 2f); // 2f는 속도, 조절 가능
-
-        //animator.SetFloat("Move", moveAmount);
-    }
-
     private IEnumerator Attacking()
     {
         //공격범위, (게이지) 표시
@@ -175,16 +163,18 @@ public class Bomber : MonoBehaviour, IMonster
         //Hit 콜라이더 제거
         hitBoxClass.hitCollider.enabled = false;
 
-        //사망 애니메이션 플레이
-        //animator.SetTrigger("IsDie");
+        Destroy(gameObject, 1f);
     }
     public void Hit()
     {
         if (IsBeingHit) return; // 중복 방지
 
+        StopAllCoroutines();
+
         Debug.Log("폭탄병 피격");
         IsHit = false;
         IsBeingHit = true;
+        attackRangeObj.SetActive(false);
 
         int hitDamage = PlayerStatWhiteBox.WhtieBox.playerAttackDamage(hitBoxClass.playerAttackType);
         TakeDamage(hitDamage);
@@ -197,17 +187,23 @@ public class Bomber : MonoBehaviour, IMonster
         Debug.Log("폭탄병 공격시작!");
         IsAttacking = true;
 
-        // 공격 모션 중 이동 막기
-        MoveAnimation(false);
-
         //타겟을 바라보기
         Transform target = detectionClass.target;
         LookTarget(target);
+
+        //Idle Animation
+        animator.SetTrigger("isAttack");
 
         StartCoroutine(Attacking());
     }
     public void MoveToTarget()
     {
+        if(!isDetection)
+        {
+            animator.SetTrigger("isDetection");
+            return;
+        }
+
         Debug.Log("폭탄병 접근중..");
         agent.enabled = true;
 
@@ -218,17 +214,11 @@ public class Bomber : MonoBehaviour, IMonster
         agent.SetDestination(target.position);
 
         InAttackRange = HasArrived();
-
-        //걷기 애니메이션 플레이
-        //animator.SetBool("IsAttack", false);
-        MoveAnimation(true);
     }
     public void Idle()
     {
         agent.enabled = false;
 
-        //Idle 애니메이션 플레이
-        MoveAnimation(false);
         Debug.Log("폭탄병 대기중");
     }
 
