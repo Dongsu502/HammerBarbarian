@@ -110,6 +110,11 @@ public static class UIWhiteBox
         MainUIWB.ScriptPanel_SetActive(isActive);
     }
 
+    public static void SetActiveInterectionPanel(bool isActive)
+    {
+        MainUIWB.InterectionPanel_SetActive(isActive);
+    }
+
     #endregion
 
     /// <summary>
@@ -212,13 +217,13 @@ public static class UIWhiteBox
     }
 
     /// <summary>
-    /// 상호작용 UI 오브젝트 스폰
+    /// 상호작용 UI 활성화
     /// </summary>
-    /// <param name="spawnPos">스폰 위치</param>
-    /// <returns>상호작용 UI 오브젝트</returns>
-    public static GameObject SpawnInterectionUI(Transform spawnPos, Transform lookTarget) 
+    /// <param name="_bindKey">상호작용 키</param>
+    /// <param name="_interectionText">상호작용 텍스트</param>
+    public static void Spawn_InterectionUI(string _bindKey, string _interectionText)
     {
-        return MainUIWB.SpawnInterectionUI(spawnPos, lookTarget);
+        MainUIWB.Spawn_InterectionUI(_bindKey, _interectionText);
     }
 
     #endregion

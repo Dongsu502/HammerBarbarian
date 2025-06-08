@@ -6,10 +6,6 @@ using UnityEngine.UI;
 
 public class MainUIManager : MonoBehaviour
 {
-    [Header("상호작용 UI")]
-    [SerializeField] private GameObject interectionUIPrefab;
-
-    [Space(3)]
     [Header("Panel")]
     [Tooltip("일시정지 패널")]
     public GameObject PausePanel;
@@ -21,6 +17,8 @@ public class MainUIManager : MonoBehaviour
     public GameObject ScriptPanel;
     [Tooltip("사망 패널")]
     public GameObject DiePanel;
+    [Tooltip("상호작용 패널")]
+    public GameObject InterectionPanel; 
 
     [Header("PlayerUI")]
     [Tooltip("플레이어 체력이미지")]
@@ -85,6 +83,10 @@ public class MainUIManager : MonoBehaviour
     public string[] item_NameTexts;
 
     [Space(3)]
+    [Header("Interection")]
+    public Text interectionText;
+
+    [Space(3)]
     [Header("Animator")]
     [SerializeField] private Animator Anim_RuneInventory;
     [Tooltip("옵션 패널 애니메이션")]
@@ -110,9 +112,6 @@ public class MainUIManager : MonoBehaviour
     private bool isBigMapSize = false;
     private const float PLAYER_MARKER_BIGSIZE = 17f;
     private const float PLAYER_MARKER_SMALLSIZE = 5f;
-
-    [SerializeField] private Transform spawnPos;
-    [SerializeField] private Transform lookTarget;
 
 #if UNITY_EDITOR
 
@@ -171,10 +170,15 @@ public class MainUIManager : MonoBehaviour
     {
         UIWhiteBox.StartScripting(1100, 1104);
     }
-    [ContextMenu("상호작용 UI 소환")]
-    private void SpawnInterectionUI_Test()
+    [ContextMenu("상호작용UI 활성화")]
+    private void OnEnableInterectionUI()
     {
-        SpawnInterectionUI(spawnPos, lookTarget);
+        Spawn_InterectionUI("F", "유물획득");
+    }
+    [ContextMenu("상호작용UI 비활성화")]
+    private void OnDisableInterectionUI()
+    {
+        InterectionPanel_SetActive(false);
     }
 
 #endif
@@ -327,6 +331,9 @@ public class MainUIManager : MonoBehaviour
     /// </summary>
     private void MainUI_Initialize()
     {
+        //상호작용 패널 비활성화
+        InterectionPanel_SetActive(false);
+
         //일시정지 패널 비활성화
         PausePanel_SetActive(false);
 
@@ -407,6 +414,13 @@ public class MainUIManager : MonoBehaviour
     public void DiePanel_SetActive(bool active)
     {
         DiePanel.SetActive(active);
+
+        CursorLock(active);
+    }
+
+    public void InterectionPanel_SetActive(bool active)
+    {
+        InterectionPanel.SetActive(active);
 
         CursorLock(active);
     }
@@ -668,12 +682,16 @@ public class MainUIManager : MonoBehaviour
 
     #region InterectionUI
 
-    //수정 필요 스폰할때 카메라를 바라보지 않는 문제 + 가장 앞에서 보이는데 이게 이상하게 부자연스러움
-    public GameObject SpawnInterectionUI(Transform spawnPos, Transform lookTarget)
+    /// <summary>
+    /// 상호작용 UI소환
+    /// </summary>
+    /// <param name="interectionBindKey">상호작용 키</param>
+    /// <param name="interectionReturnValue">상호작용 텍스트</param>
+    public void Spawn_InterectionUI(string interectionBindKey, string interectionReturnValue)
     {
-        Vector3 direction = (lookTarget.position - spawnPos.position).normalized;
-        Debug.LogWarning(direction);
-        return Instantiate(interectionUIPrefab, spawnPos.position, Quaternion.Euler(direction));
+        interectionText.text = "\"" + interectionBindKey + "\" " + interectionReturnValue;
+
+        InterectionPanel_SetActive(true);
     }
 
     #endregion

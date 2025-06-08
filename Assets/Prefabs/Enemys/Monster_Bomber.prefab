@@ -549,7 +549,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e37960132652044a1672a8d04d21d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetRenderer: {fileID: 0}
+  targetRenderer: {fileID: 4191020886588580819}
   flashMaterial: {fileID: 2100000, guid: 5158db7c924cf28479583d4672f561e8, type: 2}
   flashMateria2: {fileID: 2100000, guid: 2323404605946264899c643ee0e64fc4, type: 2}
   flashDuration: 0.05
@@ -780,6 +780,11 @@ PrefabInstance:
       addedObject: {fileID: 1959527264406088595}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2c3441b8d007e5c4d9798e83b8e081ea, type: 3}
+--- !u!137 &4191020886588580819 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7559367144458724755, guid: 2c3441b8d007e5c4d9798e83b8e081ea, type: 3}
+  m_PrefabInstance: {fileID: 5963112352850265664}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6146149509159133611 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 2c3441b8d007e5c4d9798e83b8e081ea, type: 3}
