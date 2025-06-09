@@ -156,7 +156,7 @@ public class PlayerAttack : MonoBehaviour
                 return;
             }
 
-            if (equipItem&& !IsAttackAnim()&&!IsDiveAnim())
+            if (equipItem && !IsAttackAnim() && !IsDiveAnim())
             {
                 isAiming = true;
                 useable.UseItemByType(weaponType);
