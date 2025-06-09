@@ -66,7 +66,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (status.IsDead) return;
 
-        if (isDiving || playerAttack.IsAttackAnim() || IsHitAnim())
+        if (isDiving || playerAttack.IsAttackAnim() || IsHitAnim() || IsBlockAnim())
         {
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
 
@@ -174,6 +174,12 @@ public class PlayerMove : MonoBehaviour
     {
         AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
         return stateInfo.IsTag("Hit");
+    }
+
+    public bool IsBlockAnim()
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsTag("Block");
     }
 
     public void OnHitBox()

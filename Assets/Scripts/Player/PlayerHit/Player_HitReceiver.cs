@@ -9,6 +9,7 @@ public class Player_HitReceiver : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerMove playerMove;
     [SerializeField] private GameObject player;
+    private Collider playerHitBox;
     private PlayerAttack playerAttack;
 
     [Header("Hit Reaction")]
@@ -20,6 +21,7 @@ public class Player_HitReceiver : MonoBehaviour
     private void Awake()
     {
         playerAttack = GetComponentInParent<PlayerAttack>();
+        playerHitBox = GetComponent<CapsuleCollider>();
     }
 
     /// <summary>
@@ -79,6 +81,16 @@ public class Player_HitReceiver : MonoBehaviour
             playerMove.enabled = true;
 
         isKnockedBack = false;
+    }
+
+    public void OnHitBox()
+    {
+        playerHitBox.enabled = true;
+    }
+
+    public void OffHitBox()
+    {
+        playerHitBox.enabled = false;
     }
 
 }
