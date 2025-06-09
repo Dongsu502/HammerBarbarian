@@ -17,5 +17,5 @@ public class DebrisController : MonoBehaviour
         {
             Physics.IgnoreCollision(col, weaponCollider);
         }
-    }
+    }    
 }
