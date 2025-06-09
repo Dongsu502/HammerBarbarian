@@ -16,11 +16,7 @@ public class PlayerAttack : MonoBehaviour
     public bool IsAttacking { get; private set; } = false;
 
     [Header("Windmill")]
-    [SerializeField] private float maxWindmillTime = 3f;
-    private float windmillTimer = 0f;
     private bool isWindmilling = false;
-    private float maxWindMillStemina = 100f;
-    private float minWindMillStemina = 0f;
     private float currentWindMillStemina = 100f;
 
     [Header("Weapon")]
@@ -315,7 +311,6 @@ public class PlayerAttack : MonoBehaviour
         if (isWindmilling) return;
 
         canAttack = false;
-        windmillTimer = 0f;
         animator.SetBool("isSpinning", true);
     }
 
