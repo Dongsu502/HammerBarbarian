@@ -115336,21 +115336,14 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 4.4333334
-    functionName: ResetCollider
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 4.5333333
-    functionName: OnisKinematic
+    functionName: ResetisHiting
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 4.6666665
-    functionName: ReSetIsHitting
+    functionName: OnisKinematic
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

@@ -40,6 +40,8 @@ public class MonsterHitBox : MonoBehaviour
                 flash.Flash();
             }
 
+            rb.isKinematic = false;
+
             playerAttackType = PlayerHitWhiteBox.WhiteBox.attacktype;
             //강공격인지 확인 -> 넉백
             if(playerAttackType == AttackType.Heavy)
@@ -64,7 +66,6 @@ public class MonsterHitBox : MonoBehaviour
 
     private void Knockback(Collider other, float knockbackForce)
     {
-        //나중에 플레이어 무기 타입에 따라서 구분
         WeaponType weaponType = PlayerHitWhiteBox.WhiteBox.weaponType;
         switch (weaponType)
         {

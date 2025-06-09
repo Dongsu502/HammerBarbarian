@@ -82,22 +82,27 @@ public class Golem : MonoBehaviour, IMonster
     /// <summary>
     /// Hit 애니메이션 이벤트 키
     /// </summary>
-    public void ReSetIsHitting()
+    public void OffisKinematic()
     {
-        animator.SetBool("IsHitting", false);
-
         rb.isKinematic = false;
-
-        IsBeingHit = false;
     }
 
     /// <summary>
     /// Hit 애니메이션 이벤트 키
     /// </summary>
-    public void ResetCollider()
+    public void ResetisHiting()
     {
+        if(!IsBeingHit)
+        {
+            return;
+        }
+
         hitBoxClass.hitCollider.enabled = true;
         agent.enabled = true;
+
+        animator.SetBool("IsHitting", false);
+
+        IsBeingHit = false;
     }
 
     public void OnisKinematic()
@@ -206,9 +211,6 @@ public class Golem : MonoBehaviour, IMonster
 
     private void HitAnimation()
     {
-        hitBoxClass.hitCollider.enabled = false;
-        agent.enabled = false;
-
         if (!hitBoxClass.IsKnockback)
         {
             //약공격 히트 애니메이션
@@ -253,17 +255,21 @@ public class Golem : MonoBehaviour, IMonster
 
         //공격 도중 맞으면 공격 중단 후 바로 피격으로 전환
         StopAttack();
+
         IsHit = false;
         IsBeingHit = true;
+        hitBoxClass.hitCollider.enabled = false;
+        agent.enabled = false;
 
         int hitDamage = PlayerStatWhiteBox.WhtieBox.playerAttackDamage(hitBoxClass.playerAttackType);
         TakeDamage(hitDamage);
     }
     public void Attack()
     {
+        if (IsAttacking) return;
+
         agent.enabled = false;
         InAttackRange = HasArrived();
-        Debug.Log(InAttackRange);
 
         Debug.Log("골렘 공격 시작");
         IsAttacking = true;
@@ -278,6 +284,7 @@ public class Golem : MonoBehaviour, IMonster
         //공격 애니메이션 플레이
         animator.SetBool("IsAttack", true);
     }
+    
     public void MoveToTarget()
     {
         Debug.Log("골렘 접근중..");
@@ -290,7 +297,6 @@ public class Golem : MonoBehaviour, IMonster
         agent.SetDestination(target.position);
 
         InAttackRange = HasArrived();
-        Debug.Log(InAttackRange);
 
         //걷기 애니메이션 플레이
         animator.SetBool("IsAttack", false);
@@ -299,7 +305,7 @@ public class Golem : MonoBehaviour, IMonster
     }
     public void Idle()
     {
-        agent.enabled = false;
+        InAttackRange = false;
 
         //Idle 애니메이션 플레이
         MoveAnimation(false);

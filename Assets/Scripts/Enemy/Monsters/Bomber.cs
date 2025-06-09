@@ -52,6 +52,8 @@ public class Bomber : MonoBehaviour, IMonster
     {
         attackCollider.SetActive(false);
         attackRangeObj.SetActive(false);
+
+        rb.isKinematic = true;
     }
 
     public void RunDelay()
@@ -138,6 +140,7 @@ public class Bomber : MonoBehaviour, IMonster
 
     private IEnumerator Attacking()
     {
+        Debug.Log("폭탄병 공격범위 표시!");
         //공격범위, (게이지) 표시
         attackRangeObj.SetActive(true);
 
@@ -217,8 +220,6 @@ public class Bomber : MonoBehaviour, IMonster
     }
     public void Idle()
     {
-        agent.enabled = false;
-
         Debug.Log("폭탄병 대기중");
     }
 

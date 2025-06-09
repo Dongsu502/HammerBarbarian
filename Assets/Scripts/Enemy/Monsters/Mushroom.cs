@@ -16,6 +16,7 @@ public class Mushroom : MonoBehaviour, IMonster
 
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
+    [SerializeField] private float attackDelayTime;
 
     [Header("Effect")]
     [SerializeField] private GameObject attackReadyPrefab;
@@ -24,21 +25,21 @@ public class Mushroom : MonoBehaviour, IMonster
     private MonsterDetection detectionClass;
     private MonsterHitBox hitBoxClass;
     private MonsterHealthUI healthUIClass;
-    private LongRangeAttack rangeAttackClass;
 
     private NavMeshAgent agent;
     private Animator animator;
     private Rigidbody rb;
     private CapsuleCollider mushroomCollider;
+    private Coroutine attackCoroutine;
 
     private float moveAmount;
+    private bool lookTargetCheck = false;
 
     private void Awake()
     {
         detectionClass = GetComponentInChildren<MonsterDetection>();
         hitBoxClass = GetComponentInChildren<MonsterHitBox>();
         healthUIClass = GetComponentInChildren<MonsterHealthUI>();
-        rangeAttackClass = GetComponent<LongRangeAttack>();
 
         agent = GetComponent<NavMeshAgent>();
         agent.speed = moveSpeed;
@@ -54,41 +55,24 @@ public class Mushroom : MonoBehaviour, IMonster
     #region Animation Eventkey
 
     /// <summary>
-    /// 기모으기 이펙트 생성
-    /// </summary>
-    public void AttackReady()
-    {
-        Vector3 spawnPos = rangeAttackClass.bulletSpawnPos.position;
-        attackReadyObject = Instantiate(attackReadyPrefab, spawnPos, Quaternion.identity);
-    }
-
-    /// <summary>
-    /// 기모으기 끝
-    /// </summary>
-    public void AttackReadyFinish()
-    {
-        Destroy(attackReadyObject);
-    }
-
-    /// <summary>
     /// Hit 애니메이션 이벤트 키
     /// </summary>
-    public void ReSetIsHitting()
+    public void OffisKinematic()
     {
-        animator.SetBool("IsHitting", false);
-
         rb.isKinematic = false;
-
-        IsBeingHit = false;
     }
 
     /// <summary>
     /// Hit 애니메이션 이벤트 키
     /// </summary>
-    public void ResetCollider()
+    public void ResetisHiting()
     {
         hitBoxClass.hitCollider.enabled = true;
         agent.enabled = true;
+
+        animator.SetBool("IsHitting", false);
+
+        IsBeingHit = false;
     }
 
     public void OnisKinematic()
@@ -99,11 +83,9 @@ public class Mushroom : MonoBehaviour, IMonster
     /// <summary>
     /// 공격 중단 ( 공격 애니메이션 끝에 이벤트 키 배치)
     /// </summary>
-    public void StopAttack()
+    public void StopAttackAnim()
     {
-        IsAttacking = false;
         animator.SetBool("IsAttack", false);
-        Debug.Log("공격 중단");
     }
 
     /// <summary>
@@ -156,6 +138,22 @@ public class Mushroom : MonoBehaviour, IMonster
         {
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
+
+            float angle = Quaternion.Angle(transform.rotation, lookRotation);
+            if (angle < 1f)
+            {
+                //회전 거의 종료
+                lookTargetCheck = true;
+            }
+            else
+            {
+                //아직 회전중..
+                lookTargetCheck = false;
+            }
+        }
+        else
+        {
+            lookTargetCheck = true;
         }
     }
 
@@ -177,7 +175,6 @@ public class Mushroom : MonoBehaviour, IMonster
             // 아직 도착 안 했으면 false
             return false;
         }
-
     }
 
     public void TakeDamage(int damage)
@@ -192,11 +189,6 @@ public class Mushroom : MonoBehaviour, IMonster
 
     private void HitAnimation()
     {
-        hitBoxClass.hitCollider.enabled = false;
-        agent.enabled = false;
-
-        Debug.LogWarning($"IsKnockback: {hitBoxClass.IsKnockback}");
-
         if (!hitBoxClass.IsKnockback)
         {
             //약공격 히트 애니메이션
@@ -206,8 +198,6 @@ public class Mushroom : MonoBehaviour, IMonster
             //약공격 히트 불값
             //약공격, 강공격을 애니메이션 키로 SetBool false하여 조절
             animator.SetBool("IsHitting", true);
-
-            Debug.LogWarning("약공격");
         }
         else
         {
@@ -218,9 +208,40 @@ public class Mushroom : MonoBehaviour, IMonster
             animator.SetBool("IsHitting", true);
 
             hitBoxClass.IsKnockback = false;
-
-            Debug.LogWarning("강공격");
         }
+    }
+
+    private IEnumerator AttackDelay()
+    {
+        agent.enabled = false;
+        InAttackRange = HasArrived();
+
+        Debug.Log("버섯 공격 시작");
+        IsAttacking = true;
+
+        // 공격 모션 중 이동 막기
+        MoveAnimation(false);
+
+        //타겟을 바라보기
+        Transform target = detectionClass.target;
+        while (!lookTargetCheck)
+        {
+            LookTarget(target);
+            Debug.Log("버섯 타겟팅중..");
+
+            yield return null;
+        }
+
+        //공격 애니메이션 플레이
+        animator.SetBool("IsAttack", true);
+
+        yield return new WaitForSeconds(attackDelayTime);
+
+        lookTargetCheck = false;
+
+        IsAttacking = false;
+
+        Debug.Log("버섯 공격 끝");
     }
 
     private void DieDelay()
@@ -244,33 +265,22 @@ public class Mushroom : MonoBehaviour, IMonster
         if (IsBeingHit) return; // 중복 방지
 
         //공격 도중 맞으면 공격 중단 후 바로 피격으로 전환
-        StopAttack();
+        StopAttackAnim();
+        IsAttacking = false;
+        StopCoroutine(attackCoroutine);
+
         IsHit = false;
         IsBeingHit = true;
-        //공격 기모으기 이펙트 삭제
-        AttackReadyFinish();
+        hitBoxClass.hitCollider.enabled = false;
+        agent.enabled = false;
 
         int hitDamage = PlayerStatWhiteBox.WhtieBox.playerAttackDamage(hitBoxClass.playerAttackType);
         TakeDamage(hitDamage);
     }
     public void Attack()
     {
-        agent.enabled = false;
-        InAttackRange = HasArrived();
-        Debug.Log(InAttackRange);
-
-        Debug.Log("버섯 공격 시작");
-        IsAttacking = true;
-
-        // 공격 모션 중 이동 막기
-        MoveAnimation(false);
-
-        //타겟을 바라보기
-        Transform target = detectionClass.target;
-        LookTarget(target);
-
-        //공격 애니메이션 플레이
-        animator.SetBool("IsAttack", true);
+        if (IsAttacking) return;
+        attackCoroutine = StartCoroutine(AttackDelay());
     }
     public void MoveToTarget()
     {

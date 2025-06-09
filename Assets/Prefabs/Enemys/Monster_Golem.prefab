@@ -638,15 +638,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -36.25
+      value: -46.18283
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.22
+      value: 3.0031118
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.66
+      value: 50.563828
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0ccd8b17174703a45bb29e258312e4eb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1148,7 +1148,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 1

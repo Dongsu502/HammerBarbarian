@@ -298,7 +298,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
@@ -350,6 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 6
   rotateSpeed: 6
+  attackDelayTime: 5
   attackReadyPrefab: {fileID: 5978683434153172194, guid: 96886d40cb147c440af0e90e8536059d, type: 3}
 --- !u!114 &7993369597243107776
 MonoBehaviour:
@@ -437,7 +438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitCollider: {fileID: 4270063890721356521}
   LightknockbackForce: 1
-  HeavyknockbackForce: 10
+  HeavyknockbackForce: 14
   IsKnockback: 0
   playerAttackType: 0
 --- !u!114 &8783472523856455710
