@@ -18,12 +18,18 @@ public class PlayerBlock : MonoBehaviour
        if(context.started) 
        {
             animator.SetBool("isBlocking",true);
+            playerBlockBox.enabled = true;
        }
 
        if (context.canceled)
        {
             animator.SetBool("isBlocking", false);
-
+            playerBlockBox.enabled = false;
         }
+    }
+
+    public void BlockHit()
+    {
+        animator.SetTrigger("BlockHit");
     }
 }

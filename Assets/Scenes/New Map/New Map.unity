@@ -4805,6 +4805,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0926d0983caaf4e489b70a4c6b9e318c, type: 3}
+--- !u!114 &301707922 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7407847551293000281, guid: 619fa196807de014f953d23a660130e6, type: 3}
+  m_PrefabInstance: {fileID: 8411769937997943013}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11d447c9fb8b84f469dac1268b9d97ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &302238059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11877,7 +11888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2347716024353218003, guid: 163c2a7cb99b16c4d93a4ac70515d182, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3688312901838415551, guid: 163c2a7cb99b16c4d93a4ac70515d182, type: 3}
       propertyPath: m_LocalPosition.x
@@ -39616,6 +39627,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1986068837}
   - component: {fileID: 1986068838}
+  - component: {fileID: 1986068839}
   m_Layer: 11
   m_Name: BlockHitBox
   m_TagString: Untagged
@@ -39653,12 +39665,24 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1.2684454, y: 1.9886091, z: 0.42228508}
   m_Center: {x: 0.059042614, y: -0.051704884, z: -0.28885746}
+--- !u!114 &1986068839
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1986068836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0eb0ec417c4154e4881447a611f36d9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1993861436
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -44452,8 +44476,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eee65eb68aaf8c54c9d48dd8c3edb2fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerBlockBox: {fileID: 0}
-  playerHitReceiver: {fileID: 0}
+  playerBlockBox: {fileID: 1986068838}
+  playerHitReceiver: {fileID: 301707922}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
