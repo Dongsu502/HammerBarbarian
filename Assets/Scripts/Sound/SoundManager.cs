@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.TerrainTools;
 using UnityEngine;
 using UnityEngine.SceneManagement; // 씬 관련 이벤트를 사용하기 위해 추가
+using UnityEngine.Audio;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour
 {
@@ -20,6 +21,13 @@ public class SoundManager : MonoBehaviour
     private Dictionary<string, AudioClip> playerSfxClips = new Dictionary<string, AudioClip>(); // 플레이어 효과음 저장
     private Dictionary<string, AudioClip> monsterSfxClips = new Dictionary<string, AudioClip>(); // 몬스터 효과음 저장
     private Dictionary<string, AudioClip> uiClips = new Dictionary<string, AudioClip>(); // UI음 저장
+
+    // 오디오 믹서, 오디오의 타입별로 사운드를 조절
+    [SerializeField] private AudioMixer audioMixer;
+    [SerializeField] private Slider masterVolumeController;
+    [SerializeField] private Slider bgmVolumeController;
+    [SerializeField] private Slider sfxVolumeController;
+    [SerializeField] private Slider uiVolumeController;
 
     // class나 struct 위에 선언하여 사용하면 인스펙터 창에 직렬화로 표시됨
     [Serializable]
@@ -56,6 +64,63 @@ public class SoundManager : MonoBehaviour
         // 현재 활성화된 씬을 가져와 OnSceneLoaded를 호출하여 BGM 재생
         string activeSceneName = SceneManager.GetActiveScene().name;
         OnSeceneLoaded(activeSceneName); // 현재 씬에 맞는 BGM을 설정
+    }
+
+    public void MasterControl()
+    {
+        float sound = masterVolumeController.value;
+
+        if (sound <= 0.0001f)
+        {
+            audioMixer.SetFloat("Master", -80);
+        }
+        else
+        {
+            float dB = Mathf.Log10(sound) * 20f;
+            audioMixer.SetFloat("Master", dB);
+        }
+    }
+    public void BGMControl()
+    {
+        float sound = bgmVolumeController.value;
+
+        if (sound <= 0.0001f)
+        {
+            audioMixer.SetFloat("BGM", -80);
+        }
+        else
+        {
+            float dB = Mathf.Log10(sound) * 20f;
+            audioMixer.SetFloat("BGM", dB);
+        }
+    }
+    public void SFXControl()
+    {
+        float sound = sfxVolumeController.value;
+
+        if (sound <= 0.0001f)
+        {
+            audioMixer.SetFloat("SFX", -80);
+        }
+        else
+        {
+            float dB = Mathf.Log10(sound) * 20f;
+            audioMixer.SetFloat("SFX", dB);
+        }
+    }
+    public void UIControl()
+    {
+        float sound = uiVolumeController.value;
+
+        if (sound <= 0.0001f)
+        {
+            audioMixer.SetFloat("UI", -80);
+        }
+        else
+        {
+            float dB = Mathf.Log10(sound) * 20f;
+            audioMixer.SetFloat("UI", dB);
+        }
     }
 
     // AudioClip 리스트를 Dictionary로 변환하여 이름으로 접근 가능하게 만듬
@@ -195,38 +260,15 @@ public class SoundManager : MonoBehaviour
         uiSource.Stop();
     }
 
-    // 배경음 볼륨 조절 함수
-    public void SetBGMVolume(float volume)
-    {
-        bgmSource.volume = Mathf.Clamp(volume, 0f, 1f); // 볼륨을 0에서 1사이 값으로 제한
-    }
-
-    // 플레이어 효과음 볼륨 조절 함수
-    public void SetPlayerSFXVolume(float volume)
-    {
-        playerSfxSource.volume = Mathf.Clamp(volume, 0f, 1f); // 볼륨을 0에서 1사이 값으로 제한
-    }
-
-    // 몬스터 효과음 볼륨 조절 함수
-    public void SetMonsterSFXVolume(float volume)
-    {
-        monsterSfxSource.volume = Mathf.Clamp(volume, 0f, 1f); // 볼륨을 0에서 1사이 값으로 제한
-    }
-
-    // UI음 볼륨 조절 함수
-    public void SetUIVolume(float volume)
-    {
-        uiSource.volume = Mathf.Clamp(volume, 0f, 1f); // 볼륨을 0에서 1사이 값으로 제한
-    }
-
     // BGM을 페이드아웃 시키는 코루틴 함수
     private IEnumerator FadeOutBGM(float duration, Action onFadeComplete)
     {
         float startVolume = bgmSource.volume;
+        float startTime = Time.time;
 
-        for(float t=0f; t < duration; t+=Time.deltaTime)
+        while (Time.time < startTime + duration)
         {
-            bgmSource.volume = Mathf.Clamp(startVolume, 0f, t / duration);
+            bgmSource.volume = Mathf.Lerp(startVolume, 0f, (Time.time - startTime) / duration);
             yield return null;
         }
 
@@ -237,15 +279,16 @@ public class SoundManager : MonoBehaviour
     // BGM을 페이드 인 시키는 코루틴 함수
     private IEnumerator FadeInBGM(float duration)
     {
+        float targetVolume = 1f;
+        float startTime = Time.time;
         float startVolume = 0f;
-        bgmSource.volume = 0f;
 
-        for (float t = 0f; t < duration; t += Time.deltaTime) 
+        while (Time.time < startTime + duration)
         {
-            bgmSource.volume = Mathf.Clamp(startVolume, 0f, t / duration);
+            bgmSource.volume = Mathf.Lerp(startVolume, targetVolume, (Time.time - startTime) / duration);
             yield return null;
         }
 
-        bgmSource.volume = 1f; // 최종적으로 볼륨을 1로 설정
+        bgmSource.volume = targetVolume;
     }
 }
