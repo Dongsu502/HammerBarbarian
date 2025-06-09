@@ -115,41 +115,6 @@ public class MainUIManager : MonoBehaviour
 
 #if UNITY_EDITOR
 
-    [ContextMenu("피격1")]
-    private void Hit1()
-    {
-        TakeDamage(1);
-    }
-    [ContextMenu("피격2")]
-    private void Hit2()
-    {
-        TakeDamage(2);
-    }
-    [ContextMenu("피격3")]
-    private void Hit3()
-    {
-        TakeDamage(3);
-    }
-    [ContextMenu("회복1")]
-    private void Heal1()
-    {
-        Heal(1);
-    }
-    [ContextMenu("회복2")]
-    private void Heal2()
-    {
-        Heal(2);
-    }
-    [ContextMenu("회복3")]
-    private void Heal3()
-    {
-        Heal(3);
-    }
-    [ContextMenu("게이지 감소 30")]
-    private void GaugeUse30()
-    {
-        UseGauge(30f);
-    }
     [ContextMenu("룬 선택창으로 설정")]
     private void SetRuneChoice()
     {
@@ -179,6 +144,11 @@ public class MainUIManager : MonoBehaviour
     private void OnDisableInterectionUI()
     {
         InterectionPanel_SetActive(false);
+    }
+    [ContextMenu("아이템 갯수 증가")]
+    private void PlusItem()
+    {
+        GetItem();
     }
 
 #endif
@@ -575,9 +545,21 @@ public class MainUIManager : MonoBehaviour
     {
         int itemCount = DataManager.Instance.GetCurrentData().currentItemList;
 
+        if(itemCount == 0)
+        {
+            for(int i = 0; i < itemChoice_Buttons.Length; i++)
+            {
+                itemChoice_Buttons[i].gameObject.SetActive(false);
+            }
+
+            Debug.LogWarning($"현재 아이템의 갯수가 {itemCount}개입니다.");
+
+            return;
+        }
+
         for(int i = 0; i < itemChoice_Buttons.Length; i++)
         {
-            itemChoice_Buttons[i].gameObject.SetActive(i <= itemCount);
+            itemChoice_Buttons[i].gameObject.SetActive(i < itemCount);
         }
         Debug.Log($"활성화된 아이템 수: {itemCount}");
     } 
