@@ -42,18 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Dive",
+                    "name": "EquipItem",
                     "type": "Button",
-                    "id": "fbcc227a-ecdc-424b-93d3-9d0ef4446bd1",
+                    "id": "c15fcab7-5732-4413-a316-b099a7950eb7",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
                 },
                 {
-                    "name": "EquipItem",
+                    "name": "Block",
                     "type": "Button",
-                    "id": "c15fcab7-5732-4413-a316-b099a7950eb7",
+                    "id": "dcaae9c7-3e9d-4ab2-b77e-6ede1885591a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -151,23 +151,23 @@
                 },
                 {
                     "name": "",
-                    "id": "80c9f9b4-00af-4dbe-ab61-d65f3c0dee5a",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dive",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "8d18de2f-6905-4dec-8cf5-6ae9ad7058ca",
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "EquipItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4d44e6c-0156-497f-ade7-ccb7cda12c18",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Block",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

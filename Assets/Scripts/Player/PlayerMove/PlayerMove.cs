@@ -12,6 +12,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Transform cameraTransform;
     [SerializeField] private InputActionReference lookAction;
     [SerializeField] private AimCameraSwitcher cameraSwitcher;
+    [SerializeField] private Collider hitBoxCollider;
     private PlayerStatus status;
 
     private PlayerAttack playerAttack;
@@ -65,7 +66,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (status.IsDead) return;
 
-        if (isDiving || playerAttack.IsAttackAnim())
+        if (isDiving || playerAttack.IsAttackAnim() || IsHitAnim())
         {
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
 
@@ -167,6 +168,22 @@ public class PlayerMove : MonoBehaviour
     public void EndDive()
     {
         isDiving = false;
+    }
+
+    public bool IsHitAnim()
+    {
+        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
+        return stateInfo.IsTag("Hit");
+    }
+
+    public void OnHitBox()
+    {
+        hitBoxCollider.enabled = true;
+    }
+
+    public void OffHitBox()
+    {
+        hitBoxCollider.enabled = false;
     }
 
     public void OnInterpolate()

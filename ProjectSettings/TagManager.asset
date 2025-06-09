@@ -23,7 +23,7 @@ TagManager:
   - UI
   - Minimap
   - WorldUI
-  - 
+  - InvisibleDoor
   - Enemy_Attack
   - Enemy
   - Player

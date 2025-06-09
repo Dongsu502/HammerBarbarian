@@ -9,6 +9,7 @@ public class Player_HitReceiver : MonoBehaviour
     [SerializeField] private Animator animator;
     [SerializeField] private PlayerMove playerMove;
     [SerializeField] private GameObject player;
+    private PlayerAttack playerAttack;
 
     [Header("Hit Reaction")]
     [SerializeField] private float knockbackForce = 10f;
@@ -16,6 +17,10 @@ public class Player_HitReceiver : MonoBehaviour
 
     private bool isKnockedBack = false;
 
+    private void Awake()
+    {
+        playerAttack = GetComponentInParent<PlayerAttack>();
+    }
 
     /// <summary>
     /// 피격 시 호출되는 메서드 (공격자 쪽에서 방향 정보 전달 필요)
@@ -30,6 +35,7 @@ public class Player_HitReceiver : MonoBehaviour
 
     private IEnumerator KnockbackCoroutine(Vector3 direction)
     {
+        playerAttack.DisableHammerCollider();
         isKnockedBack = true;
 
         if (playerMove != null)

@@ -34,5 +34,11 @@ public class PlayerHit : MonoBehaviour
                 //animator.SetTrigger("Hit");
             }
         }
+
+        if (other.CompareTag("MinimapTrigger"))
+        {
+            UIWhiteBox.DisableMinimapFog(other);
+            Destroy(other.gameObject);
+        }
     }
 }
