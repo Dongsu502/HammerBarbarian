@@ -262,6 +262,9 @@ public class MainUIManager : MonoBehaviour
                     Anim_Setting.SetTrigger("Off");
                     UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
                     break;
+                case MainUIState.Die:
+                    Debug.LogWarning("MainUIState가 Die입니다.");
+                    return;
                 default:
                     Debug.LogWarning("MainUIState가 NONE, PAUSE, PAUSE_SETTING이 아닙니다.");
                     PausePanel_SetActive(true);
