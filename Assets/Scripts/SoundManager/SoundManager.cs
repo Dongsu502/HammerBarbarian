@@ -11,12 +11,14 @@ public class SoundManager : MonoBehaviour
     public static SoundManager instance;
 
     public AudioSource bgmSource; // 배경음악
-    public AudioSource sfxSource; // 효과음
+    public AudioSource playerSfxSource; // 플레이어효과음
+    public AudioSource monsterSfxSource; // 몬스터효과음
     public AudioSource uiSource; // UI음
 
     // 사운드를 이름으로 관리할 수 있도록 Dictionary 사용
     private Dictionary<string, AudioClip> bgmClips = new Dictionary<string, AudioClip>(); // 배경음 저장
-    private Dictionary<string, AudioClip> sfxClips = new Dictionary<string, AudioClip>(); // 효과음 저장
+    private Dictionary<string, AudioClip> playerSfxClips = new Dictionary<string, AudioClip>(); // 플레이어 효과음 저장
+    private Dictionary<string, AudioClip> monsterSfxClips = new Dictionary<string, AudioClip>(); // 몬스터 효과음 저장
     private Dictionary<string, AudioClip> uiClips = new Dictionary<string, AudioClip>(); // UI음 저장
 
     // class나 struct 위에 선언하여 사용하면 인스펙터 창에 직렬화로 표시됨
@@ -28,7 +30,8 @@ public class SoundManager : MonoBehaviour
     }
 
     public NameAudioClip[] bgmClipsList; // 배경음 리스트
-    public NameAudioClip[] sfxClipsList; // 효과음 리스트
+    public NameAudioClip[] playerSfxClipsList; // 플레이어 효과음 리스트
+    public NameAudioClip[] monsterSfxClipsList; // 몬스터 효과음 리스트
     public NameAudioClip[] uiClipsList; // 효과음 리스트
 
     private Coroutine currentBGMCoroutin; // 현재 실행중인 BGM 코루틴을 추절하기 위한 변수
@@ -66,11 +69,19 @@ public class SoundManager : MonoBehaviour
             }
         }
 
-        foreach (var sfx in sfxClipsList)
+        foreach (var sfx in playerSfxClipsList)
         {
-            if (!sfxClips.ContainsKey(sfx.name))
+            if (!playerSfxClips.ContainsKey(sfx.name))
             {
-                sfxClips.Add(sfx.name, sfx.clip); // 배경음 이름과 클립을 저장
+                playerSfxClips.Add(sfx.name, sfx.clip); // 플레이어 효과음 이름과 클립을 저장
+            }
+        }
+
+        foreach (var sfx in monsterSfxClipsList)
+        {
+            if (!monsterSfxClips.ContainsKey(sfx.name))
+            {
+                monsterSfxClips.Add(sfx.name, sfx.clip); // 몬스터 효과음 이름과 클립을 저장
             }
         }
 
@@ -121,12 +132,25 @@ public class SoundManager : MonoBehaviour
         }
     }
 
-    // 효과음 재생 함수(이름으로 재생)
-    public void PlaySFX(string name)
+    // 플레이어 효과음 재생 함수(이름으로 재생)
+    public void PlayPlayerSFX(string name)
     {
-        if (sfxClips.ContainsKey(name))
+        if (playerSfxClips.ContainsKey(name))
         {
-            sfxSource.PlayOneShot(sfxClips[name]); // 해당 이름의 효과음을 
+            playerSfxSource.PlayOneShot(playerSfxClips[name]); // 해당 이름의 효과음을 
+        }
+        else
+        {
+            Debug.Log("해당 이름의 효과음이 존재하지 않음: " + name);
+        }
+    }
+
+    // 몬스터 효과음 재생 함수(이름으로 재생)
+    public void PlayMonsterSFX(string name)
+    {
+        if (monsterSfxClips.ContainsKey(name))
+        {
+            monsterSfxSource.PlayOneShot(monsterSfxClips[name]); // 해당 이름의 효과음을 
         }
         else
         {
@@ -153,10 +177,16 @@ public class SoundManager : MonoBehaviour
         bgmSource.Stop();
     }
 
-    // 효과음 멈춤
-    public void StopSFX()
+    // 플레이어 효과음 멈춤
+    public void StopPlayerSFX()
     {
-        sfxSource.Stop();
+        playerSfxSource.Stop();
+    }
+
+    // 몬스터 효과음 멈춤
+    public void StopMonsterSFX()
+    {
+        monsterSfxSource.Stop();
     }
 
     // UI음 멈춤
@@ -171,10 +201,16 @@ public class SoundManager : MonoBehaviour
         bgmSource.volume = Mathf.Clamp(volume, 0f, 1f); // 볼륨을 0에서 1사이 값으로 제한
     }
 
-    // 효과음 볼륨 조절 함수
-    public void SetSFXVolume(float volume)
+    // 플레이어 효과음 볼륨 조절 함수
+    public void SetPlayerSFXVolume(float volume)
     {
-        sfxSource.volume = Mathf.Clamp(volume, 0f, 1f); // 볼륨을 0에서 1사이 값으로 제한
+        playerSfxSource.volume = Mathf.Clamp(volume, 0f, 1f); // 볼륨을 0에서 1사이 값으로 제한
+    }
+
+    // 몬스터 효과음 볼륨 조절 함수
+    public void SetMonsterSFXVolume(float volume)
+    {
+        monsterSfxSource.volume = Mathf.Clamp(volume, 0f, 1f); // 볼륨을 0에서 1사이 값으로 제한
     }
 
     // UI음 볼륨 조절 함수
@@ -183,7 +219,7 @@ public class SoundManager : MonoBehaviour
         uiSource.volume = Mathf.Clamp(volume, 0f, 1f); // 볼륨을 0에서 1사이 값으로 제한
     }
 
-    // BGM을 페이드아웃 시키는 로루틴 함수
+    // BGM을 페이드아웃 시키는 코루틴 함수
     private IEnumerator FadeOutBGM(float duration, Action onFadeComplete)
     {
         float startVolume = bgmSource.volume;
