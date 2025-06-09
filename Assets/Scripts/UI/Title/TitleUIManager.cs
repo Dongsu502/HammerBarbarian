@@ -40,6 +40,8 @@ public class TitleUIManager : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.instance.PlayBGM("Title01", 0);
+
         StartCoroutine(StartSequence());
     }
 
