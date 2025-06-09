@@ -14,6 +14,7 @@ TagManager:
   - Attack_Mushroom
   - Attack_Bomber
   - MinimapTrigger
+  - Player_BlockHitBox
   layers:
   - Default
   - TransparentFX
