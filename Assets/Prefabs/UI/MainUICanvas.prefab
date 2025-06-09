@@ -11088,8 +11088,8 @@ MonoBehaviour:
     m_NumColorKeys: 3
     m_NumAlphaKeys: 2
   minimapImage: {fileID: 5748115647126164626}
-  minimapCamera: {fileID: 0}
-  playerMarker: {fileID: 0}
+  minimapCamera: {fileID: 116750467052522022, guid: 25c5a1126ae76df4abba887603c3c7aa, type: 3}
+  playerMarker: {fileID: 2598126704144871753, guid: 28c111725938348429c2505b70ec66f3, type: 3}
   MapPanel: {fileID: 1584957558307552982}
   crossHairImage: {fileID: 2879664895708831362}
   runeShowImages:
@@ -11097,6 +11097,7 @@ MonoBehaviour:
   - {fileID: 150386566248840172}
   - {fileID: 1496818358005062919}
   item_ImageResources:
+  - {fileID: 21300000, guid: f590c7d1855734a45ae2ef12ee6a291b, type: 3}
   - {fileID: 21300000, guid: 5297ad46f2d796a4eafe503f2983a35f, type: 3}
   - {fileID: 21300000, guid: 8618147db8ba5204da2b13f0af8c6af2, type: 3}
   - {fileID: 21300000, guid: 7910ad3513689fd4fa43a638db97f648, type: 3}

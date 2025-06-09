@@ -535,7 +535,7 @@ public class MainUIManager : MonoBehaviour
         
         currentItemNum = int.Parse(pressedButtonNumber);
 
-        itemImage.sprite = item_ImageResources[currentItemNum];
+        itemImage.sprite = item_ImageResources[currentItemNum + 1];
     }
 
     /// <summary>
@@ -552,6 +552,11 @@ public class MainUIManager : MonoBehaviour
                 itemChoice_Buttons[i].gameObject.SetActive(false);
             }
 
+            //아이템 이미지
+            itemImage.sprite = item_ImageResources[itemCount];
+
+            //아이템 텍스트
+            ChangeItemName_UI("");
             Debug.LogWarning($"현재 아이템의 갯수가 {itemCount}개입니다.");
 
             return;

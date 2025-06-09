@@ -13,6 +13,9 @@ public class MinimapFog : MonoBehaviour
     {
         UIWhiteBox.SetMinimapFogWB(this);
 
+        gameObject.transform.position = new Vector3(59f, -26.6f, 123.1f);
+        gameObject.transform.localScale = new Vector3(33.36097f, 6.808361f, 33.36097f);
+
         InitializeFog();
     }
 

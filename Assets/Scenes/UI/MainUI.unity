@@ -122,50 +122,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &48522422 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7382022723453436484, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-  m_PrefabInstance: {fileID: 4689269034511260716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &96410448 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4052943122693266971, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-  m_PrefabInstance: {fileID: 4689269034511260716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &119077909 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2945256902246096701, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-  m_PrefabInstance: {fileID: 4689269034511260716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &399953070 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7491886913917787600, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-  m_PrefabInstance: {fileID: 4689269034511260716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &564963983
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,39 +387,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!114 &976033742 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8438978742275891828, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-  m_PrefabInstance: {fileID: 4689269034511260716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1043810376 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6692578641277190301, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-  m_PrefabInstance: {fileID: 4689269034511260716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1166877481 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3117305867352189491, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-  m_PrefabInstance: {fileID: 4689269034511260716}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1456776081
 GameObject:
   m_ObjectHideFlags: 0
@@ -949,42 +872,6 @@ PrefabInstance:
       propertyPath: minimapCamera
       value: 
       objectReference: {fileID: 8282551110268451982}
-    - target: {fileID: 1234886135090730904, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: itemChoice_Buttons.Array.size
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 1234886135090730904, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: itemChoice_Buttons.Array.data[0]
-      value: 
-      objectReference: {fileID: 48522422}
-    - target: {fileID: 1234886135090730904, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: itemChoice_Buttons.Array.data[1]
-      value: 
-      objectReference: {fileID: 1043810376}
-    - target: {fileID: 1234886135090730904, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: itemChoice_Buttons.Array.data[2]
-      value: 
-      objectReference: {fileID: 976033742}
-    - target: {fileID: 1234886135090730904, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: itemChoice_Buttons.Array.data[3]
-      value: 
-      objectReference: {fileID: 1166877481}
-    - target: {fileID: 1234886135090730904, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: itemChoice_Buttons.Array.data[4]
-      value: 
-      objectReference: {fileID: 96410448}
-    - target: {fileID: 1234886135090730904, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: itemChoice_Buttons.Array.data[5]
-      value: 
-      objectReference: {fileID: 119077909}
-    - target: {fileID: 1234886135090730904, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: itemChoice_Buttons.Array.data[6]
-      value: 
-      objectReference: {fileID: 399953070}
-    - target: {fileID: 1234886135090730904, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
-      propertyPath: itemChoice_Buttons.Array.data[7]
-      value: 
-      objectReference: {fileID: 399953070}
     - target: {fileID: 3395330831850877845, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
       propertyPath: m_Pivot.x
       value: 0
