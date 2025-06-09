@@ -15,7 +15,10 @@ public class Golem : MonoBehaviour, IMonster
     public bool InAttackRange { get; set; }
     public bool IsAttacking { get; private set; }
 
+    [Header("허수아비모드")]
+    [SerializeField] private bool isDummyMode;
 
+    [Space]
     [Header("State")]
     [SerializeField] private float moveSpeed;
     [SerializeField] private float rotateSpeed;
@@ -197,10 +200,13 @@ public class Golem : MonoBehaviour, IMonster
 
     public void TakeDamage(int damage)
     {
-        HP -= damage;
-        Debug.Log($"{gameObject.name}이(가) {damage}의 피해를 입음.. 남은 체력: {HP}");
+        if(!isDummyMode)
+        {
+            HP -= damage;
+            Debug.Log($"{gameObject.name}이(가) {damage}의 피해를 입음.. 남은 체력: {HP}");
 
-        healthUIClass.TakeDamageUI(damage);
+            healthUIClass.TakeDamageUI(damage);
+        }
 
         HitAnimation();
         if(HP<=0)
@@ -266,6 +272,8 @@ public class Golem : MonoBehaviour, IMonster
     }
     public void Attack()
     {
+        if (isDummyMode) return;
+
         if (IsAttacking) return;
 
         agent.enabled = false;
