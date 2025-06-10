@@ -38,11 +38,6 @@ public class TitleUIManager : MonoBehaviour
         TitleUI_Initialize();
     }
 
-    private void Start()
-    {
-        SoundManager.instance.PlayBGM("Title01", 0);
-    }
-
     private void OnEnable()
     {
         StartCoroutine(StartSequence());
@@ -72,11 +67,13 @@ public class TitleUIManager : MonoBehaviour
 
     public void GobackMenu()
     {
-        MenuPanel?.SetActive(true);
+        SoundManager.instance.PlayUI("UI_OptionDrag_Open");
 
-        PlayButton?.SetActive(false);
-        StorageDataPanel?.SetActive(false);
-        SettingPanel?.SetActive(false);
+        MenuPanel.SetActive(true);
+
+        PlayButton.SetActive(false);
+        StorageDataPanel.SetActive(false);
+        SettingPanel.SetActive(false);
     }
 
     private IEnumerator StartSequence()
@@ -84,12 +81,17 @@ public class TitleUIManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         //플레이 버튼 활성화
         OnPlayButton();
+
+        //배경음악 플레이
+        SoundManager.instance.PlayBGM("Title01", 1f);
     }
 
     #region ButtonEvent
 
     public void Click_PlayButton()
     {
+        SoundManager.instance.PlayUI("UI_OptionDrag_Open");
+
         PlayButton.SetActive(false);
 
         Anim_Title.SetTrigger("Start");
@@ -120,6 +122,7 @@ public class TitleUIManager : MonoBehaviour
     }
     public void Click_Setting_GobackButton()
     {
+        SoundManager.instance.PlayUI("UI_OptionDrag_Colse");
         Anim_SettingOff.SetTrigger("Off");
     }
 

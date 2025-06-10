@@ -1,4 +1,3 @@
-using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
@@ -204,6 +203,7 @@ public class MainUIManager : MonoBehaviour
 
     private void Start()
     {
+        SoundManager.instance.PlayBGM("Forest02", 0.5f);
         MainUI_Initialize();
     }
 
@@ -234,6 +234,7 @@ public class MainUIManager : MonoBehaviour
                     UIWhiteBox.MainUICurrentState = MainUIState.NONE;
                     break;
                 case MainUIState.PAUSE_SETTING:
+                    SoundManager.instance.PlayUI("UI_OptionDrag_Colse");
                     Anim_Setting.SetTrigger("Off");
                     UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
                     break;
@@ -535,6 +536,8 @@ public class MainUIManager : MonoBehaviour
     /// </summary>
     public void ChangeItem_UI()
     {
+        SoundManager.instance.PlayUI("UI_Botton05");
+
         string buttonName = EventSystem.current.currentSelectedGameObject.name;
         string pressedButtonNumber = buttonName.Substring(buttonName.Length - 1, 1);
         

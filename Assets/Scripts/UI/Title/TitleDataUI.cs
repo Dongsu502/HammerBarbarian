@@ -120,6 +120,10 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
     private void SetActive_ResetDataPopup(bool isActive)
     {
+        if(isActive)
+        {
+            SoundManager.instance.PlayUI("UI_Botton01");
+        }
         ResetDataPopup.SetActive(isActive);
     }
 
@@ -165,6 +169,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
     public void Click_YesButton()
     {
+        SoundManager.instance.PlayUI("UI_Botton05");
+
         switch (selectIndex)
         {
             case -1:
@@ -205,6 +211,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
     public void Click_NoButton()
     {
+        SoundManager.instance.PlayUI("UI_Botton05");
+
         SetActive_ResetDataPopup(false);
         DeselectAll();
         selectIndex = -1;
@@ -212,6 +220,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
     public void Click_Data1Button()
     {
+        SoundManager.instance.PlayUI("UI_Botton07");
+
         selectIndex = 0;
 
         //버튼 선택되었는지 확인
@@ -245,6 +255,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
     public void Click_Data2Button()
     {
+        SoundManager.instance.PlayUI("UI_Botton07");
+
         selectIndex = 1;
 
         if (!isClickButton[selectIndex])
@@ -277,6 +289,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
     public void Click_Data3Button()
     {
+        SoundManager.instance.PlayUI("UI_Botton07");
+
         selectIndex = 2;
 
         if (!isClickButton[selectIndex])

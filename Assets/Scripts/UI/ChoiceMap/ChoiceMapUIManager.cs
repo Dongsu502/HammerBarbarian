@@ -22,6 +22,11 @@ public class ChoiceMapUIManager : MonoBehaviour
         uiInput = new UIInputAction();
     }
 
+    private void Start()
+    {
+        SoundManager.instance.StopBGM();
+    }
+
     private void OnEnable()
     {
         uiInput.ChoiceMapUI.Enable();
@@ -45,8 +50,6 @@ public class ChoiceMapUIManager : MonoBehaviour
         WorldPanel.SetActive(false);
 
         UIWhiteBox.ChoiceMapUICurrentState = ChoiceMapUIState.DUNGEON;
-
-        //SetActiveDungeonButtons(0, 3);
     }
 
     private void R_KeyDown(InputAction.CallbackContext context)
@@ -79,31 +82,6 @@ public class ChoiceMapUIManager : MonoBehaviour
     }
 
     /// <summary>
-    /// 던전 버튼 활성화 (일단 보류)
-    /// </summary>
-    /// <param name="worldNumber">월드 번호</param>
-    /// <param name="dungeonIndex">던전 갯수</param>
-    //private void SetActiveDungeonButtons(int worldNumber, int dungeonIndex)
-    //{
-    //    BaseData currentData = DataManager.Instance.GetCurrentData();
-
-    //    for(int i = 0; i < dungeonIndex; i++)
-    //    {
-    //        DungeonButtons[i].gameObject.SetActive(false);
-
-    //        if (currentData.worlds[worldNumber].dungeons[i] == true)
-    //        {
-    //            DungeonButtons[i].gameObject.SetActive(true);
-    //        }
-    //        else
-    //        {
-    //            return;
-    //        }
-    //    }
-        
-    //}
-
-    /// <summary>
     /// 월드패널 활성화 / 비활성화
     /// </summary>
     /// <param name="isActive">활성화 여부</param>
@@ -111,20 +89,6 @@ public class ChoiceMapUIManager : MonoBehaviour
     {
         WorldPanel.SetActive(isActive);
     }
-
-    /// <summary>
-    /// 월드 버튼 활성화 (일단 보류)
-    /// </summary>
-    /// <param name="index"></param>
-    //private void SetActiveWorldButtons(int index)
-    //{
-    //    BaseData currentData = DataManager.Instance.GetCurrentData();
-
-    //    for(int i = 0; i < index; i++)
-    //    {
-            
-    //    }
-    //}
 
     #region 버튼 클릭 이벤트
 
@@ -138,6 +102,8 @@ public class ChoiceMapUIManager : MonoBehaviour
     }
     public void Click_Dungeon3()
     {
+        SoundManager.instance.PlayUI("UI_Botton07");
+
         Debug.Log("던전3 이동");
         UIWhiteBox.SceneName = "New Map";
         SceneManager.LoadScene("Loading");
@@ -145,6 +111,8 @@ public class ChoiceMapUIManager : MonoBehaviour
 
     public void Click_World1()
     {
+        SoundManager.instance.PlayUI("UI_Botton07");
+
         Debug.Log("월드1 던전선택창 이동");
 
         SetActiveWorldPanel(false);

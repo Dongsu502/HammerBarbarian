@@ -1,9 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SettingPanel : MonoBehaviour
 {
+    [SerializeField] private Slider sliderMaster;
+    [SerializeField] private Slider sliderBGM;
+    [SerializeField] private Slider sliderSFX;
+    [SerializeField] private Slider sliderUI;
+
+    private void OnEnable()
+    {
+        SoundManager.instance.PlayUI("UI_OptionDrag_Open");
+    }
+
     #region EventKey
 
     public void DisableEvent()
@@ -11,31 +22,11 @@ public class SettingPanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void SetMatserVolume(float sliderValue)
+    public void MasterVolumeEvent()
     {
-        Debug.Log($"MasterVolume: {sliderValue}");
-        SetBackgroundVolume(sliderValue);
-        SetSFXVolume(sliderValue);
-        SetUISFXVolume(sliderValue);
-    }
-
-    public void SetBackgroundVolume(float sliderValue)
-    {
-        Debug.Log($"BackgroundVolume: {sliderValue}");
-        //SoundManager.instance.SetBGMVolume(sliderValue);
-    }
-
-    public void SetSFXVolume(float sliderValue)
-    {
-        Debug.Log($"SFXVolume: {sliderValue}");
-        //SoundManager.instance.SetPlayerSFXVolume(sliderValue);
-       //SoundManager.instance.SetMonsterSFXVolume(sliderValue);
-    }
-
-    public void SetUISFXVolume(float sliderValue)
-    {
-        Debug.Log($"UIVolume: {sliderValue}");
-       // SoundManager.instance.SetUIVolume(sliderValue);
+        sliderBGM.value = sliderMaster.value;
+        sliderSFX.value = sliderMaster.value;
+        sliderUI.value = sliderMaster.value;
     }
 
     #endregion

@@ -52,6 +52,8 @@ public class RuneInventoryUI : MonoBehaviour
 
     private void OnEnable()
     {
+        SoundManager.instance.PlayUI("UI_OptionDrag_Open");
+
         //ÆË¾÷Ã¢ ºñÈ°¼ºÈ­
         RePlacementPopup.SetActive(false);
 
@@ -158,6 +160,8 @@ public class RuneInventoryUI : MonoBehaviour
 
     public void Click_YesButton()
     {
+        SoundManager.instance.PlayUI("UI_Botton05");
+
         //·é UI Àû¿ë
         RuneUIApplication(ClickRuneSlot, choiceRune);
 
@@ -171,12 +175,16 @@ public class RuneInventoryUI : MonoBehaviour
 
     public void Click_NoButton()
     {
+        SoundManager.instance.PlayUI("UI_Botton05");
+
         //ÆÐ³Î ºñÈ°¼ºÈ­
         UIWhiteBox.SetActiveRuneInventoryPanel(false);
     }
 
     public void Click_RuneButton1()
     {
+        SoundManager.instance.PlayUI("UI_Botton07");
+
         if (!isChangeRune) return;
 
         //·é ½½·Ô¹øÈ£ º¯°æ
@@ -190,6 +198,8 @@ public class RuneInventoryUI : MonoBehaviour
 
     public void Click_RuneButton2()
     {
+        SoundManager.instance.PlayUI("UI_Botton07");
+
         if (!isChangeRune) return;
 
         //·é ½½·Ô¹øÈ£ º¯°æ
@@ -203,6 +213,8 @@ public class RuneInventoryUI : MonoBehaviour
 
     public void Click_RuneButton3()
     {
+        SoundManager.instance.PlayUI("UI_Botton07");
+
         if (!isChangeRune) return;
 
         //·é ½½·Ô¹øÈ£ º¯°æ

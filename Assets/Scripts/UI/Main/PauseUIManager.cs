@@ -53,18 +53,24 @@ public class PauseUIManager : MonoBehaviour
 
     public void Click_GobackButton()
     {
+        SoundManager.instance.PlayUI("UI_Botton05");
+
         mainUIManager.PausePanel_SetActive(false);
         UIWhiteBox.MainUICurrentState = MainUIState.NONE;
     }
 
     public void Click_Setting()
     {
+        SoundManager.instance.PlayUI("UI_Botton05");
+
         SetActive_SettingPanel(true);
         UIWhiteBox.MainUICurrentState = MainUIState.PAUSE_SETTING;
     }
 
     public void Click_GoTitleButton()
     {
+        SoundManager.instance.PlayUI("UI_Botton05");
+
         var currentData = DataManager.Instance.GetCurrentData();
         string currentDataName = DataManager.Instance.currentDataFileName;
         DataManager.Instance.SaveGameData(currentData, currentDataName);
@@ -75,6 +81,8 @@ public class PauseUIManager : MonoBehaviour
 
     public void Click_QuitButton()
     {
+        SoundManager.instance.PlayUI("UI_Botton05");
+
         var currentData = DataManager.Instance.GetCurrentData();
         string currentDataName = DataManager.Instance.currentDataFileName;
         DataManager.Instance.SaveGameData(currentData, currentDataName);

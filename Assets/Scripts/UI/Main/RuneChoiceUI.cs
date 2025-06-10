@@ -36,7 +36,9 @@ public class RuneChoiceUI : MonoBehaviour
 
     private void OnEnable()
     {
-        if(UIWhiteBox.MainUICurrentState == MainUIState.NONE)
+        SoundManager.instance.PlayUI("UI_OptionDrag_Open");
+
+        if (UIWhiteBox.MainUICurrentState == MainUIState.NONE)
         {
             Debug.LogWarning("UIState이 NONE입니다. UIState을 설정해주세요.");
             return;
@@ -108,6 +110,8 @@ public class RuneChoiceUI : MonoBehaviour
 
     public void Click_runeButton()
     {
+        SoundManager.instance.PlayUI("UI_Botton07");
+
         animator.SetTrigger("Off");
         UIWhiteBox.CursorLock(false);
 
