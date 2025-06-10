@@ -24,6 +24,14 @@ public class Bomber : MonoBehaviour, IMonster
     [SerializeField] private float attackWaitingTime;
     [SerializeField] private GameObject attackEffectPrefab;
 
+    [Space]
+    [Header("Die")]
+    [SerializeField] private GameObject dieEffectPrefab;
+    private GameObject dieEffectObj;
+
+    [Space]
+    [SerializeField] private Transform BigHitEffectPos;
+
     private MonsterDetection detectionClass;
     private MonsterHitBox hitBoxClass;
 
@@ -32,7 +40,6 @@ public class Bomber : MonoBehaviour, IMonster
     private Rigidbody rb;
     private CapsuleCollider bomberCollider;
 
-    private float moveAmount;
     private bool isDetection;
 
     private void Awake()
@@ -59,29 +66,6 @@ public class Bomber : MonoBehaviour, IMonster
     public void RunDelay()
     {
         isDetection = true;
-    }
-
-    /// <summary>
-    /// Die 애니메이션 키 이벤트
-    /// </summary>
-    public void DestroyDelay()
-    {
-        Destroy(gameObject);
-    }
-
-    /// <summary>
-    /// Die 애니메이션 키 이벤트
-    /// </summary>
-    public void RBDestory()
-    {
-        //중력 제거
-        rb.isKinematic = true;
-
-        //내비 제거
-        agent.enabled = false;
-
-        //폭탄병 콜라이더 제거
-        bomberCollider.enabled = false;
     }
 
     public void TakeDamage(int damage)
@@ -158,15 +142,36 @@ public class Bomber : MonoBehaviour, IMonster
         Destroy(gameObject);
     }
 
+    private IEnumerator Die()
+    {
+        //Hit 콜라이더 제거
+        hitBoxClass.hitCollider.enabled = false;
+
+        //중력 제거
+        rb.isKinematic = true;
+
+        //내비 제거
+        agent.enabled = false;
+
+        //골렘 콜라이더 제거
+        bomberCollider.enabled = false;
+
+        yield return null;
+
+        dieEffectObj = Instantiate(dieEffectPrefab, BigHitEffectPos.position, BigHitEffectPos.rotation);
+
+        yield return null;
+
+        Destroy(dieEffectObj, 3f);
+        Destroy(gameObject);
+    }
+
     #region AI
 
     public void Death()
     {
         Debug.Log("폭탄병 사망");
-        //Hit 콜라이더 제거
-        hitBoxClass.hitCollider.enabled = false;
-
-        Destroy(gameObject, 1f);
+        StartCoroutine(Die());
     }
     public void Hit()
     {
