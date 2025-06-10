@@ -13,6 +13,7 @@ public class EnemySpawnManager : MonoBehaviour
     [Header("몬스터 프리팹")]
     [SerializeField] private GameObject golemPrefab;
     [SerializeField] private GameObject mushroomPrefab;
+    [SerializeField] private GameObject bomberPrefab;
     private GameObject spawnMonster;
 
 
@@ -33,7 +34,7 @@ public class EnemySpawnManager : MonoBehaviour
     {
         for(int i = 0; i < spawnObjects.Length; i++)
         {
-            MonsterType monsterType = spawnObjects[i].GetComponent<EnemySpawner>().currentMonsterType;
+            MonsterType monsterType = spawnObjects[i].GetComponent<EnemySpawner>().CurrentMonsterType;
 
             if(monsterType == MonsterType.GOLEM)
             {
@@ -42,6 +43,10 @@ public class EnemySpawnManager : MonoBehaviour
             else if(monsterType == MonsterType.MUSHROOM)
             {
                 spawnMonster = Instantiate(mushroomPrefab, spawnObjects[i].transform.position, spawnObjects[i].transform.rotation);
+            }
+            else if(monsterType == MonsterType.BOMBER)
+            {
+                spawnMonster = Instantiate(bomberPrefab, spawnObjects[i].transform.position, spawnObjects[i].transform.rotation);
             }
             else
             {

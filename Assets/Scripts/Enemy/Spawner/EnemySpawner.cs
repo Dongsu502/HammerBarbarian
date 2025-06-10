@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,10 +6,13 @@ using UnityEngine;
 public enum MonsterType
 {
     GOLEM,
-    MUSHROOM
+    MUSHROOM,
+    BOMBER
 }
-
 public class EnemySpawner : MonoBehaviour
 {
-    public MonsterType currentMonsterType { get; private set; }
+    [SerializeField]
+    private MonsterType currentMonsterType;  // 인스펙터에서 보이고
+
+    public MonsterType CurrentMonsterType => currentMonsterType; // 코드에서는 읽기 전용
 }
