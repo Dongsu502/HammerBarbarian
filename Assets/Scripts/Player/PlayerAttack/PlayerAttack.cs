@@ -7,6 +7,7 @@ public class PlayerAttack : MonoBehaviour
     private Animator animator;
     private Rigidbody rb;
     private PlayerStatus status;
+    private PlayerAnimStateChecker animChecker;
 
     [Header("Attack Combo")]
     [SerializeField] private int comboStep = 0;
@@ -37,14 +38,11 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float dizzyMoveSpeed = 1.5f;
     private float dizzyTimer = 0f;
 
-    // Attack types
     public AttackType attackType = AttackType.None;
 
-    // Interfaces
     private IItemUseable useable;
     private IAttackable attackable;
 
-    // Buffered Input
     private bool bufferedLightAttack = false;
     private bool bufferedHeavyAttack = false;
 
@@ -56,13 +54,14 @@ public class PlayerAttack : MonoBehaviour
         hammerCollider = hammer.GetComponents<Collider>();
         useable = GetComponent<IItemUseable>();
         attackable = GetComponent<IAttackable>();
+        animChecker = GetComponent<PlayerAnimStateChecker>();
     }
 
     private void Update()
     {
         HandleComboResetTimer();
 
-        if(IsWhirlwindAnim())
+        if (animChecker.IsWhirlwindAnim())
             HandleWindmillState();
     }
 
@@ -91,20 +90,19 @@ public class PlayerAttack : MonoBehaviour
 
     public void OnAttack1(InputAction.CallbackContext context)
     {
-        if (status.IsDead) return;
-        if (!context.performed) return;
+        if (status.IsDead || !context.performed) return;
+        if (animChecker.IsBlockAnim()) return;
 
         if (!canAttack)
         {
-            if (!IsWhirlwindAnim())
+            if (!animChecker.IsWhirlwindAnim())
             {
                 bufferedLightAttack = true;
                 return;
             }
-            
         }
 
-        if (IsWhirlwindAnim())
+        if (animChecker.IsWhirlwindAnim())
         {
             IsAttacking = true;
             canAttack = false;
@@ -133,13 +131,9 @@ public class PlayerAttack : MonoBehaviour
         IsAttacking = true;
 
         if (comboStep == 1)
-        {
             animator.SetTrigger("Attack_1");
-        }
         else if (comboStep == 2)
-        {
             animator.SetTrigger("Attack_2");
-        }
 
         comboTimer = comboResetTime;
     }
@@ -147,19 +141,31 @@ public class PlayerAttack : MonoBehaviour
     public void OnAttack2(InputAction.CallbackContext context)
     {
         if (status.IsDead) return;
+        if (animChecker.IsBlockAnim()) return;
 
+        // 아이템 장착 중일 때: 우클릭은 조준 동작만 처리
+        if (equipItem)
+        {
+            if (context.started && !animChecker.IsAttackAnim() && !animChecker.IsDiveAnim())
+            {
+                isAiming = true;
+                useable.UseItemByType(weaponType);
+            }
+            else if (context.canceled && !animChecker.IsDiveAnim())
+            {
+                isAiming = false;
+                useable.EndUseItemByType(weaponType);
+            }
+
+            return; // 여기서 끝
+        }
+
+        // 일반 무기 상태 (망치 등): 강공격 처리
         if (context.started)
         {
             if (!canAttack)
             {
                 bufferedHeavyAttack = true;
-                return;
-            }
-
-            if (equipItem && !IsAttackAnim() && !IsDiveAnim())
-            {
-                isAiming = true;
-                useable.UseItemByType(weaponType);
                 return;
             }
 
@@ -172,49 +178,35 @@ public class PlayerAttack : MonoBehaviour
                 IsAttacking = true;
                 canAttack = false;
                 animator.SetTrigger("SAttack_1");
-
             }
         }
 
         if (context.canceled)
         {
-            if (equipItem&& !IsDiveAnim())
-            {
-                isAiming = false;
-                useable.EndUseItemByType(weaponType);
-            }
-            else
-            {
-                StopWindMill();
-                animator.SetBool("isSpinning", false);
-            }
+            StopWindMill();
+            animator.SetBool("isSpinning", false);
         }
     }
+
 
     public void OnEquipItem(InputAction.CallbackContext context)
     {
         if (status.IsDead) return;
+        if (!context.performed || isAiming) return;
 
-        if (context.performed && !isAiming)
+        int currentItemType = UIWhiteBox.GetCurrentItemNum();
+
+        if (!equipItem)
         {
-            int currentItemType = UIWhiteBox.GetCurrentItemNum();
-
-            if (!equipItem)
-            {
-                equipItem = true;
-                weaponType = (WeaponType)currentItemType;
-
-                //아이템 장착 표시
-                UIWhiteBox.SetActiveItemSelectImage(true);
-            }
-            else
-            {
-                equipItem = false;
-                weaponType = WeaponType.Hammer;
-
-                //아이템 장착 표시 해제
-                UIWhiteBox.SetActiveItemSelectImage(false);
-            }
+            equipItem = true;
+            weaponType = (WeaponType)currentItemType;
+            UIWhiteBox.SetActiveItemSelectImage(true);
+        }
+        else
+        {
+            equipItem = false;
+            weaponType = WeaponType.Hammer;
+            UIWhiteBox.SetActiveItemSelectImage(false);
         }
     }
 
@@ -254,25 +246,11 @@ public class PlayerAttack : MonoBehaviour
             col.enabled = false;
     }
 
-    public void SetAttackTypeToLight()
-    {
-        attackType = AttackType.Light;
-    }
+    public void SetAttackTypeToLight() => attackType = AttackType.Light;
+    public void SetAttackTypeToHeavy() => attackType = AttackType.Heavy;
 
-    public void SetAttackTypeToHeavy()
-    {
-        attackType = AttackType.Heavy;
-    }
-
-    public void StartWindmillTimer()
-    {
-        isWindmilling = true;
-    }
-
-    public void DizzyPlay()
-    {
-        isDizzy=true;
-    }
+    public void StartWindmillTimer() => isWindmilling = true;
+    public void DizzyPlay() => isDizzy = true;
 
     public void EnableInputAction_Attack1() => attack1Action.action.Enable();
     public void DisableInputAction_Attack1() => attack1Action.action.Disable();
@@ -297,13 +275,12 @@ public class PlayerAttack : MonoBehaviour
             currentWindMillStemina = UIWhiteBox.GetGauge();
             return;
         }
+
         UIWhiteBox.UseGauge(0.7f);
         currentWindMillStemina = UIWhiteBox.GetGauge();
 
         if (currentWindMillStemina <= 0f)
-        {
             StopWindMill();
-        }
     }
 
     private void StartWindMill()
@@ -320,26 +297,7 @@ public class PlayerAttack : MonoBehaviour
 
         isWindmilling = false;
         animator.SetBool("isSpinning", false);
-
         dizzyTimer = 0f;
-    }
-
-    public bool IsAttackAnim()
-    {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        return stateInfo.IsTag("Attack");
-    }
-
-    public bool IsDiveAnim()
-    {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        return stateInfo.IsTag("Dive");
-    }
-
-    public bool IsWhirlwindAnim()
-    {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        return stateInfo.IsTag("Whirlwind");
     }
 
     [ContextMenu("화면이동 잠금")]

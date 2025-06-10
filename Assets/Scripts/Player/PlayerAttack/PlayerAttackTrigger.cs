@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerAttackTrigger : MonoBehaviour
 {
-    [SerializeField] private PlayerAttack playerAttack;
+    [SerializeField] private PlayerAnimStateChecker animChecker;
 
     [SerializeField]private Transform hitOrigin;
 
@@ -16,7 +16,7 @@ public class PlayerAttackTrigger : MonoBehaviour
         {
             //cameraShakeTrigger.Shake();
 
-            if (!playerAttack.IsWhirlwindAnim())
+            if (!animChecker.IsWhirlwindAnim())
             {
                 hitStopHandler.HitStop(0.1f);
             }
