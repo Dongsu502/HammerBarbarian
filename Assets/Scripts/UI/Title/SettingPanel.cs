@@ -22,20 +22,20 @@ public class SettingPanel : MonoBehaviour
     public void SetBackgroundVolume(float sliderValue)
     {
         Debug.Log($"BackgroundVolume: {sliderValue}");
-        SoundManager.instance.SetBGMVolume(sliderValue);
+        //SoundManager.instance.SetBGMVolume(sliderValue);
     }
 
     public void SetSFXVolume(float sliderValue)
     {
         Debug.Log($"SFXVolume: {sliderValue}");
-        SoundManager.instance.SetPlayerSFXVolume(sliderValue);
-        SoundManager.instance.SetMonsterSFXVolume(sliderValue);
+        //SoundManager.instance.SetPlayerSFXVolume(sliderValue);
+       //SoundManager.instance.SetMonsterSFXVolume(sliderValue);
     }
 
     public void SetUISFXVolume(float sliderValue)
     {
         Debug.Log($"UIVolume: {sliderValue}");
-        SoundManager.instance.SetUIVolume(sliderValue);
+       // SoundManager.instance.SetUIVolume(sliderValue);
     }
 
     #endregion

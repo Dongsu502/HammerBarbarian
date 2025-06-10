@@ -9,10 +9,16 @@ public class PlayerAttack : MonoBehaviour
     private PlayerStatus status;
     private PlayerAnimStateChecker animChecker;
 
-    [Header("Attack Combo")]
-    [SerializeField] private int comboStep = 0;
-    [SerializeField] private float comboResetTime = 1.0f;
-    private float comboTimer;
+    [Header("Light Attack Combo")]
+    [SerializeField] private float lightComboResetTime = 2.0f;
+    [SerializeField] private int lightComboStep = 0;
+    private float lightComboTimer;
+
+    [Header("Heavy Attack Combo")]
+    [SerializeField] private float heavyComboResetTime = 2.0f;
+    private int heavyComboStep = 0;
+    private float heavyComboTimer;
+
     private bool canAttack = true;
     public bool IsAttacking { get; private set; } = false;
 
@@ -43,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
     private IItemUseable useable;
     private IAttackable attackable;
 
-    private bool bufferedLightAttack = false;
+    [SerializeField]private bool bufferedLightAttack = false;
     private bool bufferedHeavyAttack = false;
 
     private void Awake()
@@ -59,7 +65,8 @@ public class PlayerAttack : MonoBehaviour
 
     private void Update()
     {
-        HandleComboResetTimer();
+        HandleLightComboReset();
+        HandleHeavyComboReset();
 
         if (animChecker.IsWhirlwindAnim())
             HandleWindmillState();
@@ -107,7 +114,6 @@ public class PlayerAttack : MonoBehaviour
             IsAttacking = true;
             canAttack = false;
             animator.SetTrigger("SAttack_1");
-            Debug.Log("강공격 전환");
             return;
         }
 
@@ -122,28 +128,27 @@ public class PlayerAttack : MonoBehaviour
         {
             var stuckHandler = activeHammer.GetComponent<RopeWeaponCollisionHandler>();
             if (stuckHandler != null && stuckHandler.IsStuckToWall)
-            {
                 return;
-            }
         }
 
-        comboStep++;
+        lightComboStep++;
         IsAttacking = true;
+        //canAttack = false;
 
-        if (comboStep == 1)
+        if (lightComboStep == 1)
             animator.SetTrigger("Attack_1");
-        else if (comboStep == 2)
+        else if (lightComboStep == 2)
             animator.SetTrigger("Attack_2");
 
-        comboTimer = comboResetTime;
+        lightComboTimer = lightComboResetTime;
+        attackType = AttackType.Light;
     }
 
     public void OnAttack2(InputAction.CallbackContext context)
     {
-        if (status.IsDead) return;
-        if (animChecker.IsBlockAnim()) return;
+        if (status.IsDead || animChecker.IsBlockAnim()) return;
 
-        // 아이템 장착 중일 때: 우클릭은 조준 동작만 처리
+        // 아이템 장착 상태에서는 조준 기능만 수행
         if (equipItem)
         {
             if (context.started && !animChecker.IsAttackAnim() && !animChecker.IsDiveAnim())
@@ -156,11 +161,9 @@ public class PlayerAttack : MonoBehaviour
                 isAiming = false;
                 useable.EndUseItemByType(weaponType);
             }
-
-            return; // 여기서 끝
+            return;
         }
 
-        // 일반 무기 상태 (망치 등): 강공격 처리
         if (context.started)
         {
             if (!canAttack)
@@ -169,16 +172,26 @@ public class PlayerAttack : MonoBehaviour
                 return;
             }
 
-            if (comboStep >= 2)
+            // light 콤보가 2타까지 진행된 경우 → 윈드밀 발동
+            if (lightComboStep >= 2)
             {
                 StartWindMill();
+                return;
             }
-            else
-            {
-                IsAttacking = true;
-                canAttack = false;
+
+            // 일반 강공격 콤보 흐름
+            heavyComboStep++;
+            IsAttacking = true;
+            canAttack = false;
+
+            if (heavyComboStep == 1)
                 animator.SetTrigger("SAttack_1");
-            }
+            else if (heavyComboStep == 2)
+                animator.SetTrigger("SAttack_2");
+            // 필요 시 SAttack_3 등 추가 가능
+
+            heavyComboTimer = heavyComboResetTime;
+            attackType = AttackType.Heavy;
         }
 
         if (context.canceled)
@@ -194,7 +207,8 @@ public class PlayerAttack : MonoBehaviour
         if (status.IsDead) return;
         if (!context.performed || isAiming) return;
 
-        int currentItemType = UIWhiteBox.GetCurrentItemNum();
+        int currentItemType = DataManager.Instance.GetCurrentData().currentItemList;
+        if (currentItemType == 0) return;
 
         if (!equipItem)
         {
@@ -205,7 +219,7 @@ public class PlayerAttack : MonoBehaviour
         else
         {
             equipItem = false;
-            weaponType = WeaponType.Hammer;
+            weaponType = (WeaponType)currentItemType;
             UIWhiteBox.SetActiveItemSelectImage(false);
         }
     }
@@ -214,9 +228,10 @@ public class PlayerAttack : MonoBehaviour
     {
         IsAttacking = false;
         canAttack = true;
-
+        
         if (bufferedHeavyAttack)
         {
+            Debug.Log($"Attack1 called: lightComboStep={lightComboStep}, canAttack={canAttack}, isAttacking={IsAttacking}");
             bufferedHeavyAttack = false;
             OnAttack2(new InputAction.CallbackContext());
         }
@@ -229,8 +244,10 @@ public class PlayerAttack : MonoBehaviour
 
     public void ComboReset()
     {
-        comboStep = 0;
-        comboTimer = 0f;
+        lightComboStep = 0;
+        heavyComboStep = 0;
+        lightComboTimer = 0f;
+        heavyComboTimer = 0f;
         animator.SetBool("isSpinning", false);
     }
 
@@ -256,16 +273,24 @@ public class PlayerAttack : MonoBehaviour
     public void DisableInputAction_Attack1() => attack1Action.action.Disable();
     public int currentAttackType() => (int)attackType;
 
-    private void HandleComboResetTimer()
+    private void HandleLightComboReset()
     {
-        if (comboStep <= 0) return;
+        
+        if (lightComboStep <= 0) return;
 
-        comboTimer -= Time.deltaTime;
-        if (comboTimer <= 0f)
-        {
-            comboStep = 0;
-            comboTimer = 0f;
-        }
+        lightComboTimer -= Time.deltaTime;
+        Debug.Log(lightComboTimer);
+        if (lightComboTimer <= 0f)
+            lightComboStep = 0;
+    }
+
+    private void HandleHeavyComboReset()
+    {
+        if (heavyComboStep <= 0) return;
+
+        heavyComboTimer -= Time.deltaTime;
+        if (heavyComboTimer <= 0f)
+            heavyComboStep = 0;
     }
 
     private void HandleWindmillState()

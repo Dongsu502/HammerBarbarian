@@ -160,6 +160,15 @@ public static class UIWhiteBox
     {
         MainUIWB.GetItem();
     }
+    
+    /// <summary>
+    /// 게이지 회복 여부 결정
+    /// </summary>
+    /// <param name="newValue">true: 회복 / false: 멈춤</param>
+    public static void SetisGaugeRecovery(bool newValue)
+    {
+        MainUIWB.SetisGaugeRecovery(newValue);
+    }
 
     /// <summary>
     /// 게이지 값 리턴

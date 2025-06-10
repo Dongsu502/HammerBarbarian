@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 8410978029793978355}
   m_Layer: 11
   m_Name: BlockHitBox
-  m_TagString: Untagged
+  m_TagString: Player_BlockHitBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1703,6 +1703,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 416c1836a317852439696dd195f07357, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3682233187454013637}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 416c1836a317852439696dd195f07357, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2330272035427540497}
     - targetCorrespondingSourceObject: {fileID: 1431230937535002766, guid: 416c1836a317852439696dd195f07357, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7287526208338295315}
@@ -1777,7 +1780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 39838d530a34a8a4e9e9003af26bce25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerAttack: {fileID: 2772837331923341245}
+  animChecker: {fileID: 2330272035427540497}
   hitOrigin: {fileID: 3102345251348883172}
   hitStopHandler: {fileID: 3878933797797071580}
 --- !u!4 &8039722746882286621 stripped
@@ -2147,3 +2150,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hammer: {fileID: 4237310321422195104}
+--- !u!114 &2330272035427540497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8979611509393584014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b654438f2e6992c4a82db89210a80951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
