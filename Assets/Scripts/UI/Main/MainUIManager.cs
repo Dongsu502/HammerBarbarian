@@ -113,7 +113,7 @@ public class MainUIManager : MonoBehaviour
     private const float PLAYER_MARKER_BIGSIZE = 17f;
     private const float PLAYER_MARKER_SMALLSIZE = 5f;
 
-    private bool isGaugeRecovery;
+    private bool isGaugeRecovery = true;
 
 #if UNITY_EDITOR
 
