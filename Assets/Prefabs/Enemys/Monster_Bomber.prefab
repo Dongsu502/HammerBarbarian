@@ -395,6 +395,8 @@ MonoBehaviour:
   attackRangeObj: {fileID: 2588930297251978173}
   attackWaitingTime: 2
   attackEffectPrefab: {fileID: 725748389856807714, guid: 4bda94453d2ca7444a0fff05b2d425f5, type: 3}
+  dieEffectPrefab: {fileID: 8194992990867289339, guid: 99bc28c0d45f51c4fbac01080b73edc7, type: 3}
+  BigHitEffectPos: {fileID: 2267277364459848279}
 --- !u!95 &7271776602238307919
 Animator:
   serializedVersion: 5
