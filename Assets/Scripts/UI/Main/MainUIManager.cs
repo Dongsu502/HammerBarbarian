@@ -113,6 +113,8 @@ public class MainUIManager : MonoBehaviour
     private const float PLAYER_MARKER_BIGSIZE = 17f;
     private const float PLAYER_MARKER_SMALLSIZE = 5f;
 
+    private bool isGaugeRecovery;
+
 #if UNITY_EDITOR
 
     [ContextMenu("룬 선택창으로 설정")]
@@ -207,7 +209,10 @@ public class MainUIManager : MonoBehaviour
 
     private void Update()
     {
-        GaugeRecovery(GAUGE_RECOVERY_VALUE);
+        if(isGaugeRecovery)
+        {
+            GaugeRecovery(GAUGE_RECOVERY_VALUE);
+        }
     }
 
     #endregion
@@ -642,6 +647,15 @@ public class MainUIManager : MonoBehaviour
     {
         float normalized = gaugeValue / GAUGE_MAX_VALUE;
         gaugeImage.color = gaugeGradient.Evaluate(normalized);
+    }
+
+    /// <summary>
+    /// 게이지 회복 여부 결정
+    /// </summary>
+    /// <param name="newValue">true: 회복 / false: 멈춤</param>
+    public void SetisGaugeRecovery(bool newValue)
+    {
+        isGaugeRecovery = newValue;
     }
 
     #endregion

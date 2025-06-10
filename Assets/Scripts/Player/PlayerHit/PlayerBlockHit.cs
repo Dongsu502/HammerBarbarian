@@ -16,7 +16,7 @@ public class PlayerBlockHit : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {    
         if (playerBlock != null)
         {
             if (other.CompareTag("Attack_Mushroom"))
@@ -24,6 +24,7 @@ public class PlayerBlockHit : MonoBehaviour
                 Debug.Log("막았다! (Mushroom)");
                 PlayBlockEffect();
                 ApplySlowKnockbackOverTime();
+                UIWhiteBox.UseGauge(25f);
                 Destroy(other.gameObject);
             }
 
@@ -32,6 +33,7 @@ public class PlayerBlockHit : MonoBehaviour
                 Debug.Log("막았다! (Golem)");
                 PlayBlockEffect();
                 ApplySlowKnockbackOverTime();
+                UIWhiteBox.UseGauge(25f);
             }
         }
     }
