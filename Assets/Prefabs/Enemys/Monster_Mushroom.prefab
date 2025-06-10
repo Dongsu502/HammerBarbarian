@@ -348,6 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f93f1f6b61483048811e2c8fec084fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isDummyMode: 0
   moveSpeed: 6
   rotateSpeed: 6
   attackDelayTime: 5
@@ -1154,7 +1155,7 @@ PrefabInstance:
     - target: {fileID: 5345917390782728308, guid: 60138a432077f8d4c97581c62e7380b9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 90c2876aca1f0874db4bd236d1d0f860, type: 2}
+      objectReference: {fileID: 2100000, guid: 99b2fe730c6484e44a3cdfb594a6d5f2, type: 2}
     - target: {fileID: 6477755628748590766, guid: 60138a432077f8d4c97581c62e7380b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.10169
@@ -1326,7 +1327,7 @@ PrefabInstance:
     - target: {fileID: 8666144961061897018, guid: 60138a432077f8d4c97581c62e7380b9, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 90c2876aca1f0874db4bd236d1d0f860, type: 2}
+      objectReference: {fileID: 2100000, guid: 99b2fe730c6484e44a3cdfb594a6d5f2, type: 2}
     - target: {fileID: 8714910536421475713, guid: 60138a432077f8d4c97581c62e7380b9, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.042614117

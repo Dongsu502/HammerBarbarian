@@ -25,6 +25,12 @@ public class MonsterHealthUI : MonoBehaviour
         HPBar_Initialize();
     }
 
+    private void OnEnable()
+    {
+        //플레이어 화이트박스에 참조된 프리룩 카메라위치 받아오기
+        //lookTarget = 
+    }
+
     private void Update()
     {
         LookTarget(lookTarget);

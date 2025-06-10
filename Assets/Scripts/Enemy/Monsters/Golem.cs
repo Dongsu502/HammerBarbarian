@@ -209,10 +209,10 @@ public class Golem : MonoBehaviour, IMonster
         }
 
         HitAnimation();
-        if(HP<=0)
-        {
-            Destroy(this.gameObject, 5f);
-        }
+        //if(HP<=0)
+        //{
+        //    Destroy(this.gameObject, 5f);
+        //}
     }
 
     private void HitAnimation()

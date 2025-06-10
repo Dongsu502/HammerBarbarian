@@ -18,6 +18,7 @@ public class MonsterAttackDetection : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        //플레이어 히트
         if(other.transform.CompareTag("PlayerHitBox"))
         {
             Debug.Log($"몬스터 {other.gameObject.name}공격!! ");
@@ -34,6 +35,21 @@ public class MonsterAttackDetection : MonoBehaviour
             if (receiver != null)
             {
                 receiver.OnHit(hitPoint, hitNormal);
+            }
+        }
+
+        //플레이어 막기 시전
+        if(other.transform.CompareTag("Player_BlockHitBox"))
+        {
+            Debug.Log($"{other.gameObject.name}에 공격이 막혔다!");
+            
+            if (monsterName == "Golem")
+            {
+                AttackCollider.SetActive(false);
+            }
+            else if (monsterName == "Mushroom")
+            {
+                Destroy(gameObject);
             }
         }
     }
