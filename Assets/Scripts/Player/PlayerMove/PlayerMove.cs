@@ -15,8 +15,7 @@ public class PlayerMove : MonoBehaviour
     [SerializeField] private Collider hitBoxCollider;
     private PlayerStatus status;
 
-    private PlayerAttack playerAttack;
-    private PlayerIK playerIK;
+    private PlayerAnimStateChecker animChecker;
     private Rigidbody rb;
     private Animator animator;
 
@@ -24,19 +23,16 @@ public class PlayerMove : MonoBehaviour
     private bool isDiving = false;
 
     public float currentAnimSpeed = 0f;
-    [SerializeField]private float diveSpeed = 5f;
+    [SerializeField] private float diveSpeed = 5f;
     private float diveDuration = 0.38f;
     private AnimationCurve diveSpeedCurve;
-
-
 
     private void Awake()
     {
         status = GetComponent<PlayerStatus>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        playerAttack = GetComponent<PlayerAttack>();
-        playerIK = GetComponent<PlayerIK>();
+        animChecker = GetComponent<PlayerAnimStateChecker>();
 
         if (cameraTransform == null && Camera.main != null)
             cameraTransform = Camera.main.transform;
@@ -46,7 +42,6 @@ public class PlayerMove : MonoBehaviour
     {
         if (status.IsDead) return;
         Debug.LogWarning("움직일 수 있어!");
-
         inputVector = context.ReadValue<Vector2>();
     }
 
@@ -54,10 +49,9 @@ public class PlayerMove : MonoBehaviour
     {
         if (status.IsDead) return;
 
-        if (context.performed && !isDiving && !playerAttack.IsAttackAnim())
+        if (context.performed && !isDiving && !animChecker.IsAttackAnim())
         {
             animator.applyRootMotion = true;
-
             animator.SetTrigger("Dive");
         }
     }
@@ -66,13 +60,12 @@ public class PlayerMove : MonoBehaviour
     {
         if (status.IsDead) return;
 
-        if (isDiving || playerAttack.IsAttackAnim() || IsHitAnim() || IsBlockAnim())
+        if (isDiving || animChecker.IsAttackAnim() || animChecker.IsHitAnim() || animChecker.IsBlockAnim())
         {
             rb.velocity = new Vector3(0f, rb.velocity.y, 0f);
 
             currentAnimSpeed = Mathf.Lerp(currentAnimSpeed, 0f, Time.fixedDeltaTime * 20f);
             animator.SetFloat("MoveSpeed", currentAnimSpeed);
-
             return;
         }
 
@@ -89,13 +82,12 @@ public class PlayerMove : MonoBehaviour
         }
 
         UpdateMoveSpeed();
+
         if (!isDiving)
         {
             StickToGround();
-
         }
     }
-
 
     private void StickToGround()
     {
@@ -146,11 +138,8 @@ public class PlayerMove : MonoBehaviour
         {
             Vector3 offset = moveDir * diveSpeed * Time.fixedDeltaTime;
 
-            // 벽 충돌 사전 감지
             if (Physics.Raycast(rb.position, moveDir, out RaycastHit hit, offset.magnitude + 0.1f, LayerMask.GetMask("InvisibleWall")))
-            {
                 break;
-            }
 
             rb.MovePosition(rb.position + offset);
             elapsed += Time.fixedDeltaTime;
@@ -160,47 +149,12 @@ public class PlayerMove : MonoBehaviour
         animator.applyRootMotion = false;
     }
 
-    public void StartDive()
-    {
-        isDiving = true;
-    }
+    public void StartDive() => isDiving = true;
+    public void EndDive() => isDiving = false;
 
-    public void EndDive()
-    {
-        isDiving = false;
-    }
+    public void OnHitBox() => hitBoxCollider.enabled = true;
+    public void OffHitBox() => hitBoxCollider.enabled = false;
 
-    public bool IsHitAnim()
-    {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        return stateInfo.IsTag("Hit");
-    }
-
-    public bool IsBlockAnim()
-    {
-        AnimatorStateInfo stateInfo = animator.GetCurrentAnimatorStateInfo(0);
-        return stateInfo.IsTag("Block");
-    }
-
-    public void OnHitBox()
-    {
-        hitBoxCollider.enabled = true;
-    }
-
-    public void OffHitBox()
-    {
-        hitBoxCollider.enabled = false;
-    }
-
-    public void OnInterpolate()
-    {
-        rb.interpolation = RigidbodyInterpolation.Interpolate;
-        //rb.collisionDetectionMode = CollisionDetectionMode.ContinuousDynamic;
-    }
-
-    public void OffInterpolate()
-    {
-        rb.interpolation = RigidbodyInterpolation.None;
-        //rb.collisionDetectionMode = CollisionDetectionMode.Discrete;
-    }
+    public void OnInterpolate() => rb.interpolation = RigidbodyInterpolation.Interpolate;
+    public void OffInterpolate() => rb.interpolation = RigidbodyInterpolation.None;
 }
