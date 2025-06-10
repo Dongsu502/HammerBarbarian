@@ -182,7 +182,7 @@ public class PlayerAttack : MonoBehaviour
             // ÀÏ¹Ý °­°ø°Ý ÄÞº¸ Èå¸§
             heavyComboStep++;
             IsAttacking = true;
-            canAttack = false;
+            //canAttack = false;
 
             if (heavyComboStep == 1)
                 animator.SetTrigger("SAttack_1");
@@ -279,7 +279,6 @@ public class PlayerAttack : MonoBehaviour
         if (lightComboStep <= 0) return;
 
         lightComboTimer -= Time.deltaTime;
-        Debug.Log(lightComboTimer);
         if (lightComboTimer <= 0f)
             lightComboStep = 0;
     }
