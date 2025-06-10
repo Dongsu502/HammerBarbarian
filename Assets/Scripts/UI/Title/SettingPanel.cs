@@ -22,12 +22,5 @@ public class SettingPanel : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void MasterVolumeEvent()
-    {
-        sliderBGM.value = sliderMaster.value;
-        sliderSFX.value = sliderMaster.value;
-        sliderUI.value = sliderMaster.value;
-    }
-
     #endregion
 }

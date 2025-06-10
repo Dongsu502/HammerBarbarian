@@ -2611,6 +2611,79 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1001 &883730924
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4764531141064956345, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -687.9291
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764531141064956345, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -464.10944
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764531141064956345, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1061.9698
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764531141064956345, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764531141064956345, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764531141064956345, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764531141064956345, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764531141064956345, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764531141064956345, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764531141064956345, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6185942896986537319, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: m_Name
+      value: OptionManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534415538723763960, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: uiSlider
+      value: 
+      objectReference: {fileID: 33613830}
+    - target: {fileID: 6534415538723763960, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: bgmSlider
+      value: 
+      objectReference: {fileID: 338000186}
+    - target: {fileID: 6534415538723763960, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 1563903047}
+    - target: {fileID: 6534415538723763960, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
+      propertyPath: masterSlider
+      value: 
+      objectReference: {fileID: 1205162412}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 63e27ed67c0aa4f4d94e94ab305eba39, type: 3}
 --- !u!1 &888545988
 GameObject:
   m_ObjectHideFlags: 0
@@ -4116,18 +4189,6 @@ MonoBehaviour:
       - m_Target: {fileID: 453337179}
         m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
         m_MethodName: MasterControl
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1488690684}
-        m_TargetAssemblyTypeName: SettingPanel, Assembly-CSharp
-        m_MethodName: MasterVolumeEvent
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -7675,3 +7736,4 @@ SceneRoots:
   - {fileID: 896247703}
   - {fileID: 1537869286}
   - {fileID: 329959035}
+  - {fileID: 883730924}

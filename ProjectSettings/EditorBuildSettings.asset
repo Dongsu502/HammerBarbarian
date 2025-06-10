@@ -5,19 +5,19 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/UI/Title.unity
     guid: e747e296167e7694ab2ffb48fa06c1e0
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/UI/ChoiceDungeon.unity
     guid: a572a387a5c66ed4fbe81d348cb0f37c
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/New Map/New Map.unity
     guid: 11064f62b57eba844ad7154f682949bb
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/UI/Loading.unity
     guid: 005a3a4a78ea55f4484d8ee0c9839828
-  - enabled: 1
+  - enabled: 0
     path: Assets/Personals/SoundMnager.unity
     guid: d94a0a073f00413419833dfd2e697288
   m_configObjects:
