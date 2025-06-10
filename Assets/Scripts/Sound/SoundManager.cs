@@ -237,13 +237,22 @@ public class SoundManager : MonoBehaviour
     }
 
     // 배경음 멈춤
-    public void StopBGM()
+    public void StopBGM(float fadeDuration = 1f)
     {
-        bgmSource.Stop();
+        if (currentBGMCoroutin != null)
+        {
+            StopCoroutine(currentBGMCoroutin);
+        }
+
+        currentBGMCoroutin = StartCoroutine(FadeOutBGM(fadeDuration, () =>
+        {
+            bgmSource.Stop();
+            bgmSource.clip = null;
+        }));
     }
 
-    // 플레이어 효과음 멈춤
-    public void StopPlayerSFX()
+        // 플레이어 효과음 멈춤
+        public void StopPlayerSFX()
     {
         playerSfxSource.Stop();
     }
@@ -279,7 +288,7 @@ public class SoundManager : MonoBehaviour
     // BGM을 페이드 인 시키는 코루틴 함수
     private IEnumerator FadeInBGM(float duration)
     {
-        float targetVolume = 1f;
+        float targetVolume = 0.5f;
         float startTime = Time.time;
         float startVolume = 0f;
 
