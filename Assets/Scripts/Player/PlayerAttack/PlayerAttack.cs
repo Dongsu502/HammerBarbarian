@@ -248,6 +248,8 @@ public class PlayerAttack : MonoBehaviour
         heavyComboStep = 0;
         lightComboTimer = 0f;
         heavyComboTimer = 0f;
+        animator.ResetTrigger("Attack_2");
+        animator.ResetTrigger("SAttack_2");
         animator.SetBool("isSpinning", false);
     }
 
