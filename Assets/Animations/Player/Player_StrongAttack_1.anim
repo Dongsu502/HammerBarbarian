@@ -98698,7 +98698,7 @@ AnimationClip:
     intParameter: 0
     messageOptions: 0
   - time: 0.43333334
-    functionName: SetAttackTypeToHeavy
+    functionName: SetAttackTypeToLight
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
