@@ -209,14 +209,18 @@ public class Golem : MonoBehaviour, IMonster
         }
 
         HitAnimation();
-        //if(HP<=0)
-        //{
-        //    Destroy(this.gameObject, 5f);
-        //}
+        //임시코드
+        if (HP <= 0)
+        {
+            animator.SetTrigger("IsDie");
+            Destroy(this.gameObject, 10f);
+        }
     }
 
     private void HitAnimation()
     {
+        DisableAttackCol();
+
         if (!hitBoxClass.IsKnockback)
         {
             //약공격 히트 애니메이션
