@@ -193,6 +193,12 @@ public class Mushroom : MonoBehaviour, IMonster
         }
 
         HitAnimation();
+        //임시코드
+        if (HP <= 0)
+        {
+            animator.SetTrigger("IsDie");
+            Destroy(this.gameObject, 10f);
+        }
     }
 
     private void HitAnimation()
