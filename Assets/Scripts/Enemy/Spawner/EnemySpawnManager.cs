@@ -19,11 +19,12 @@ public class EnemySpawnManager : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if(other.CompareTag("Player"))
         {
             SpawnEnemys();
+            Debug.Log("몬스터 스폰 트리거 발동");
 
-            Destroy(this);
+            Destroy(this,2f);
         }
     }
 
@@ -34,6 +35,7 @@ public class EnemySpawnManager : MonoBehaviour
     {
         for(int i = 0; i < spawnObjects.Length; i++)
         {
+            Debug.Log("몬스터 스폰!");
             MonsterType monsterType = spawnObjects[i].GetComponent<EnemySpawner>().CurrentMonsterType;
 
             if(monsterType == MonsterType.GOLEM)
