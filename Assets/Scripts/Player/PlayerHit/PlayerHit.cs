@@ -14,7 +14,7 @@ public class PlayerHit : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Attack_Golem") || other.gameObject.CompareTag("Attack_Mushroom"))
+        if (other.gameObject.CompareTag("Attack_Golem") || other.gameObject.CompareTag("Attack_Mushroom") || other.CompareTag("Attack_Bomber"))
         {
             MonsterAttackDetection enemyAttack = other.GetComponent<MonsterAttackDetection>();
             if (status == null)

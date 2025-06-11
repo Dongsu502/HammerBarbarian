@@ -21,6 +21,7 @@ public class MonsterHealthUI : MonoBehaviour
     private void Awake()
     {
         monster = GetComponentInParent<IMonster>();
+        lookTarget = PlayerStatWhiteBox.WhiteBox.FreeLookCamera.transform;
 
         HPBar_Initialize();
     }

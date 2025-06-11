@@ -184,7 +184,7 @@ public class Bomber : MonoBehaviour, IMonster
         IsBeingHit = true;
         attackRangeObj.SetActive(false);
 
-        int hitDamage = PlayerStatWhiteBox.WhtieBox.playerAttackDamage(hitBoxClass.playerAttackType);
+        int hitDamage = PlayerStatWhiteBox.WhiteBox.playerAttackDamage(hitBoxClass.playerAttackType);
         TakeDamage(hitDamage);
     }
     public void Attack()
