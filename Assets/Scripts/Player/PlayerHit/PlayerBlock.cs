@@ -8,10 +8,12 @@ public class PlayerBlock : MonoBehaviour
     [SerializeField] private Collider playerBlockBox;
     [SerializeField] private Player_HitReceiver playerHitReceiver;
     private bool isBlocking = false;
+    private PlayerAnimStateChecker playerAnimState;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        playerAnimState = GetComponent<PlayerAnimStateChecker>();
     }
 
     private void Update()
@@ -22,7 +24,10 @@ public class PlayerBlock : MonoBehaviour
     public void OnBlock(InputAction.CallbackContext context)
     {
         float steminaGauge = UIWhiteBox.GetGauge();
+        if (playerAnimState.IsHitAnim() || playerAnimState.IsAttackAnim() || playerAnimState.IsWhirlwindAnim()) return;
+
         if (steminaGauge < 25f) return;
+        
         if (context.started) 
         {
            StartBlock();
