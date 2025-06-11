@@ -8308,6 +8308,7 @@ GameObject:
   - component: {fileID: 527747487}
   - component: {fileID: 527747486}
   - component: {fileID: 527747488}
+  - component: {fileID: 527747489}
   m_Layer: 0
   m_Name: Way_2
   m_TagString: MinimapTrigger
@@ -8345,7 +8346,7 @@ Transform:
   m_GameObject: {fileID: 527747485}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 0.2345247, z: -0, w: 0.97211015}
-  m_LocalPosition: {x: -2.8600006, y: 3.51, z: 81.58}
+  m_LocalPosition: {x: 1.7, y: 3.51, z: 87.18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -8376,6 +8377,33 @@ MonoBehaviour:
   golemPrefab: {fileID: 8038279925113128421, guid: e6d179a280b47f041b1585969bf1eb26, type: 3}
   mushroomPrefab: {fileID: 2347716024353218003, guid: 163c2a7cb99b16c4d93a4ac70515d182, type: 3}
   bomberPrefab: {fileID: 4638024143782350015, guid: 497321ab3618ec04cba70399e7fdf100, type: 3}
+--- !u!54 &527747489
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 527747485}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &535714440
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12389,6 +12417,7 @@ GameObject:
   - component: {fileID: 730793499}
   - component: {fileID: 730793500}
   - component: {fileID: 730793501}
+  - component: {fileID: 730793502}
   m_Layer: 0
   m_Name: Way_1
   m_TagString: MinimapTrigger
@@ -12455,6 +12484,33 @@ MonoBehaviour:
   golemPrefab: {fileID: 8038279925113128421, guid: e6d179a280b47f041b1585969bf1eb26, type: 3}
   mushroomPrefab: {fileID: 2347716024353218003, guid: 163c2a7cb99b16c4d93a4ac70515d182, type: 3}
   bomberPrefab: {fileID: 4638024143782350015, guid: 497321ab3618ec04cba70399e7fdf100, type: 3}
+--- !u!54 &730793502
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 730793498}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 1
 --- !u!1001 &732927493
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22880,6 +22936,7 @@ GameObject:
   - component: {fileID: 1280441680}
   - component: {fileID: 1280441679}
   - component: {fileID: 1280441681}
+  - component: {fileID: 1280441682}
   m_Layer: 0
   m_Name: Way_4
   m_TagString: MinimapTrigger
@@ -22951,6 +23008,33 @@ MonoBehaviour:
   golemPrefab: {fileID: 8038279925113128421, guid: e6d179a280b47f041b1585969bf1eb26, type: 3}
   mushroomPrefab: {fileID: 2347716024353218003, guid: 163c2a7cb99b16c4d93a4ac70515d182, type: 3}
   bomberPrefab: {fileID: 4638024143782350015, guid: 497321ab3618ec04cba70399e7fdf100, type: 3}
+--- !u!54 &1280441682
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1280441678}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1284199719
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30741,6 +30825,7 @@ GameObject:
   - component: {fileID: 1407817730}
   - component: {fileID: 1407817729}
   - component: {fileID: 1407817731}
+  - component: {fileID: 1407817732}
   m_Layer: 0
   m_Name: Way_5
   m_TagString: MinimapTrigger
@@ -30815,6 +30900,33 @@ MonoBehaviour:
   golemPrefab: {fileID: 8038279925113128421, guid: e6d179a280b47f041b1585969bf1eb26, type: 3}
   mushroomPrefab: {fileID: 2347716024353218003, guid: 163c2a7cb99b16c4d93a4ac70515d182, type: 3}
   bomberPrefab: {fileID: 4638024143782350015, guid: 497321ab3618ec04cba70399e7fdf100, type: 3}
+--- !u!54 &1407817732
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1407817728}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1413008070
 GameObject:
   m_ObjectHideFlags: 0
@@ -31212,6 +31324,7 @@ GameObject:
   - component: {fileID: 1435040549}
   - component: {fileID: 1435040548}
   - component: {fileID: 1435040550}
+  - component: {fileID: 1435040551}
   m_Layer: 0
   m_Name: Way_3
   m_TagString: MinimapTrigger
@@ -31249,7 +31362,7 @@ Transform:
   m_GameObject: {fileID: 1435040547}
   serializedVersion: 2
   m_LocalRotation: {x: -0.021369161, y: 0.13409056, z: 0.022986483, w: 0.99047196}
-  m_LocalPosition: {x: 84.850006, y: 3.98, z: 132.79}
+  m_LocalPosition: {x: 85.42, y: 4.08, z: 134.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -31277,6 +31390,33 @@ MonoBehaviour:
   golemPrefab: {fileID: 8038279925113128421, guid: e6d179a280b47f041b1585969bf1eb26, type: 3}
   mushroomPrefab: {fileID: 2347716024353218003, guid: 163c2a7cb99b16c4d93a4ac70515d182, type: 3}
   bomberPrefab: {fileID: 4638024143782350015, guid: 497321ab3618ec04cba70399e7fdf100, type: 3}
+--- !u!54 &1435040551
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1435040547}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1001 &1445354421
 PrefabInstance:
   m_ObjectHideFlags: 0

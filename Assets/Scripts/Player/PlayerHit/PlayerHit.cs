@@ -38,7 +38,7 @@ public class PlayerHit : MonoBehaviour
         if (other.CompareTag("MinimapTrigger"))
         {
             UIWhiteBox.DisableMinimapFog(other);
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
         }
     }
 }
