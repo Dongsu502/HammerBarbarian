@@ -14,6 +14,8 @@ public class PlayerAnimStateChecker : MonoBehaviour
         return animator.GetCurrentAnimatorStateInfo(0).IsTag(tag);
     }
 
+
+    public bool IsWalkAnim() => IsTag("Walk");
     public bool IsAttackAnim() => IsTag("Attack");
     public bool IsDiveAnim() => IsTag("Dive");
     public bool IsHitAnim() => IsTag("Hit");
