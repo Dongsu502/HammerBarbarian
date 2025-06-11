@@ -214,6 +214,33 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void OnEquipItem(InputAction.CallbackContext context)
+    {
+        if (status.IsDead) return;
+
+        if (context.performed && !isAiming)
+        {
+            int currentItemType = UIWhiteBox.GetCurrentItemNum();
+
+            if (!equipItem)
+            {
+                equipItem = true;
+                weaponType = (WeaponType)currentItemType;
+
+                //아이템 장착 표시
+                UIWhiteBox.SetActiveItemSelectImage(true);
+            }
+            else
+            {
+                equipItem = false;
+                weaponType = WeaponType.Hammer;
+
+                //아이템 장착 표시 해제
+                UIWhiteBox.SetActiveItemSelectImage(false);
+            }
+        }
+    }
+
     public void EndAttack()
     {
         IsAttacking = false;
