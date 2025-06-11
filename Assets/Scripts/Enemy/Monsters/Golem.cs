@@ -100,7 +100,7 @@ public class Golem : MonoBehaviour, IMonster
             return;
         }
 
-        hitBoxClass.hitCollider.enabled = true;
+        //hitBoxClass.hitCollider.enabled = true;
         agent.enabled = true;
 
         animator.SetBool("IsHitting", false);
@@ -250,6 +250,9 @@ public class Golem : MonoBehaviour, IMonster
 
         //사망 애니메이션 플레이
         animator.SetTrigger("IsDie");
+
+        //체력바 UI 비활성화
+        healthUIClass.HPBar_SetActive(false);
     }
 
     #region AI
@@ -268,7 +271,7 @@ public class Golem : MonoBehaviour, IMonster
 
         IsHit = false;
         IsBeingHit = true;
-        hitBoxClass.hitCollider.enabled = false;
+        //hitBoxClass.hitCollider.enabled = false;
         agent.enabled = false;
 
         int hitDamage = PlayerStatWhiteBox.WhiteBox.playerAttackDamage(hitBoxClass.playerAttackType);

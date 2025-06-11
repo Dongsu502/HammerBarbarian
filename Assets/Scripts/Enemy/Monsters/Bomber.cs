@@ -153,7 +153,7 @@ public class Bomber : MonoBehaviour, IMonster
         //내비 제거
         agent.enabled = false;
 
-        //골렘 콜라이더 제거
+        //폭탄병 콜라이더 제거
         bomberCollider.enabled = false;
 
         yield return null;

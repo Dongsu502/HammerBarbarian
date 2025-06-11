@@ -46,7 +46,7 @@ public class MonsterHealthUI : MonoBehaviour
         currentHP = max_HP;
     }
 
-    private void HPBar_SetActive(bool isActive)
+    public void HPBar_SetActive(bool isActive)
     {
         currentHPImage.gameObject.SetActive(isActive);
         HPBar.SetActive(isActive);

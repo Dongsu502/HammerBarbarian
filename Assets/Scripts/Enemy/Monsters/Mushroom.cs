@@ -72,7 +72,7 @@ public class Mushroom : MonoBehaviour, IMonster
     /// </summary>
     public void ResetisHiting()
     {
-        hitBoxClass.hitCollider.enabled = true;
+        //hitBoxClass.hitCollider.enabled = true;
         agent.enabled = true;
 
         animator.SetBool("IsHitting", false);
@@ -112,7 +112,7 @@ public class Mushroom : MonoBehaviour, IMonster
         //내비 제거
         agent.enabled = false;
 
-        //골렘 콜라이더 제거
+        //버섯 콜라이더 제거
         mushroomCollider.enabled = false;
     }
 
@@ -265,6 +265,9 @@ public class Mushroom : MonoBehaviour, IMonster
 
         //사망 애니메이션 플레이
         animator.SetTrigger("IsDie");
+
+        //체력바 UI 비활성화
+        healthUIClass.HPBar_SetActive(false);
     }
 
     #region AI
@@ -285,7 +288,7 @@ public class Mushroom : MonoBehaviour, IMonster
 
         IsHit = false;
         IsBeingHit = true;
-        hitBoxClass.hitCollider.enabled = false;
+        //hitBoxClass.hitCollider.enabled = false;
         agent.enabled = false;
 
         int hitDamage = PlayerStatWhiteBox.WhiteBox.playerAttackDamage(hitBoxClass.playerAttackType);

@@ -37,5 +37,10 @@ public class MonsterDetection : MonoBehaviour
 
             monster.TargetDetected = false;
         }
+
+        if(other.CompareTag("Attack_Mushroom"))
+        {
+            Destroy(other.gameObject);
+        }
     }
 }

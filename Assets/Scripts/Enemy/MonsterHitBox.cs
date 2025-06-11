@@ -20,6 +20,8 @@ public class MonsterHitBox : MonoBehaviour
 
     public AttackType playerAttackType;
 
+    public bool isTriggerHit;
+
     private void Awake()
     {
         monster = GetComponentInParent<IMonster>();
@@ -31,8 +33,10 @@ public class MonsterHitBox : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.transform.CompareTag("Weapon")) 
+        if (other.transform.CompareTag("Weapon") && !isTriggerHit) 
         {
+            isTriggerHit = true;
+
             //반짝이는 효과
             var flash = GetComponent<HitFlashEffect>();
             if (flash != null)
@@ -42,25 +46,31 @@ public class MonsterHitBox : MonoBehaviour
 
             rb.isKinematic = false;
 
+            //플레이어 공격타입 확인
             playerAttackType = PlayerHitWhiteBox.WhiteBox.attacktype;
-            //강공격인지 확인 -> 넉백
-            if(playerAttackType == AttackType.Heavy)
-            {
-                IsKnockback = true;
-
-                PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, playerAttackType);
-
-                Knockback(other, HeavyknockbackForce);
-            }
-
-            if (playerAttackType == AttackType.Light)
-            {
-                PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, playerAttackType);
-
-                Knockback(other, LightknockbackForce);
-            }
+            AttackTypeCheck(other, playerAttackType);
 
             monster.IsHit = true;
+        }
+    }
+
+    private void AttackTypeCheck(Collider other, AttackType newAttackType)
+    {
+        //강공격인지 확인 -> 넉백
+        if (newAttackType == AttackType.Heavy)
+        {
+            IsKnockback = true;
+
+            PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, newAttackType);
+
+            Knockback(other, HeavyknockbackForce);
+        }
+
+        if (newAttackType == AttackType.Light)
+        {
+            PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, newAttackType);
+
+            Knockback(other, LightknockbackForce);
         }
     }
 

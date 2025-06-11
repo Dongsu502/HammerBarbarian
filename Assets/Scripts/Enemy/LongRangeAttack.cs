@@ -7,7 +7,6 @@ public class LongRangeAttack : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     public Transform bulletSpawnPos;
     [SerializeField] private float bulletSpeed;
-    [SerializeField] private float destroyDelayTime;
 
     private GameObject bullet = null;
     private MonsterDetection monsterDetection;
@@ -31,7 +30,6 @@ public class LongRangeAttack : MonoBehaviour
         bullet = Instantiate(bulletPrefab, spawnPos.position, Quaternion.identity);
 
         FireDirection();
-        DestroyBullet(bullet, destroyDelayTime);
     }
 
     private void FireDirection()
@@ -39,10 +37,5 @@ public class LongRangeAttack : MonoBehaviour
         Vector3 direction = gameObject.transform.forward;
 
         bullet.GetComponent<Rigidbody>().AddForce(direction.normalized * bulletSpeed * Time.deltaTime, ForceMode.Force);
-    }
-
-    private void DestroyBullet(GameObject bullet, float delayTime)
-    {
-        Destroy(bullet, delayTime);
     }
 }
