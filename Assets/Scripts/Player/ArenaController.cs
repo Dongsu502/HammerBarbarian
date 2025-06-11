@@ -8,7 +8,11 @@ public class ArenaController : MonoBehaviour
     [SerializeField] private GameObject[] walls;
     [SerializeField] List<GameObject> enemies = new List<GameObject>();
 
-    [SerializeField] private TextToggelController textToggelController;
+    private bool hasRegisteredEnemy = false;
+
+    //private int currentEnemyCount;
+
+    public int CurrentEnemyCount => enemies.Count;
 
     private bool addedEnemy = false;
 
@@ -26,12 +30,6 @@ public class ArenaController : MonoBehaviour
         if (enemies.Count <= 0)
         {
             DeActiveWall();
-
-            if (this.gameObject.name == "ArenaController1" && addedEnemy)
-            {
-                textToggelController.ToggleText(1105, 1106);
-                addedEnemy = false;
-            }
         }
     }
 
@@ -56,10 +54,9 @@ public class ArenaController : MonoBehaviour
 
     public void AddEnemy(GameObject enemy)
     {
-        if (!addedEnemy)
-        {
-            addedEnemy = true;
-        }
         enemies.Add(enemy);
+        hasRegisteredEnemy = true;
     }
+
+    public bool HasEnemyEverSpawned => hasRegisteredEnemy;
 }
