@@ -301,6 +301,8 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+
+
     private void HandleSpinComboTimeout()
     {
         if (!isSpinCombo || spinComboStep != 1) return;
@@ -355,6 +357,8 @@ public class PlayerAttack : MonoBehaviour
 
     public void SetAttackTypeToLight() => attackType = AttackType.Light;
     public void SetAttackTypeToHeavy() => attackType = AttackType.Heavy;
+    public void SetAttackTypeToStrong() => attackType = AttackType.Skill;
+
     public void StartWindmillTimer() => isWindmilling = true;
     public void DizzyPlay() => isDizzy = true;
     public void EnableInputAction_Attack1() => attack1Action.action.Enable();
