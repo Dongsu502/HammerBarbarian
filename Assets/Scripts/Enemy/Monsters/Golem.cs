@@ -267,7 +267,7 @@ public class Golem : MonoBehaviour, IMonster
         hitBoxClass.hitCollider.enabled = false;
         agent.enabled = false;
 
-        int hitDamage = PlayerStatWhiteBox.WhtieBox.playerAttackDamage(hitBoxClass.playerAttackType);
+        int hitDamage = PlayerStatWhiteBox.WhiteBox.playerAttackDamage(hitBoxClass.playerAttackType);
         TakeDamage(hitDamage);
     }
     public void Attack()

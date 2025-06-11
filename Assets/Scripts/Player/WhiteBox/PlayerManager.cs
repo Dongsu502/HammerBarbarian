@@ -2,22 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game;
+using Cinemachine;
 
 
 public static class PlayerStatWhiteBox
 {
-    public static PlayerManager WhtieBox { get; private set; }
+    public static PlayerManager WhiteBox { get; private set; }
 
     public static void SetWhiteBox(PlayerManager manager)
     {
-        WhtieBox = manager;
+        WhiteBox = manager;
     }
 }
 public class PlayerManager : MonoBehaviour
 {
     PlayerStatus playerStatus;
+    [SerializeField] private CinemachineFreeLook freeLookCamera;
 
     public int playerAttackDamage(AttackType type) => playerStatus.PlayerDamagebyAttackType(type);
+    public CinemachineFreeLook FreeLookCamera => freeLookCamera;
 
     private void Awake()
     {

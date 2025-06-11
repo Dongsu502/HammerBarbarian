@@ -247,7 +247,6 @@ public class PlayerAttack : MonoBehaviour
         spinComboStep = 1;
         IsAttacking = true;
         animator.SetTrigger("SPAttack_1");
-        attackType = AttackType.Skill;
         spinComboTimer = spinComboTimeout;
     }
 
