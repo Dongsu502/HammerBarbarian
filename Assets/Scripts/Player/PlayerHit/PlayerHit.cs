@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Game;
 
 public class PlayerHit : MonoBehaviour
 {
@@ -22,6 +23,7 @@ public class PlayerHit : MonoBehaviour
                 Debug.Log("¾ø³ë");
             }
             status.TakeDamage(enemyAttack.monsterAttackPower);
+            PlayerHitWhiteBox.WhiteBox.Shake("Player", AttackType.None);
 
             animator.applyRootMotion = true;
             if(status.playerHP <= 0)

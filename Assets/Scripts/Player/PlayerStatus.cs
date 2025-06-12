@@ -64,6 +64,8 @@ public class PlayerStatus : MonoBehaviour
             return 20;
         if(attackType==AttackType.Skill)
             return 30;
+        if (attackType == AttackType.WhirlWind)
+            return 5;
 
         return 0;
     }

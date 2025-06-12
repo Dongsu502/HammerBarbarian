@@ -103,4 +103,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6b2dccb516be0074bbe4e3bacaed03f0, type: 2}
   - {fileID: 11400000, guid: 68792b27a41778f4bb7be30efc3fdfa9, type: 2}
   - {fileID: 11400000, guid: 2b00a375176efb44881e3bc14103f65c, type: 2}
+  - {fileID: 11400000, guid: 905b1ad185ed47c4181f4a7d24aabef3, type: 2}
+  - {fileID: 11400000, guid: dc34a99be39e6c3479c9648b0eb5da56, type: 2}
   shakeCooldown: 0.2

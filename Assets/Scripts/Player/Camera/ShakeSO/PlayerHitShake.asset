@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ff3e1e61934a741479daa9057447b1fc, type: 3}
-  m_Name: GolemLightShake
+  m_Name: PlayerHitShake
   m_EditorClassIdentifier: 
-  mosterType: Golem
-  attackType: 1
+  mosterType: Player
+  attackType: 0
   amplitude: 1
-  frequency: 1.2
+  frequency: 1
   impulseDefinition:
     m_ImpulseChannel: 1
-    m_ImpulseShape: 1
+    m_ImpulseShape: 0
     m_CustomImpulseShape:
       serializedVersion: 2
       m_Curve: []
@@ -28,9 +28,9 @@ MonoBehaviour:
     m_ImpulseDuration: 0.2
     m_ImpulseType: 3
     m_DissipationRate: 0
-    m_RawSignal: {fileID: 11400000, guid: c3e4ac6cb90a3db4383caa20f73b2fce, type: 2}
-    m_AmplitudeGain: 6
-    m_FrequencyGain: 0.3
+    m_RawSignal: {fileID: 11400000, guid: 8359c56f96b3dc14daef06d785bb3098, type: 2}
+    m_AmplitudeGain: 0.5
+    m_FrequencyGain: 0.5
     m_RepeatMode: 0
     m_Randomize: 1
     m_TimeEnvelope:
@@ -46,13 +46,13 @@ MonoBehaviour:
         m_PreInfinity: 2
         m_PostInfinity: 2
         m_RotationOrder: 4
-      m_AttackTime: 0.02
+      m_AttackTime: 0
       m_SustainTime: 0.2
-      m_DecayTime: 0.2
+      m_DecayTime: 0.7
       m_ScaleWithImpact: 1
       m_HoldForever: 0
-    m_ImpactRadius: 40
+    m_ImpactRadius: 100
     m_DirectionMode: 0
     m_DissipationMode: 2
-    m_DissipationDistance: 50
+    m_DissipationDistance: 100
     m_PropagationSpeed: 343
