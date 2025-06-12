@@ -5,7 +5,8 @@ namespace Game
         None,
         Light,
         Heavy,
-        Skill
+        Skill,
+        WhirlWind
     }
 
     public enum WeaponType
