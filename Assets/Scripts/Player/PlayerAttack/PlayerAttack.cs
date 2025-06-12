@@ -385,17 +385,15 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void MosnterHitTriggerInit()
-    {
-        //foreach(var trigger in attackTrigger.monsterHitBoxes)
-        //{
-        //    trigger.isTriggerHit = false;
-        //}
-
-        for(int i =0; i <= attackTrigger.monsterHitBoxes.Count; i++)
+    {  
+        if(attackTrigger.monsterHitBoxes.Count != 0)
         {
-            attackTrigger.monsterHitBoxes.ElementAt(i).isTriggerHit = false;
+            for (int i = 0; i <= attackTrigger.monsterHitBoxes.Count; i++)
+            {
+                attackTrigger.monsterHitBoxes.ElementAt(i).isTriggerHit = false;
+            }
+            attackTrigger.monsterHitBoxes.Clear();
         }
-        attackTrigger.monsterHitBoxes.Clear();
     }
 
     public void SetAttackTypeToLight() => attackType = AttackType.Light;
