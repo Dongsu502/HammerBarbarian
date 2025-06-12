@@ -38,6 +38,7 @@ public class Golem : MonoBehaviour, IMonster
     private CapsuleCollider golemCollider;
     private GameObject attackCollider;
 
+    private Coroutine dieCoroutine;
     private float moveAmount;
 
     private void Awake()
@@ -60,6 +61,11 @@ public class Golem : MonoBehaviour, IMonster
 
     #region Animation Eventkey
 
+    public void PlayAttackSFX()
+    {
+        SoundManager.instance.PlayMonsterSFX("Golem_Damage01");
+    }
+
     /// <summary>
     /// 공격 이펙트 생성
     /// </summary>
@@ -75,11 +81,20 @@ public class Golem : MonoBehaviour, IMonster
     /// </summary>
     public void EnableAttackCol()
     {
-        attackCollider.SetActive(true);
+        if(!attackCollider.activeSelf)
+        {
+            attackCollider.SetActive(true);
+            Debug.LogWarning("골렘 공격 콜라이더 활성화");
+
+        }
     }
     public void DisableAttackCol()
     {
-        attackCollider.SetActive(false);
+        if(attackCollider.activeSelf)
+        {
+            attackCollider.SetActive(false);
+            Debug.LogWarning("골렘 공격 콜라이더 비활성화");
+        }
     }
 
     /// <summary>
@@ -210,11 +225,11 @@ public class Golem : MonoBehaviour, IMonster
 
         HitAnimation();
         //임시코드
-        if (HP <= 0)
-        {
-            animator.SetTrigger("IsDie");
-            Destroy(this.gameObject, 10f);
-        }
+        //if (HP <= 0)
+        //{
+        //    animator.SetTrigger("IsDie");
+        //    Destroy(this.gameObject, 10f);
+        //}
     }
 
     private void HitAnimation()
@@ -243,24 +258,31 @@ public class Golem : MonoBehaviour, IMonster
         }
     }
 
-    private void DieDelay()
+    private IEnumerator PlayDieAnimation()
     {
+        yield return null;
         //Hit 콜라이더 제거
         hitBoxClass.hitCollider.enabled = false;
+
+        //사망 효과음 재생
+        SoundManager.instance.PlayMonsterSFX("Golem_Damage02");
 
         //사망 애니메이션 플레이
         animator.SetTrigger("IsDie");
 
         //체력바 UI 비활성화
         healthUIClass.HPBar_SetActive(false);
+
+        yield return null;
     }
 
     #region AI
 
     public void Death()
     {
+        if (dieCoroutine != null) return;
+        dieCoroutine = StartCoroutine(PlayDieAnimation());
         Debug.Log("골렘 사망");
-        DieDelay();
     }
     public void Hit()
     {

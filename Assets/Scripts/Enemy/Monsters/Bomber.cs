@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class Bomber : MonoBehaviour, IMonster
 {
     public string Name { get; private set; } = "Bomber";
-    public int HP { get; private set; } = 10;
+    public int HP { get; private set; } = 5;
     public bool IsHit { get; set; }
     public bool IsBeingHit { get; private set; }
     public bool TargetDetected { get; set; }

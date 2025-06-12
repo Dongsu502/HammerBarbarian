@@ -7,13 +7,22 @@ public class LongRangeAttack : MonoBehaviour
     [SerializeField] private GameObject bulletPrefab;
     public Transform bulletSpawnPos;
     [SerializeField] private float bulletSpeed;
+    [SerializeField] private float bulletMaxDistance;
 
     private GameObject bullet = null;
-    private MonsterDetection monsterDetection;
+    //private MonsterDetection monsterDetection;
 
     private void Awake()
     {
-        monsterDetection = GetComponentInChildren<MonsterDetection>();
+        //monsterDetection = GetComponentInChildren<MonsterDetection>();
+    }
+
+    private void FixedUpdate()
+    {
+        if(bullet != null)
+        {
+            BulletDestroy();
+        }
     }
 
     public void Fire()
@@ -37,5 +46,15 @@ public class LongRangeAttack : MonoBehaviour
         Vector3 direction = gameObject.transform.forward;
 
         bullet.GetComponent<Rigidbody>().AddForce(direction.normalized * bulletSpeed * Time.deltaTime, ForceMode.Force);
+    }
+
+    private void BulletDestroy()
+    {
+        float distance = Vector3.Distance(bullet.transform.position, gameObject.transform.position);
+
+        if(bulletMaxDistance <= distance)
+        {
+            Destroy(bullet);
+        }
     }
 }

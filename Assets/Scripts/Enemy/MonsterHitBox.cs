@@ -56,22 +56,29 @@ public class MonsterHitBox : MonoBehaviour
 
     private void AttackTypeCheck(Collider other, AttackType newAttackType)
     {
-        //강공격인지 확인 -> 넉백
-        if (newAttackType == AttackType.Heavy)
+        float knockbackForce = 0f;
+
+        if(newAttackType == AttackType.None)
+        {
+            Debug.LogError("AttackType이 None입니다.");
+            return;
+        }
+        //약공격
+        if(newAttackType == AttackType.Light || newAttackType == AttackType.WhirlWind)
+        {
+            knockbackForce = LightknockbackForce;
+        }
+        //강공격
+        if(newAttackType == AttackType.Heavy || newAttackType == AttackType.Skill)
         {
             IsKnockback = true;
-
-            PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, newAttackType);
-
-            Knockback(other, HeavyknockbackForce);
+            knockbackForce = HeavyknockbackForce;
         }
 
-        if (newAttackType == AttackType.Light)
-        {
-            PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, newAttackType);
-
-            Knockback(other, LightknockbackForce);
-        }
+        //카메라 흔들림 효과
+        PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, newAttackType);
+        //넉백효과
+        Knockback(other, knockbackForce);
     }
 
     private void Knockback(Collider other, float knockbackForce)

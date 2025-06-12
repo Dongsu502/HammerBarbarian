@@ -37,6 +37,7 @@ public class Mushroom : MonoBehaviour, IMonster
     private CapsuleCollider mushroomCollider;
     private Coroutine attackCoroutine;
 
+    private Coroutine dieCoroutine;
     private float moveAmount;
     private bool lookTargetCheck = false;
 
@@ -58,6 +59,11 @@ public class Mushroom : MonoBehaviour, IMonster
     }
 
     #region Animation Eventkey
+
+    public void PlayAttackSFX()
+    {
+        SoundManager.instance.PlayMonsterSFX("MushroomMage_Damage07");
+    }
 
     /// <summary>
     /// Hit 애니메이션 이벤트 키
@@ -194,11 +200,11 @@ public class Mushroom : MonoBehaviour, IMonster
 
         HitAnimation();
         //임시코드
-        if (HP <= 0)
-        {
-            animator.SetTrigger("IsDie");
-            Destroy(this.gameObject, 10f);
-        }
+        //if (HP <= 0)
+        //{
+        //    animator.SetTrigger("IsDie");
+        //    Destroy(this.gameObject, 10f);
+        //}
     }
 
     private void HitAnimation()
@@ -258,24 +264,32 @@ public class Mushroom : MonoBehaviour, IMonster
         Debug.Log("버섯 공격 끝");
     }
 
-    private void DieDelay()
+    private IEnumerator PlayDieAnimation()
     {
+        yield return null;
         //Hit 콜라이더 제거
         hitBoxClass.hitCollider.enabled = false;
+
+        //사망 효과음 재생
+        SoundManager.instance.PlayMonsterSFX("MushroomMage_Damage08");
 
         //사망 애니메이션 플레이
         animator.SetTrigger("IsDie");
 
         //체력바 UI 비활성화
         healthUIClass.HPBar_SetActive(false);
+
+        yield return null;
     }
 
     #region AI
 
     public void Death()
     {
+        if (dieCoroutine != null) return;
+        dieCoroutine = StartCoroutine(PlayDieAnimation());
         Debug.Log("버섯 사망");
-        DieDelay();
+        
     }
     public void Hit()
     {

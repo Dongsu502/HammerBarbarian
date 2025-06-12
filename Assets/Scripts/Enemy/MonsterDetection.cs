@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
 public class MonsterDetection : MonoBehaviour
 {
+    [SerializeField] private MonsterDetectedUI monsterDetectedUI;
+
     private IMonster monster;
     public Transform target { get; private set; }
 
@@ -23,6 +26,8 @@ public class MonsterDetection : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            monsterDetectedUI.DetectionCheck(true);
+
             SetTarget(other.transform);
 
             monster.TargetDetected = true;
@@ -32,15 +37,12 @@ public class MonsterDetection : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            monsterDetectedUI.DetectionCheck(false);
+
             Transform self = GetComponentInParent<Transform>();
             SetTarget(self);
 
             monster.TargetDetected = false;
-        }
-
-        if(other.CompareTag("Attack_Mushroom"))
-        {
-            Destroy(other.gameObject);
         }
     }
 }
