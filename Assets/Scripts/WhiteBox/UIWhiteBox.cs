@@ -6,12 +6,14 @@ using UnityEngine;
 public enum MainUIState
 {
     NONE,
+    ITEM_CHOICE,
     RUNE_CHOICE,
     RUNE_GET,
+    RUNE_INVENTORY,
     PAUSE,
     PAUSE_SETTING,
-    RUNE_INVENTORY,
     SCRIPT,
+    MAP,
     Die
 }
 public enum ChoiceMapUIState
@@ -22,6 +24,8 @@ public enum ChoiceMapUIState
 
 public static class UIWhiteBox
 {
+    //시작할때 호출되는 것 구분
+    public static bool isStart { get; set; } = true;
     public static string SceneName { get; set; }
 
     public static MainUIState MainUICurrentState { get; set; } = MainUIState.NONE;

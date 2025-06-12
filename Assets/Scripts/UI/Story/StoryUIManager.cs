@@ -15,7 +15,7 @@ public class StoryUIManager : MonoBehaviour
 
     private void Awake()
     {
-        textTypingClass = new TextTyping();
+        textTypingClass = GetComponent<TextTyping>();
 
         InitializeStory();
     }
@@ -43,6 +43,6 @@ public class StoryUIManager : MonoBehaviour
     {
         storyText.gameObject.SetActive(true);
 
-        StartCoroutine(textTypingClass.Typing(storyText, storyContent, 0.07f));
+        textTypingClass.StartTyping(storyText, storyContent, 0.05f);
     }
 }

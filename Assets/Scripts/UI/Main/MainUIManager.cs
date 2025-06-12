@@ -251,50 +251,67 @@ public class MainUIManager : MonoBehaviour
 
     private void ChoiceItemAction(InputAction.CallbackContext context)
     {
-        if(context.performed)
+        if (UIWhiteBox.MainUICurrentState == MainUIState.NONE || UIWhiteBox.MainUICurrentState == MainUIState.ITEM_CHOICE)
         {
-            ChoiceUI_SetActive(true);
-        }
+            if (context.performed)
+            {
+                ChoiceUI_SetActive(true);
+                UIWhiteBox.MainUICurrentState = MainUIState.ITEM_CHOICE;
+            }
 
-        if(context.canceled)
-        {
-            ChoiceUI_SetActive(false);
+            if (context.canceled)
+            {
+                ChoiceUI_SetActive(false);
+                UIWhiteBox.MainUICurrentState = MainUIState.NONE;
+            }
         }
     }
 
     private void RuneInventoryAction(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if(UIWhiteBox.MainUICurrentState == MainUIState.NONE || UIWhiteBox.MainUICurrentState == MainUIState.RUNE_INVENTORY)
         {
-            if(RuneInventoryPanel.activeSelf)
+            if (context.started)
             {
-                Anim_RuneInventory.SetTrigger("Off");
-            }
-            else
-            {
-                UIWhiteBox.SetRuneInventoryTitleText("인벤토리");
-                RuneInventoryPanel_SetActive(true);
+                if (RuneInventoryPanel.activeSelf)
+                {
+                    Anim_RuneInventory.SetTrigger("Off");
+                    UIWhiteBox.MainUICurrentState = MainUIState.NONE;
+                }
+                else
+                {
+                    UIWhiteBox.SetRuneInventoryTitleText("인벤토리");
+                    RuneInventoryPanel_SetActive(true);
+                    UIWhiteBox.MainUICurrentState = MainUIState.RUNE_INVENTORY;
+                }
             }
         }
     }
 
     private void MapAction(InputAction.CallbackContext context)
     {
-        if(context.started)
+        if(UIWhiteBox.MainUICurrentState == MainUIState.NONE || UIWhiteBox.MainUICurrentState == MainUIState.MAP)
         {
-            if(!isBigMapSize)
+            if (context.started)
             {
-                isBigMapSize = true;
+                if (!isBigMapSize)
+                {
+                    isBigMapSize = true;
 
-                mapPlayerMarker.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
-                MapPanel_SetActive(true);
-            }
-            else
-            {
-                isBigMapSize = false;
+                    mapPlayerMarker.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+                    MapPanel_SetActive(true);
 
-                mapPlayerMarker.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
-                MapPanel_SetActive(false);
+                    UIWhiteBox.MainUICurrentState = MainUIState.MAP;
+                }
+                else
+                {
+                    isBigMapSize = false;
+
+                    mapPlayerMarker.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
+                    MapPanel_SetActive(false);
+
+                    UIWhiteBox.MainUICurrentState = MainUIState.NONE;
+                }
             }
         }
     }
@@ -306,6 +323,9 @@ public class MainUIManager : MonoBehaviour
     /// </summary>
     private void MainUI_Initialize()
     {
+        //시작구분
+        UIWhiteBox.isStart = false;
+
         //상호작용 패널 비활성화
         InterectionPanel_SetActive(false);
 

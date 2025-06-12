@@ -31,7 +31,7 @@ public class ScriptUIManager : MonoBehaviour
         UIWhiteBox.SetScriptUIWB(this);
 
         inputAction = new UIInputAction();
-        textTyping = new TextTyping();
+        textTyping = GetComponent<TextTyping>();
     }
 
     private void OnEnable()
@@ -41,6 +41,8 @@ public class ScriptUIManager : MonoBehaviour
         inputAction.MainUI.Script.started += Input_F;
 
         WorldWhiteBox.WhiteBox.PauseGame();
+
+        UIWhiteBox.MainUICurrentState = MainUIState.SCRIPT;
     }
 
     private void OnDisable()
@@ -50,6 +52,8 @@ public class ScriptUIManager : MonoBehaviour
         inputAction.MainUI.Script.started -= Input_F;
 
         WorldWhiteBox.WhiteBox.ResumeGame();
+
+        UIWhiteBox.MainUICurrentState = MainUIState.NONE;
     }
 
     #endregion
@@ -95,7 +99,7 @@ public class ScriptUIManager : MonoBehaviour
         Name.text = newName;
 
         //타이핑효과로 대사 추가
-        StartCoroutine(textTyping.Typing(Script, newScript, 0.02f));
+        textTyping.StartTyping(Script, newScript, 0.02f);
     }
 
     #region InputAction
@@ -114,6 +118,12 @@ public class ScriptUIManager : MonoBehaviour
     //버튼 클릭 이벤트로 다음 대사로 넘기기
     public void NextScript()
     {
+        if(textTyping.IsTyping)
+        {
+            textTyping.SkipTyping();
+            return;
+        }
+
         currentIndex++;
 
         if(currentIndex < currentScriptList.Count)

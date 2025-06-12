@@ -36,7 +36,10 @@ public class RuneChoiceUI : MonoBehaviour
 
     private void OnEnable()
     {
-        SoundManager.instance.PlayUI("UI_OptionDrag_Open");
+        if(!UIWhiteBox.isStart)
+        {
+            SoundManager.instance.PlayUI("UI_OptionDrag_Open");
+        }
 
         if (UIWhiteBox.MainUICurrentState == MainUIState.NONE)
         {

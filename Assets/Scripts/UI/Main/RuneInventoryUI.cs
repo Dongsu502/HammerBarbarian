@@ -52,7 +52,10 @@ public class RuneInventoryUI : MonoBehaviour
 
     private void OnEnable()
     {
-        SoundManager.instance.PlayUI("UI_OptionDrag_Open");
+        if (!UIWhiteBox.isStart)
+        {
+            SoundManager.instance.PlayUI("UI_OptionDrag_Open");
+        }
 
         //팝업창 비활성화
         RePlacementPopup.SetActive(false);
