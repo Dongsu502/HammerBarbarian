@@ -21,7 +21,6 @@ public class MonsterHealthUI : MonoBehaviour
     private void Awake()
     {
         monster = GetComponentInParent<IMonster>();
-        lookTarget = PlayerStatWhiteBox.WhiteBox.FreeLookCamera.transform;
 
         HPBar_Initialize();
     }
@@ -29,7 +28,7 @@ public class MonsterHealthUI : MonoBehaviour
     private void OnEnable()
     {
         //플레이어 화이트박스에 참조된 프리룩 카메라위치 받아오기
-        //lookTarget = 
+        lookTarget = PlayerStatWhiteBox.WhiteBox.FreeLookCamera.transform;
     }
 
     private void Update()

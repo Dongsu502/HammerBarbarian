@@ -21,6 +21,7 @@ public class Bomber : MonoBehaviour, IMonster
     [Header("attack")]
     [SerializeField] private GameObject attackCollider;
     [SerializeField] private GameObject attackRangeObj;
+    [SerializeField] private GameObject currentAttackRange;
     [SerializeField] private float attackWaitingTime;
     [SerializeField] private GameObject attackEffectPrefab;
 
@@ -59,6 +60,7 @@ public class Bomber : MonoBehaviour, IMonster
     {
         attackCollider.SetActive(false);
         attackRangeObj.SetActive(false);
+        currentAttackRange.SetActive(false);
 
         rb.isKinematic = true;
     }
@@ -125,10 +127,26 @@ public class Bomber : MonoBehaviour, IMonster
     private IEnumerator Attacking()
     {
         Debug.Log("폭탄병 공격범위 표시!");
-        //공격범위, (게이지) 표시
+        //공격범위 표시
         attackRangeObj.SetActive(true);
+        currentAttackRange.transform.localScale = Vector3.zero;
+        currentAttackRange.SetActive(true);
 
-        yield return new WaitForSeconds(attackWaitingTime);
+        // Scale을 점점 키우기
+        float elapsed = 0f;
+        Vector3 startScale = Vector3.zero;
+        Vector3 targetScale = Vector3.one * 10f; // (10,10,10)까지 커지게
+
+        while (elapsed < attackWaitingTime)
+        {
+            float t = elapsed / attackWaitingTime;
+            currentAttackRange.transform.localScale = Vector3.Lerp(startScale, targetScale, t);
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        // 마지막 Scale 보정
+        currentAttackRange.transform.localScale = targetScale;
 
         //폭발 이펙트
         GameObject attackEffect = Instantiate(attackEffectPrefab, transform.position, attackEffectPrefab.transform.rotation);

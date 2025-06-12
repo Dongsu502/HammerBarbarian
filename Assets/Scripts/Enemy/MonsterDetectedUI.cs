@@ -23,6 +23,11 @@ public class MonsterDetectedUI : MonoBehaviour
         detectedImage = GetComponent<Image>();
     }
 
+    private void OnEnable()
+    {
+        target = PlayerStatWhiteBox.WhiteBox.FreeLookCamera.transform;
+    }
+
     private void Update()
     {
         LookTarget(target);
@@ -34,7 +39,7 @@ public class MonsterDetectedUI : MonoBehaviour
         dir.y = 0f; // 수평 회전만
         if (dir.sqrMagnitude > 0f)
         {
-            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            Quaternion lookRotation = Quaternion.LookRotation(-dir);
             transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, rotateSpeed * Time.deltaTime);
         }
     }
