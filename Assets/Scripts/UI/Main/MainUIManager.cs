@@ -60,6 +60,7 @@ public class MainUIManager : MonoBehaviour
     [SerializeField] private GameObject playerMarker;
     [Space]
     [SerializeField] private GameObject MapPanel;
+    [SerializeField] private GameObject mapPlayerMarker; 
 
     [Space(3)]
     [Header("Crosshair")]
@@ -109,9 +110,6 @@ public class MainUIManager : MonoBehaviour
     private const float GAUGE_MAX_VALUE = 100f;
 
     private bool isBigMapSize = false;
-    private const float PLAYER_MARKER_BIGSIZE = 17f;
-    private const float PLAYER_MARKER_SMALLSIZE = 5f;
-
     private bool isGaugeRecovery = true;
 
 #if UNITY_EDITOR
@@ -288,16 +286,14 @@ public class MainUIManager : MonoBehaviour
             {
                 isBigMapSize = true;
 
-                Vector3 bigSize = new Vector3(PLAYER_MARKER_BIGSIZE, PLAYER_MARKER_BIGSIZE, PLAYER_MARKER_BIGSIZE);
-                playerMarker.transform.localScale = bigSize;
+                mapPlayerMarker.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
                 MapPanel_SetActive(true);
             }
             else
             {
                 isBigMapSize = false;
 
-                Vector3 smallSize = new Vector3(PLAYER_MARKER_SMALLSIZE, PLAYER_MARKER_SMALLSIZE, PLAYER_MARKER_SMALLSIZE);
-                playerMarker.transform.localScale = smallSize;
+                mapPlayerMarker.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
                 MapPanel_SetActive(false);
             }
         }
@@ -342,6 +338,9 @@ public class MainUIManager : MonoBehaviour
 
         //원거리공격 에임 이미지 비활성화
         Crosshair_SetActive(false);
+
+        //맵 플레이어마커 이미지 투명화
+        mapPlayerMarker.GetComponent<SpriteRenderer>().color = Color.clear;
 
         //게이지 값 적용
         gaugeValue = GAUGE_MAX_VALUE;
