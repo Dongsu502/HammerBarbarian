@@ -11,6 +11,9 @@ public class TextTriggerController : MonoBehaviour
     private bool triggered = false;
     private bool[] conditionStates;
 
+    [SerializeField] private int sequenceIndex;
+    [SerializeField] private TextTriggerSequenceManager sequenceManager;
+
     private void Start()
     {
         conditionStates = new bool[conditionComponents.Length];
@@ -36,9 +39,10 @@ public class TextTriggerController : MonoBehaviour
 
     public void TriggerText()
     {
-        if (triggered) return;
+        if (triggered || !sequenceManager.CanTrigger(sequenceIndex)) return;
 
         triggered = true;
         UIWhiteBox.StartScripting(minCount, maxCount);
+        sequenceManager.Advance();
     }
 }
