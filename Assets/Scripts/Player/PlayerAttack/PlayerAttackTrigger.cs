@@ -19,7 +19,6 @@ public class PlayerAttackTrigger : MonoBehaviour
         {
             monsterHitBoxes.Add(monsterHitBox);
             //이거를 공격끝날때 몬스터히트박스의 불값을 false로 바꾸고 초기화
-
             //cameraShakeTrigger.Shake();
 
             if (!animChecker.IsWhirlwindAnim())

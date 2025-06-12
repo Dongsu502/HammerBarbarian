@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Game;
+using System.Linq;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class PlayerAttack : MonoBehaviour
     private Rigidbody rb;
     private PlayerStatus status;
     private PlayerAnimStateChecker animChecker;
+    private PlayerAttackTrigger attackTrigger;
 
     [Header("Light Attack Combo")]
     [SerializeField] private float lightComboResetTime = 2.0f;
@@ -67,6 +69,7 @@ public class PlayerAttack : MonoBehaviour
         useable = GetComponent<IItemUseable>();
         attackable = GetComponent<IAttackable>();
         animChecker = GetComponent<PlayerAnimStateChecker>();
+        attackTrigger = GetComponentInChildren<PlayerAttackTrigger>();
     }
 
     private void Update()
@@ -204,7 +207,6 @@ public class PlayerAttack : MonoBehaviour
                 animator.SetTrigger("SAttack_2");
 
             heavyComboTimer = heavyComboResetTime;
-            attackType = AttackType.Heavy;
         }
 
         if (context.canceled)
@@ -382,9 +384,24 @@ public class PlayerAttack : MonoBehaviour
             col.enabled = false;
     }
 
+    public void MosnterHitTriggerInit()
+    {
+        //foreach(var trigger in attackTrigger.monsterHitBoxes)
+        //{
+        //    trigger.isTriggerHit = false;
+        //}
+
+        for(int i =0; i <= attackTrigger.monsterHitBoxes.Count; i++)
+        {
+            attackTrigger.monsterHitBoxes.ElementAt(i).isTriggerHit = false;
+        }
+        attackTrigger.monsterHitBoxes.Clear();
+    }
+
     public void SetAttackTypeToLight() => attackType = AttackType.Light;
     public void SetAttackTypeToHeavy() => attackType = AttackType.Heavy;
     public void SetAttackTypeToStrong() => attackType = AttackType.Skill;
+    public void SetAttackTypeToWhirlWind()=>attackType = AttackType.WhirlWind;
 
     public void StartWindmillTimer() => isWindmilling = true;
     public void DizzyPlay() => isDizzy = true;
