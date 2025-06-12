@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7231f348ebc8b96449194c49b31f3217, type: 3}
+  m_Name: StoryData
+  m_EditorClassIdentifier: 
+  associatedSheet: 1-1GhWFWfP_SXiIONwcEVu0D2YIBG2YJN-b5uQ6KHHYY
+  associatedWorksheet: Story
+  START_ROW_LENGTH: 2
+  END_ROW_LENGTH: 2
+  DataList:
+  - id: 1
+    name: Story1
+    description: "\uB204\uAD70\uAC00\uAC00 \uB9D0\uD588\uB2E4. \uC628 \uBAB8\uC758
+      \uACE0\uAE30\uAC00 \uD600 \uC704\uC5D0\uC11C \uB179\uB294 \uC11C\uB9AC\uAC19\uC740
+      \uC721\uC9C8\uC744 \uAC00\uC9C4 \uB3D9\uBB3C\uC774 \uC788\uB2E4\uACE0.. \uB204\uAD70\uAC00\uAC00
+      \uB9D0\uD588\uB2E4. \uB18D\uD6C4\uD558\uACE0 \uC785\uC5D0 \uB300\uBA74 \uB179\uB294
+      \uBC14\uB2D0\uB77C, \uBBFC\uD2B8, \uCD08\uCF54 \uC544\uC774\uC2A4\uD06C\uB9BC\uC758
+      \uC0B0\uC774 \uC904\uC9C0\uC5B4 \uC120 \uC544\uC774\uC2A4\uD06C\uB9BC \uC0B0\uB9E5\uC774
+      \uC788\uB2E4\uACE0.. \uB204\uAD70\uAC00\uAC00 \uB9D0\uD588\uB2E4. \uC791\uB82C\uD558\uB294
+      \uD0DC\uC591\uC544\uB798 \uC798 \uBCF6\uC544\uC9C4 \uD5A5\uAE30\uB85C\uC6B4
+      \uC18C\uC2A4\uAC00 \uB118\uCE58\uB294 \uBCF6\uC74C \uAD6D\uC218\uB85C \uB41C
+      \uC0AC\uB9C9 \uBCF6\uC74C\uAD6D\uC218 \uB098\uB77C\uAC00 \uC788\uB2E4\uACE0.."

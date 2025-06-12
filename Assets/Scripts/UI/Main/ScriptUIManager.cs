@@ -22,6 +22,8 @@ public class ScriptUIManager : MonoBehaviour
     private List<ItemData> currentScriptList = new List<ItemData>();
     private int currentIndex = 0;
 
+    private TextTyping textTyping;
+
     #region UnityFunc
 
     private void Awake()
@@ -29,6 +31,7 @@ public class ScriptUIManager : MonoBehaviour
         UIWhiteBox.SetScriptUIWB(this);
 
         inputAction = new UIInputAction();
+        textTyping = new TextTyping();
     }
 
     private void OnEnable()
@@ -91,7 +94,8 @@ public class ScriptUIManager : MonoBehaviour
     {
         Name.text = newName;
 
-        Script.text = newScript;
+        //타이핑효과로 대사 추가
+        StartCoroutine(textTyping.Typing(Script, newScript, 0.02f));
     }
 
     #region InputAction
