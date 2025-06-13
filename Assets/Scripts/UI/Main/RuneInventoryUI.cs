@@ -235,7 +235,7 @@ public class RuneInventoryUI : MonoBehaviour
 
     public void DisableRuneInventory()
     {
-        gameObject.SetActive(false);
+        UIWhiteBox.SetActiveRuneInventoryPanel(false);
     }
 
     #endregion

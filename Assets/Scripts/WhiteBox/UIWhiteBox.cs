@@ -154,7 +154,7 @@ public static class UIWhiteBox
     /// <returns>MainUIManager¿« currentItemNum</returns>
     public static int GetCurrentItemNum()
     {
-        return MainUIWB.UseItemNumber() + 1;
+        return MainUIWB.UseItemNumber();
     }
 
     /// <summary>

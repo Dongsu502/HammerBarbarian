@@ -419,8 +419,6 @@ public class MainUIManager : MonoBehaviour
     public void InterectionPanel_SetActive(bool active)
     {
         InterectionPanel.SetActive(active);
-
-        CursorLock(active);
     }
 
     #endregion
@@ -527,7 +525,7 @@ public class MainUIManager : MonoBehaviour
     /// <returns>현재 아이템 번호</returns>
     public int UseItemNumber()
     {
-        return currentItemNum;
+        return currentItemNum + 1;
     }
 
     /// <summary>
