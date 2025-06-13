@@ -388,7 +388,7 @@ public class PlayerAttack : MonoBehaviour
     {  
         if(attackTrigger.monsterHitBoxes.Count != 0)
         {
-            for (int i = 0; i <= attackTrigger.monsterHitBoxes.Count; i++)
+            for (int i = 0; i < attackTrigger.monsterHitBoxes.Count; i++)
             {
                 attackTrigger.monsterHitBoxes.ElementAt(i).isTriggerHit = false;
             }

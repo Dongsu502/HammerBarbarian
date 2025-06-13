@@ -27,6 +27,14 @@ public class OptionManager : MonoBehaviour
     void Start()
     {
         LoadSettings();
+
+        // 혹시라도 currentSettings가 null인 경우 대비
+        if (currentSettings == null)
+        {
+            Debug.LogWarning("currentSettings가 null이라 기본값으로 초기화합니다.");
+            currentSettings = new SoundSettings();
+        }
+
         ApplySettingsToUI();
         ApplySettingsToAudio();
 
