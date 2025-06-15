@@ -48,7 +48,7 @@ MonoBehaviour:
         m_RotationOrder: 4
       m_AttackTime: 0.06
       m_SustainTime: 0.2
-      m_DecayTime: 0.7
+      m_DecayTime: 0.4
       m_ScaleWithImpact: 1
       m_HoldForever: 0
     m_ImpactRadius: 100

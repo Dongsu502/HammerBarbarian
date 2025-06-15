@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1632943642523816572}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.29379272, y: 0.65446776, z: -0.30759907, w: 0.6250925}
+  m_LocalRotation: {x: 0.22446026, y: -0.111541726, z: 0.025871485, w: 0.9677328}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -104,7 +104,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734099189714631860}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.2824043, y: 0.65994036, z: -0.29567546, w: 0.6303194}
+  m_LocalRotation: {x: 0.20686723, y: -0.111992724, z: 0.023843698, w: 0.9716456}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 13, z: -10}
+  m_FollowOffset: {x: 0, y: 9.11889, z: -17.005562}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -364,7 +364,7 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_YAxis:
-    Value: 1
+    Value: 0.48
     m_SpeedMode: 0
     m_MaxSpeed: 2
     m_AccelTime: 0.2
@@ -475,11 +475,11 @@ MonoBehaviour:
   m_AvoidObstacles: 1
   m_DistanceLimit: 3
   m_MinimumOcclusionTime: 0
-  m_CameraRadius: 1.2
+  m_CameraRadius: 0.5
   m_Strategy: 0
   m_MaximumEffort: 4
-  m_SmoothingTime: 0.3
-  m_Damping: 0.5
+  m_SmoothingTime: 0.5
+  m_Damping: 0.9
   m_DampingWhenOccluded: 0.6
   m_OptimalTargetDistance: 0
 --- !u!114 &5046783627575658952
@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 13, z: -10}
+  m_FollowOffset: {x: 0, y: 9.11889, z: -17.005562}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1
@@ -663,7 +663,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7893819067346792784}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.30511424, y: 0.64876443, z: -0.3194526, w: 0.6196451}
+  m_LocalRotation: {x: 0.24202567, y: -0.111052684, z: 0.027896091, w: 0.9634899}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -776,7 +776,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BindingMode: 5
-  m_FollowOffset: {x: 0, y: 13, z: -10}
+  m_FollowOffset: {x: 0, y: 9.11889, z: -17.005562}
   m_XDamping: 1
   m_YDamping: 1
   m_ZDamping: 1

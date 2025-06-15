@@ -15,12 +15,13 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") &&controller.sequenceIndex ==3)
         {
             UIWhiteBox.Spawn_InterectionUI("F", "근육 만져보기");
             if (Input.GetKeyDown(KeyCode.F))
             {
                 controller.NotifyConditionMet(index);
+                UIWhiteBox.SetActiveInterectionPanel(false);
             }
         }
     }
