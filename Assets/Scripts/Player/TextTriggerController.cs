@@ -11,7 +11,7 @@ public class TextTriggerController : MonoBehaviour
     private bool triggered = false;
     private bool[] conditionStates;
 
-    [SerializeField] private int sequenceIndex;
+    public int sequenceIndex;
     [SerializeField] private TextTriggerSequenceManager sequenceManager;
 
     private void Start()

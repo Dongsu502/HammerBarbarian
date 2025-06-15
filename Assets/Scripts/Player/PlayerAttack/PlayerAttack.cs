@@ -219,11 +219,11 @@ public class PlayerAttack : MonoBehaviour
     public void OnEquipItem(InputAction.CallbackContext context)
     {
         if (status.IsDead) return;
+        int currentItemType = UIWhiteBox.GetCurrentItemNum();
+        if (currentItemType == 0) return;
 
         if (context.performed && !isAiming)
         {
-            int currentItemType = UIWhiteBox.GetCurrentItemNum();
-
             if (!equipItem)
             {
                 equipItem = true;
