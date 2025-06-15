@@ -12,6 +12,8 @@ public class PlayerAttackTrigger : MonoBehaviour
 
     public HashSet<MonsterHitBox> monsterHitBoxes = new HashSet<MonsterHitBox>();
 
+    [SerializeField] private PlayerSoundController soundController;
+
     private void OnTriggerEnter(Collider other)
     {
         MonsterHitBox monsterHitBox = other.GetComponent<MonsterHitBox>();
@@ -34,6 +36,7 @@ public class PlayerAttackTrigger : MonoBehaviour
             {
                 receiver.OnHit(hitPoint, hitNormal);
             }
+            soundController.AttackHitSound();
         }
     }
 

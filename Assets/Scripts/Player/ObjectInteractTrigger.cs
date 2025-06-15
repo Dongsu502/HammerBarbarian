@@ -15,6 +15,11 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
 
     private void OnTriggerStay(Collider other)
     {
+        if (controller.sequenceIndex != 3)
+        {
+            UIWhiteBox.SetActiveInterectionPanel(false); 
+            return;
+        }       
         if (other.CompareTag("Player") &&controller.sequenceIndex ==3)
         {
             UIWhiteBox.Spawn_InterectionUI("F", "근육 만져보기");

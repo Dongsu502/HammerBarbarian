@@ -8,9 +8,12 @@ public class PlayerHit : MonoBehaviour
     [SerializeField]private Animator animator;
     [SerializeField] private PlayerStatus status;
 
+    private PlayerSoundController soundController;
+
     private void Awake()
     {
         status = GetComponentInParent<PlayerStatus>();
+        soundController = GetComponentInParent<PlayerSoundController>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,6 +38,8 @@ public class PlayerHit : MonoBehaviour
             {
                 //animator.SetTrigger("Hit");
             }
+
+            soundController.HitSound();
         }
 
         if (other.CompareTag("MinimapTrigger"))
