@@ -1285,7 +1285,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4087643816500081490, guid: f0fde2f4cd44dcf44bac5965bce6254b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.67
+      value: 10.44
       objectReference: {fileID: 0}
     - target: {fileID: 4087643816500081490, guid: f0fde2f4cd44dcf44bac5965bce6254b, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1293,7 +1293,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4087643816500081490, guid: f0fde2f4cd44dcf44bac5965bce6254b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 6.71
+      value: 17.22
       objectReference: {fileID: 0}
     - target: {fileID: 4087643816500081490, guid: f0fde2f4cd44dcf44bac5965bce6254b, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18187,6 +18187,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4629232248383922634, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.9634899
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629232248383922634, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.24202567
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629232248383922634, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.111052684
+      objectReference: {fileID: 0}
+    - target: {fileID: 4629232248383922634, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.027896091
+      objectReference: {fileID: 0}
     - target: {fileID: 5620383256304357953, guid: 671a11235ec5c3f4ea878fa0486482e9, type: 3}
       propertyPath: m_Name
       value: FreeLook Camera
@@ -19191,6 +19207,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f2e25295dff61341a0aaf58e47adf69, type: 3}
+--- !u!114 &863043401 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8740927499534569170, guid: 619fa196807de014f953d23a660130e6, type: 3}
+  m_PrefabInstance: {fileID: 8411769937997943013}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f99e3666a5a21940bba6f67da5a359e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &869252373
 GameObject:
   m_ObjectHideFlags: 0
@@ -51688,6 +51715,10 @@ PrefabInstance:
       propertyPath: hammerController
       value: 
       objectReference: {fileID: 64554604}
+    - target: {fileID: 3723013765512864719, guid: 619fa196807de014f953d23a660130e6, type: 3}
+      propertyPath: soundController
+      value: 
+      objectReference: {fileID: 863043401}
     - target: {fileID: 8635139620551111988, guid: 619fa196807de014f953d23a660130e6, type: 3}
       propertyPath: m_LocalPosition.x
       value: 49.39
@@ -51728,6 +51759,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8740927499534569170, guid: 619fa196807de014f953d23a660130e6, type: 3}
+      propertyPath: hitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 75c336405d19f4844a7bf3b7eb935e42, type: 3}
+    - target: {fileID: 8740927499534569170, guid: 619fa196807de014f953d23a660130e6, type: 3}
+      propertyPath: attackHitClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 465967a9fa19e2042999b50925d0ff06, type: 3}
     - target: {fileID: 8979611509393584014, guid: 619fa196807de014f953d23a660130e6, type: 3}
       propertyPath: m_Name
       value: Player
