@@ -24,6 +24,8 @@ public class ScriptUIManager : MonoBehaviour
 
     private TextTyping textTyping;
 
+    private bool isEnd = false;
+
     #region UnityFunc
 
     private void Awake()
@@ -58,6 +60,11 @@ public class ScriptUIManager : MonoBehaviour
 
     #endregion
 
+    public bool GetisEnd()
+    {
+        return isEnd;
+    }
+
     /// <summary>
     /// 원하는 id값의 데이터가져오기
     /// </summary>
@@ -67,9 +74,10 @@ public class ScriptUIManager : MonoBehaviour
     {
         currentScriptList.Clear();
         currentIndex = 0;
+        isEnd = false;
 
         //start부터 end까지의 데이터 리스트 가져오기
-        for(int i = 0; i < scriptData.DataList.Count; i++)
+        for (int i = 0; i < scriptData.DataList.Count; i++)
         {
             int id = scriptData.DataList[i].id;
             if(id >= start && id <= end)
@@ -133,6 +141,7 @@ public class ScriptUIManager : MonoBehaviour
         }
         else
         {
+            isEnd = true;
             UIWhiteBox.SetActiveScriptUIPanel(false);
         }
     }

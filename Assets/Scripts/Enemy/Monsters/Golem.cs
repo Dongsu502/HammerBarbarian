@@ -269,6 +269,9 @@ public class Golem : MonoBehaviour, IMonster
         //체력바 UI 비활성화
         healthUIClass.HPBar_SetActive(false);
 
+        //리스트 제거
+
+
         yield return null;
     }
 

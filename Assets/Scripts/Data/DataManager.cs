@@ -58,6 +58,16 @@ public class DataManager : MonoBehaviour
     {
         SaveGameData(data1, GameDataFileName1);
     }
+    [ContextMenu("데이터 저장2")]
+    public void SaveData2()
+    {
+        SaveGameData(data2, GameDataFileName2);
+    }
+    [ContextMenu("데이터 저장3")]
+    public void SaveData3()
+    {
+        SaveGameData(data3, GameDataFileName3);
+    }
     [ContextMenu("데이터 존재하는지 확인")]
     public void DataCheck()
     {

@@ -211,6 +211,12 @@ public class MainUIManager : MonoBehaviour
         {
             GaugeRecovery(GAUGE_RECOVERY_VALUE);
         }
+
+        //임시 코드 유물 획득
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            GetItem();
+        }
     }
 
     #endregion
@@ -236,11 +242,18 @@ public class MainUIManager : MonoBehaviour
                     Anim_Setting.SetTrigger("Off");
                     UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
                     break;
+                case MainUIState.PAUSE_KEYDESCRIPTION:
+                    UIWhiteBox.SetActiveKeyDescriptionImage(false);
+                    UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
+                    break;
+                case MainUIState.SCRIPT:
+                    Debug.LogWarning("MainUIState가 SCRIPT입니다.");
+                    return;
                 case MainUIState.Die:
                     Debug.LogWarning("MainUIState가 Die입니다.");
                     return;
                 default:
-                    Debug.LogWarning("MainUIState가 NONE, PAUSE, PAUSE_SETTING이 아닙니다.");
+                    Debug.LogWarning("MainUIState가 NONE, PAUSE, PAUSE_SETTING, PAUSE_KEYDESCRIPTION이 아닙니다.");
                     PausePanel_SetActive(true);
                     UIWhiteBox.MainUICurrentState = MainUIState.PAUSE;
                     break;
@@ -525,6 +538,11 @@ public class MainUIManager : MonoBehaviour
     /// <returns>현재 아이템 번호</returns>
     public int UseItemNumber()
     {
+        int itemCount = DataManager.Instance.GetCurrentData().currentItemList;
+        if(itemCount <= 0)
+        {
+            return 0;
+        }
         return currentItemNum + 1;
     }
 
@@ -561,6 +579,8 @@ public class MainUIManager : MonoBehaviour
         currentItemNum = int.Parse(pressedButtonNumber);
 
         itemImage.sprite = item_ImageResources[currentItemNum + 1];
+
+        Debug.LogError($"$currentItemNum: {currentItemNum}");
     }
 
     /// <summary>
