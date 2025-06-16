@@ -57075,7 +57075,7 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 1.7
+  - time: 0.033333335
     functionName: RBDestory
     data: 
     objectReferenceParameter: {fileID: 0}
