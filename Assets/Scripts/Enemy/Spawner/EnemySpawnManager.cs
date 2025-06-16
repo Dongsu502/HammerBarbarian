@@ -16,14 +16,18 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] private GameObject bomberPrefab;
     private GameObject spawnMonster;
 
+    private bool isSpawned = false;
+
+
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.CompareTag("Player"))
         {
+            if (isSpawned) return;
             SpawnEnemys();
             Debug.Log("몬스터 스폰 트리거 발동");
-
+            isSpawned = true;
             Destroy(this,2f);
         }
     }

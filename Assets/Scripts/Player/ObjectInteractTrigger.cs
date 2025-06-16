@@ -9,6 +9,8 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
 
     [SerializeField] private ArenaController arenaController;
 
+    private bool isActivated = false;
+
     public void Init(TextTriggerController controller, int conditionIndex)
     {
         this.controller = controller;
@@ -17,7 +19,7 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
 
     private void OnTriggerStay(Collider other)
     {
-        if (arenaController.CurrentEnemyCount != 0)
+        if (arenaController.CurrentEnemyCount != 0 || isActivated)
             return;
 
         if (other.CompareTag("Player") &&controller.sequenceIndex ==3)
@@ -27,6 +29,7 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
             {
                 controller.NotifyConditionMet(index);
                 UIWhiteBox.SetActiveInterectionPanel(false);
+                isActivated = true;
                 StartCoroutine(playerDiretor());
             }
         }
@@ -41,6 +44,7 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
 
     private IEnumerator playerDiretor()
     {
+        Debug.Log("¹¹¾ß ½Ã¹ß");
         yield return new WaitForSeconds(1f);
         CutsceneWhiteBox.WhiteBox.StartCutscene();
         CutsceneWhiteBox.WhiteBox.PlayerCutscene();
