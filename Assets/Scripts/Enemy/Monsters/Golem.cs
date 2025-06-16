@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
 
-public class Golem : MonoBehaviour, IMonster
+public class Golem : MonoBehaviour, IMonster, IArenaRegistrable
 {
     public string Name { get; private set; } = "Golem";
     public int HP { get; private set; } = 50;
@@ -57,6 +57,13 @@ public class Golem : MonoBehaviour, IMonster
 
         golemCollider = GetComponent<CapsuleCollider>();
         attackCollider = GetComponentInChildren<MonsterAttackDetection>().AttackCollider;
+    }
+
+    private ArenaController arena;
+
+    public void Initialize(ArenaController arena)
+    {
+        this.arena = arena;
     }
 
     #region Animation Eventkey
@@ -270,7 +277,7 @@ public class Golem : MonoBehaviour, IMonster
         healthUIClass.HPBar_SetActive(false);
 
         //리스트 제거
-
+        arena.RemoveEnemy(gameObject);
 
         yield return null;
     }

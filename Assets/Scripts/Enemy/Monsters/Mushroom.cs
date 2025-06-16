@@ -4,7 +4,7 @@ using System.Threading;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Mushroom : MonoBehaviour, IMonster
+public class Mushroom : MonoBehaviour, IMonster, IArenaRegistrable
 {
     public string Name { get; private set; } = "Mushroom";
     public int HP { get; private set; } = 30;
@@ -56,6 +56,13 @@ public class Mushroom : MonoBehaviour, IMonster
         rb = GetComponent<Rigidbody>();
 
         mushroomCollider = GetComponent<CapsuleCollider>();
+    }
+
+    private ArenaController arena;
+
+    public void Initialize(ArenaController arena)
+    {
+        this.arena = arena;
     }
 
     #region Animation Eventkey
@@ -280,6 +287,9 @@ public class Mushroom : MonoBehaviour, IMonster
 
         //체력바 UI 비활성화
         healthUIClass.HPBar_SetActive(false);
+
+        //리스트 제거
+        arena.RemoveEnemy(gameObject);
 
         yield return null;
     }

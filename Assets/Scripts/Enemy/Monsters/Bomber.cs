@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Bomber : MonoBehaviour, IMonster
+public class Bomber : MonoBehaviour, IMonster, IArenaRegistrable
 {
     public string Name { get; private set; } = "Bomber";
     public int HP { get; private set; } = 5;
@@ -63,6 +63,13 @@ public class Bomber : MonoBehaviour, IMonster
         currentAttackRange.SetActive(false);
 
         rb.isKinematic = true;
+    }
+
+    private ArenaController arena;
+
+    public void Initialize(ArenaController arena)
+    {
+        this.arena = arena;
     }
 
     public void RunDelay()
@@ -173,6 +180,9 @@ public class Bomber : MonoBehaviour, IMonster
 
         //폭탄병 콜라이더 제거
         bomberCollider.enabled = false;
+
+        //리스트 제거
+        arena.RemoveEnemy(gameObject);
 
         yield return null;
 

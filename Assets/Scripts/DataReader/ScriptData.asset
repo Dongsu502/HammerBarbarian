@@ -22,21 +22,21 @@ MonoBehaviour:
     description: "\uC774\uBD10 \uB9DD\uCE58, \uC774\uACF3\uC73C\uB85C \uAC00\uB294\uAC8C
       \uB9DE\uB098?"
   - id: 1101
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uC544\uC8FC \uC624\uB798\uC804 \uC77C\uC774\uB77C \uAE30\uC5B5\uC774
       \uD750\uB9BF\uD558\uC9C0\uB9CC \uB9DE\uC744\uAC70\uB2E4."
   - id: 1102
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uADF8\uB9AC\uACE0 \uB098\uB294 \uB9DD\uCE58\uAC00 \uC544\uB2C8\uB77C
       \uAC80\uC774\uB77C\uACE0 \uBA87\uBC88\uC744..."
   - id: 1103
     name: "\uCE74\uB208 \uBC14\uB780"
     description: "\uB9DD\uCE58\uB294 \uB9DD\uCE58\uB2E4!!"
   - id: 1104
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uD558\uC544..."
   - id: 1105
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uC800 \uB098\uBB34 \uBB34\uC5B8\uAC00 \uC774\uC0C1\uD558\uAD70."
   - id: 1106
     name: "\uCE74\uB208 \uBC14\uB780"
@@ -46,60 +46,60 @@ MonoBehaviour:
     description: "\uC74C! \uC5ED\uC2DC \uD504\uB85C\uD14C\uC778\uB2D8\uC758 \uADFC\uC721\uC740
       \uC5B8\uC81C\uBD10\uB3C4 \uC644\uBCBD\uD558\uB2E4!!"
   - id: 1108
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uC800\uB7F0\uAC8C...\uC2E0?"
   - id: 1109
     name: "\uCE74\uB208 \uBC14\uB780"
     description: "\uD504\uB85C\uD14C\uC778\uAED8\uC11C \uBCF4\uC870\uD574\uC8FC\uC2DC\uAE38!"
   - id: 1110
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uC800\uAC74?"
   - id: 1111
-    name: protein
+    name: "\uD504\uB85C\uD14C\uC778"
     description: "\uB300\uB959\uC740 \uC900\uBE44 \uC5C6\uC774 \uB3CC\uC544\uB2E4\uB2C8\uAE30\uC5D4
       \uC704\uD5D8\uD558\uB2E4."
   - id: 1112
-    name: protein
+    name: "\uD504\uB85C\uD14C\uC778"
     description: "\uC774\uAC78 \uAC00\uC838\uB77C\uAC00."
   - id: 1113
     name: "\uCE74\uB208 \uBC14\uB780"
     description: "\uAC10\uC0AC\uD558\uB2E4!!"
   - id: 1114
-    name: "\uC194\uB77C"
-    description: "\uC2A4\uD504\uB9C1...?"
+    name: "\uC131\uAC80 \uC194\uB77C"
+    description: "\uBC40...?"
   - id: 1115
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uC800\uB7F0\uACF3\uC5D0 \uB9C8\uBC95\uC9C4\uC774?"
   - id: 1116
     name: "\uCE74\uB208 \uBC14\uB780"
     description: "\uB9C8\uBC95\uC9C4\uC774 \uC5B4\uB514\uC788\uB098?"
   - id: 1117
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uC800 \uAC70\uB300\uD55C \uB098\uBB34 \uC704\uCABD\uC774\uB2E4."
   - id: 1118
     name: "\uCE74\uB208 \uBC14\uB780"
     description: "\uBB54\uC9C0 \uBAA8\uB974\uACA0\uC73C\uB2C8, \uC77C\uB2E8 \uBD80\uC154\uBCFC\uAE4C!!!"
   - id: 1119
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uC774\uBD10!! \uAE30\uB2E4\uB824\uB77C!!!"
   - id: 1120
     name: "\uCE74\uB208 \uBC14\uB780"
     description: "\uC557! \uC800\uCABD\uC5D0 \uAE38\uC774 \uC0DD\uACBC\uB2E4!"
   - id: 1121
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uD558...\uBC8C\uC368\uBD80\uD130 \uBA38\uB9AC\uAC00 \uC544\uD504\uAD70..."
   - id: 1122
     name: "\uCE74\uB208 \uBC14\uB780"
     description: "\uB0B4\uAC00 \uB108\uBB34 \uAC15\uD558\uAC8C \uB358\uC84C\uAD70!
       \uBBF8\uC548\uD558\uB2E4!!!"
   - id: 1123
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: ...
   - id: 1124
     name: "\uCE74\uB208 \uBC14\uB780"
     description: "HAHAHAHAHAHA!!! \uB0B4\uAC00 \uC654\uB2E4!!!!"
   - id: 1125
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uC790\uB124\uB294 \uC870\uC2EC\uC774\uB77C\uB294 \uB2E8\uC5B4\uB97C
       \uBAA8\uB974\uB098?"
   - id: 1126
@@ -107,7 +107,7 @@ MonoBehaviour:
     description: "\uADF8\uB7F0\uAC74 \uD798\uC774 \uBD80\uC871\uD55C \uB188\uB4E4\uC758
       \uBCC0\uBA85\uC774\uB2E4!!"
   - id: 1127
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uC55E\uC5D0 \uD568\uC815\uC774 \uC788\uAD70."
   - id: 1128
     name: "\uCE74\uB208 \uBC14\uB780"
@@ -116,6 +116,6 @@ MonoBehaviour:
     name: "\uCE74\uB208 \uBC14\uB780"
     description: "\uBE5B\uB098\uB294 \uB3CC?"
   - id: 1130
-    name: "\uC194\uB77C"
+    name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uBAA8\uB974\uB294\uAC00? \uADF8\uAC74 \uB8EC\uC774\uB77C\uB294
       \uAC83\uC774\uB2E4."

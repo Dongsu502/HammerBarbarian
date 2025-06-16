@@ -23,6 +23,8 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
     [SerializeField] private int selectIndex = -1;
 
+    private bool onPopup = false;
+
     #region UnityFunc
 
     private void Awake()
@@ -75,6 +77,7 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData eventData)
     {
+        if (onPopup) return;
         DeselectAll();
         selectIndex = -1;
     }
@@ -125,6 +128,7 @@ public class TitleDataUI : MonoBehaviour, IPointerClickHandler
             SoundManager.instance.PlayUI("UI_Botton01");
         }
         ResetDataPopup.SetActive(isActive);
+        onPopup = isActive;
     }
 
     /// <summary>
