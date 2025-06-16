@@ -27,7 +27,20 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
             {
                 controller.NotifyConditionMet(index);
                 UIWhiteBox.SetActiveInterectionPanel(false);
+                StartCoroutine(playerDiretor());
             }
         }
+    }
+
+    private IEnumerator playerDiretor()
+    {
+        yield return new WaitForSeconds(1f);
+        CutsceneWhiteBox.WhiteBox.StartCutscene();
+        CutsceneWhiteBox.WhiteBox.PlayerCutscene();
+
+        new WaitForSeconds(5f);
+
+        CutsceneWhiteBox.WhiteBox.EndCutscene();
+
     }
 }
