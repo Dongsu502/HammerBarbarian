@@ -7,6 +7,8 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
     private TextTriggerController controller;
     private int index;
 
+    [SerializeField] private ArenaController arenaController;
+
     public void Init(TextTriggerController controller, int conditionIndex)
     {
         this.controller = controller;
@@ -15,11 +17,9 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
 
     private void OnTriggerStay(Collider other)
     {
-        if (controller.sequenceIndex != 3)
-        {
-            UIWhiteBox.SetActiveInterectionPanel(false); 
+        if (arenaController.CurrentEnemyCount != 0)
             return;
-        }       
+
         if (other.CompareTag("Player") &&controller.sequenceIndex ==3)
         {
             UIWhiteBox.Spawn_InterectionUI("F", "근육 만져보기");
@@ -29,6 +29,13 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
                 UIWhiteBox.SetActiveInterectionPanel(false);
                 StartCoroutine(playerDiretor());
             }
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            UIWhiteBox.SetActiveInterectionPanel(false);
         }
     }
 

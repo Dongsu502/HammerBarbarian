@@ -10,3 +10,8 @@ public interface IAttackable
 {
     void AttackByType(WeaponType type);
 }
+
+public interface IArenaRegistrable
+{
+    void Initialize(ArenaController arena);
+}
