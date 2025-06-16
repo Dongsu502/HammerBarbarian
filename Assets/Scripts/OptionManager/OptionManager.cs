@@ -5,6 +5,8 @@ using System;
 
 public class OptionManager : MonoBehaviour
 {
+    public static OptionManager instance { get; private set; }
+
     [Header("Sliders")]
     public Slider masterSlider;
     public Slider bgmSlider;
@@ -24,7 +26,24 @@ public class OptionManager : MonoBehaviour
 
     private SoundSettings currentSettings;
 
-    void Start()
+    // 초기화 완료 이벤트
+    public static event Action OnSettingsLoaded;
+
+    void Awake()
+    {
+        // 싱글톤 구현: 이미 인스턴스가 존재하면 파괴, 없으면 설정
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);  // 씬 전환 시 파괴되지 않도록 설정
+        }
+        else
+        {
+            Destroy(gameObject);  // 이미 존재하는 인스턴스가 있으면 이 객체는 파괴
+        }        
+    }
+
+    private void OnEnable()
     {
         LoadSettings();
 
@@ -43,6 +62,9 @@ public class OptionManager : MonoBehaviour
         bgmSlider.onValueChanged.AddListener((v) => OnSliderChanged());
         sfxSlider.onValueChanged.AddListener((v) => OnSliderChanged());
         uiSlider.onValueChanged.AddListener((v) => OnSliderChanged());
+
+        // 설정을 로드한 후, 초기화 완료 이벤트 발생
+        OnSettingsLoaded?.Invoke();
     }
 
     void OnSliderChanged()
@@ -69,6 +91,9 @@ public class OptionManager : MonoBehaviour
     {
         // 실제 적용: 이 예시는 마스터만 적용하지만 나중에 세부 오디오 믹서에 연동 가능
         AudioListener.volume = currentSettings.masterVolume;
+        AudioListener.volume = currentSettings.bgmVolume;
+        AudioListener.volume = currentSettings.sfxVolume;
+        AudioListener.volume = currentSettings.uiVolume;
         // TODO: BGM, SFX, UI 볼륨은 AudioMixer 사용 시 적용
     }
 
@@ -98,4 +123,10 @@ public class OptionManager : MonoBehaviour
             SaveSettings(); // 기본값 저장
         }
     }
+
+    // 추가: 슬라이더 값 불러오기
+    public float GetMasterVolume() => currentSettings.masterVolume;
+    public float GetBGMVolume() => currentSettings.bgmVolume;
+    public float GetSFXVolume() => currentSettings.sfxVolume;
+    public float GetUIVolume() => currentSettings.uiVolume;
 }
