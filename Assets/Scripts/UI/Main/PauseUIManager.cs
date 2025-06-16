@@ -16,6 +16,9 @@ public class PauseUIManager : MonoBehaviour
     [Tooltip("옵션창 배경이미지")]
     [SerializeField] private Image SettingBackgroundImage;
 
+    [Space]
+    [SerializeField] private GameObject keyDescriptionObj;
+
     private void Awake()
     {
         UIWhiteBox.SetPauseUIWB(this);
@@ -29,6 +32,7 @@ public class PauseUIManager : MonoBehaviour
     private void OnEnable()
     {
         SetActive_SettingPanel(false);
+        SetActive_KeyDescription(false);
 
         WorldWhiteBox.WhiteBox.PauseGame();
     }
@@ -46,7 +50,12 @@ public class PauseUIManager : MonoBehaviour
     public void SetActive_SettingPanel(bool isActive)
     {
         SettingPanel.SetActive(isActive);
-        SettingBackgroundImage.gameObject.SetActive(!isActive);
+        //SettingBackgroundImage.gameObject.SetActive(!isActive);
+    }
+
+    public void SetActive_KeyDescription(bool isActive)
+    {
+        keyDescriptionObj.SetActive(isActive);
     }
 
     #region ButtonEvent
@@ -65,6 +74,14 @@ public class PauseUIManager : MonoBehaviour
 
         SetActive_SettingPanel(true);
         UIWhiteBox.MainUICurrentState = MainUIState.PAUSE_SETTING;
+    }
+
+    public void Click_KeyDescription()
+    {
+        SoundManager.instance.PlayUI("UI_Botton05");
+
+        SetActive_KeyDescription(true);
+        UIWhiteBox.MainUICurrentState = MainUIState.PAUSE_KEYDESCRIPTION;
     }
 
     public void Click_GoTitleButton()

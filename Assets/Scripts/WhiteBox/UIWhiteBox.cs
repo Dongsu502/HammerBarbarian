@@ -12,6 +12,7 @@ public enum MainUIState
     RUNE_INVENTORY,
     PAUSE,
     PAUSE_SETTING,
+    PAUSE_KEYDESCRIPTION,
     SCRIPT,
     MAP,
     Die
@@ -117,6 +118,11 @@ public static class UIWhiteBox
     public static void SetActiveInterectionPanel(bool isActive)
     {
         MainUIWB.InterectionPanel_SetActive(isActive);
+    }
+
+    public static void SetActiveKeyDescriptionImage(bool isActive)
+    {
+        PauseUIWB.SetActive_KeyDescription(isActive);
     }
 
     #endregion
@@ -294,6 +300,19 @@ public static class UIWhiteBox
     public static List<int> GetRuneIDs()
     {
         return RuneInventoryWB.runeIDs;
+    }
+
+    #endregion
+
+    #region ScriptUI
+
+    /// <summary>
+    /// 대사 끝나는지 체크 불값 가져오기
+    /// </summary>
+    /// <returns></returns>
+    public static bool GetScriptIsEnd()
+    {
+        return ScriptUIWB.GetisEnd();
     }
 
     #endregion
