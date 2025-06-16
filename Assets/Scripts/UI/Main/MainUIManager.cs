@@ -314,6 +314,7 @@ public class MainUIManager : MonoBehaviour
                     mapPlayerMarker.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
                     MapPanel_SetActive(true);
 
+                    WorldWhiteBox.WhiteBox.PauseGame();
                     UIWhiteBox.MainUICurrentState = MainUIState.MAP;
                 }
                 else
@@ -323,6 +324,7 @@ public class MainUIManager : MonoBehaviour
                     mapPlayerMarker.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 0f);
                     MapPanel_SetActive(false);
 
+                    WorldWhiteBox.WhiteBox.ResumeGame();
                     UIWhiteBox.MainUICurrentState = MainUIState.NONE;
                 }
             }
