@@ -23,16 +23,7 @@ public class ArenaController : MonoBehaviour
             walls[i].SetActive(false);
         }
     }
-    // Update is called once per frame
-    void Update()
-    {
-        enemies.RemoveAll(enemy => enemy == null);
-        if (enemies.Count <= 0)
-        {
-            DeActiveWall();
-        }
-    }
-
+  
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -41,6 +32,15 @@ public class ArenaController : MonoBehaviour
             {
                 walls[i].SetActive(true);
             }
+        }
+    }
+
+    public void RemoveEnemy(GameObject enemy)
+    {
+        enemies.Remove(enemy);
+        if (enemies.Count <= 0)
+        {
+            DeActiveWall();
         }
     }
 

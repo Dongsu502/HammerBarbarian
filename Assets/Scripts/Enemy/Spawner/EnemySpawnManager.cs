@@ -33,20 +33,20 @@ public class EnemySpawnManager : MonoBehaviour
     /// </summary>
     private void SpawnEnemys()
     {
-        for(int i = 0; i < spawnObjects.Length; i++)
+        for (int i = 0; i < spawnObjects.Length; i++)
         {
             Debug.Log("몬스터 스폰!");
             MonsterType monsterType = spawnObjects[i].GetComponent<EnemySpawner>().CurrentMonsterType;
 
-            if(monsterType == MonsterType.GOLEM)
+            if (monsterType == MonsterType.GOLEM)
             {
                 spawnMonster = Instantiate(golemPrefab, spawnObjects[i].transform.position, spawnObjects[i].transform.rotation);
             }
-            else if(monsterType == MonsterType.MUSHROOM)
+            else if (monsterType == MonsterType.MUSHROOM)
             {
                 spawnMonster = Instantiate(mushroomPrefab, spawnObjects[i].transform.position, spawnObjects[i].transform.rotation);
             }
-            else if(monsterType == MonsterType.BOMBER)
+            else if (monsterType == MonsterType.BOMBER)
             {
                 spawnMonster = Instantiate(bomberPrefab, spawnObjects[i].transform.position, spawnObjects[i].transform.rotation);
             }
@@ -55,8 +55,13 @@ public class EnemySpawnManager : MonoBehaviour
                 Debug.LogError("스포너의 몬스터 타입이 잘못 되었습니다.");
             }
 
-            //아레나 컨트롤러에 몬스터들 등록
+            IArenaRegistrable arenaUnit = spawnMonster.GetComponent<IArenaRegistrable>();
+            if (arenaUnit != null)
+            {
+                arenaUnit.Initialize(arenaController);
+            }
             arenaController.AddEnemy(spawnMonster);
         }
     }
+
 }

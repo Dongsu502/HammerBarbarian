@@ -220,6 +220,7 @@ public class PlayerAttack : MonoBehaviour
     {
         if (status.IsDead) return;
         int currentItemType = UIWhiteBox.GetCurrentItemNum();
+        Debug.Log(currentItemType);
         if (currentItemType == 0) return;
 
         if (context.performed && !isAiming)
