@@ -15,6 +15,9 @@ public class ChoiceMapUIManager : MonoBehaviour
     public GameObject WorldPanel;
     [SerializeField] private Button[] WorldButtons;
 
+    [Header("세팅패널")]
+    public GameObject SettingPanel;
+
     private UIInputAction uiInput;
 
     private void Awake()
@@ -33,6 +36,7 @@ public class ChoiceMapUIManager : MonoBehaviour
 
         uiInput.ChoiceMapUI.OpenWorldMap.started += R_KeyDown;
         uiInput.ChoiceMapUI.Mouse.started += RightMouseDown;
+        uiInput.ChoiceMapUI.Setting.started += EscapeEvent;
 
         InitializeChoiceUI();
     }
@@ -42,12 +46,14 @@ public class ChoiceMapUIManager : MonoBehaviour
 
         uiInput.ChoiceMapUI.OpenWorldMap.started -= R_KeyDown;
         uiInput.ChoiceMapUI.Mouse.started -= RightMouseDown;
+        uiInput.ChoiceMapUI.Setting.started -= EscapeEvent;
     }
 
     private void InitializeChoiceUI()
     {
         DungeonPanel.SetActive(true);
         WorldPanel.SetActive(false);
+        SettingPanel.SetActive(false);
 
         UIWhiteBox.ChoiceMapUICurrentState = ChoiceMapUIState.DUNGEON;
     }
@@ -70,6 +76,31 @@ public class ChoiceMapUIManager : MonoBehaviour
     {
         UIWhiteBox.SceneName = "Title";
         SceneManager.LoadScene("Loading");
+    }
+
+    private void EscapeEvent(InputAction.CallbackContext context)
+    {
+        ChoiceMapUIState currentUIState = ChoiceMapUIState.DUNGEON;
+        if(UIWhiteBox.ChoiceMapUICurrentState != ChoiceMapUIState.SETTING)
+        {
+            if(UIWhiteBox.ChoiceMapUICurrentState == ChoiceMapUIState.DUNGEON)
+            {
+                currentUIState = ChoiceMapUIState.DUNGEON;
+            }
+            else if(UIWhiteBox.ChoiceMapUICurrentState == ChoiceMapUIState.WORLD)
+            {
+                currentUIState = ChoiceMapUIState.WORLD;
+            }
+            SettingPanel.SetActive(true);
+
+            UIWhiteBox.ChoiceMapUICurrentState = ChoiceMapUIState.SETTING;
+        }
+        else
+        {
+            SettingPanel.GetComponent<Animator>().SetTrigger("Off");
+
+            UIWhiteBox.ChoiceMapUICurrentState = currentUIState;
+        }
     }
 
     /// <summary>

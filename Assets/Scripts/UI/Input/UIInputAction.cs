@@ -152,6 +152,15 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Setting"",
+                    ""type"": ""Button"",
+                    ""id"": ""6be663a6-2772-4240-aab9-d9212d0413e3"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -174,6 +183,17 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Mouse"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""09f23651-0b94-4238-b3a6-415c740cfc94"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Setting"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -241,6 +261,7 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         m_ChoiceMapUI = asset.FindActionMap("ChoiceMapUI", throwIfNotFound: true);
         m_ChoiceMapUI_OpenWorldMap = m_ChoiceMapUI.FindAction("OpenWorldMap", throwIfNotFound: true);
         m_ChoiceMapUI_Mouse = m_ChoiceMapUI.FindAction("Mouse", throwIfNotFound: true);
+        m_ChoiceMapUI_Setting = m_ChoiceMapUI.FindAction("Setting", throwIfNotFound: true);
         // TitleUI
         m_TitleUI = asset.FindActionMap("TitleUI", throwIfNotFound: true);
         m_TitleUI_DeleteData = m_TitleUI.FindAction("DeleteData", throwIfNotFound: true);
@@ -393,12 +414,14 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
     private List<IChoiceMapUIActions> m_ChoiceMapUIActionsCallbackInterfaces = new List<IChoiceMapUIActions>();
     private readonly InputAction m_ChoiceMapUI_OpenWorldMap;
     private readonly InputAction m_ChoiceMapUI_Mouse;
+    private readonly InputAction m_ChoiceMapUI_Setting;
     public struct ChoiceMapUIActions
     {
         private @UIInputAction m_Wrapper;
         public ChoiceMapUIActions(@UIInputAction wrapper) { m_Wrapper = wrapper; }
         public InputAction @OpenWorldMap => m_Wrapper.m_ChoiceMapUI_OpenWorldMap;
         public InputAction @Mouse => m_Wrapper.m_ChoiceMapUI_Mouse;
+        public InputAction @Setting => m_Wrapper.m_ChoiceMapUI_Setting;
         public InputActionMap Get() { return m_Wrapper.m_ChoiceMapUI; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -414,6 +437,9 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
             @Mouse.started += instance.OnMouse;
             @Mouse.performed += instance.OnMouse;
             @Mouse.canceled += instance.OnMouse;
+            @Setting.started += instance.OnSetting;
+            @Setting.performed += instance.OnSetting;
+            @Setting.canceled += instance.OnSetting;
         }
 
         private void UnregisterCallbacks(IChoiceMapUIActions instance)
@@ -424,6 +450,9 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
             @Mouse.started -= instance.OnMouse;
             @Mouse.performed -= instance.OnMouse;
             @Mouse.canceled -= instance.OnMouse;
+            @Setting.started -= instance.OnSetting;
+            @Setting.performed -= instance.OnSetting;
+            @Setting.canceled -= instance.OnSetting;
         }
 
         public void RemoveCallbacks(IChoiceMapUIActions instance)
@@ -507,6 +536,7 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
     {
         void OnOpenWorldMap(InputAction.CallbackContext context);
         void OnMouse(InputAction.CallbackContext context);
+        void OnSetting(InputAction.CallbackContext context);
     }
     public interface ITitleUIActions
     {

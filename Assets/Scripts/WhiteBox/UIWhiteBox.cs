@@ -20,7 +20,8 @@ public enum MainUIState
 public enum ChoiceMapUIState
 {
     DUNGEON,
-    WORLD
+    WORLD,
+    SETTING
 }
 
 public static class UIWhiteBox
