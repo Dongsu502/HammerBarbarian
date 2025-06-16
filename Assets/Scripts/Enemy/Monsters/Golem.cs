@@ -110,16 +110,13 @@ public class Golem : MonoBehaviour, IMonster
     /// </summary>
     public void ResetisHiting()
     {
-        if(!IsBeingHit)
-        {
-            return;
-        }
-
-        //hitBoxClass.hitCollider.enabled = true;
         agent.enabled = true;
 
         animator.SetBool("IsHitting", false);
+    }
 
+    public void ResetIsBeingHit()
+    {
         IsBeingHit = false;
     }
 
@@ -222,14 +219,8 @@ public class Golem : MonoBehaviour, IMonster
 
             healthUIClass.TakeDamageUI(damage);
         }
-
+        
         HitAnimation();
-        //임시코드
-        //if (HP <= 0)
-        //{
-        //    animator.SetTrigger("IsDie");
-        //    Destroy(this.gameObject, 10f);
-        //}
     }
 
     private void HitAnimation()
@@ -255,6 +246,11 @@ public class Golem : MonoBehaviour, IMonster
             animator.SetBool("IsHitting", true);
 
             hitBoxClass.IsKnockback = false;
+        }
+
+        if (hitBoxClass.isBoomHit)
+        {
+            hitBoxClass.isBoomHit = false;
         }
     }
 
@@ -286,18 +282,22 @@ public class Golem : MonoBehaviour, IMonster
     }
     public void Hit()
     {
-        if (IsBeingHit) return; // 중복 방지
-
         //공격 도중 맞으면 공격 중단 후 바로 피격으로 전환
         StopAttack();
 
         IsHit = false;
         IsBeingHit = true;
-        //hitBoxClass.hitCollider.enabled = false;
         agent.enabled = false;
 
-        int hitDamage = PlayerStatWhiteBox.WhiteBox.playerAttackDamage(hitBoxClass.playerAttackType);
-        TakeDamage(hitDamage);
+        if(hitBoxClass.isBoomHit)
+        {
+            TakeDamage(hitBoxClass.bomberDamage);
+        }
+        else
+        {
+            int hitDamage = PlayerStatWhiteBox.WhiteBox.playerAttackDamage(hitBoxClass.playerAttackType);
+            TakeDamage(hitDamage);
+        }
     }
     public void Attack()
     {

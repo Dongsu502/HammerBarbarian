@@ -48,6 +48,14 @@ public class MonsterDetectedUI : MonoBehaviour
     /// <param name="isDetection">감지 여부(true: 감지 / false: 감지 안됨)</param>
     public void DetectionCheck(bool isDetection)
     {
+        if(isDetection)
+        {
+            Debug.LogError("느낌표!");
+        }
+        else
+        {
+            Debug.LogError("물음표?");
+        }
         //이미지 변경
         ChangeImage(isDetection);
         //페이드인아웃
@@ -70,6 +78,7 @@ public class MonsterDetectedUI : MonoBehaviour
         {
             //물음표로 변경
             detectedImage.sprite = detectedSprite[0];
+            detectedImage.color = Color.white;
         }
     }
 
@@ -79,13 +88,22 @@ public class MonsterDetectedUI : MonoBehaviour
     /// <param name="isIn">감지 여부</param>
     private void FadeInOut(bool isDetection)
     {
+        Coroutine fadeOutCoroutine = null;
         if (isDetection)
         {
+            if (fadeOutCoroutine != null)
+            {
+                StopCoroutine(fadeOutCoroutine);
+            }
             //일정 시간 지난 후 페이드아웃
-            StartCoroutine(FadeOut(fadeOutTime));
+            fadeOutCoroutine = StartCoroutine(FadeOut(fadeOutTime));
         }
         else
         {
+            if(fadeOutCoroutine != null)
+            {
+                StopCoroutine(fadeOutCoroutine);
+            }
             //색깔 활성화
             detectedImage.color = Color.white;
         }

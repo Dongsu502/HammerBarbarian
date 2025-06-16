@@ -8,6 +8,8 @@ public class MonsterAttackDetection : MonoBehaviour
     public int monsterAttackPower;
     public GameObject AttackCollider;
 
+    private bool isBoom = false;
+
     private void Start()
     {
         if(monsterName == "Golem")
@@ -50,6 +52,21 @@ public class MonsterAttackDetection : MonoBehaviour
             else if (monsterName == "Mushroom")
             {
                 Destroy(gameObject);
+            }
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (monsterName == "Bomber" && other.transform.CompareTag("EnemyHitBox"))
+        {
+            if (other.GetComponentInParent<IMonster>().Name == "Golem" || other.GetComponentInParent<IMonster>().Name == "Mushroom")
+            {
+                if(!isBoom)
+                {
+                    other.GetComponentInChildren<MonsterHitBox>().BoomHit();
+                    isBoom = true;
+                }
             }
         }
     }

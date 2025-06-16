@@ -78,11 +78,13 @@ public class Mushroom : MonoBehaviour, IMonster
     /// </summary>
     public void ResetisHiting()
     {
-        //hitBoxClass.hitCollider.enabled = true;
         agent.enabled = true;
 
         animator.SetBool("IsHitting", false);
+    }
 
+    public void ResetIsBeingHit()
+    {
         IsBeingHit = false;
     }
 
@@ -199,12 +201,6 @@ public class Mushroom : MonoBehaviour, IMonster
         }
 
         HitAnimation();
-        //임시코드
-        //if (HP <= 0)
-        //{
-        //    animator.SetTrigger("IsDie");
-        //    Destroy(this.gameObject, 10f);
-        //}
     }
 
     private void HitAnimation()
@@ -228,6 +224,11 @@ public class Mushroom : MonoBehaviour, IMonster
             animator.SetBool("IsHitting", true);
 
             hitBoxClass.IsKnockback = false;
+        }
+
+        if (hitBoxClass.isBoomHit)
+        {
+            hitBoxClass.isBoomHit = false;
         }
     }
 
@@ -262,6 +263,7 @@ public class Mushroom : MonoBehaviour, IMonster
         IsAttacking = false;
 
         Debug.Log("버섯 공격 끝");
+        InAttackRange = HasArrived();
     }
 
     private IEnumerator PlayDieAnimation()
@@ -293,30 +295,47 @@ public class Mushroom : MonoBehaviour, IMonster
     }
     public void Hit()
     {
-        if (IsBeingHit) return; // 중복 방지
-
         //공격 도중 맞으면 공격 중단 후 바로 피격으로 전환
         StopAttackAnim();
         IsAttacking = false;
-        StopCoroutine(attackCoroutine);
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
 
         IsHit = false;
         IsBeingHit = true;
-        //hitBoxClass.hitCollider.enabled = false;
         agent.enabled = false;
 
-        int hitDamage = PlayerStatWhiteBox.WhiteBox.playerAttackDamage(hitBoxClass.playerAttackType);
-        TakeDamage(hitDamage);
+        if (hitBoxClass.isBoomHit)
+        {
+            TakeDamage(hitBoxClass.bomberDamage);
+        }
+        else
+        {
+            int hitDamage = PlayerStatWhiteBox.WhiteBox.playerAttackDamage(hitBoxClass.playerAttackType);
+            TakeDamage(hitDamage);
+        }
     }
     public void Attack()
     {
         if (isDummyMode) return;
 
         if (IsAttacking) return;
+
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
         attackCoroutine = StartCoroutine(AttackDelay());
     }
     public void MoveToTarget()
     {
+        if(attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
+
         Debug.Log("버섯 접근중..");
         agent.enabled = true;
 
@@ -336,6 +355,11 @@ public class Mushroom : MonoBehaviour, IMonster
     }
     public void Idle()
     {
+        if (attackCoroutine != null)
+        {
+            StopCoroutine(attackCoroutine);
+        }
+
         agent.enabled = false;
 
         //Idle 애니메이션 플레이

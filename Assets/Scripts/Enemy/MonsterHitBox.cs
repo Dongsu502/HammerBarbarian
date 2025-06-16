@@ -11,6 +11,7 @@ public class MonsterHitBox : MonoBehaviour
 
     [SerializeField] private float LightknockbackForce = 1f;
     [SerializeField] private float HeavyknockbackForce = 10f;
+    public int bomberDamage = 15;
 
     public bool IsKnockback;
 
@@ -21,6 +22,7 @@ public class MonsterHitBox : MonoBehaviour
     public AttackType playerAttackType;
 
     public bool isTriggerHit;
+    public bool isBoomHit;
 
     private void Awake()
     {
@@ -29,6 +31,28 @@ public class MonsterHitBox : MonoBehaviour
         hitCollider = GetComponent<BoxCollider>();
 
         rb = GetComponentInParent<Rigidbody>();
+    }
+
+    public void BoomHit()
+    {
+        //반짝이는 효과
+        var flash = GetComponent<HitFlashEffect>();
+        if (flash != null)
+        {
+            flash.Flash();
+        }
+
+        rb.isKinematic = false;
+
+        //카메라 흔들림 효과
+        PlayerHitWhiteBox.WhiteBox.Shake(monster.Name, AttackType.Heavy);
+        //넉백효과
+        Vector3 knockbackDir = Vector3.up;
+        rb.AddForce(knockbackDir * LightknockbackForce, ForceMode.Impulse);
+        IsKnockback = true;
+
+        monster.IsHit = true;
+        isBoomHit = true;
     }
 
     private void OnTriggerEnter(Collider other)
