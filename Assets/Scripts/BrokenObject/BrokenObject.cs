@@ -74,9 +74,14 @@ public class BrokenObject : MonoBehaviour
 
         // 원본 비활성화는 마지막에
         gameObject.SetActive(false);
-        trigger.BrokenTrigger();
-
+        StartCoroutine(DelayTrigger());
         Destroy(brokenObject, debrisLifetime);
+    }
+
+    private IEnumerator DelayTrigger()
+    {
+        yield return new WaitForSeconds(2.5f);
+        trigger.BrokenTrigger();
     }
 
     private IEnumerator IgnoreWeaponCollisionNextFrame(GameObject brokenObject, Collider weaponCollider)

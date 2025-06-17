@@ -9,16 +9,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.7605598
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.7605598
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.7605598
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.060568
+      value: -93.203
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.2248516
+      value: 14.61
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 62.40698
+      value: 196.72
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
       propertyPath: m_LocalRotation.w
@@ -143,6 +155,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7533600360765262763}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7535568032348733794}
     - targetCorrespondingSourceObject: {fileID: 6781330548785859341, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5678216400410834627}
@@ -483,6 +498,18 @@ LODGroup:
     fadeTransitionWidth: 0
     renderers: []
   m_Enabled: 1
+--- !u!114 &7535568032348733794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2864482152956706768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3448fab260b3d3040ac1d467c145011d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!23 &3108536160580049225 stripped
 MeshRenderer:
   m_CorrespondingSourceObject: {fileID: -9213665902091330616, guid: b6ce4a1c85d081c43898d315ffdeafcd, type: 3}
