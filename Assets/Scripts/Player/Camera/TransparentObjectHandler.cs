@@ -7,6 +7,9 @@ public class TransparentObjectHandler : MonoBehaviour
     private Dictionary<Renderer, Color> originalColors = new();
     private bool isTransparent = false;
 
+    [SerializeField] private Material transparentMaterial;
+    private Dictionary<Renderer, Material> originalMats = new();
+
     private void Awake()
     {
         renderers.AddRange(GetComponentsInChildren<Renderer>());
@@ -25,20 +28,10 @@ public class TransparentObjectHandler : MonoBehaviour
 
         foreach (var r in renderers)
         {
-            if (!r.material.HasProperty("_Color")) continue;
+            if (!originalMats.ContainsKey(r))
+                originalMats[r] = r.sharedMaterial;
 
-            Color c = r.material.color;
-            c.a = alpha;
-            r.material.color = c;
-
-            r.material.SetFloat("_Mode", 2); // Fade
-            r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.SrcAlpha);
-            r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha);
-            r.material.SetInt("_ZWrite", 0);
-            r.material.DisableKeyword("_ALPHATEST_ON");
-            r.material.EnableKeyword("_ALPHABLEND_ON");
-            r.material.DisableKeyword("_ALPHAPREMULTIPLY_ON");
-            r.material.renderQueue = 3000;
+            r.material = transparentMaterial;
         }
     }
 
@@ -49,16 +42,8 @@ public class TransparentObjectHandler : MonoBehaviour
 
         foreach (var r in renderers)
         {
-            if (!originalColors.ContainsKey(r)) continue;
-
-            r.material.color = originalColors[r];
-
-            r.material.SetFloat("_Mode", 0); // Opaque
-            r.material.SetInt("_SrcBlend", (int)UnityEngine.Rendering.BlendMode.One);
-            r.material.SetInt("_DstBlend", (int)UnityEngine.Rendering.BlendMode.Zero);
-            r.material.SetInt("_ZWrite", 1);
-            r.material.DisableKeyword("_ALPHABLEND_ON");
-            r.material.renderQueue = -1;
+            if (originalMats.TryGetValue(r, out var mat))
+                r.material = mat;
         }
     }
 }

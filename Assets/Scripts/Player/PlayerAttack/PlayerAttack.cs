@@ -60,6 +60,9 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private bool bufferedLightAttack = false;
     private bool bufferedHeavyAttack = false;
 
+    [SerializeField] private GameObject idleSnake;
+    [SerializeField] private GameObject attackSnake;
+
     private void Awake()
     {
         status = GetComponent<PlayerStatus>();
@@ -229,6 +232,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 equipItem = true;
                 weaponType = (WeaponType)currentItemType;
+                idleSnake.SetActive(true);
 
                 //아이템 장착 표시
                 UIWhiteBox.SetActiveItemSelectImage(true);
@@ -237,6 +241,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 equipItem = false;
                 weaponType = WeaponType.Hammer;
+                idleSnake.SetActive(false);
 
                 //아이템 장착 표시 해제
                 UIWhiteBox.SetActiveItemSelectImage(false);
@@ -397,6 +402,17 @@ public class PlayerAttack : MonoBehaviour
         }
     }
 
+    public void SnakeAttackObjEnable()
+    {
+        idleSnake.SetActive(false);
+        attackSnake.SetActive(true);
+    }
+
+    public void SnakeAttackObjDisable()
+    {
+        idleSnake.SetActive(true);
+        attackSnake.SetActive(false);
+    }
     public void SetAttackTypeToLight() => attackType = AttackType.Light;
     public void SetAttackTypeToHeavy() => attackType = AttackType.Heavy;
     public void SetAttackTypeToStrong() => attackType = AttackType.Skill;
