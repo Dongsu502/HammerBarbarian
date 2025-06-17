@@ -18,7 +18,9 @@ public class BrokenObject : MonoBehaviour
     public float spawnOffset = 0.1f;
 
     private Transform player;
-    private bool isBroken = false;
+    public bool isBroken = false;
+
+    [SerializeField] private ObjectBrokenTrigger trigger;
 
     private void Start()
     {
@@ -72,6 +74,7 @@ public class BrokenObject : MonoBehaviour
 
         // 원본 비활성화는 마지막에
         gameObject.SetActive(false);
+        trigger.BrokenTrigger();
 
         Destroy(brokenObject, debrisLifetime);
     }
