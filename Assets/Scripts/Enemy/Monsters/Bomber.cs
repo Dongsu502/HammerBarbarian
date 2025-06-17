@@ -163,6 +163,10 @@ public class Bomber : MonoBehaviour, IMonster, IArenaRegistrable
         yield return null;
 
         Debug.Log("폭탄병 공격끝!");
+
+        //리스트 제거
+        arena.RemoveEnemy(gameObject);
+        
         Destroy(attackEffect, 3f);
         Destroy(gameObject);
     }
