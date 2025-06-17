@@ -10,9 +10,6 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
     [SerializeField] private ArenaController arenaController;
 
     private bool isActivated = false;
-    private bool isInteracted = false;
-
-    [SerializeField]private Animator stoneAnimator;
 
     public void Init(TextTriggerController controller, int conditionIndex)
     {
@@ -32,20 +29,11 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
             {
                 controller.NotifyConditionMet(index);
                 UIWhiteBox.SetActiveInterectionPanel(false);
+                UIWhiteBox.GetItem();
                 isActivated = true;
-                isInteracted = true;
             }
         }
     }
-
-    private void Update()
-    {
-        if (isInteracted && UIWhiteBox.GetScriptIsEnd())
-        {
-            StartCoroutine(PlayerDirectorCoroutine());
-        }
-    }
-
 
     private void OnTriggerExit(Collider other)
     {
@@ -55,29 +43,5 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
         }
     }
 
-    [ContextMenu("ÄÆ¾À Àç»ý")]
-    public void Play()
-    {
-        StartCoroutine(PlayerDirectorCoroutine());
-
-    }
-
-    private IEnumerator PlayerDirectorCoroutine()
-    {
-        // ÄÆ¾À ½ÃÀÛ
-        CutsceneWhiteBox.WhiteBox.StartCutscene();
-        CutsceneWhiteBox.WhiteBox.PlayerCutscene();
-
-        // 4ÃÊ ´ë±â
-        yield return new WaitForSeconds(4f);
-
-        // µ¹ »èÁ¦ Æ®¸®°Å
-        stoneAnimator.SetTrigger("StoneDelet");
-
-        // ´Ù½Ã 4ÃÊ ´ë±â
-        yield return new WaitForSeconds(4f);
-
-        // ÄÆ¾À Á¾·á
-        CutsceneWhiteBox.WhiteBox.EndCutscene();
-    }
+  
 }
