@@ -24,6 +24,7 @@ public class ObjectBrokenTrigger : MonoBehaviour, ITextTriggerCondition
         if(isInterated && UIWhiteBox.GetScriptIsEnd())
         {
             Play();
+            isInterated = false;
         }
     }
 
