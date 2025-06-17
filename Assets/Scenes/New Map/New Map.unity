@@ -12474,31 +12474,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4426219173522328912, guid: a976d413225bdab478ac641224cf5000, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 23.725903
+      value: 53.258755
       objectReference: {fileID: 0}
     - target: {fileID: 4426219173522328912, guid: a976d413225bdab478ac641224cf5000, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 36.52546
+      value: 11.89889
       objectReference: {fileID: 0}
     - target: {fileID: 4426219173522328912, guid: a976d413225bdab478ac641224cf5000, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 121.021774
+      value: -10.329647
       objectReference: {fileID: 0}
     - target: {fileID: 4426219173522328912, guid: a976d413225bdab478ac641224cf5000, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.29869828
+      value: 0.96789545
       objectReference: {fileID: 0}
     - target: {fileID: 4426219173522328912, guid: a976d413225bdab478ac641224cf5000, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.047516722
+      value: 0.22375792
       objectReference: {fileID: 0}
     - target: {fileID: 4426219173522328912, guid: a976d413225bdab478ac641224cf5000, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.9413278
+      value: -0.111560464
       objectReference: {fileID: 0}
     - target: {fileID: 4426219173522328912, guid: a976d413225bdab478ac641224cf5000, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.1497451
+      value: 0.025790531
       objectReference: {fileID: 0}
     - target: {fileID: 4426219173522328912, guid: a976d413225bdab478ac641224cf5000, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -12518,7 +12518,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8169786456299238784, guid: a976d413225bdab478ac641224cf5000, type: 3}
       propertyPath: field of view
-      value: 60.000004
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 8169786456299238784, guid: a976d413225bdab478ac641224cf5000, type: 3}
       propertyPath: m_CullingMask.m_Bits
@@ -13378,7 +13378,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9096148321434316099, guid: 38e830b8d39d50c49875b3e9ad846501, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -61808,22 +61808,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1788781589994757859, guid: 493aa18e9b98a1347b2a06cdabfc4857, type: 3}
-      propertyPath: m_XDamping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1788781589994757859, guid: 493aa18e9b98a1347b2a06cdabfc4857, type: 3}
-      propertyPath: m_YDamping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1788781589994757859, guid: 493aa18e9b98a1347b2a06cdabfc4857, type: 3}
-      propertyPath: m_ZDamping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1788781589994757859, guid: 493aa18e9b98a1347b2a06cdabfc4857, type: 3}
-      propertyPath: m_BindingMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2306147405903824148, guid: 493aa18e9b98a1347b2a06cdabfc4857, type: 3}
       propertyPath: m_Follow
       value: 
@@ -61832,10 +61816,6 @@ PrefabInstance:
       propertyPath: m_LookAt
       value: 
       objectReference: {fileID: 1077594614}
-    - target: {fileID: 2306147405903824148, guid: 493aa18e9b98a1347b2a06cdabfc4857, type: 3}
-      propertyPath: m_Priority
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 4083179163315744319, guid: 493aa18e9b98a1347b2a06cdabfc4857, type: 3}
       propertyPath: m_LocalPosition.x
       value: 23.725903
@@ -61879,14 +61859,6 @@ PrefabInstance:
     - target: {fileID: 4504766846905819678, guid: 493aa18e9b98a1347b2a06cdabfc4857, type: 3}
       propertyPath: m_Name
       value: Cutscene Camera
-      objectReference: {fileID: 0}
-    - target: {fileID: 7036438077453447726, guid: 493aa18e9b98a1347b2a06cdabfc4857, type: 3}
-      propertyPath: m_VerticalDamping
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7036438077453447726, guid: 493aa18e9b98a1347b2a06cdabfc4857, type: 3}
-      propertyPath: m_HorizontalDamping
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
