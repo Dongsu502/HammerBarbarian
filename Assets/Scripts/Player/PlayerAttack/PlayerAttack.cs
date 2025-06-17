@@ -2,6 +2,8 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Game;
 using System.Linq;
+using UnityEngine.Rendering;
+using System.Collections;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -45,6 +47,9 @@ public class PlayerAttack : MonoBehaviour
     public WeaponType weaponType = WeaponType.Hammer;
     public bool equipItem = false;
     private bool isAiming = false;
+    private bool coolDown = false;
+    [SerializeField] private float hammerThrowCooldownTime = 5f;
+    private float hammerThrowCooldownTimer = 0f;
 
     [Header("Dizzy")]
     private bool isDizzy = false;
@@ -83,6 +88,11 @@ public class PlayerAttack : MonoBehaviour
 
         if (animChecker.IsWhirlwindAnim())
             HandleWindmillState();
+
+        if (hammerThrowCooldownTimer > 0f)
+        {
+            hammerThrowCooldownTimer -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -132,7 +142,14 @@ public class PlayerAttack : MonoBehaviour
 
         if (equipItem && isAiming)
         {
+            if (hammerThrowCooldownTimer > 0f)
+            {
+                Debug.Log("쿨타임 중입니다!");
+                return;
+            }
+
             attackable.AttackByType(weaponType);
+            hammerThrowCooldownTimer = hammerThrowCooldownTime;
             return;
         }
 

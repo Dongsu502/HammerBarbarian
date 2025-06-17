@@ -8,6 +8,7 @@ public class RopeWeaponCollisionHandler : MonoBehaviour
     private RopePullController ropePullController;
 
     [SerializeField] private Transform hitOrigin;
+    [SerializeField] private PlayerAttackTrigger attackTrigger;
 
     private bool isStuckToWall = false;
 
@@ -16,6 +17,7 @@ public class RopeWeaponCollisionHandler : MonoBehaviour
     private void Awake()
     {
         ropePullController = FindAnyObjectByType<RopePullController>().GetComponent<RopePullController>();
+        attackTrigger = FindAnyObjectByType<PlayerAttackTrigger>().GetComponent<PlayerAttackTrigger>();
         hammerRb = GetComponent<Rigidbody>();
     }
 
@@ -70,8 +72,12 @@ public class RopeWeaponCollisionHandler : MonoBehaviour
             return;
         }
 
-        if (other.CompareTag("EnemyHitBox"))
+        MonsterHitBox monsterHitBox = other.GetComponent<MonsterHitBox>();
+
+        if (other.CompareTag("EnemyHitBox") && !attackTrigger.monsterHitBoxes.Contains(monsterHitBox))
         {
+            attackTrigger.monsterHitBoxes.Add(monsterHitBox);
+
             Vector3 hitPoint = other.ClosestPoint(hitOrigin.position);
             Vector3 hitNormal = (other.transform.position - hitOrigin.position).normalized;
 
