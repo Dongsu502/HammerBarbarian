@@ -1203,6 +1203,26 @@ PrefabInstance:
       propertyPath: masterVolumeController
       value: 
       objectReference: {fileID: 1205162412}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: monsterSfxClipsList.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: monsterSfxClipsList.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 63c512ed4af01734e97ac4f9e2bd589b, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: monsterSfxClipsList.Array.data[13].name
+      value: Bomber_Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: monsterSfxClipsList.Array.data[14].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1fbba75d98610134caa84f5d457e2d69, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: monsterSfxClipsList.Array.data[14].name
+      value: Bomber_Die
+      objectReference: {fileID: 0}
     - target: {fileID: 6599211942671354876, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
       propertyPath: m_Name
       value: SoundManager

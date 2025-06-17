@@ -157,6 +157,8 @@ public class Bomber : MonoBehaviour, IMonster, IArenaRegistrable
 
         //폭발 이펙트
         GameObject attackEffect = Instantiate(attackEffectPrefab, transform.position, attackEffectPrefab.transform.rotation);
+        //폭발 사운드
+        SoundManager.instance.PlayMonsterSFX("Bomber_Attack");
         //공격범위 콜라이더 잠시 활성화 -> 트리거된다면 공격 성공
         attackCollider.SetActive(true);
 
@@ -190,7 +192,10 @@ public class Bomber : MonoBehaviour, IMonster, IArenaRegistrable
 
         yield return null;
 
+        //폭발 이펙트
         dieEffectObj = Instantiate(dieEffectPrefab, BigHitEffectPos.position, BigHitEffectPos.rotation);
+        //폭발 사운드
+        SoundManager.instance.PlayMonsterSFX("Bomber_Die");
 
         yield return null;
 
