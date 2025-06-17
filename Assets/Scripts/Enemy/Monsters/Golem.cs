@@ -156,9 +156,6 @@ public class Golem : MonoBehaviour, IMonster, IArenaRegistrable
     /// </summary>
     public void RBDestory()
     {
-        //중력 제거
-        rb.isKinematic = true;
-
         //내비 제거
         agent.enabled = false;
 

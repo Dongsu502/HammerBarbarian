@@ -613,6 +613,9 @@ public class MainUIManager : MonoBehaviour
         {
             itemChoice_Buttons[i].gameObject.SetActive(i < itemCount);
         }
+
+        //얻은 아이템 이미지로 착용
+        itemImage.sprite = item_ImageResources[itemCount];
         Debug.Log($"활성화된 아이템 수: {itemCount}");
     } 
 

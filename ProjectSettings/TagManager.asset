@@ -16,6 +16,7 @@ TagManager:
   - MinimapTrigger
   - Player_BlockHitBox
   - EnemyHitBox_Bomber
+  - GroundNV
   layers:
   - Default
   - TransparentFX

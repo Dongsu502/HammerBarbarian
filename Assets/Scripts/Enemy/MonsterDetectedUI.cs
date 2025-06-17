@@ -48,14 +48,6 @@ public class MonsterDetectedUI : MonoBehaviour
     /// <param name="isDetection">감지 여부(true: 감지 / false: 감지 안됨)</param>
     public void DetectionCheck(bool isDetection)
     {
-        if(isDetection)
-        {
-            Debug.LogError("느낌표!");
-        }
-        else
-        {
-            Debug.LogError("물음표?");
-        }
         //이미지 변경
         ChangeImage(isDetection);
         //페이드인아웃
