@@ -87,6 +87,7 @@ public class PauseUIManager : MonoBehaviour
     public void Click_GoTitleButton()
     {
         SoundManager.instance.PlayUI("UI_Botton05");
+        SoundManager.instance.StopBGM();
 
         var currentData = DataManager.Instance.GetCurrentData();
         string currentDataName = DataManager.Instance.currentDataFileName;

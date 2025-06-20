@@ -311,7 +311,7 @@ public class MainUIManager : MonoBehaviour
                 {
                     isBigMapSize = true;
 
-                    mapPlayerMarker.GetComponent<SpriteRenderer>().color = new Color(1f, 1f, 1f, 1f);
+                    mapPlayerMarker.GetComponent<SpriteRenderer>().color = Color.red;
                     MapPanel_SetActive(true);
 
                     WorldWhiteBox.WhiteBox.PauseGame();
