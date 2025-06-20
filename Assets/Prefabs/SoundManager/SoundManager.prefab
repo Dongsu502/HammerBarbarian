@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 6599211942671354876}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 59.536835, y: 15.065475, z: 72.979996}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -52,10 +52,6 @@ MonoBehaviour:
   monsterSfxSource: {fileID: 700347637730835309}
   uiSource: {fileID: 4202584754351764820}
   audioMixer: {fileID: 24100000, guid: 5c1c34b769422a84982fcb62315d4405, type: 2}
-  masterVolumeController: {fileID: 0}
-  bgmVolumeController: {fileID: 0}
-  sfxVolumeController: {fileID: 0}
-  uiVolumeController: {fileID: 0}
   bgmClipsList:
   - name: Title01
     clip: {fileID: 8300000, guid: afec768d7b86cdd468f83eb7f0c93a79, type: 3}

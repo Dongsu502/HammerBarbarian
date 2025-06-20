@@ -290,19 +290,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 453337179}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: UIControl
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &34817663
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,6 +1176,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: uiSource
+      value: 
+      objectReference: {fileID: 1028287476}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
       propertyPath: uiVolumeController
       value: 
       objectReference: {fileID: 33613830}
@@ -1413,19 +1405,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 453337179}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: BGMControl
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &345685461
 GameObject:
   m_ObjectHideFlags: 0
@@ -1752,17 +1732,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   question: {fileID: 1194538841}
---- !u!114 &453337179 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
-  m_PrefabInstance: {fileID: 329959035}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e46609f672f68145a9956eaf7276828, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &486290203
 GameObject:
   m_ObjectHideFlags: 0
@@ -3272,6 +3241,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1012493648}
   m_CullTransparentMesh: 1
+--- !u!82 &1028287476 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 4202584754351764820, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+  m_PrefabInstance: {fileID: 329959035}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1033593751
 GameObject:
   m_ObjectHideFlags: 0
@@ -4205,19 +4179,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 453337179}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: MasterControl
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1233727825
 GameObject:
   m_ObjectHideFlags: 0
@@ -5631,19 +5593,7 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 453337179}
-        m_TargetAssemblyTypeName: SoundManager, Assembly-CSharp
-        m_MethodName: SFXControl
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &1627524646
 GameObject:
   m_ObjectHideFlags: 0

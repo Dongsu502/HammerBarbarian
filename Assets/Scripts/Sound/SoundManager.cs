@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement; // 씬 관련 이벤트를 사용하기 위해 추가
 using UnityEngine.Audio;
 using UnityEngine.UI;
 
@@ -24,10 +23,7 @@ public class SoundManager : MonoBehaviour
 
     // 오디오 믹서, 오디오의 타입별로 사운드를 조절
     [SerializeField] private AudioMixer audioMixer;
-    [SerializeField] private Slider masterVolumeController;
-    [SerializeField] private Slider bgmVolumeController;
-    [SerializeField] private Slider sfxVolumeController;
-    [SerializeField] private Slider uiVolumeController;
+
 
     private float masterVolume = 1f;
     private float bgmVolume = 1f;
@@ -63,75 +59,74 @@ public class SoundManager : MonoBehaviour
             Destroy(gameObject); // 이미 인스턴스가 존재하면 파괴
         }
     }
-
-    private void Start()
+    private void InitializeAudioClips()
     {
-        // OptionManager의 OnSettingsLoaded 이벤트를 구독
-        OptionManager.OnSettingsLoaded += ApplySavedSettings;
+        foreach (var bgm in bgmClipsList)
+        {
+            if (!bgmClips.ContainsKey(bgm.name))
+            {
+                bgmClips.Add(bgm.name, bgm.clip); // 배경음 이름과 클립을 저장
+            }
+        }
 
-        SceneManager.sceneLoaded += OnSceneLoaded;  // 씬 전환 시 호출될 메서드 등록
+        foreach (var sfx in playerSfxClipsList)
+        {
+            if (!playerSfxClips.ContainsKey(sfx.name))
+            {
+                playerSfxClips.Add(sfx.name, sfx.clip); // 플레이어 효과음 이름과 클립을 저장
+            }
+        }
+
+        foreach (var sfx in monsterSfxClipsList)
+        {
+            if (!monsterSfxClips.ContainsKey(sfx.name))
+            {
+                monsterSfxClips.Add(sfx.name, sfx.clip); // 몬스터 효과음 이름과 클립을 저장
+            }
+        }
+
+        foreach (var ui in uiClipsList)
+        {
+            if (!uiClips.ContainsKey(ui.name))
+            {
+                uiClips.Add(ui.name, ui.clip); // UI음 이름과 클립을 저장
+            }
+        }
+    }
+
+    private void OnEnable()
+    {
+        if (OptionManager.instance != null)
+            OptionManager.instance.OnVolumeChanged += ApplyVolumes;
     }
 
     private void OnDisable()
     {
-        OptionManager.OnSettingsLoaded -= ApplySavedSettings;
-        SceneManager.sceneLoaded -= OnSceneLoaded;  // 씬 전환 이벤트 해제
+        if (OptionManager.instance != null)
+            OptionManager.instance.OnVolumeChanged -= ApplyVolumes;
     }
 
-    public void ApplySavedSettings()
+    private void Start()
     {
-        // 옵션 매니저의 저장된 값 불러오기
-        if (OptionManager.instance != null)
-        {
-            if (masterVolumeController != null)
-            {
-                MasterVolume = OptionManager.instance.GetMasterVolume(); // 값을 Set 하면서 오디오 믹서에 반영
-                BGMVolume = OptionManager.instance.GetBGMVolume(); // 값을 Set 하면서 오디오 믹서에 반영
-                SFXVolume = OptionManager.instance.GetSFXVolume(); // 값을 Set 하면서 오디오 믹서에 반영
-                UIVolume = OptionManager.instance.GetUIVolume(); // 값을 Set 하면서 오디오 믹서에 반영
-            }
-            else
-            {
-                Debug.LogWarning("마스터 볼륨 컨트롤러가 어싸인 안됐음!");
-            }
+        // 씬 시작시 현재 옵션값으로 볼륨 적용
+        ApplyVolumes();
+    }
 
-            if (bgmVolumeController != null)
-            {
-                bgmVolumeController.value = OptionManager.instance.GetBGMVolume();
-            }
-            else
-            {
-                Debug.LogWarning("비지엠 볼륨 컨트롤러가 어싸인 안됐음!");
-            }
+    public void ApplyVolumes()
+    {
+        if (OptionManager.instance == null) return;
 
-            if (sfxVolumeController != null)
-            {
-                sfxVolumeController.value = OptionManager.instance.GetSFXVolume();
-            }
-            else
-            {
-                Debug.LogWarning("sfx 볼륨 컨트롤러가 어싸인 안됐음!");
-            }
+        // 볼륨 값이 0일 경우 -80dB(=음소거), 그 외엔 Log 변환
+        SetVolume("Master", OptionManager.instance.MasterVolume);
+        SetVolume("BGM", OptionManager.instance.BGMVolume);
+        SetVolume("SFX", OptionManager.instance.SFXVolume);
+        SetVolume("UI", OptionManager.instance.UIVolume);
+    }
 
-            if (uiVolumeController != null)
-            {
-                uiVolumeController.value = OptionManager.instance.GetUIVolume();
-            }
-            else
-            {
-                Debug.LogWarning("ui 볼륨 컨트롤러가 어싸인 안됐음!");
-            }
-
-            //// 저장된 값이 있으면 해당 값으로 오디오 믹서에 적용
-            //MasterControl();
-            //BGMControl();
-            //SFXControl();
-            //UIControl();
-        }
-        else
-        {
-            Debug.LogWarning("옵션매니저가 없어요!!");
-        }
+    private void SetVolume(string parameterName, float value)
+    {
+        float dB = (value <= 0.0001f) ? -80f : Mathf.Log10(value) * 20f;
+        audioMixer.SetFloat(parameterName, dB);
     }
 
     // Master Volume 프로퍼티
@@ -177,106 +172,6 @@ public class SoundManager : MonoBehaviour
             audioMixer.SetFloat("UI", Mathf.Log10(uiVolume) * 20f);  // 오디오 믹서 반영
         }
     }
-
-    //public void MasterControl()
-    //{
-    //    float sound = masterVolumeController.value;
-
-    //    if (sound <= 0.0001f)
-    //    {
-    //        audioMixer.SetFloat("Master", -80);
-    //    }
-    //    else
-    //    {
-    //        float dB = Mathf.Log10(sound) * 20f;
-    //        audioMixer.SetFloat("Master", dB);
-    //    }
-    //}
-
-    //public void BGMControl()
-    //{
-    //    float sound = bgmVolumeController.value;
-
-    //    if (sound <= 0.0001f)
-    //    {
-    //        audioMixer.SetFloat("BGM", -80);
-    //    }
-    //    else
-    //    {
-    //        float dB = Mathf.Log10(sound) * 20f;
-    //        audioMixer.SetFloat("BGM", dB);
-    //    }
-    //}
-    //public void SFXControl()
-    //{
-    //    float sound = sfxVolumeController.value;
-
-    //    if (sound <= 0.0001f)
-    //    {
-    //        audioMixer.SetFloat("SFX", -80);
-    //    }
-    //    else
-    //    {
-    //        float dB = Mathf.Log10(sound) * 20f;
-    //        audioMixer.SetFloat("SFX", dB);
-    //    }
-    //}
-    //public void UIControl()
-    //{
-    //    float sound = uiVolumeController.value;
-
-    //    if (sound <= 0.0001f)
-    //    {
-    //        audioMixer.SetFloat("UI", -80);
-    //    }
-    //    else
-    //    {
-    //        float dB = Mathf.Log10(sound) * 20f;
-    //        audioMixer.SetFloat("UI", dB);
-    //    }
-    //}
-
-    // AudioClip 리스트를 Dictionary로 변환하여 이름으로 접근 가능하게 만듬
-    private void InitializeAudioClips()
-    {
-        foreach (var bgm in bgmClipsList)
-        {
-            if (!bgmClips.ContainsKey(bgm.name))
-            {
-                bgmClips.Add(bgm.name, bgm.clip); // 배경음 이름과 클립을 저장
-            }
-        }
-
-        foreach (var sfx in playerSfxClipsList)
-        {
-            if (!playerSfxClips.ContainsKey(sfx.name))
-            {
-                playerSfxClips.Add(sfx.name, sfx.clip); // 플레이어 효과음 이름과 클립을 저장
-            }
-        }
-
-        foreach (var sfx in monsterSfxClipsList)
-        {
-            if (!monsterSfxClips.ContainsKey(sfx.name))
-            {
-                monsterSfxClips.Add(sfx.name, sfx.clip); // 몬스터 효과음 이름과 클립을 저장
-            }
-        }
-
-        foreach (var ui in uiClipsList)
-        {
-            if (!uiClips.ContainsKey(ui.name))
-            {
-                uiClips.Add(ui.name, ui.clip); // UI음 이름과 클립을 저장
-            }
-        }
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        ApplySavedSettings(); // 씬이 로드될 때 자동으로 설정값을 불러오고 적용
-    }
-
 
     // 배경음 재생 함수(이름으로 재생)
     public void PlayBGM(string name, float fadeDuration = 1f)
@@ -405,5 +300,4 @@ public class SoundManager : MonoBehaviour
 
         bgmSource.volume = targetVolume;
     }
-
 }
