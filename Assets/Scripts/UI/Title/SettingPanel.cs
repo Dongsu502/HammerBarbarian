@@ -12,25 +12,50 @@ public class SettingPanel : MonoBehaviour
 
     private void OnEnable()
     {
-        if (SoundManager.instance != null)
+        // 옵션매니저의 현재 값으로 슬라이더 초기화
+        if (OptionManager.instance != null)
         {
-            SoundManager.instance.PlayUI("UI_OptionDrag_Open");
-
-            // 슬라이더 값을 SoundManager의 저장된 값으로 초기화
-            sliderMaster.value = SoundManager.instance.MasterVolume; // SoundManager에서 MasterVolume 가져오기
-            sliderBGM.value = SoundManager.instance.BGMVolume; // SoundManager에서 BGMVolume 가져오기
-            sliderSFX.value = SoundManager.instance.SFXVolume; // SoundManager에서 SFXVolume 가져오기
-            sliderUI.value = SoundManager.instance.UIVolume; // SoundManager에서 UIVolume 가져오기
+            sliderMaster.value = OptionManager.instance.MasterVolume;
+            sliderBGM.value = OptionManager.instance.BGMVolume;
+            sliderSFX.value = OptionManager.instance.SFXVolume;
+            sliderUI.value = OptionManager.instance.UIVolume;
         }
+
+        // 이벤트 리스너 등록 (슬라이더 값이 바뀔 때 옵션매니저에 반영)
+        sliderMaster.onValueChanged.AddListener(OnMasterChanged);
+        sliderBGM.onValueChanged.AddListener(OnBGMChanged);
+        sliderSFX.onValueChanged.AddListener(OnSFXChanged);
+        sliderUI.onValueChanged.AddListener(OnUIChanged);
     }
 
-    private void Start()
+    private void OnDisable()
     {
-        // 슬라이더 값 변경 시 SoundManager에 반영
-        sliderMaster.onValueChanged.AddListener((value) => SoundManager.instance.MasterVolume = value);
-        sliderBGM.onValueChanged.AddListener((value) => SoundManager.instance.BGMVolume = value);
-        sliderSFX.onValueChanged.AddListener((value) => SoundManager.instance.SFXVolume = value);
-        sliderUI.onValueChanged.AddListener((value) => SoundManager.instance.UIVolume = value);
+        // 리스너 해제 (메모리 누수 방지)
+        sliderMaster.onValueChanged.RemoveListener(OnMasterChanged);
+        sliderBGM.onValueChanged.RemoveListener(OnBGMChanged);
+        sliderSFX.onValueChanged.RemoveListener(OnSFXChanged);
+        sliderUI.onValueChanged.RemoveListener(OnUIChanged);
+    }
+
+    private void OnMasterChanged(float value)
+    {
+        if (OptionManager.instance != null)
+            OptionManager.instance.MasterVolume = value;
+    }
+    private void OnBGMChanged(float value)
+    {
+        if (OptionManager.instance != null)
+            OptionManager.instance.BGMVolume = value;
+    }
+    private void OnSFXChanged(float value)
+    {
+        if (OptionManager.instance != null)
+            OptionManager.instance.SFXVolume = value;
+    }
+    private void OnUIChanged(float value)
+    {
+        if (OptionManager.instance != null)
+            OptionManager.instance.UIVolume = value;
     }
 
     #region EventKey

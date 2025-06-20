@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 6185942896986537319}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -687.9291, y: -464.10944, z: 1061.9698}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -44,7 +44,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5726da6f2169932429314a903226b904, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterSlider: {fileID: 0}
-  bgmSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  uiSlider: {fileID: 0}
