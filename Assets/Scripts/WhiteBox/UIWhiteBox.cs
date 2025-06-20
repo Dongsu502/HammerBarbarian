@@ -40,6 +40,7 @@ public static class UIWhiteBox
     public static RuneInventoryUI RuneInventoryWB { get; private set; }
     public static RuneChoiceUI RuneChoiceWB { get; private set; }
     public static ScriptUIManager ScriptUIWB { get; private set; }
+    public static TutorialUIManager TutorialUIManager { get; private set; }
 
     #region SetWhiteBox
 
@@ -70,6 +71,10 @@ public static class UIWhiteBox
     public static void SetScriptUIWB(ScriptUIManager scriptUIWB)
     {
         ScriptUIWB = scriptUIWB;
+    }
+    public static void SetTutorialUIWB(TutorialUIManager tutorialUIWB)
+    {
+        TutorialUIManager = tutorialUIWB;
     }
 
     #endregion
@@ -314,6 +319,15 @@ public static class UIWhiteBox
     public static bool GetScriptIsEnd()
     {
         return ScriptUIWB.GetisEnd();
+    }
+
+    #endregion
+
+    #region TutorialUI
+
+    public static void SetActive_KeyDescriptionPanel(bool isActive)
+    {
+        TutorialUIManager.SetActiveKeyPanel(isActive);
     }
 
     #endregion
