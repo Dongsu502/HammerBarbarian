@@ -41,6 +41,7 @@ public static class UIWhiteBox
     public static RuneChoiceUI RuneChoiceWB { get; private set; }
     public static ScriptUIManager ScriptUIWB { get; private set; }
     public static TutorialUIManager TutorialUIManager { get; private set; }
+    public static ItemGauge ItemGauge { get; private set; }
 
     #region SetWhiteBox
 
@@ -75,6 +76,10 @@ public static class UIWhiteBox
     public static void SetTutorialUIWB(TutorialUIManager tutorialUIWB)
     {
         TutorialUIManager = tutorialUIWB;
+    }
+    public static void SetItemGaugeUIWB(ItemGauge itemGaugeUIWB)
+    {
+        ItemGauge = itemGaugeUIWB;
     }
 
     #endregion
@@ -331,4 +336,13 @@ public static class UIWhiteBox
     }
 
     #endregion
+
+    #region ItemGaugeUI
+
+    public static void UseItemGauge()
+    {
+        ItemGauge.UseItem();
+    }
+
+    #endregion 
 }

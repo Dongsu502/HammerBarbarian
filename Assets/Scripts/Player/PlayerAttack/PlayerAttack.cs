@@ -150,6 +150,7 @@ public class PlayerAttack : MonoBehaviour
 
             attackable.AttackByType(weaponType);
             hammerThrowCooldownTimer = hammerThrowCooldownTime;
+            UIWhiteBox.UseItemGauge();
             return;
         }
 
