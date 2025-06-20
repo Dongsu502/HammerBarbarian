@@ -24,12 +24,6 @@ public class SoundManager : MonoBehaviour
     // 오디오 믹서, 오디오의 타입별로 사운드를 조절
     [SerializeField] private AudioMixer audioMixer;
 
-
-    private float masterVolume = 1f;
-    private float bgmVolume = 1f;
-    private float sfxVolume = 1f;
-    private float uiVolume = 1f;
-
     // class나 struct 위에 선언하여 사용하면 인스펙터 창에 직렬화로 표시됨
     [Serializable]
     public struct NameAudioClip
@@ -96,15 +90,33 @@ public class SoundManager : MonoBehaviour
 
     private void OnEnable()
     {
+        // 옵션매니저가 이미 존재하면 바로 구독
         if (OptionManager.instance != null)
+        {
             OptionManager.instance.OnVolumeChanged += ApplyVolumes;
+            // 최초 볼륨도 한 번 세팅
+            ApplyVolumes();
+        }
+        // 옵션매니저가 나중에 생성된다면, 옵션매니저의 OnInitialized 이벤트를 구독
+        OptionManager.OnInitialized += OnOptionManagerInitialized;
     }
 
     private void OnDisable()
     {
+        // 구독 해제
         if (OptionManager.instance != null)
             OptionManager.instance.OnVolumeChanged -= ApplyVolumes;
+
+        OptionManager.OnInitialized -= OnOptionManagerInitialized;
     }
+
+    private void OnOptionManagerInitialized()
+    {
+        // 이제 OptionManager.instance가 null이 아님이 보장됨!
+        OptionManager.instance.OnVolumeChanged += ApplyVolumes;
+        ApplyVolumes();
+    }
+
 
     private void Start()
     {
@@ -114,6 +126,7 @@ public class SoundManager : MonoBehaviour
 
     public void ApplyVolumes()
     {
+        Debug.Log("OptionTest MasterVolume Setter! 이벤트 호출");
         if (OptionManager.instance == null) return;
 
         // 볼륨 값이 0일 경우 -80dB(=음소거), 그 외엔 Log 변환
@@ -125,53 +138,32 @@ public class SoundManager : MonoBehaviour
 
     private void SetVolume(string parameterName, float value)
     {
-        float dB = (value <= 0.0001f) ? -80f : Mathf.Log10(value) * 20f;
+        Debug.Log($"SetVolume 호출: {parameterName}, value: {value}");
+        if (audioMixer == null)
+        {
+            Debug.LogError("audioMixer가 할당되지 않았음!");
+            return;
+        }
+
+        float dB;
+
+        if (value <= 0.0001f)
+        {
+            // 볼륨이 매우 작으면 완전 음소거(-80dB)
+            dB = -80f;
+        }
+        else
+        {
+            // 일반 볼륨일 때는 0~1값을 dB로 변환
+            dB = Mathf.Log10(value) * 20f;
+        }
+
+        Debug.Log($"Mixer SetFloat: {parameterName}, dB: {dB}");
+
         audioMixer.SetFloat(parameterName, dB);
     }
 
-    // Master Volume 프로퍼티
-    public float MasterVolume
-    {
-        get { return masterVolume; }
-        set
-        {
-            masterVolume = Mathf.Clamp01(value);  // 값이 0~1 사이로 유지되도록 함
-            audioMixer.SetFloat("Master", Mathf.Log10(masterVolume) * 20f);  // 오디오 믹서 반영
-        }
-    }
 
-    // BGM Volume 프로퍼티
-    public float BGMVolume
-    {
-        get { return bgmVolume; }
-        set
-        {
-            bgmVolume = Mathf.Clamp01(value);  // 값이 0~1 사이로 유지되도록 함
-            audioMixer.SetFloat("BGM", Mathf.Log10(bgmVolume) * 20f);  // 오디오 믹서 반영
-        }
-    }
-
-    // SFX Volume 프로퍼티
-    public float SFXVolume
-    {
-        get { return sfxVolume; }
-        set
-        {
-            sfxVolume = Mathf.Clamp01(value);  // 값이 0~1 사이로 유지되도록 함
-            audioMixer.SetFloat("SFX", Mathf.Log10(sfxVolume) * 20f);  // 오디오 믹서 반영
-        }
-    }
-
-    // UI Volume 프로퍼티
-    public float UIVolume
-    {
-        get { return uiVolume; }
-        set
-        {
-            uiVolume = Mathf.Clamp01(value);  // 값이 0~1 사이로 유지되도록 함
-            audioMixer.SetFloat("UI", Mathf.Log10(uiVolume) * 20f);  // 오디오 믹서 반영
-        }
-    }
 
     // 배경음 재생 함수(이름으로 재생)
     public void PlayBGM(string name, float fadeDuration = 1f)

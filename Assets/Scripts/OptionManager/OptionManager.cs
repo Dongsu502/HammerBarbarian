@@ -23,6 +23,9 @@ public class OptionManager : MonoBehaviour
     // 볼륨 변경 시 알림 이벤트
     public event Action OnVolumeChanged;
 
+    public static event Action OnInitialized; // 초기화 완료 이벤트
+
+
     void Awake()
     {
         // 싱글톤 구현: 이미 인스턴스가 존재하면 파괴, 없으면 설정
@@ -40,6 +43,7 @@ public class OptionManager : MonoBehaviour
     private void OnEnable()
     {
         LoadSettings();
+        OnInitialized?.Invoke();  // 옵션매니저가 완전히 준비된 후 이벤트 발행
     }
 
     void OnApplicationQuit()
@@ -78,6 +82,7 @@ public class OptionManager : MonoBehaviour
             if (!Mathf.Approximately(currentSettings.masterVolume, value))
             {
                 currentSettings.masterVolume = value;
+                Debug.Log("OptionTest MasterVolume Setter! 이벤트 호출");
                 OnVolumeChanged?.Invoke();
             }
         }
@@ -90,6 +95,7 @@ public class OptionManager : MonoBehaviour
             if (!Mathf.Approximately(currentSettings.bgmVolume, value))
             {
                 currentSettings.bgmVolume = value;
+                Debug.Log("OptionTest BGMVolume Setter! 이벤트 호출");
                 OnVolumeChanged?.Invoke();
             }
         }
@@ -102,6 +108,7 @@ public class OptionManager : MonoBehaviour
             if (!Mathf.Approximately(currentSettings.sfxVolume, value))
             {
                 currentSettings.sfxVolume = value;
+                Debug.Log("OptionTest SFXVolume Setter! 이벤트 호출");
                 OnVolumeChanged?.Invoke();
             }
         }
@@ -114,6 +121,7 @@ public class OptionManager : MonoBehaviour
             if (!Mathf.Approximately(currentSettings.uiVolume, value))
             {
                 currentSettings.uiVolume = value;
+                Debug.Log("OptionTest UIVolume Setter! 이벤트 호출");
                 OnVolumeChanged?.Invoke();
             }
         }
