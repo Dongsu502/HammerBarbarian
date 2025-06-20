@@ -30,6 +30,7 @@ public class ObjectBrokenTrigger : MonoBehaviour, ITextTriggerCondition
 
     public void BrokenTrigger()
     {
+        Debug.LogWarning("ºÎ¼­Áü!!");
         controller.NotifyConditionMet(index);
         isInterated = true;
     }

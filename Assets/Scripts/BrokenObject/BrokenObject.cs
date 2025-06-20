@@ -22,6 +22,8 @@ public class BrokenObject : MonoBehaviour
 
     [SerializeField] private ObjectBrokenTrigger trigger;
 
+    private Renderer renderer;
+
     private void Start()
     {
         GameObject playerObj = GameObject.FindWithTag("Player");
@@ -29,6 +31,9 @@ public class BrokenObject : MonoBehaviour
             player = playerObj.transform;
         else
             Debug.LogWarning("BreakableObject: 'Player' 태그를 가진 오브젝트를 찾을 수 없습니다.");
+
+        renderer= GetComponent<Renderer>();
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -73,7 +78,7 @@ public class BrokenObject : MonoBehaviour
         }
 
         // 원본 비활성화는 마지막에
-        gameObject.SetActive(false);
+        renderer.enabled = false;
         StartCoroutine(DelayTrigger());
         Destroy(brokenObject, debrisLifetime);
     }
@@ -82,6 +87,7 @@ public class BrokenObject : MonoBehaviour
     {
         yield return new WaitForSeconds(2.5f);
         trigger.BrokenTrigger();
+        gameObject.SetActive(false);
     }
 
     private IEnumerator IgnoreWeaponCollisionNextFrame(GameObject brokenObject, Collider weaponCollider)

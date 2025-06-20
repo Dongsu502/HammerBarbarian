@@ -59,4 +59,16 @@ public class ArenaController : MonoBehaviour
     }
 
     public bool HasEnemyEverSpawned => hasRegisteredEnemy;
+
+    [ContextMenu("모든 적 삭제")]
+    public void TestRemoveAllEnemies()
+    {
+        foreach (var enemy in enemies)
+        {
+            Destroy(enemy);
+        }
+        enemies.Clear();
+        
+        DeActiveWall();
+    }
 }
