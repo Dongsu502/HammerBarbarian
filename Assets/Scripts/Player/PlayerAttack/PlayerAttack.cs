@@ -49,7 +49,7 @@ public class PlayerAttack : MonoBehaviour
     private bool isAiming = false;
     private bool coolDown = false;
     [SerializeField] private float hammerThrowCooldownTime = 5f;
-    private float hammerThrowCooldownTimer = 0f;
+    public float hammerThrowCooldownTimer = 0f;
 
     [Header("Dizzy")]
     private bool isDizzy = false;

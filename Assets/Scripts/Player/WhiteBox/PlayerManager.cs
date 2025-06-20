@@ -17,14 +17,17 @@ public static class PlayerStatWhiteBox
 public class PlayerManager : MonoBehaviour
 {
     PlayerStatus playerStatus;
+    PlayerAttack playerAttack;
     [SerializeField] private CinemachineFreeLook freeLookCamera;
 
     public int playerAttackDamage(AttackType type) => playerStatus.PlayerDamagebyAttackType(type);
+    public float playerHammerTimer() => playerAttack.hammerThrowCooldownTimer;
     public CinemachineFreeLook FreeLookCamera => freeLookCamera;
 
     private void Awake()
     {
         PlayerStatWhiteBox.SetWhiteBox(this);
         playerStatus = GetComponent<PlayerStatus>();
+        playerAttack =GetComponent<PlayerAttack>();
     }
 }
