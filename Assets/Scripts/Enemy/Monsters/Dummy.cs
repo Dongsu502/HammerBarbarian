@@ -14,11 +14,13 @@ public class Dummy : MonoBehaviour, IMonster
 
     private MonsterHitBox hitBoxClass;
     private Animator animator;
+    private Rigidbody rb;
 
     private void Awake()
     {
         hitBoxClass = GetComponentInChildren<MonsterHitBox>();
         animator = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
     }
 
     public void ResetBeingHit()
@@ -31,29 +33,27 @@ public class Dummy : MonoBehaviour, IMonster
         if (!hitBoxClass.IsKnockback)
         {
             //약공격 히트 애니메이션
-            animator.SetFloat("Attack_Light", 0);
-            Debug.LogError("약공격 히트");
+            animator.SetTrigger("Attack_Light");
         }
         else
         {
             //강공격 히트 애니메이션
-            animator.SetFloat("Attack_Heavy", 1);
-            Debug.LogError("강공격 히트");
+            animator.SetTrigger("Attack_Heavy");
 
             hitBoxClass.IsKnockback = false;
         }
-
-        
     }
 
     public void Death()
     {
-        return;
+        Idle();
     }
     public void Hit()
     {
         IsHit = false;
         IsBeingHit = true;
+        rb.isKinematic = true;
+
         HitAnimation();
     }
     public void Attack()
@@ -66,6 +66,6 @@ public class Dummy : MonoBehaviour, IMonster
     }
     public void Idle()
     {
-        return;
+
     }
 }
