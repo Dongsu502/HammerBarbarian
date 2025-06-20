@@ -13,7 +13,7 @@ public class HitFlashEffect : MonoBehaviour
     [SerializeField] private float flashDuration = 0.1f;
 
     private Material[] originalMaterials;
-    private bool isFlashing = false;
+    [SerializeField] private bool isFlashing = false;
 
     private void Awake()
     {

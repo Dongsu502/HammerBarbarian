@@ -13,6 +13,11 @@ public static class WorldWhiteBox
 }
 public class WorldManager : MonoBehaviour
 {
+    private void Awake()
+    {
+        WorldWhiteBox.SetWhiteBox(this);
+    }
+
     public void PauseGame()
     {
         Debug.Log("∏ÿ√Á!!");
@@ -25,8 +30,5 @@ public class WorldManager : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    private void Awake()
-    {
-        WorldWhiteBox.SetWhiteBox(this);
-    }
+    
 }
