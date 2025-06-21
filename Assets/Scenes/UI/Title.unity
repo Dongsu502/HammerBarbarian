@@ -1200,6 +1200,10 @@ PrefabInstance:
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.size
+      value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
       propertyPath: monsterSfxClipsList.Array.data[13].clip
       value: 
       objectReference: {fileID: 8300000, guid: 63c512ed4af01734e97ac4f9e2bd589b, type: 3}
@@ -1214,6 +1218,182 @@ PrefabInstance:
     - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
       propertyPath: monsterSfxClipsList.Array.data[14].name
       value: Bomber_Die
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[0].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e28293d1a5b4d18478f9c4055ac4050d, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[0].name
+      value: StoryNarration1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[1].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2629af3c037dad748b9d048cb07b93ff, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[1].name
+      value: StoryNarration2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 891d5fe276b9ba947b865689b4db6b8d, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[2].name
+      value: StoryNarration3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c65161812be784f47ade4799ab5c8baa, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[3].name
+      value: StoryNarration4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 943ce1a3765f3534bb039fcf2a7fdea8, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[4].name
+      value: StoryNarration5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e5bfecf040c06d342b1eb732be396b74, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[5].name
+      value: StoryNarration6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[6].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 3b60d3798409ff2438618fd5a408d87f, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[6].name
+      value: StoryNarration7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[7].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: b51ed7159306ca1489948561927bb75d, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[7].name
+      value: StoryNarration8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 84b4e91a60964a5439d84872446248d7, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[8].name
+      value: StoryNarration9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[9].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: ec3973b977ed64e4582b46f1279a1c8f, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[9].name
+      value: StoryNarration10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[10].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a237928d3b483d04da4df197874bc6fc, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[10].name
+      value: StoryNarration11
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[11].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 00fb0a80dada28f4ba4d47227f6601ec, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[11].name
+      value: StoryNarration12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 8d8f01ed2fb696942aaed8ab25a8763b, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[12].name
+      value: StoryNarration13
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[13].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7eebe096c762fdd4989d94083b56d29b, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[13].name
+      value: StoryNarration14
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[14].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: c4d569173e4c976469ba66f0ae0d6527, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[14].name
+      value: StoryNarration15
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[15].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 48094ca94dd328b41b5ce567a6a46a20, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[15].name
+      value: StoryNarration16
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[16].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 4d33574abe6c31745a8be7926e87633c, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[16].name
+      value: StoryNarration17
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[17].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 1d482580b453ab74f80fd4ce90d54dc3, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[17].name
+      value: StoryNarration18
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[18].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2ca3ba93b464015498c60c63f0aa28af, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[18].name
+      value: StoryNarration19
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[19].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e6ff9cee4d950dc468d7a0000bc34f15, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[19].name
+      value: StoryNarration20
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[20].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: ed382c3221f2f5f44a158b37d9a3ee19, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[20].name
+      value: StoryNarration21
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[21].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: cceeba9184107864988ccc84af466190, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: narrationSfxClipsList.Array.data[21].name
+      value: StoryNarration22
       objectReference: {fileID: 0}
     - target: {fileID: 6599211942671354876, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
       propertyPath: m_Name

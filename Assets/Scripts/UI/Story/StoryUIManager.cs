@@ -55,6 +55,11 @@ public class StoryUIManager : MonoBehaviour
         StartCoroutine(StartStory());
     }
 
+    private void PlayNarration(int _id)
+    {
+        SoundManager.instance.PlayNarrationSFX("StoryNarration" + _id);
+    }
+
     private void InitializeStory()
     {
         InputKeyImage.gameObject.SetActive(false);
@@ -65,7 +70,7 @@ public class StoryUIManager : MonoBehaviour
         yield return new WaitUntil(() => storyData.DataList != null && storyData.DataList.Count > 0);
 
         SetStoryImage(0);
-        GetScriptData(1, 3, typingSpeed);
+        NextStory(1);
     }
 
     private void SetStoryImage(int _index)
@@ -114,6 +119,10 @@ public class StoryUIManager : MonoBehaviour
     {
         InputKeyImage.gameObject.SetActive(false);
 
+        //나레이션 플레이
+        SoundManager.instance.StopNarrationSFX();
+        PlayNarration(storyList[currentIndex].id);
+
         //타이핑효과로 대사 추가
         textTypingClass.StartTyping(storyText, newScript, speed);
     }
@@ -152,9 +161,8 @@ public class StoryUIManager : MonoBehaviour
             isEnd = true;
 
             int currentStoryNumber = int.Parse(storyList[0].name.Substring(storyList[0].name.Length - 1));
-            Debug.LogError($"currentIndex: {currentIndex}");
-            Debug.LogError($"currentStoryNumber: {currentStoryNumber}");
-            if (currentStoryNumber > 7)
+
+            if (currentStoryNumber >= 7)
             {
                 UIWhiteBox.SceneName = "New Map";
                 SceneManager.LoadScene("Loading");
