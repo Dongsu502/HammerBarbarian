@@ -30,6 +30,9 @@ public class TutorialUIManager : MonoBehaviour
     public void Click_ExitButton()
     {
         SetActiveKeyPanel(false);
+
+        //대사 호출
+        UIWhiteBox.StartScripting(1133, 1133);
     }
 
     public void Click_PreviousButton()

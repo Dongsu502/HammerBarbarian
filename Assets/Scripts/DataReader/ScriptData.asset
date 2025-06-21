@@ -15,7 +15,7 @@ MonoBehaviour:
   associatedSheet: 1-1GhWFWfP_SXiIONwcEVu0D2YIBG2YJN-b5uQ6KHHYY
   associatedWorksheet: Script
   START_ROW_LENGTH: 2
-  END_ROW_LENGTH: 32
+  END_ROW_LENGTH: 35
   DataList:
   - id: 1100
     name: "\uCE74\uB208 \uBC14\uB780"
@@ -119,3 +119,14 @@ MonoBehaviour:
     name: "\uC131\uAC80 \uC194\uB77C"
     description: "\uBAA8\uB974\uB294\uAC00? \uADF8\uAC74 \uB8EC\uC774\uB77C\uB294
       \uAC83\uC774\uB2E4."
+  - id: 1131
+    name: "\uC131\uAC80 \uC194\uB77C"
+    description: "\uC74C? \uC55E\uC5D0 \uD45C\uC9C0\uD310\uC774 \uC788\uAD70.."
+  - id: 1132
+    name: "\uC131\uAC80 \uC194\uB77C"
+    description: "W A S D \uB97C \uC774\uC6A9\uD574 \uD45C\uC9C0\uD310\uAE4C\uC9C0
+      \uC774\uB3D9\uD574\uBD10\uB77C."
+  - id: 1133
+    name: "\uC131\uAC80 \uC194\uB77C"
+    description: "\uC624\uB978\uCABD \uD5C8\uC218\uC544\uBE44\uB97C \uC0C1\uB300\uB85C
+      \uCF64\uBCF4\uB97C \uC0AC\uC6A9\uD574\uBD10\uB77C."

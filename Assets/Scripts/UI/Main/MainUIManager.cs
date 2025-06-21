@@ -203,6 +203,9 @@ public class MainUIManager : MonoBehaviour
     {
         SoundManager.instance.PlayBGM("Forest02", 0.5f);
         MainUI_Initialize();
+
+        //첫번째 대사 호출
+        UIWhiteBox.StartScripting(1131, 1132);
     }
 
     private void Update()
