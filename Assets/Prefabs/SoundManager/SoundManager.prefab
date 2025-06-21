@@ -50,6 +50,7 @@ MonoBehaviour:
   bgmSource: {fileID: 6493267343485111278}
   playerSfxSource: {fileID: 700347637730835309}
   monsterSfxSource: {fileID: 700347637730835309}
+  narrationSfxSource: {fileID: 700347637730835309}
   uiSource: {fileID: 4202584754351764820}
   audioMixer: {fileID: 24100000, guid: 5c1c34b769422a84982fcb62315d4405, type: 2}
   bgmClipsList:
@@ -181,6 +182,7 @@ MonoBehaviour:
     clip: {fileID: 8300000, guid: d2eb22570a2547b4890b92d30242e0ad, type: 3}
   - name: MushroomMage_Damage11
     clip: {fileID: 8300000, guid: f3dee5862119a09479666d86aa8e494a, type: 3}
+  narrationSfxClipsList: []
   uiClipsList:
   - name: UI_Botton01
     clip: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}

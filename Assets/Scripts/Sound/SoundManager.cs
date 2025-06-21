@@ -13,12 +13,14 @@ public class SoundManager : MonoBehaviour
     public AudioSource bgmSource; // 배경음악
     public AudioSource playerSfxSource; // 플레이어효과음
     public AudioSource monsterSfxSource; // 몬스터효과음
+    public AudioSource narrationSfxSource; // 나레이션효과음
     public AudioSource uiSource; // UI음
 
     // 사운드를 이름으로 관리할 수 있도록 Dictionary 사용
     private Dictionary<string, AudioClip> bgmClips = new Dictionary<string, AudioClip>(); // 배경음 저장
     private Dictionary<string, AudioClip> playerSfxClips = new Dictionary<string, AudioClip>(); // 플레이어 효과음 저장
     private Dictionary<string, AudioClip> monsterSfxClips = new Dictionary<string, AudioClip>(); // 몬스터 효과음 저장
+    private Dictionary<string, AudioClip> narrationSfxClips = new Dictionary<string, AudioClip>(); // 나레이션 효과음 저장
     private Dictionary<string, AudioClip> uiClips = new Dictionary<string, AudioClip>(); // UI음 저장
 
     // 오디오 믹서, 오디오의 타입별로 사운드를 조절
@@ -35,6 +37,7 @@ public class SoundManager : MonoBehaviour
     public NameAudioClip[] bgmClipsList; // 배경음 리스트
     public NameAudioClip[] playerSfxClipsList; // 플레이어 효과음 리스트
     public NameAudioClip[] monsterSfxClipsList; // 몬스터 효과음 리스트
+    public NameAudioClip[] narrationSfxClipsList; // 나레이션 효과음 리스트
     public NameAudioClip[] uiClipsList; // 효과음 리스트
 
     private Coroutine currentBGMCoroutin; // 현재 실행중인 BGM 코루틴을 추절하기 위한 변수
@@ -76,6 +79,14 @@ public class SoundManager : MonoBehaviour
             if (!monsterSfxClips.ContainsKey(sfx.name))
             {
                 monsterSfxClips.Add(sfx.name, sfx.clip); // 몬스터 효과음 이름과 클립을 저장
+            }
+        }
+
+        foreach (var sfx in narrationSfxClipsList)
+        {
+            if (!narrationSfxClips.ContainsKey(sfx.name))
+            {
+                narrationSfxClips.Add(sfx.name, sfx.clip); // 몬스터 효과음 이름과 클립을 저장
             }
         }
 
@@ -215,6 +226,19 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    // 나레이션 효과음 재생 함수(이름으로 재생)
+    public void PlayNarrationSFX(string name)
+    {
+        if (narrationSfxClips.ContainsKey(name))
+        {
+            narrationSfxSource.PlayOneShot(narrationSfxClips[name]); // 해당 이름의 효과음을 
+        }
+        else
+        {
+            Debug.Log("해당 이름의 효과음이 존재하지 않음: " + name);
+        }
+    }
+
     // UI음 재생 함수(이름으로 재생)
     public void PlayUI(string name)
     {
@@ -253,6 +277,12 @@ public class SoundManager : MonoBehaviour
     public void StopMonsterSFX()
     {
         monsterSfxSource.Stop();
+    }
+
+    // 나레이션 효과음 멈춤
+    public void StopNarrationSFX()
+    {
+        narrationSfxSource.Stop();
     }
 
     // UI음 멈춤
