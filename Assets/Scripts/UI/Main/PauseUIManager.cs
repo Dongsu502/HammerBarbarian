@@ -34,7 +34,10 @@ public class PauseUIManager : MonoBehaviour
         SetActive_SettingPanel(false);
         SetActive_KeyDescription(false);
 
-        WorldWhiteBox.WhiteBox.PauseGame();
+        if(!UIWhiteBox.isStart)
+        {
+            WorldWhiteBox.WhiteBox.PauseGame();
+        }
     }
 
     private void OnDisable()

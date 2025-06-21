@@ -285,8 +285,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2347716024353218003}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 15
+  m_Drag: 0.05
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -441,10 +441,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitCollider: {fileID: 4270063890721356521}
   LightknockbackForce: 1
-  HeavyknockbackForce: 14
+  HeavyknockbackForce: 500
+  bomberDamage: 15
   IsKnockback: 0
   playerAttackType: 0
   isTriggerHit: 0
+  isBoomHit: 0
 --- !u!114 &8783472523856455710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -477,6 +479,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 5158db7c924cf28479583d4672f561e8, type: 2}
   flashMateria2: {fileID: 2100000, guid: 2323404605946264899c643ee0e64fc4, type: 2}
   flashDuration: 0.05
+  isFlashing: 0
 --- !u!1 &4852328446739745647
 GameObject:
   m_ObjectHideFlags: 0

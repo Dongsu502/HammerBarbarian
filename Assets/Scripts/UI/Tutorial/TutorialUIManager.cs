@@ -54,11 +54,8 @@ public class TutorialUIManager : MonoBehaviour
     private void Awake()
     {
         UIWhiteBox.SetTutorialUIWB(this);
-    }
 
-    private void Start()
-    {
-        SetActiveKeyPanel(false);
+        KeyDescriptionPanel.SetActive(false);
     }
 
     public void SetActiveKeyPanel(bool isActive)
@@ -158,8 +155,6 @@ public class TutorialUIManager : MonoBehaviour
 
     public void Click_PreviousButton()
     {
-        Debug.LogError("왼쪽화살표 클릭");
-
         switch(UIWhiteBox.TutorialUICurrentState)
         {
             case TutorialUIState.COMBO:
@@ -175,8 +170,6 @@ public class TutorialUIManager : MonoBehaviour
 
     public void Click_NextButton()
     {
-        Debug.LogError("오른쪽화살표 클릭");
-
         switch (UIWhiteBox.TutorialUICurrentState)
         {
             case TutorialUIState.COMBO:

@@ -1216,10 +1216,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitCollider: {fileID: 7930457586923156555}
   LightknockbackForce: 1
-  HeavyknockbackForce: 10
+  HeavyknockbackForce: 700
+  bomberDamage: 15
   IsKnockback: 0
   playerAttackType: 0
   isTriggerHit: 0
+  isBoomHit: 0
 --- !u!114 &754420597239724513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252,6 +1254,7 @@ MonoBehaviour:
   flashMaterial: {fileID: 2100000, guid: 5158db7c924cf28479583d4672f561e8, type: 2}
   flashMateria2: {fileID: 2100000, guid: 2323404605946264899c643ee0e64fc4, type: 2}
   flashDuration: 0.05
+  isFlashing: 0
 --- !u!1 &3790662321242072348
 GameObject:
   m_ObjectHideFlags: 0
@@ -2389,8 +2392,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8038279925113128421}
   serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
+  m_Mass: 20
+  m_Drag: 0.05
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}

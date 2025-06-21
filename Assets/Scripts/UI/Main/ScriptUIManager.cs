@@ -42,7 +42,10 @@ public class ScriptUIManager : MonoBehaviour
 
         inputAction.MainUI.Script.started += Input_F;
 
-        WorldWhiteBox.WhiteBox.PauseGame();
+        if(!UIWhiteBox.isStart)
+        {
+            WorldWhiteBox.WhiteBox.PauseGame();
+        }
 
         UIWhiteBox.MainUICurrentState = MainUIState.SCRIPT;
     }

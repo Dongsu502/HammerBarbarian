@@ -11,7 +11,6 @@ public class WoodenSignTriggerEvent : MonoBehaviour
         if(other.CompareTag("Player"))
         {
             isTrigger = true;
-            Debug.LogError("표지판 트리거 발동");
             if(isTrigger)
             {
                 UIWhiteBox.Spawn_InterectionUI("F", "표지판보기");

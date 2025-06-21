@@ -118,10 +118,10 @@ public class MonsterHitBox : MonoBehaviour
                 break;
         }
 
-        Vector3 knockbackDir = -hitDirection.normalized;
+        Vector3 knockbackDir = -hitDirection.normalized + Vector3.down * 0.2f;
 
-        rb.AddForce(knockbackDir * knockbackForce, ForceMode.Impulse);
+        rb.AddForce(knockbackDir.normalized * knockbackForce, ForceMode.Impulse);
 
-        Debug.Log("피격자에게 넉백 적용: " + knockbackDir);
+        Debug.Log("피격자에게 넉백 적용: " + knockbackDir.normalized);
     }
 }
