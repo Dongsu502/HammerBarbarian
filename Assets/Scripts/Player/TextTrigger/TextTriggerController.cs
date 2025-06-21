@@ -43,7 +43,7 @@ public class TextTriggerController : MonoBehaviour
         if (triggered || !sequenceManager.CanTrigger(sequenceIndex)) return;
 
         triggered = true;
-        UIWhiteBox.StartScripting(minCount, maxCount);
+        UIWhiteBox.StartScripting(minCount, maxCount, 0.02f);
         sequenceManager.Advance();
     }
 }

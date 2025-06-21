@@ -106,6 +106,8 @@ public class DataManager : MonoBehaviour
         {
             Debug.LogWarning($"{fileName} 파일이 존재하지 않아 삭제할 수 없음");
         }
+
+        Debug.Log("[Delete] 삭제 대상 파일 경로: " + filePath);
     }
 
     /// <summary>
@@ -147,6 +149,8 @@ public class DataManager : MonoBehaviour
 
         //이미 저장된 파일이 있다면 덮어쓰고, 없다면 새로 만들어서 저장
         File.WriteAllText(filePath, ToJsonData);
+
+        Debug.Log("[Save] 파일 경로: " + filePath);
 
         //올바르게 저장되었는지 확인
         Debug.Log("저장 완료");
@@ -227,6 +231,8 @@ public class DataManager : MonoBehaviour
     public bool NeedToCreateNewDataFile(int slotNumber)
     {
         string path = GetDataFilePath(slotNumber);
+
+        Debug.Log("[Check] 존재 여부 확인 파일 경로: " + path);
 
         // 없으면 true (새로운 데이터 파일을 만들 수 있음)
         if (!File.Exists(path))

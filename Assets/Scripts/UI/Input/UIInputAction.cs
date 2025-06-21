@@ -246,6 +246,34 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""StoryUI"",
+            ""id"": ""c4fa1c88-fbc8-4e92-b0aa-b27430b0d2b0"",
+            ""actions"": [
+                {
+                    ""name"": ""Script"",
+                    ""type"": ""Button"",
+                    ""id"": ""0fb4fa40-b54e-4b2f-bfcb-27212d12d835"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""4c8c8569-849d-4169-b00f-f0c4c1d7db5a"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Script"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -266,6 +294,9 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         m_TitleUI = asset.FindActionMap("TitleUI", throwIfNotFound: true);
         m_TitleUI_DeleteData = m_TitleUI.FindAction("DeleteData", throwIfNotFound: true);
         m_TitleUI_Mouse = m_TitleUI.FindAction("Mouse", throwIfNotFound: true);
+        // StoryUI
+        m_StoryUI = asset.FindActionMap("StoryUI", throwIfNotFound: true);
+        m_StoryUI_Script = m_StoryUI.FindAction("Script", throwIfNotFound: true);
     }
 
     ~@UIInputAction()
@@ -273,6 +304,7 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_MainUI.enabled, "This will cause a leak and performance issues, UIInputAction.MainUI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_ChoiceMapUI.enabled, "This will cause a leak and performance issues, UIInputAction.ChoiceMapUI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_TitleUI.enabled, "This will cause a leak and performance issues, UIInputAction.TitleUI.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_StoryUI.enabled, "This will cause a leak and performance issues, UIInputAction.StoryUI.Disable() has not been called.");
     }
 
     public void Dispose()
@@ -524,6 +556,52 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
         }
     }
     public TitleUIActions @TitleUI => new TitleUIActions(this);
+
+    // StoryUI
+    private readonly InputActionMap m_StoryUI;
+    private List<IStoryUIActions> m_StoryUIActionsCallbackInterfaces = new List<IStoryUIActions>();
+    private readonly InputAction m_StoryUI_Script;
+    public struct StoryUIActions
+    {
+        private @UIInputAction m_Wrapper;
+        public StoryUIActions(@UIInputAction wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Script => m_Wrapper.m_StoryUI_Script;
+        public InputActionMap Get() { return m_Wrapper.m_StoryUI; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(StoryUIActions set) { return set.Get(); }
+        public void AddCallbacks(IStoryUIActions instance)
+        {
+            if (instance == null || m_Wrapper.m_StoryUIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_StoryUIActionsCallbackInterfaces.Add(instance);
+            @Script.started += instance.OnScript;
+            @Script.performed += instance.OnScript;
+            @Script.canceled += instance.OnScript;
+        }
+
+        private void UnregisterCallbacks(IStoryUIActions instance)
+        {
+            @Script.started -= instance.OnScript;
+            @Script.performed -= instance.OnScript;
+            @Script.canceled -= instance.OnScript;
+        }
+
+        public void RemoveCallbacks(IStoryUIActions instance)
+        {
+            if (m_Wrapper.m_StoryUIActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IStoryUIActions instance)
+        {
+            foreach (var item in m_Wrapper.m_StoryUIActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_StoryUIActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public StoryUIActions @StoryUI => new StoryUIActions(this);
     public interface IMainUIActions
     {
         void OnSetting(InputAction.CallbackContext context);
@@ -542,5 +620,9 @@ public partial class @UIInputAction: IInputActionCollection2, IDisposable
     {
         void OnDeleteData(InputAction.CallbackContext context);
         void OnMouse(InputAction.CallbackContext context);
+    }
+    public interface IStoryUIActions
+    {
+        void OnScript(InputAction.CallbackContext context);
     }
 }

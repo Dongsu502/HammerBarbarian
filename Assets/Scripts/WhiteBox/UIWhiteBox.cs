@@ -235,7 +235,7 @@ public static class UIWhiteBox
         MainUIWB.SetColorRuneShowImage(index);
     }
 
-    public static void StartScripting(int _start, int _end)
+    public static void StartScripting(int _start, int _end, float _speed)
     {
         MainUICurrentState = MainUIState.SCRIPT;
 
@@ -243,7 +243,7 @@ public static class UIWhiteBox
         MainUIWB.ScriptPanel_SetActive(true);
         
         //대사 가져오기
-        ScriptUIWB.GetScriptData(_start, _end);
+        ScriptUIWB.GetScriptData(_start, _end, _speed);
     }
 
     /// <summary>

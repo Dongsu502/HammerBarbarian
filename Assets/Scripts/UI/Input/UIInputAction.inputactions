@@ -224,6 +224,34 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "StoryUI",
+            "id": "c4fa1c88-fbc8-4e92-b0aa-b27430b0d2b0",
+            "actions": [
+                {
+                    "name": "Script",
+                    "type": "Button",
+                    "id": "0fb4fa40-b54e-4b2f-bfcb-27212d12d835",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4c8c8569-849d-4169-b00f-f0c4c1d7db5a",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Script",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": []

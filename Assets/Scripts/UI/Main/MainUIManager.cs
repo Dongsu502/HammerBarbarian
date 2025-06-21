@@ -132,7 +132,7 @@ public class MainUIManager : MonoBehaviour
     [ContextMenu("대사 시작")]
     private void StartScript()
     {
-        UIWhiteBox.StartScripting(1100, 1104);
+        UIWhiteBox.StartScripting(1100, 1104, 0.02f);
     }
     [ContextMenu("상호작용UI 활성화")]
     private void OnEnableInterectionUI()
@@ -205,7 +205,7 @@ public class MainUIManager : MonoBehaviour
         MainUI_Initialize();
 
         //첫번째 대사 호출
-        UIWhiteBox.StartScripting(1131, 1132);
+        UIWhiteBox.StartScripting(1131, 1132, 0.02f);
     }
 
     private void Update()
