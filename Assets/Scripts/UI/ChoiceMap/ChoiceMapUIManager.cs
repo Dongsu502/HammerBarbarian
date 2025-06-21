@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
@@ -134,10 +135,28 @@ public class ChoiceMapUIManager : MonoBehaviour
     public void Click_Dungeon3()
     {
         SoundManager.instance.PlayUI("UI_Botton07");
-
-        Debug.Log("던전3 이동");
-        UIWhiteBox.SceneName = "New Map";
-        SceneManager.LoadScene("Loading");
+        //현재 파일이름 번호 가져와서 파일 존재하는지 확인
+        string currentFileName = DataManager.Instance.currentDataFileName;
+        string numberStr = Regex.Match(currentFileName, @"\d+").Value;
+        if(int.TryParse(numberStr, out int result))
+        {
+            if (DataManager.Instance.NeedToCreateNewDataFile(result-1))
+            {
+                Debug.Log("스토리씬 이동");
+                UIWhiteBox.SceneName = "Story";
+                SceneManager.LoadScene("Loading");
+            }
+            else
+            {
+                Debug.Log("던전3 이동");
+                UIWhiteBox.SceneName = "New Map";
+                SceneManager.LoadScene("Loading");
+            }
+        }
+        else
+        {
+            Debug.LogError("파일 숫자 추출 실패");
+        }
     }
 
     public void Click_World1()

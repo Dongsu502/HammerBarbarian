@@ -14,6 +14,9 @@ public class TextTyping : MonoBehaviour
     private Text currentText;
     private string fullText;
 
+    // 콜백 등록용 이벤트
+    public System.Action onTypingEnd;
+
     public void StartTyping(Text uiText, string newText, float speed)
     {
         //이미 실행중이라면 멈추고 새로 시작
@@ -31,6 +34,9 @@ public class TextTyping : MonoBehaviour
 
         StopTyping();
         currentText.text = fullText;
+
+        // 콜백 호출
+        onTypingEnd?.Invoke();
     }
 
     private IEnumerator TypingCoroutine(float speed)
@@ -49,6 +55,9 @@ public class TextTyping : MonoBehaviour
         }
 
         isTyping = false;
+
+        // 콜백 호출
+        onTypingEnd?.Invoke();
     }
 
     private void StopTyping()
@@ -61,32 +70,4 @@ public class TextTyping : MonoBehaviour
 
         isTyping= false;
     }
-
-    /// <summary>
-    /// 타이핑효과
-    /// </summary>
-    /// <param name="_newText">텍스트변수</param>
-    /// <param name="_newString">텍스트변수에 들어갈 값</param>
-    /// <param name="typingSpeed">타이핑 속도</param>
-    /// <returns></returns>
-    //public IEnumerator Typing(Text _newText, string _newString, float typingSpeed)
-    //{
-    //    isTyping = true;
-    //    yield return null;
-
-    //    _newText.text = string.Empty;
-
-    //    StringBuilder stringBuilder = new StringBuilder();
-        
-    //    for(int i = 0; i < _newString.Length; i++)
-    //    {
-    //        stringBuilder.Append(_newString[i]);
-    //        _newText.text = stringBuilder.ToString();
-
-    //        //속도
-    //        yield return new WaitForSecondsRealtime(typingSpeed);
-    //    }
-    //    yield return null;
-    //    isTyping = false;
-    //}
 }

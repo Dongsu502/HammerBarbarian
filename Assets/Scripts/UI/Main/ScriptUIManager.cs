@@ -70,7 +70,7 @@ public class ScriptUIManager : MonoBehaviour
     /// </summary>
     /// <param name="start">시작id</param>
     /// <param name="end">마지막id</param>
-    public void GetScriptData(int start,  int end)
+    public void GetScriptData(int start,  int end, float speed)
     {
         currentScriptList.Clear();
         currentIndex = 0;
@@ -89,7 +89,7 @@ public class ScriptUIManager : MonoBehaviour
         //첫번째 대사 UI에 표시
         if(currentScriptList.Count > 0)
         {
-            SetScriptUI(currentScriptList[0].name, currentScriptList[0].description);
+            SetScriptUI(currentScriptList[0].name, currentScriptList[0].description, speed);
         }
         else
         {
@@ -102,12 +102,12 @@ public class ScriptUIManager : MonoBehaviour
     /// </summary>
     /// <param name="newName">이름</param>
     /// <param name="newScript">대사</param>
-    private void SetScriptUI(string newName, string newScript)
+    private void SetScriptUI(string newName, string newScript, float speed)
     {
         Name.text = newName;
 
         //타이핑효과로 대사 추가
-        textTyping.StartTyping(Script, newScript, 0.02f);
+        textTyping.StartTyping(Script, newScript, speed);
     }
 
     #region InputAction
@@ -137,7 +137,7 @@ public class ScriptUIManager : MonoBehaviour
         if(currentIndex < currentScriptList.Count)
         {
             var data = currentScriptList[currentIndex];
-            SetScriptUI (data.name, data.description);
+            SetScriptUI (data.name, data.description, 0.02f);
         }
         else
         {

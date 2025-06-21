@@ -32,7 +32,7 @@ public class TutorialUIManager : MonoBehaviour
         SetActiveKeyPanel(false);
 
         //대사 호출
-        UIWhiteBox.StartScripting(1133, 1133);
+        UIWhiteBox.StartScripting(1133, 1133, 0.02f);
     }
 
     public void Click_PreviousButton()
