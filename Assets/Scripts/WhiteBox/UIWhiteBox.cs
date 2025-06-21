@@ -48,6 +48,7 @@ public static class UIWhiteBox
     public static ScriptUIManager ScriptUIWB { get; private set; }
     public static TutorialUIManager TutorialUIWB { get; private set; }
     public static ItemGauge ItemGaugeWB { get; private set; }
+    public static DemoEndingUI DemoEndingUIWB { get; private set; }
 
     #region SetWhiteBox
 
@@ -86,6 +87,10 @@ public static class UIWhiteBox
     public static void SetItemGaugeUIWB(ItemGauge itemGaugeUIWB)
     {
         ItemGaugeWB = itemGaugeUIWB;
+    }
+    public static void SetDemoEndingUIWB(DemoEndingUI demoEndingUIWB)
+    {
+        DemoEndingUIWB = demoEndingUIWB;
     }
 
     #endregion
@@ -350,5 +355,14 @@ public static class UIWhiteBox
         ItemGaugeWB.UseItem();
     }
 
-    #endregion 
+    #endregion
+
+    #region DemoEndingUI
+
+    public static void OnEnableEndingUI()
+    {
+        DemoEndingUIWB.OnEnable_backImage();
+    }
+
+    #endregion
 }
