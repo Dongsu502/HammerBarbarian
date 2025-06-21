@@ -23,6 +23,11 @@ public enum ChoiceMapUIState
     WORLD,
     SETTING
 }
+public enum TutorialUIState
+{
+    COMBO,
+    FIRSTITEM
+}
 
 public static class UIWhiteBox
 {
@@ -32,6 +37,7 @@ public static class UIWhiteBox
 
     public static MainUIState MainUICurrentState { get; set; } = MainUIState.NONE;
     public static ChoiceMapUIState ChoiceMapUICurrentState { get; set; }
+    public static TutorialUIState TutorialUICurrentState { get; set; }
 
     public static TitleUIManager TitleUIWB { get; private set; }
     public static MainUIManager MainUIWB { get; private set; }
@@ -40,8 +46,8 @@ public static class UIWhiteBox
     public static RuneInventoryUI RuneInventoryWB { get; private set; }
     public static RuneChoiceUI RuneChoiceWB { get; private set; }
     public static ScriptUIManager ScriptUIWB { get; private set; }
-    public static TutorialUIManager TutorialUIManager { get; private set; }
-    public static ItemGauge ItemGauge { get; private set; }
+    public static TutorialUIManager TutorialUIWB { get; private set; }
+    public static ItemGauge ItemGaugeWB { get; private set; }
 
     #region SetWhiteBox
 
@@ -75,11 +81,11 @@ public static class UIWhiteBox
     }
     public static void SetTutorialUIWB(TutorialUIManager tutorialUIWB)
     {
-        TutorialUIManager = tutorialUIWB;
+        TutorialUIWB = tutorialUIWB;
     }
     public static void SetItemGaugeUIWB(ItemGauge itemGaugeUIWB)
     {
-        ItemGauge = itemGaugeUIWB;
+        ItemGaugeWB = itemGaugeUIWB;
     }
 
     #endregion
@@ -332,7 +338,7 @@ public static class UIWhiteBox
 
     public static void SetActive_KeyDescriptionPanel(bool isActive)
     {
-        TutorialUIManager.SetActiveKeyPanel(isActive);
+        TutorialUIWB.SetActiveKeyPanel(isActive);
     }
 
     #endregion
@@ -341,7 +347,7 @@ public static class UIWhiteBox
 
     public static void UseItemGauge()
     {
-        ItemGauge.UseItem();
+        ItemGaugeWB.UseItem();
     }
 
     #endregion 

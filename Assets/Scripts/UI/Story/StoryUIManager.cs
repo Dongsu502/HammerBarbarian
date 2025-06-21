@@ -131,7 +131,7 @@ public class StoryUIManager : MonoBehaviour
 
     private void Input_F(InputAction.CallbackContext context)
     {
-        if (context.started && UIWhiteBox.MainUICurrentState == MainUIState.SCRIPT)
+        if (context.started)
         {
             NextScript();
         }

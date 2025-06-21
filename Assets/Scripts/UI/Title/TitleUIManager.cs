@@ -4,10 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
+using Unity.Collections;
 
 public class TitleUIManager : MonoBehaviour
 {
-    [Header("PlayButton")]
+    [Header("Button")]
     [Tooltip("메뉴 버튼")]
     [SerializeField] private GameObject PlayButton;
 
@@ -109,6 +110,9 @@ public class TitleUIManager : MonoBehaviour
 
     public void Click_StorageDataButton()
     {
+        //데이터가 1개도 없다면 이벤트X
+        if (GetComponentInChildren<MenuPanel>().emptyData) return;
+
         isNewGame = false;
 
         SettingPanel.SetActive(false);

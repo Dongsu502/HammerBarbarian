@@ -18,7 +18,8 @@ public class WoodenSignTriggerEvent : MonoBehaviour
             }
             if(Input.GetKeyDown(KeyCode.F))
             {
-                UIWhiteBox.SetActive_KeyDescriptionPanel(true);
+                UIWhiteBox.TutorialUICurrentState = TutorialUIState.COMBO;
+                UIWhiteBox. SetActive_KeyDescriptionPanel(true);
             }
         }
     }
