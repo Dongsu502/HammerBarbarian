@@ -10,6 +10,17 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
     [SerializeField] private ArenaController arenaController;
 
     private bool isActivated = false;
+    private bool isInteracted = false;
+
+    private void Update()
+    {
+        if (isInteracted && UIWhiteBox.GetScriptIsEnd())
+        {
+            UIWhiteBox.TutorialUICurrentState = TutorialUIState.FIRSTITEM;
+            UIWhiteBox.SetActive_KeyDescriptionPanel(true);
+            isInteracted = false;
+        }
+    }
 
     public void Init(TextTriggerController controller, int conditionIndex)
     {
@@ -30,6 +41,7 @@ public class ObjectInteractTrigger : MonoBehaviour, ITextTriggerCondition
                 controller.NotifyConditionMet(index);
                 UIWhiteBox.SetActiveInterectionPanel(false);
                 UIWhiteBox.GetItem();
+                isInteracted=true;
                 isActivated = true;
             }
         }
