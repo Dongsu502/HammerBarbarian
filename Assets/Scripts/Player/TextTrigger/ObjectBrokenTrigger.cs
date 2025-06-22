@@ -58,6 +58,10 @@ public class ObjectBrokenTrigger : MonoBehaviour, ITextTriggerCondition
 
         // ÄÆ¾À Á¾·á
         CutsceneWhiteBox.WhiteBox.EndCutscene();
+
+        yield return new WaitForSeconds(2f);
+
+        UIWhiteBox.OnEnableEndingUI();
     }
 
 

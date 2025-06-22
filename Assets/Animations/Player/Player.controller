@@ -129,7 +129,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BlockEnd
-  m_Speed: 1
+  m_Speed: 3
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 739355903974927201}
@@ -663,7 +663,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: BlockStart
-  m_Speed: 1.7
+  m_Speed: 2.5
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -5299829489174747468}
@@ -874,9 +874,9 @@ AnimatorStateTransition:
   m_Mute: 0
   m_IsExit: 0
   serializedVersion: 3
-  m_TransitionDuration: 0.11531541
-  m_TransitionOffset: 0.0036036144
-  m_ExitTime: 0.69189125
+  m_TransitionDuration: 0.024020722
+  m_TransitionOffset: 0
+  m_ExitTime: 0.000000020185867
   m_HasExitTime: 1
   m_HasFixedDuration: 1
   m_InterruptionSource: 0
