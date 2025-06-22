@@ -4,39 +4,34 @@ using UnityEngine;
 public class PlayerSoundController : MonoBehaviour
 {
     [SerializeField] private AudioSource audioSource;
-    [SerializeField] private AudioClip lightAttackClip;
-    [SerializeField] private AudioClip heavyAttackClip;
-    [SerializeField] private AudioClip strongAttackClip;
-    [SerializeField] private AudioClip windmillClip;
-    [SerializeField] private AudioClip attackHitClip;
-    [SerializeField] private AudioClip hitClip;
+   
 
     public void PlayAttackSound(AttackType type)
     {
         switch (type)
         {
             case AttackType.Light:
-                audioSource.PlayOneShot(lightAttackClip);
+                SoundManager.instance.PlayPlayerSFX("Swing07");
                 break;
             case AttackType.Heavy:
-                audioSource.PlayOneShot(heavyAttackClip);
+                SoundManager.instance.PlayPlayerSFX("Swing02");
                 break;
             case AttackType.Skill:
-                audioSource.PlayOneShot(strongAttackClip);
+                SoundManager.instance.PlayPlayerSFX("Swing04");
                 break;
             case AttackType.WhirlWind:
-                audioSource.PlayOneShot(windmillClip);
+                SoundManager.instance.PlayPlayerSFX("WhirlWind01");
                 break;
         }
     }
 
     public void AttackHitSound()
     {
-        audioSource.PlayOneShot(attackHitClip);
+        SoundManager.instance.PlayPlayerSFX("Attack08");
     }
 
     public void HitSound()
     {
-        audioSource.PlayOneShot(hitClip);
+        SoundManager.instance.PlayPlayerSFX("Damage01");
     }
 }

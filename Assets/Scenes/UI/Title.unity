@@ -1196,12 +1196,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1205162412}
     - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: playerSfxClipsList.Array.size
+      value: 34
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
       propertyPath: monsterSfxClipsList.Array.size
       value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
       propertyPath: narrationSfxClipsList.Array.size
       value: 22
+      objectReference: {fileID: 0}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: playerSfxClipsList.Array.data[33].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: ef7f6b8d1f001324f94fbbd094bc052d, type: 3}
+    - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
+      propertyPath: playerSfxClipsList.Array.data[33].name
+      value: Block01
       objectReference: {fileID: 0}
     - target: {fileID: 6483506778668848440, guid: 37720c430de81a24e903b0a264afca3b, type: 3}
       propertyPath: monsterSfxClipsList.Array.data[13].clip

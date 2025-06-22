@@ -25,6 +25,7 @@ public class PlayerBlockHit : MonoBehaviour
                 PlayBlockEffect();
                 ApplySlowKnockbackOverTime();
                 UIWhiteBox.UseGauge(25f);
+                SoundManager.instance.PlayPlayerSFX("Block01");
                 Destroy(other.gameObject);
             }
 
@@ -33,6 +34,7 @@ public class PlayerBlockHit : MonoBehaviour
                 Debug.Log("¸·¾Ò´Ù! (Golem)");
                 PlayBlockEffect();
                 ApplySlowKnockbackOverTime();
+                SoundManager.instance.PlayPlayerSFX("Block01");
                 UIWhiteBox.UseGauge(25f);
             }
         }
