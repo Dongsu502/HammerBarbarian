@@ -189,7 +189,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blockEffectPrefab: {fileID: 7275548786892498063, guid: 5bc9a0bf98f67d240a936bf476ba2082, type: 3}
   blockHitSpawnPos: {fileID: 3948057975931251546}
-  force: 140
+  force: 500
 --- !u!1 &2689470420303142354
 GameObject:
   m_ObjectHideFlags: 0
