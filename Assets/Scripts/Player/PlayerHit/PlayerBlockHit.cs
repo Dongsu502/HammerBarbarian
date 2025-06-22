@@ -8,6 +8,8 @@ public class PlayerBlockHit : MonoBehaviour
     [SerializeField] private GameObject blockEffectPrefab;
     [SerializeField] private Transform blockHitSpawnPos;
 
+    [SerializeField] private float force = 80f;
+
 
     private void Awake()
     {
@@ -53,7 +55,7 @@ public class PlayerBlockHit : MonoBehaviour
         Vector3 direction = -transform.forward;
         direction.y = 0f; // 살짝 위로
 
-        float force = 80f; // mass 15 기준으로 적당히 천천히 밀릴 정도
+        
 
         while (timer < duration)
         {
