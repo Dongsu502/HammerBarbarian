@@ -255,6 +255,9 @@ public class MainUIManager : MonoBehaviour
                 case MainUIState.Die:
                     Debug.LogWarning("MainUIState가 Die입니다.");
                     return;
+                case MainUIState.Tutorial:
+                    Debug.LogWarning("MainUIState가 Tutorial입니다.");
+                    return;
                 default:
                     Debug.LogWarning("MainUIState가 NONE, PAUSE, PAUSE_SETTING, PAUSE_KEYDESCRIPTION이 아닙니다.");
                     PausePanel_SetActive(true);

@@ -15,7 +15,8 @@ public enum MainUIState
     PAUSE_KEYDESCRIPTION,
     SCRIPT,
     MAP,
-    Die
+    Die,
+    Tutorial
 }
 public enum ChoiceMapUIState
 {

@@ -148,6 +148,7 @@ public class TutorialUIManager : MonoBehaviour
 
         if(UIWhiteBox.TutorialUICurrentState == TutorialUIState.COMBO)
         {
+            UIWhiteBox.MainUICurrentState = MainUIState.NONE;
             //대사 호출
             UIWhiteBox.StartScripting(1133, 1133, 0.02f);
         }
