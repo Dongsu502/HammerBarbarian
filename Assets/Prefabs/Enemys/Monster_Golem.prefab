@@ -1216,7 +1216,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hitCollider: {fileID: 7930457586923156555}
   LightknockbackForce: 1
-  HeavyknockbackForce: 700
+  HeavyknockbackForce: 600
   bomberDamage: 15
   IsKnockback: 0
   playerAttackType: 0

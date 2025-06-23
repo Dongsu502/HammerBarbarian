@@ -73,6 +73,13 @@ public class DemoEndingUI : MonoBehaviour
     public void Click_GoTitleButton()
     {
         WorldWhiteBox.WhiteBox.ResumeGame();
+
+        var currentData = DataManager.Instance.GetCurrentData();
+        string currentDataName = DataManager.Instance.currentDataFileName;
+        DataManager.Instance.SaveGameData(currentData, currentDataName);
+
+        SoundManager.instance.StopBGM();
+
         SceneManager.LoadScene("Title");
     }
 

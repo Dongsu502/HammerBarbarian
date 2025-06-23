@@ -22,10 +22,12 @@ public class MonsterDetection : MonoBehaviour
         target = GetComponentInParent<Transform>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            if (monster.TargetDetected) return;
+
             monsterDetectedUI.DetectionCheck(true);
 
             SetTarget(other.transform);
