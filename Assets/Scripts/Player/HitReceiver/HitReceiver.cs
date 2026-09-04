@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Game;
@@ -14,7 +14,6 @@ public class HitReceiver : MonoBehaviour
     private void Start()
     {
         monster = GetComponentInParent<IMonster>();
-        
     }
 
     public void OnHit(Vector3 hitPoint, Vector3 hitNormal)
@@ -25,18 +24,17 @@ public class HitReceiver : MonoBehaviour
             Vector3 spawnPos = hitPoint + hitNormal * effectOffset;
             Quaternion rot = Quaternion.LookRotation(hitNormal);
             AttackType attackType = PlayerHitWhiteBox.WhiteBox.attacktype;
+            
             if (monster.HP <= 20 && attackType == AttackType.Heavy && monster.Name =="Golem")
             {        
-                GameObject boomEffect = Instantiate(boomEffectPrefab, transform.position, rot);
-                Destroy(boomEffect, 2f);
+                EffectPoolManager.Instance.SpawnEffect(boomEffectPrefab, transform.position, rot);
             }
             else if(monster.HP <= 10 && attackType == AttackType.Heavy)
             {
-                GameObject boomEffect = Instantiate(boomEffectPrefab, transform.position, rot);
-                Destroy(boomEffect, 2f);
+                EffectPoolManager.Instance.SpawnEffect(boomEffectPrefab, transform.position, rot);
             }
-            GameObject effect = Instantiate(hitEffectPrefab, spawnPos, rot);
-            Destroy(effect, 2f); // 2ÃÊ ÈÄ ÀÚµ¿ ÆÄ±«
+            
+            EffectPoolManager.Instance.SpawnEffect(hitEffectPrefab, spawnPos, rot);
         }
     }
 }

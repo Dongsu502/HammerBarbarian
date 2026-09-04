@@ -3,47 +3,56 @@ using UnityEngine;
 
 public class TransparentObjectHandler : MonoBehaviour
 {
-    private List<Renderer> renderers = new();
-    private Dictionary<Renderer, Color> originalColors = new();
-    private bool isTransparent = false;
-
     [SerializeField] private Material transparentMaterial;
-    private Dictionary<Renderer, Material> originalMats = new();
+
+    private readonly List<Renderer> renderers = new();
+    private readonly Dictionary<Renderer, Material> originalMaterials = new();
+
+    private bool isTransparent;
 
     private void Awake()
     {
-        renderers.AddRange(GetComponentsInChildren<Renderer>());
+        renderers.AddRange(GetComponentsInChildren<Renderer>(true));
 
-        foreach (var r in renderers)
+        foreach (var renderer in renderers)
         {
-            if (r.material.HasProperty("_Color"))
-                originalColors[r] = r.material.color;
+            if (renderer != null)
+            {
+                originalMaterials[renderer] = renderer.sharedMaterial;
+            }
         }
     }
 
-    public void SetTransparent(float alpha = 0.2f)
+    public void SetTransparent()
     {
-        if (isTransparent) return;
+        if (isTransparent || transparentMaterial == null)
+            return;
+
         isTransparent = true;
 
-        foreach (var r in renderers)
+        foreach (var renderer in renderers)
         {
-            if (!originalMats.ContainsKey(r))
-                originalMats[r] = r.sharedMaterial;
-
-            r.material = transparentMaterial;
+            if (renderer != null)
+            {
+                renderer.sharedMaterial = transparentMaterial;
+            }
         }
     }
 
     public void Restore()
     {
-        if (!isTransparent) return;
+        if (!isTransparent)
+            return;
+
         isTransparent = false;
 
-        foreach (var r in renderers)
+        foreach (var renderer in renderers)
         {
-            if (originalMats.TryGetValue(r, out var mat))
-                r.material = mat;
+            if (renderer != null &&
+                originalMaterials.TryGetValue(renderer, out Material originalMaterial))
+            {
+                renderer.sharedMaterial = originalMaterial;
+            }
         }
     }
 }

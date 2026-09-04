@@ -50,7 +50,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4848,7 +4848,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 4df8a5993f951b04581df7cc5fbb1254, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4913,6 +4912,7 @@ GameObject:
   - component: {fileID: 1429954232896169631}
   - component: {fileID: 1429954232896169632}
   - component: {fileID: 1429954232896169629}
+  - component: {fileID: 4496545374500597934}
   m_Layer: 0
   m_Name: CFXR3 Hit Misc A
   m_TagString: Untagged
@@ -4959,7 +4959,6 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: d2e32673805f8974a888782e19aa2bbf, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -5029,7 +5028,7 @@ ParticleSystem:
   emitterVelocityMode: 0
   looping: 0
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -9817,7 +9816,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9205bc1bbacc90040a998067b5643d16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearBehavior: 2
+  clearBehavior: 0
   cameraShake:
     enabled: 1
     useMainCamera: 1
@@ -9977,6 +9976,19 @@ MonoBehaviour:
     perlinColor: 0
     perlinColorSpeed: 1
   fadeOutReference: {fileID: 0}
+--- !u!114 &4496545374500597934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429954232896169633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6373525e406bc8f4f9a195ba7326d7dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  returnDelay: 2
 --- !u!1 &1429954232937552486
 GameObject:
   m_ObjectHideFlags: 0

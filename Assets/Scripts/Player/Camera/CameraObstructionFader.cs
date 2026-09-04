@@ -5,38 +5,92 @@ public class CameraObstructionFader : MonoBehaviour
 {
     [SerializeField] private Transform target;
     [SerializeField] private LayerMask transparentLayer;
-    private List<TransparentObjectHandler> currentlyFaded = new();
+    [SerializeField] private float radius = 1f;
 
-    void LateUpdate()
+    private HashSet<TransparentObjectHandler> currentlyFaded = new();
+    private HashSet<TransparentObjectHandler> detectedThisFrame = new();
+
+    private readonly RaycastHit[] hitBuffer = new RaycastHit[64];
+
+    private void LateUpdate()
+    {
+        if (target == null)
+        {
+            RestoreAll();
+            return;
+        }
+
+        Vector3 from = transform.position;
+        Vector3 direction = target.position - from;
+        float distance = direction.magnitude;
+
+        if (distance <= Mathf.Epsilon)
+        {
+            RestoreAll();
+            return;
+        }
+
+        detectedThisFrame.Clear();
+
+        int hitCount = Physics.SphereCastNonAlloc(
+            from,
+            radius,
+            direction.normalized,
+            hitBuffer,
+            distance,
+            transparentLayer,
+            QueryTriggerInteraction.Ignore
+        );
+
+        for (int i = 0; i < hitCount; i++)
+        {
+            Collider hitCollider = hitBuffer[i].collider;
+
+            if (hitCollider == null)
+                continue;
+
+            TransparentObjectHandler handler =
+                hitCollider.GetComponentInParent<TransparentObjectHandler>();
+
+            if (handler != null)
+                detectedThisFrame.Add(handler);
+        }
+
+        foreach (var handler in currentlyFaded)
+        {
+            if (handler != null && !detectedThisFrame.Contains(handler))
+            {
+                handler.Restore();
+            }
+        }
+
+        foreach (var handler in detectedThisFrame)
+        {
+            if (!currentlyFaded.Contains(handler))
+            {
+                handler.SetTransparent();
+            }
+        }
+
+        var temp = currentlyFaded;
+        currentlyFaded = detectedThisFrame;
+        detectedThisFrame = temp;
+    }
+
+    private void OnDisable()
+    {
+        RestoreAll();
+    }
+
+    private void RestoreAll()
     {
         foreach (var handler in currentlyFaded)
         {
             if (handler != null)
                 handler.Restore();
         }
+
         currentlyFaded.Clear();
-
-        Vector3 from = transform.position;
-        Vector3 to = target.position;
-        Vector3 dir = to - from;
-        float dist = dir.magnitude;
-
-        float radius = 1f; // 조절 가능
-        RaycastHit[] hits = Physics.SphereCastAll(from, radius, dir, dist, transparentLayer);
-
-        Debug.DrawRay(from, dir.normalized * dist, Color.green);
-        Debug.DrawLine(from + Vector3.left * radius, to + Vector3.left * radius, Color.red);
-        Debug.DrawLine(from + Vector3.right * radius, to + Vector3.right * radius, Color.red);
-
-        foreach (var hit in hits)
-        {
-            TransparentObjectHandler handler = hit.collider.GetComponentInParent<TransparentObjectHandler>();
-            if (handler != null && !currentlyFaded.Contains(handler))
-            {
-                handler.SetTransparent();
-                currentlyFaded.Add(handler);
-            }
-        }
-
+        detectedThisFrame.Clear();
     }
 }

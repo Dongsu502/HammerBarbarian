@@ -144,7 +144,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (hammerThrowCooldownTimer > 0f)
             {
-                Debug.Log("ÄðÅ¸ÀÓ ÁßÀÔ´Ï´Ù!");
+                Debug.Log("ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½Ô´Ï´ï¿½!");
                 return;
             }
 
@@ -252,7 +252,7 @@ public class PlayerAttack : MonoBehaviour
                 weaponType = (WeaponType)currentItemType;
                 idleSnake.SetActive(true);
 
-                //¾ÆÀÌÅÛ ÀåÂø Ç¥½Ã
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½
                 UIWhiteBox.SetActiveItemSelectImage(true);
             }
             else
@@ -261,7 +261,7 @@ public class PlayerAttack : MonoBehaviour
                 weaponType = WeaponType.Hammer;
                 idleSnake.SetActive(false);
 
-                //¾ÆÀÌÅÛ ÀåÂø Ç¥½Ã ÇØÁ¦
+                //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ç¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
                 UIWhiteBox.SetActiveItemSelectImage(false);
             }
         }
@@ -274,7 +274,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (isSpinCombo && spinComboStep == 1)
         {
-            return; // ±â´Ù¸®±â
+            return; // ï¿½ï¿½Ù¸ï¿½ï¿½ï¿½
         }
         else if (isSpinCombo && spinComboStep == 2)
         {
@@ -305,7 +305,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void ContinueSpinCombo()
     {
-        Debug.Log("È¸Àü ³»·ÁÄ¡±â!!");
+        Debug.Log("È¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ä¡ï¿½ï¿½!!");
         spinComboStep = 2;
         IsAttacking = true;
         canAttack = false;
@@ -409,13 +409,12 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void MosnterHitTriggerInit()
-    {  
-        if(attackTrigger.monsterHitBoxes.Count != 0)
+    {
+        if (attackTrigger.monsterHitBoxes.Count != 0)
         {
-            for (int i = 0; i < attackTrigger.monsterHitBoxes.Count; i++)
-            {
-                attackTrigger.monsterHitBoxes.ElementAt(i).isTriggerHit = false;
-            }
+            foreach (var monster in attackTrigger.monsterHitBoxes)
+                monster.isTriggerHit = false;
+
             attackTrigger.monsterHitBoxes.Clear();
         }
     }
@@ -442,6 +441,6 @@ public class PlayerAttack : MonoBehaviour
     public void DisableInputAction_Attack1() => attack1Action.action.Disable();
     public int currentAttackType() => (int)attackType;
 
-    [ContextMenu("È­¸éÀÌµ¿ Àá±Ý")]
+    [ContextMenu("È­ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½")]
     public void TestMethod() => DisableInputAction_Attack1();
 }
